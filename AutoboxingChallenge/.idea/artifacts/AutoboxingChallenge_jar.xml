@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AutoboxingChallenge:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AutoboxingChallenge_jar</output-path>
+    <root id="archive" name="AutoboxingChallenge.jar">
+      <element id="module-output" name="AutoboxingChallenge" />
+    </root>
+  </artifact>
+</component>
