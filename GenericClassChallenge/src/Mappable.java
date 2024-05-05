@@ -1,2 +1,3 @@
-public class Mappable {
+public interface Mappable {
+    void render();
 }
