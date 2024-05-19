@@ -20,6 +20,10 @@ public <T > T instanceFind(T Child){
         return Child;
 
 }
+public void testList(List<T> l)
+{
 
+    System.out.println(l);
+}
 
 }
