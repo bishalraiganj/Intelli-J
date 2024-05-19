@@ -8,6 +8,7 @@ r.stringCoordinates();
 Layer l=new Layer();
 l.addElements(new Park("Raiganj Municipal Park",3.4444,4.555));
 l.addElements(r);
+l.addElements(new River("Ganga ","1.333,2.3333/3.222,4.33/5.444,5.444"));
 l.renderLayer();
 
     }

@@ -33,7 +33,7 @@ public class Line implements Mappable {
     { stringCoordinates();
 
         System.out.printf("""
-                Render %s as LINE %s
+                Render %s River as LINE %s
                 
                 """,name,riverCoordinates);
 //        System.out.print(riverCoordinates);

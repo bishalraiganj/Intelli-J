@@ -18,7 +18,7 @@ this.name=name;
     public void render()
     {
         System.out.printf("""
-                Render %s as POINT %s
+                Render %s  Park as POINT %s
                 
                 """,name,Arrays.toString(parkCoordinates));
     }
