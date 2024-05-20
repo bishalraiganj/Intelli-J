@@ -43,7 +43,7 @@ public class Student implements QueryItem {
     @Override
     public String toString()
     {
-        return "%-15d %-15s %-15s %d\n".formatted(studentId,name,course,yearStarted);
+        return "%-15d %-15s %-15s %d".formatted(studentId,name,course,yearStarted);
 
     }
     public boolean matchFieldValue(String fieldName,String fieldValue)

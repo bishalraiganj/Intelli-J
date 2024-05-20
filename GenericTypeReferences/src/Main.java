@@ -73,6 +73,9 @@ public class Main {
         Arrays.sort(lStudents2, new StudentComparator<>());
 
         System.out.println(Arrays.toString(lStudents2));
+        var lpaList=queryList1.getMatches("percentComplete","50");
+        System.out.println("This is a list of students who have less or " +
+                "equal to 50 % completion in the queryList1 reference of students List in my code : \n"+lpaList+"\n This is the queryList1 below : \n"+queryList1);
 
 
     }
