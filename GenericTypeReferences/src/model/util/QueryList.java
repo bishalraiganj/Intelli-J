@@ -2,11 +2,12 @@ package model.util;
 
 import model.Student;
 
+import javax.management.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryList<T extends Student & QueryItem> {
-    private List<T> items;
+public class QueryList<T extends Student & QueryItem> extends ArrayList<T>{
+
     public static <T extends QueryItem> List<T> getMatches(List<T> list,String fieldName,String fieldValue)
     {
         List<T> matches = new ArrayList<>();
@@ -20,19 +21,23 @@ public class QueryList<T extends Student & QueryItem> {
         }
         return matches;
     }
-    public List<T> getItems()
+//    public List<T> getItems()
+//    {
+//        return items;
+//    }
+    public QueryList()
     {
-        return items;
+
     }
     public QueryList(List<T> items)
     {
-        this.items=items;
+        this.addAll(items);
     }
 public List<T> getMatches(String fieldName,String fieldValue)
 {
 List<T> matches=new ArrayList<>();
 
-for(T item:items)
+for(T item:this)
 {
     if(item.matchFieldValue(fieldName,fieldValue))
     {
@@ -48,7 +53,7 @@ return matches;
 }
 public String returnQueryListType()
 {
-    String s=items.get(0).getClass().getName();
+    String s=this.get(0).getClass().getName();
     return s;
 }
 }
