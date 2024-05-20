@@ -1,11 +1,25 @@
 package model.util;
 
+import model.Student;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryList<T extends QueryItem> {
+public class QueryList<T extends Student & QueryItem> {
     private List<T> items;
+    public static <T extends QueryItem> List<T> getMatches(List<T> list,String fieldName,String fieldValue)
+    {
+        List<T> matches = new ArrayList<>();
+        for(T item:list)
+        {
+            if(item.matchFieldValue(fieldName,fieldValue))
+            {
+                matches.add(item);
+            }
 
+        }
+        return matches;
+    }
     public List<T> getItems()
     {
         return items;

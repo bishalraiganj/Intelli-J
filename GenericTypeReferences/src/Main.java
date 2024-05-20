@@ -1,30 +1,37 @@
 import model.LPAStudent;
 import model.Student;
+import model.util.QueryItem;
 import model.util.QueryList;
 
 import java.util.ArrayList;
 import java.util.List;
+record Employee(String name) implements QueryItem{
+    public boolean matchFieldValue(String fieldName,String fieldValue)
+    {
+        return fieldName.equals(fieldValue);
+    }
+}
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String... args) {
-//    int studentCount=10;
-//    List<Student> students = new ArrayList<> ();
-//    for(int i=0;i<studentCount;i++)
-//    {
-//        students.add(new Student());
-//
-//    }
-//        printMoreList(students);
-//
-//        List<LPAStudent> LPAStudents = new ArrayList<> ();
-//        for(int i=0;i<studentCount;i++)
-//        {
-//            LPAStudents.add(new LPAStudent());
-//
-//        }
-//        printMoreList(LPAStudents);
+    int studentCount=10;
+    List<Student> students = new ArrayList<> ();
+    for(int i=0;i<studentCount;i++)
+    {
+        students.add(new Student());
+
+    }
+        printMoreList(students);
+
+        List<LPAStudent> LPAStudents = new ArrayList<> ();
+        for(int i=0;i<studentCount;i++)
+        {
+            LPAStudents.add(new LPAStudent());
+
+        }
+        printMoreList(LPAStudents);
 
 
         QueryList<LPAStudent> queryList1=new QueryList<>(List.of(new LPAStudent()
@@ -38,7 +45,10 @@ public class Main {
             var matches=queryList1.getMatches("course","java");
             System.out.printf("Matches found in the List are the following %s \n",queryList1.returnQueryListType());
             printMoreList(matches);
+            var students2=QueryList.getMatches(new ArrayList<>(),"yearStarted","2021");
+        System.out.println(students2);
 
+//        QueryList<Employee> employeeList=new QueryList<>();
     }
 //new
     public static void printMoreList(List<? extends Student> students)
