@@ -1,4 +1,5 @@
 import model.LPAStudent;
+import model.LPAStudentComparator;
 import model.Student;
 
 // pushing to git on 21/05/2024 @ 12:27 as of now
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+                                  // This is the UDEMY JAVA Course By Tim Buchalka's GENERIC Topic's/ Sections's last  exercise  done By Bishal Adhikary on 21/05/2024 @ 3:08 am in the morning
 
 class StudentComparator<T extends Student> implements Comparator<T>
 
@@ -78,7 +80,35 @@ public class Main {
                 "equal to 50 % completion in the queryList1 reference of students List in my code : \n"+lpaList+"\n This is the queryList1 below : \n"+queryList1);
 
 
+
+        QueryList<Student> nl= new QueryList<>();
+
+        for(int i=0;i<=50;i++) {
+            nl.add(new LPAStudent());
+        }
+//        Student[] newArray=
+    var t= nl.getMatches("PercentComplete","50");
+        t.sort(Comparator.naturalOrder());
+       System.out.println("This is t List\n "+t);
+       t.sort(new LPAStudentComparator());
+
+       System.out.println("This is the new Sorted t list sorted by their studentIDs\n"+t);
+
+        var yu=nl.getMatches("percentComplete","60")
+                .getMatches("Course","java");
+
+        System.out.println("This is the list of Students having percentComplete <= 60 and pursuing Java\n"+yu);
+
     }
+    public static void printList(List<?> list)
+    {
+
+        for(var o:list)
+        {
+            System.out.println(o);
+        }
+    }
+
     //new
     public static void printMoreList(List<? extends Student> students)
     {

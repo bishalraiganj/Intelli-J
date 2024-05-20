@@ -5,12 +5,19 @@ import model.util.QueryItem;
 import java.util.Comparator;
 import java.util.Random;
 
-public class Student implements QueryItem {
+public class Student implements QueryItem,Comparable<Student> {
     private static int id=10000;
     private int studentId=id;
     private String name;
     private String course;
     private int yearStarted;
+
+    @Override
+    public int compareTo(Student o)
+    {
+        return Integer.valueOf(yearStarted).compareTo(o.yearStarted);
+
+    }
 
     protected static Random random = new Random();
     private static String[] firstNames = { "Bishal","Suparna","Ann","Bill","Cathy","John","Tim"};

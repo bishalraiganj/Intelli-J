@@ -33,9 +33,9 @@ public class QueryList<T extends Student & QueryItem> extends ArrayList<T>{
     {
         this.addAll(items);
     }
-public List<T> getMatches(String fieldName,String fieldValue)
+public QueryList<T> getMatches(String fieldName,String fieldValue)
 {
-List<T> matches=new ArrayList<>();
+QueryList<T> matches=new QueryList<>();
 
 for(T item:this)
 {
