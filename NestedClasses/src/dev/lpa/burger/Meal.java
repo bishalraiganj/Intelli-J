@@ -16,7 +16,7 @@ public class Meal {
     public Meal(double conversionRate)
     {
         this.conversionRate = conversionRate;
-        this.burger = new Burger("name");
+        this.burger = new Burger("regular");
         this.drink = new Item("coke","drink",1.5);
         System.out.println(drink.name);
         this.side = new Item("fries","side",2.0);
@@ -32,6 +32,11 @@ public class Meal {
     public String toString()
     {
         return "%s%n%s%n%s%n%26s$%.2f".formatted(burger,drink,side,"Total Due",getTotal());
+    }
+    public void addToppings (String... selectedToppings)
+    {
+
+        burger.addToppings(selectedToppings);
     }
 
     private class Item{
@@ -75,6 +80,7 @@ public class Meal {
                case AVOCADO -> 1.0;
                case BACON,CHEESE -> 1.5;
                default -> 0;
+
            };
 
 
@@ -87,32 +93,54 @@ public class Meal {
         private List<Item> toppings = new ArrayList<>();
         Burger(String name)
         {
-        super(name,"burger",50.0);
+        super(name,"burger",5.0);
         }
     public double getPrice()
     {
+        double total = super.price ;
+        for(Item topping:toppings)
+        {
 
-        return super.price;
+            total+=topping.price;
+
+
+        }
+        return total;
     }
 
     private void addToppings(String... selectedToppings)
     {
-        for(String selectedTopping:selectedToppings)
-        {
-            Extra topping = Extra.valueOf(selectedTopping.toUpperCase());
+        for(String selectedTopping:selectedToppings) {
+            try
             {
-                toppings.add(new Item(Extra.valueOf(selectedTopping.toUpperCase()).name(),"TOPPING",topping.getPrice()));
-            }
+            Extra topping = Extra.valueOf(selectedTopping.toUpperCase());
+
+            toppings.add(new Item(topping.name(), "TOPPING", topping.getPrice()));
+
+        }
+            catch(IllegalArgumentException ie)
+                {
+                    System.out.println("No topping such as :" + selectedTopping);
+                }
+
 
 
         }
 
-
-
     }
 
 
+    public String toString()
+    {
 
+        StringBuilder itemized = new StringBuilder(super.toString());
+        for(Item t:toppings)
+        {   itemized.append("\n");
+            itemized.append(t);
+        }
+        return itemized.toString();
+
+    }
 
 
 
