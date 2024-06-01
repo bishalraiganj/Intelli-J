@@ -21,7 +21,7 @@ private String store;
         return "%-8s%s".formatted(store,super.toString());
     }
 
-public class storeComparator<T extends StoreEmployee> implements Comparator<StoreEmployee> {
+public class StoreComparator<T extends StoreEmployee> implements Comparator<StoreEmployee> {
 
 
     public int compare(StoreEmployee o1, StoreEmployee o2)

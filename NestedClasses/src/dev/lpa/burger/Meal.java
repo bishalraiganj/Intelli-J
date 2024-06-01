@@ -9,9 +9,11 @@ public class Meal {
     private Item drink;
     private Item side;
     public double conversionRate;
+
     public Meal()
     {
         this(1);
+
     }
     public Meal(double conversionRate)
     {
