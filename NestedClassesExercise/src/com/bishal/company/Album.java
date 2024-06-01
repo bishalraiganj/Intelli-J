@@ -18,7 +18,8 @@ public class Album {
 
        public  boolean add(Song title) {
 
-            if (findSong(title.getTitle()) == null) {
+            if (findSong(title.getTitle()) == null)
+            {
                 songs.add(title);
                 return true;
             }
