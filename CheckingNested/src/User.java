@@ -12,8 +12,7 @@ public class User {
         return super.inheritedField;
     }
 
-
-
+    //
 
    }
 
