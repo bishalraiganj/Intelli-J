@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,38 +18,38 @@ public class Main {
         Person tim =new Person("Tim");
 
         String[] names = {"bishal","rudra","dhrup","joy","avi"};
-       UnaryOperator<String> toUpperCase = String::toUpperCase;
-       UnaryOperator<String> randomMiddleInitial = (s)-> {char a=(char) (new Random().nextInt(26)+97);return s.concat(" "+String.valueOf(a));};
-       UnaryOperator<String> reverseLastName = (s)->s.concat(new StringBuilder(s).reverse().toString());
-       List<UnaryOperator<String>>  functionInterface = new ArrayList(List.of(toUpperCase,randomMiddleInitial,reverseLastName));
-       List<UnaryOperator<String>> functionInterface2 = new ArrayList<>(List.of(
-               String::toUpperCase,
+        UnaryOperator<String> toUpperCase = String::toUpperCase;
+        UnaryOperator<String> randomMiddleInitial = (s)-> {char a=(char) (new Random().nextInt(26)+97);return s.concat(" "+String.valueOf(a));};
+        UnaryOperator<String> reverseLastName = (s)->s.concat(new StringBuilder(s).reverse().toString());
+        List<UnaryOperator<String>>  functionInterface = new ArrayList(List.of(toUpperCase,randomMiddleInitial,reverseLastName));
+        List<UnaryOperator<String>> functionInterface2 = new ArrayList<>(List.of(
+                String::toUpperCase,
 
-               (s)->s+" "+getRandomChar('d','x')+".",
-               (s)->s+=" "+reverse(s,0,s.indexOf(" ")),
-               Main::reverse,
-               String::new,
+                (s)->s+" "+getRandomChar('d','x')+".",
+                (s)->s+=" "+reverse(s,0,s.indexOf(" ")),
+                Main::reverse,
+                String::new,
 //               (s)->new String("Howdy "+s),
-               String::valueOf,
-               tim::last,
-               (new Person("Suparna"))::last
+                String::valueOf,
+                tim::last,
+                (new Person("Suparna"))::last
 
 
 
-       ));
+        ));
 
-       applyFunctions2(names,functionInterface2);
+        applyFunctions2(names,functionInterface2);
 
     }
     private static void applyFunctions(String[] names, List<UnaryOperator<String>> fList)
     {
-    int i=0;
-    for(String name : names)
-    {
-      names[i]=  name.transform(fList.get(1));
-      ++i;
-    }
-    System.out.println(Arrays.toString(names));
+        int i=0;
+        for(String name : names)
+        {
+            names[i]=  name.transform(fList.get(1));
+            ++i;
+        }
+        System.out.println(Arrays.toString(names));
     }
 
 
@@ -83,8 +85,6 @@ public class Main {
     {
 
         return new StringBuilder(s.substring(start,end)).reverse().toString();
-
-
     }
 
     private record Person(String first)
@@ -92,7 +92,7 @@ public class Main {
 
         public String last(String s)
         {
-        return first +" "+s.substring(0,s.indexOf(" "));
+            return first +" "+s.substring(0,s.indexOf(" "));
         }
     }
 
