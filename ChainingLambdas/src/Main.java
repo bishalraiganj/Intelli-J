@@ -1,6 +1,8 @@
+import javax.print.DocFlavor;
 import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Main {
 
@@ -40,8 +42,22 @@ public class Main {
                 andThen((s)->System.out.print("-")).
                 andThen(System.out::println));
 
+        Predicate<String> p1 = (s)->s.equals("TIM");
+        Predicate<String> p2 = (s)->s.equalsIgnoreCase("Tim");
+        Predicate<String> p3 = (s)->s.startsWith("T");
+        Predicate<String> p4 = (s)->s.endsWith("e");
 
+        Predicate<String> combined1 = p1.or(p2);
 
+        System.out.println("Combined1 "+combined1.test(tim));
+
+        Predicate<String> combined2 = p3.and(p4);
+
+        System.out.println("Combined2 "+combined2.test(tim));
+
+        Predicate<String> combined3 = p3.and(p4).negate();
+
+        System.out.println("Combined3 "+combined3.test(tim));
 
 
 
