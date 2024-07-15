@@ -2,29 +2,73 @@ package dev.lpa;
 
 import com.sun.jdi.Value;
 
-public class Card {
-//    enum Cards {
-//        One(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Joker("J"), Queen("Q"), King("K"), Ace("A");
-//        private int cardNumber;
-//        private String cardFace;
-//
-//        Cards(int i)
-//        {
-//            this.cardNumber = i;
-//
-//        }
-//
-//        Cards(String s)
-//        {
-//
-//        this.cardFace =s;
-//
-//        }
-//
-//
-//
-//    }
+import java.util.Arrays;
 
+public class Card {
+    enum Cards {
+        One(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Joker("J"), Queen("Q"), King("K"), Ace("A");
+        private int cardNumber;
+        private String cardFace;
+
+        Cards(int i)
+        {
+            this.cardNumber = i;
+
+        }
+
+        Cards(String s)
+        {
+
+        this.cardFace =s;
+
+        }
+        public int getCardNumber()
+        {
+
+            return cardNumber;
+        }
+        public String getCardFace()
+        {
+
+            return cardFace;
+
+        }
+        public static Cards getCard(int i)
+        {
+            if(i<14&&i>0)
+            {
+                for(Cards c :Cards.values())
+                {
+                    if(c.cardNumber==i)
+                        return c;
+
+                }
+
+            }
+            else
+                System.out.println("Invalid card Number");
+                return null;
+
+        }
+
+        public static Cards getFaceCard(String s)
+        {
+
+          for(Cards c: Cards.values())
+          {
+              if(c.cardFace.equalsIgnoreCase(s))
+              {
+                  return c;
+
+              }
+
+          }
+          System.out.println(" Invalid Card Face");
+          return null;
+
+        }
+
+    }
 
 
     enum Suit{
@@ -46,29 +90,23 @@ public class Card {
             return intValue;
         }
     }
-
+    Cards card;
     Suit s1;
     String faceValue;
     int rank;
-    public Card(Suit s1,int number)
+//    public Card(Suit s1,int number)
+//    {
+//        this.s1=s1;
+//        this.rank=number;
+//    }
+    public Card(Suit s1,Cards card)
     {
-        this.s1=s1;
-        this.rank=number;
+     this.s1=s1;
+     this.card=card;
+
     }
     public static void main(String... args)
     {
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -81,17 +119,30 @@ public class Card {
 
     }
     
-    public static Card getNumericCard(Suit s1,int rank)
+    public static Card getNumericCard(Suit s1,int num)
     {
-        if 
-        return new Card( s1,rank);
+        if (num<10&&num>0) {
+            return new Card(s1,Cards.getCard(num));
+        }
+
+        else
+            System.out.println("Not a Numeric Card");
+        return null;
+
 
     }
-    public static Card getFaceCard(Suit s1,String faceValue)
-    {
+    public static Card getFaceCard(Suit s1,String s)
 
-        return new Card(Suit.valueOf(faceValue),);
+    {   for(String sa: Arrays.asList("J","Q","K","A"))
+        {
+            if(s.equalsIgnoreCase(sa))
+            {
 
+           return  new Card(s1,Cards.getFaceCard(s));
+            }
+        }
+        System.out.println("Not a Face Card");
+        return null;
     }
 
 
