@@ -95,7 +95,26 @@ public class Main {
                         .reversed());
 
 
+
+
+
+
         list.forEach(System.out::println);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

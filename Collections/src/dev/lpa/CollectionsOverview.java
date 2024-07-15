@@ -1,15 +1,13 @@
 package dev.lpa;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CollectionsOverview {
 
     public static void main(String... main)
     {
 
-        List<String> list = new ArrayList<>();
+        Collection<String> list = new TreeSet<>();
 
         String[] names = {"Anna","Bob","Carol","David","Edna"};
         list.addAll(Arrays.asList(names));
