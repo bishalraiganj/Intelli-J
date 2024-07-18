@@ -57,6 +57,12 @@ public class Main {
         Collections.shuffle(standardDeck);
         Card.printDeck(standardDeck," Shuffled Deck",4);
 
+        Collections.reverse(standardDeck);
+        Card.printDeck(standardDeck," Reversed StandardDeck",4);
+
+
+
+
         
 
 
