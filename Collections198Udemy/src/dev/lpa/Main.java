@@ -121,6 +121,48 @@ public class Main {
 
         System.out.println(" Worst Card in the standard deck ="+Collections.min(standardDeck,Comparator.comparing(Card::rank).thenComparing(Card::suit)));
 
+        Collections.shuffle(standardDeck);
+        Collections.sort(standardDeck,(s1,s2)->s1.suit().compareTo(s2.suit()));
+        Card.printDeck(standardDeck," Sorted only by suit",4);
+        var sortBySuit =  Comparator.comparing(Card::suit).thenComparing(Card::rank);
+        standardDeck.sort(sortBySuit);
+        Card.printDeck(standardDeck," Sorted by suit, rank",4);
+
+
+        standardDeck = Card.getStandardDeck();
+        List<Card> copied = new ArrayList<>(standardDeck.subList(0,13));
+        Collections.rotate(copied,2);
+        System.out.println("UnRotated ="+standardDeck.subList(0,13));
+        System.out.println("Rotated +2  = "+copied);
+
+
+        copied = new ArrayList<>(standardDeck.subList(0,13));
+        Collections.rotate(copied,-2);
+        System.out.println("UnRotated ="+standardDeck.subList(0,13));
+        System.out.println("Rotated  -2 = "+copied);
+
+        copied = new ArrayList<>(standardDeck.subList(0,13));
+        for(int i=0;i<copied.size()/2;i++)
+        {
+            Collections.swap(copied,i,copied.size()-1-i);
+
+        }
+        System.out.println("Manual reverse :"+copied);
+
+        copied = new ArrayList<>(standardDeck.subList(0,13));
+        Collections.reverse(copied);
+        System.out.println("Using Reverse :"+copied);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
