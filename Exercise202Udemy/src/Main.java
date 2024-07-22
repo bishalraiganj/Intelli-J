@@ -20,7 +20,9 @@ public class Main {
 
         standardDeck = Card.getStandardDeck();
 
-
+        List<Card> forGame=Card.cardRandomization(standardDeck);
+        Card.printDeck(forGame," Randomized Deck of cards",4);
+        Card.handGame(forGame,4,5,"Bishal Adhikary"," Subhankar Adhikary"," Dhrup Barman","Rudra Roy");
 
 
     }

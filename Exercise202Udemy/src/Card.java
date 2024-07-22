@@ -75,7 +75,7 @@ public record Card(Suit suit, String face, int rank) {
      {
          for(int j1=0;j1<numOfEle;j1++)
          {
-             System.out.print(list.get(j));
+             System.out.print(list.get(j)+" ");
                 j++;
          }
          System.out.println("");
@@ -102,27 +102,24 @@ public record Card(Suit suit, String face, int rank) {
 
     }
 
-    public static void handGame(List<Card> cardList,int playerCount,int numOfCardInHand,String... names)
-    {
-
+    public static void handGame(List<Card> cardList,int playerCount,int numOfCardInHand,String... names) {
 
 
         List<Player> players = new ArrayList<>(playerCount);
-        for(int i=0;i<playerCount;i++)
-        {   int k=i;
+        for (int i = 0; i < playerCount; i++) {
+            int k = i;
             List<Card> cards = new ArrayList<>(numOfCardInHand);
-            for(int j=0;j<numOfCardInHand;j++)
-            {
+            for (int j = 0; j < numOfCardInHand; j++) {
                 cards.add(cardList.get(k));
+//                k=k+(playerCount-1)+1;
+                k += playerCount;
 
             }
-            players.add(new Player(numOfCardInHand,names[i],))
-
-
-
+            players.add(new Player(numOfCardInHand, names[i], cards));
         }
-
-
+        for (Player p : players) {
+            System.out.println("\n"+p);
+        }
 
 
 
