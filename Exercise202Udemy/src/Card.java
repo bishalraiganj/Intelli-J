@@ -25,8 +25,8 @@ public record Card(Suit suit, String face, int rank) {
     }
 
     public static Card getNumericCard(Suit suit, int face) {
-        if (face >= 1 && face <= 9) {
-            return new Card(suit, "" + face, face - 1);
+        if (face >= 2 && face <= 10) {
+            return new Card(suit, "" + face, face - 2);
 
         } else
             System.out.println("Not a valid face value for a numeric card of the Standard Deck of cards , must be between 1 and 9");
@@ -49,7 +49,7 @@ public record Card(Suit suit, String face, int rank) {
         List<Card> standardDeck = new ArrayList<>(52);
         Suit[] suitArr = Suit.values();
         for (int i = 0; i < 4; i++) {
-            for (int i2 = 1; i2 < 10; i2++) {
+            for (int i2 = 2; i2 < 11; i2++) {
                 standardDeck.add(Card.getNumericCard(suitArr[i ], i2));
 
 
@@ -89,42 +89,9 @@ public record Card(Suit suit, String face, int rank) {
     }
 
 
-    public static List<Card> cardRandomization(List<Card> cardList)
-    {
-        Collections.shuffle(cardList);
-        Collections.reverse(cardList);
-        Collections.shuffle(cardList);
-        if(cardList.size()>6) {
-            Collections.rotate(cardList, cardList.size() / 2 - 2);
-        }
-
-        return cardList;
-
-    }
-
-    public static void handGame(List<Card> cardList,int playerCount,int numOfCardInHand,String... names) {
-
-
-        List<Player> players = new ArrayList<>(playerCount);
-        for (int i = 0; i < playerCount; i++) {
-            int k = i;
-            List<Card> cards = new ArrayList<>(numOfCardInHand);
-            for (int j = 0; j < numOfCardInHand; j++) {
-                cards.add(cardList.get(k));
-//                k=k+(playerCount-1)+1;
-                k += playerCount;
-
-            }
-            players.add(new Player(numOfCardInHand, names[i], cards));
-        }
-        for (Player p : players) {
-            System.out.println("\n"+p);
-        }
 
 
 
-
-    }
 
 
 
