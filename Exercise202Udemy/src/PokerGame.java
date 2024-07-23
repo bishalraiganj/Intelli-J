@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class PokerGame {
 
@@ -41,14 +42,34 @@ public class PokerGame {
     }
 
 
-//    public static Player evaluateHands(List<Card> cardDeck,List<Player> playerHands)
+//    public static Player evaluateHands(List<Card> cardDeck,List<Player> playerHands,List<CardCombination> cardCombination)
 //    {
 //
+//     int playerCount = playerHands.size();
+//     int numOfCardInHand = playerHands.get(0).hand().size();
+//     for(Player p:playerHands)
+//     {
 //
 //
+//
+//
+//
+//
+//     }
 //
 //
 //    }
+
+    public static boolean testCombination(Predicate<CardCombination> p,CardCombination cardCombination)
+    {
+
+        return p.test(cardCombination);
+
+
+
+
+    }
+
 
 
 
