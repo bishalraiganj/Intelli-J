@@ -18,7 +18,7 @@ public class PokerGame {
 
     }
 
-    public static void pokerHandGame(List<Card> cardList, int playerCount, int numOfCardInHand, String... names) {
+    public static List<Player> dealingCards(List<Card> cardList, int playerCount, int numOfCardInHand, String... names) {
 
 
         List<Player> players = new ArrayList<>(playerCount);
@@ -36,7 +36,19 @@ public class PokerGame {
         for (Player p : players) {
             System.out.println("\n"+p);
         }
+
+        return players;
     }
+
+
+//    public static Player evaluateHands(List<Card> cardDeck,List<Player> playerHands)
+//    {
+//
+//
+//
+//
+//
+//    }
 
 
 

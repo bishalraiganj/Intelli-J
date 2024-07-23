@@ -22,7 +22,7 @@ public class Main {
 
         List<Card> forGame=PokerGame.cardRandomization(standardDeck);
         Card.printDeck(forGame," Randomized Deck of cards",4);
-        PokerGame.pokerHandGame(forGame,4,5,"Bishal Adhikary"," Subhankar Adhikary"," Dhrup Barman","Rudra Roy");
+        List<Player> playersHands=PokerGame.dealingCards(forGame,4,5,"Bishal Adhikary"," Subhankar Adhikary"," Dhrup Barman","Rudra Roy");
 
 
 
