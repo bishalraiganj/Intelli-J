@@ -1,6 +1,9 @@
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class PokerGame {
@@ -42,28 +45,35 @@ public class PokerGame {
     }
 
 
-//    public static Player evaluateHands(List<Card> cardDeck,List<Player> playerHands,List<CardCombination> cardCombination)
-//    {
-//
-//     int playerCount = playerHands.size();
-//     int numOfCardInHand = playerHands.get(0).hand().size();
-//     for(Player p:playerHands)
-//     {
-//
-//
-//
-//
-//
-//
-//     }
-//
-//
-//    }
-
-    public static boolean testCombination(Predicate<CardCombination> p,CardCombination cardCombination)
+    public static Player evaluateHands(List<Card> cardDeck,List<Player> players,CardCombination cardCombination)
     {
 
-        return p.test(cardCombination);
+     int playerCount = players.size();
+     int numOfCardInHand = players.get(0).hand().size();
+     for(Player p:players)
+     {
+
+        for(List<Card> c:cardCombination.cList())
+        {
+
+            testCombination((s,r)->)
+
+
+
+        }
+
+
+
+
+     }
+
+
+    }
+
+    public static int testCombination(Function<List<Card>,Integer> p, List<Card> cardCombination)
+    {
+
+        return p.apply(cardCombination);
 
 
 
