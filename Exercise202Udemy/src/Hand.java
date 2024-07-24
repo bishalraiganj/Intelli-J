@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Hand {
 
 
-    List<Card> cards;
-    int rank;
+    private List<Card> cards;
+    private int rank;
     public Hand(int rank, Card... cardArr)
     {
         cards =new ArrayList<>(Arrays.asList(cardArr));
@@ -15,4 +15,18 @@ public class Hand {
 
 
     }
+
+    public int getRank()
+    {
+        return rank;
+
+    }
+    public List<Card> getCards()
+    {
+
+        return cards;
+
+    }
+
+
 }

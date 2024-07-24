@@ -1,6 +1,7 @@
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -48,15 +49,34 @@ public class PokerGame {
     public static Player evaluateHands(List<Card> cardDeck,List<Player> players,CardCombination cardCombination)
     {
 
+
+     int pRank=0;
+     int rank;
      int playerCount = players.size();
-     int numOfCardInHand = players.get(0).hand().size();
+     int numOfCardInHand = players.get(0).getHand().size();
      for(Player p:players)
      {
 
-        for(List<Card> c:cardCombination.cList())
+
+
+
+        for(Hand c:cardCombination.cList())
+        {
+            p.setHandRank( testCombination((s)->{if(p.getHand().containsAll(s.getCards())) return s.getRank();return 0;},c));
+
+
+
+        }
+        if (p.getHandRank()==0)
         {
 
-            testCombination((s,r)->)
+            for(Card c:p.getHand())
+            {
+                pRank+=c.rank();
+
+
+            }
+
 
 
 
@@ -64,13 +84,15 @@ public class PokerGame {
 
 
 
-
      }
 
 
+     Player winner =Collections.max(players, Comparator.comparing((s)->{if(s.getHandRank()>0) return s.getHandRank();return s.getPointRank();}));
+
+    return winner;
     }
 
-    public static int testCombination(Function<List<Card>,Integer> p, List<Card> cardCombination)
+    public static int testCombination(Function<Hand,Integer> p, Hand cardCombination)
     {
 
         return p.apply(cardCombination);
