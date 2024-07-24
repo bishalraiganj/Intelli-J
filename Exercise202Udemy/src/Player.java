@@ -68,7 +68,7 @@ this.pointRank=rank;
 public String toString()
 
 {
-    return "%s\n Rank = %d".formatted(name,handRank)+"\n"+hand;
+    return "%s\n Hand Rank = %d , Points Rank =%d".formatted(name,handRank,pointRank)+"\n"+hand;
 
 
 
