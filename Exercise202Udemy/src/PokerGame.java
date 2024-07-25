@@ -77,6 +77,7 @@ public class PokerGame {
 
             }
 
+            p.setPointRank(pRank);
 
 
 

@@ -8,23 +8,34 @@ public class Hand {
 
     private List<Card> cards;
     private int rank;
-    public Hand(int rank, Card... cardArr)
-    {
-        cards =new ArrayList<>(Arrays.asList(cardArr));
+
+    public Hand(int rank, Card... cardArr) {
+        cards = new ArrayList<>(Arrays.asList(cardArr));
         this.rank = rank;
 
 
     }
 
-    public int getRank()
-    {
+    public int getRank() {
         return rank;
 
     }
-    public List<Card> getCards()
-    {
+
+    public List<Card> getCards() {
 
         return cards;
+
+    }
+
+    @Override
+    public String toString()
+    {
+
+        return  "Hands"+cards+"";
+
+
+
+
 
     }
 
