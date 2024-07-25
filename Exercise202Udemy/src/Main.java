@@ -35,7 +35,10 @@ public class Main {
 //        System.arraycopy()
 //        CardCombination pokerHandCombination = new CardCombination(royalFlush,royalFlush2,royalFlush3,royalFlush4,straightFlushArray());
 
-        System.out.println(Arrays.toString(straightFlushArray()));
+        System.out.println(Arrays.toString(straightFlushArray())+"\n"+straightFlushArray().length);
+
+
+//        System.out.println(new Card(Card.Suit.HEART,"Bishal Card",13));
 
 
     }
@@ -43,13 +46,27 @@ public class Main {
 
     public static Hand[] straightFlushArray() {
         int k=0;
-        Hand[] arr=new Hand[20];
+        Hand[] arr=new Hand[45];
         for (Card.Suit s : Card.Suit.values()) {
-            for (int i = 0; i <5;i++) {
+            for (int i = 0; i <=8;i++) {
                 Hand tempHand= new Hand(9,new Card[5]);
-                for (int j = 0; j < 5; j++)
-                {
-                   tempHand.getCards().add(new Card(s,(j+2+i)+"",j+i));
+                for (int j = i; j <= i+4; j++) {
+
+                    if ( i < 5) {
+                        tempHand.getCards().add(Card.getNumericCard(s, j + 2 ));
+                    } else {
+                        if (j <= 8) {
+
+                            tempHand.getCards().add(Card.getNumericCard(s, j + 2));
+
+
+                        } else {
+                            int count = (j + 2) - 10;
+
+
+                            tempHand.getCards().add(Card.getFaceCard(s, "JQKA".charAt(count-1) + ""));
+                        }
+                    }
                 }
                 arr[k]= tempHand;
                 k+=1;
@@ -60,7 +77,8 @@ public class Main {
         return arr;
 
 
-
     }
+
+
 
 }
