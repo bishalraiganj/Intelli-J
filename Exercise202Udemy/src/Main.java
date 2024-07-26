@@ -36,6 +36,7 @@ public class Main {
 //        CardCombination pokerHandCombination = new CardCombination(royalFlush,royalFlush2,royalFlush3,royalFlush4,straightFlushArray());
 
         System.out.println(Arrays.toString(straightFlushArray())+"\n"+straightFlushArray().length);
+        System.out.println(Arrays.toString(fourOfAKind()));
 
 
 //        System.out.println(new Card(Card.Suit.HEART,"Bishal Card",13));
@@ -46,7 +47,7 @@ public class Main {
 
     public static Hand[] straightFlushArray() {
         int k=0;
-        Hand[] arr=new Hand[45];
+        Hand[] arr=new Hand[36];
         for (Card.Suit s : Card.Suit.values()) {
             for (int i = 0; i <=8;i++) {
                 Hand tempHand= new Hand(9,new Card[5]);
@@ -68,11 +69,42 @@ public class Main {
                         }
                     }
                 }
+
+                tempHand.setCards(tempHand.getCards().subList(5,10));
                 arr[k]= tempHand;
                 k+=1;
 
 
             }
+        }
+        return arr;
+
+
+    }
+
+
+    public static Hand[] fourOfAKind()
+    {
+
+        Hand[] arr = new Hand[12];
+        for(int i=0;i<13;i++) {
+            Hand tempHand=new Hand(8,new Card[4]);
+            for (Card.Suit s : Card.Suit.values()) {
+
+                if(i<9) {
+
+                    tempHand.getCards().add(Card.getNumericCard(s,i+2));
+
+                }
+                else {
+                    int counter = i - 8;
+                    tempHand.getCards().add(Card.getFaceCard(s,"JQKA".charAt(counter)+""));
+
+                }
+
+            }
+            tempHand.setCards(tempHand.getCards().subList(4,8));
+            arr[i]=tempHand;
         }
         return arr;
 
