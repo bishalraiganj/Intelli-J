@@ -4,6 +4,7 @@ import dev.lpa.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PokerHand {
@@ -24,17 +25,27 @@ public class PokerHand {
         this.playerNo = playerNo;
         keepers = new ArrayList<Card>(hand.size());
         discards = new ArrayList<Card>(hand.size());
-
+        
 
     }
 
     @Override
     public String toString() {
 
-        return "%d. %-16s Rank:%d %-40s %s".formatted(playerNo, score, score.ordinal(), hand, (discards.size() > 0 ? "Discards:" + discards : ""));
+        return "%d. %-16s Rank:%d %-40s  Best:%-7s Worst:%-6s %s".formatted(playerNo, score, score.ordinal(), hand, Collections.max(hand, Comparator.comparing(Card::rank)),Collections.min(hand,Comparator.comparing(Card::rank)),(discards.size() > 0 ? "Discards:" + discards : ""));
 
-
+ 
     }
+
+
+
+
+
+
+
+
+
+
 
     public void setRank(int faceCount) {
 
@@ -81,19 +92,23 @@ public class PokerHand {
             keepers.addAll(sub);
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        pickDiscards();
     }
 
+    private void pickDiscards()
+    {
+        List<Card> temp = new ArrayList<>(hand);
+        temp.removeAll(keepers);
+        Collections.reverse(temp);
+        int rankedCardsNumber = keepers.size();
+        for(Card c:temp)
+        {
+            if((temp.indexOf(c)<3)&&(rankedCardsNumber>2||c.rank()<9))
+                discards.add(c);
+            else
+                keepers.add(c);
+        }
+    }
 
 
 

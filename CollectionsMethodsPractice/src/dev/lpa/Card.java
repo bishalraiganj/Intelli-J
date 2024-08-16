@@ -18,7 +18,7 @@ public record Card(Suit suit, String face, int rank) {
     public static Comparator<Card>  sortRankReversedSuit()
     {
 
-        return Comparator.comparing(Card::rank).thenComparing(Card::suit);
+        return Comparator.comparing(Card::rank).reversed().thenComparing(Card::suit);
 
 
     }
