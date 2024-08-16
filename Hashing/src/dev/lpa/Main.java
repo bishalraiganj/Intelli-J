@@ -1,3 +1,6 @@
+package dev.lpa;
+
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -8,11 +11,11 @@ public class Main {
     public static void main(String... args)
     {
 
-    String aText = "Hello";
-    String bText ="Hello";
-    String cText = String.join("l","He","lo");
-    String dText = "He".concat("llo");
-    String eText = "hello";
+        String aText = "Hello";
+        String bText ="Hello";
+        String cText = String.join("l","He","lo");
+        String dText = "He".concat("llo");
+        String eText = "hello";
 
         List<String> hellos = Arrays.asList(aText,bText,cText,dText,eText);
         hellos.forEach((s)->System.out.println(s+": "+s.hashCode()));
@@ -24,7 +27,7 @@ public class Main {
 
         for(String setValue :mySet)
         {
-            System.out.print(setValue +":");
+            System.out.print (setValue +":");
             for(int i =0;i<hellos.size();i++)
             {
                 if(setValue==hellos.get(i))
