@@ -43,6 +43,26 @@ public class Main {
         }
 
 
+        PlayingCard aceOfHearts = new PlayingCard("Hearts","Ace");
+        PlayingCard kingClubs = new PlayingCard("Clubs","King");
+        PlayingCard queenSpades = new PlayingCard("Spades","Queen");
+
+        List<PlayingCard> cards = Arrays.asList(aceOfHearts,kingClubs,queenSpades);
+        cards.forEach((s)->System.out.println(s+": "+s.hashCode()));
+
+        Set<PlayingCard> deck = new HashSet<>();
+        for(PlayingCard c :cards)
+        {
+            if(!deck.add(c))
+            {
+                System.out.println("Found a duplicate for the card"+c);
+
+            }
+
+
+
+        }
+        System.out.println(deck);
 
 
     }
