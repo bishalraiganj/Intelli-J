@@ -8,6 +8,7 @@ public class PlayingCard {
     private String face;
     private int internalHash;
 
+
     public PlayingCard(String suit, String face)
     {
         this.suit =suit;
@@ -41,6 +42,7 @@ public class PlayingCard {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -50,7 +52,7 @@ public class PlayingCard {
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(suit);
+        int result = suit.hashCode();
         result = 31 * result + Objects.hashCode(face);
         return result;
     }
