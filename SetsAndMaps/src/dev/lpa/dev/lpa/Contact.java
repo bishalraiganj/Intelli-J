@@ -40,11 +40,30 @@ public class Contact {
            this.phones.add("(%s) %s-%s".formatted(p.substring(0,3),p.substring(3,6),p.substring(6)));
 
        }
-
-
-
-
    }
 
+    public String getName()
+    {
+        return name;
+
+    }
+
+    @Override
+    public String toString()
+    {
+        return "%s: %s %s".formatted(name,emails,phones);
+    }
+
+    public Contact mergeContactData(Contact contact)
+    {
+
+        Contact newContact = new Contact(name);
+        newContact.emails.addAll(emails);
+        newContact.phones.addAll(phones);
+        newContact.emails.addAll(contact.emails);
+        newContact.phones.addAll(contact.phones);
+         return newContact;
+
+    }
 
 }
