@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class ContactData {
 
     public static final String phoneData = """
-            
             Charlie Brown, 3334445555
             Maid Marion, 1234567890
             Mickey Mouse, 9998887777
@@ -21,7 +20,6 @@ public class ContactData {
             """;
 
     public static final String emailData = """
-            
             Mickey Mouse, mckmouse@gmail.com
             Mickey Mouse, micky1@aws.com
             Minnie Mouse, minnie@verizon.com
