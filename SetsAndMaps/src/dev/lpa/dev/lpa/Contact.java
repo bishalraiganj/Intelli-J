@@ -1,6 +1,7 @@
 package dev.lpa.dev.lpa;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Contact {
@@ -65,5 +66,28 @@ public class Contact {
          return newContact;
 
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+        return getName().equals(contact.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return 33*getName().hashCode();
+    }
+
+    public void addEmail(String companyName)
+    {
+        String[] names = this.name.split(" ");
+
+        this.emails.add("%c%s@%s.com".formatted(names[0].charAt(0),names[names.length-1],companyName.replaceAll(" ","").toLowerCase()));
+    }
+
 
 }
