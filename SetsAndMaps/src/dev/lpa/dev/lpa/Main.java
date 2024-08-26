@@ -22,6 +22,14 @@ public class Main {
         printData("Phone Contacts",phoneContacts);
         printData("Email Contacts",emailContacts);
 
+        int index =emailContacts1.indexOf(new Contact("Robin Hood"));
+        Contact robinHood=emailContacts1.get(index);
+        robinHood.addEmail("Sherwood Forests");
+        robinHood.addEmail("Sherwood Forests");
+        robinHood.replaceEmailIfExists("RHood@sherwoodforests.com","RHood@sherwoodforests.org");
+
+        System.out.println(robinHood);
+
 
 
     }

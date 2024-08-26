@@ -86,8 +86,34 @@ public class Contact {
     {
         String[] names = this.name.split(" ");
 
-        this.emails.add("%c%s@%s.com".formatted(names[0].charAt(0),names[names.length-1],companyName.replaceAll(" ","").toLowerCase()));
+        String e= "%c%s@%s.com".formatted(names[0].charAt(0),names[names.length-1],companyName.replaceAll(" ","").toLowerCase());
+
+        if(!emails.add(e))
+        {
+            System.out.println(name +" Already has email "+e);
+        }
+        else
+            System.out.println(name+" now has email "+e);
     }
+
+    public void replaceEmailIfExists(String oldEmail,String newEmail)
+    {
+        if(emails.contains(oldEmail))
+        {
+            emails.remove(oldEmail);
+            emails.add(newEmail);
+        }
+
+
+
+    }
+
+
+
+
+
+
+
 
 
 }
