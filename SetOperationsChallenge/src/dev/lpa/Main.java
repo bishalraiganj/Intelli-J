@@ -8,7 +8,7 @@ public class Main {
     {
 
 
-        System.out.println(TaskData.getTasksScanner("carol"));
+//        System.out.println(TaskData.getTasksScanner("carol"));
 
         Set<Task> tasks = TaskData.getTasks("all");
         sortAndPrint("All Tasks",tasks);
@@ -42,11 +42,44 @@ public class Main {
         list.forEach(System.out::println);
 
 
+    }
 
+    public static Set<Task> getUnion(List<Set<Task>> list)
+    {
+        Set<Task> union = new HashSet<>();
+        for(Set<Task> set : list)
+        {
+            union.addAll(set);
 
+        }
 
+        return union;
 
     }
+
+    public static Set<Task> getIntersect(Set<Task> set1, Set<Task> set2)
+    {
+
+        Set<Task> intersect = new HashSet<>(set1);
+        intersect.retainAll(set2);
+        return intersect;
+
+    }
+
+    public static Set<Task> getDifference(Set<Task> set1, Set<Task> set2)
+    {
+        Set<Task> difference = new HashSet<>(set1);
+        difference.removeAll(set2);
+        return difference;
+    }
+
+
+
+
+
+
+
+
 
 
 
