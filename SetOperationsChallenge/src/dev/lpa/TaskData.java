@@ -109,13 +109,22 @@ public class TaskData {
             default ->tasks;
         };
 
+        for(String taskData:selectedList.split("\n"))
+        {
+            String[] data = taskData.split(",");
+            Arrays.asList(data).replaceAll(String::trim);
 
+            Status status = (data.length<=3 ? Status.IN_QUEUE:Status.valueOf(data[3].toUpperCase().replace(" ","_")));
+            Priority priority = Priority.valueOf(data[2].toUpperCase());
+            taskList.add(new Task(data[0],data[1],user,priority,status));
+        }
 
+        return taskList;
 
 
 
     }
-
+//
 
 
 
