@@ -86,7 +86,11 @@ public class TreeSetMain {
         System.out.println("-".repeat(90));
 
         fullSet.forEach(System.out::println);
-        Contact linus = new Contact("Linus");
+
+        Contact linus = new Contact("Linus Van Pelt");
+        var subset = fullSet.subSet(linus,false,marion,true);
+        subset.forEach(System.out::println);
+        System.out.println("-".repeat(90));
 
 
 
