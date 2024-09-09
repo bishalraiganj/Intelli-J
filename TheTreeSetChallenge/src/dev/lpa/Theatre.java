@@ -20,9 +20,11 @@ public class Theatre {
             int rowCompare = "%c".formatted( name.charAt(0)).compareTo("%c".formatted(o.name.charAt(0)));
             if(rowCompare ==0)
             {
-                return
+                return  Integer.compare(Integer.parseInt(name.substring(3)),Integer.parseInt(o.name.substring(3)));
 
             }
+
+            return rowCompare;
         }
 
 
