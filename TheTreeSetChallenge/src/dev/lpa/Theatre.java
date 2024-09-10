@@ -7,11 +7,20 @@ public class Theatre {
     static class Seat implements Comparable<Seat>{
 
         String name;
+        private boolean status;
         Seat(String name)
         {
             this.name = name;
         }
+        public boolean getStatus()
+        {
+            return status;
+        }
 
+        public void setStatus(boolean s)
+        {
+            status =s;
+        }
         @Override
         public int compareTo(Seat o)
         {
@@ -44,7 +53,12 @@ public class Theatre {
         @Override
         public String toString()
         {
+
+            if(status==true)
+
+                return name+" (Reserved)";
             return name;
+
 
         }
 
