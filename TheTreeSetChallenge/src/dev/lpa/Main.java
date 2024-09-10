@@ -11,7 +11,9 @@ public class Main {
         bishalsScreen.seatSet.forEach(System.out::println);
         System.out.println("-".repeat(50));
         bishalsScreen.printSeatMap();
-
+        System.out.println("\n"+"-".repeat(50));
+        BookingAgent bishal = new BookingAgent(bishalsScreen,'E',24);
+        bishalsScreen.printSeatMap();
     }
 
 }

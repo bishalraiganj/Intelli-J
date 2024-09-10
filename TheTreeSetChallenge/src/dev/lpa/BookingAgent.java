@@ -7,10 +7,17 @@ public class BookingAgent {
         if( row<65 || row >90)
         {
             System.out.println("Invalid row");
+            return ;
 
         }
-        if(number>t.seatSet.last().name.substring(3))
+        if(number>t.seatCount||number<0)
+        {
+            System.out.println("Invalid Number");
+//            return ;
+        }
 
+        Theatre.Seat s = new Theatre.Seat("%c00%d".formatted(row,number));
+        t.seatSet.ceiling(s).setStatus(true);
 
 
     }
