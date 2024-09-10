@@ -6,9 +6,11 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Theatre bishalsScreen = new Theatre("bishalsScreen",5,25);
-        bishalsScreen.seatSet.add(new Theatre.Seat("B0019"));
+        Theatre bishalsScreen = new Theatre("bishalsScreen",6,30);
+//        bishalsScreen.seatSet.add(new Theatre.Seat("B0019"));
         bishalsScreen.seatSet.forEach(System.out::println);
+        System.out.println("-".repeat(50));
+        bishalsScreen.printSeatMap();
 
     }
 

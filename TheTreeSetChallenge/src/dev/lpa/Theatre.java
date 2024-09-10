@@ -1,8 +1,6 @@
 package dev.lpa;
 
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Theatre {
 
@@ -39,7 +37,7 @@ public class Theatre {
 
         @Override
         public int hashCode() {
-            return name.hashCode();
+            return String.valueOf(name.charAt(0)).hashCode();
         }
 
 
@@ -72,11 +70,37 @@ public class Theatre {
 
 
         }
-
     }
     }
 
-    
+    public void printSeatMap()
+    {
+
+        Set<Seat> seatHashSet = new HashSet<>(seatSet);
+        int i = 65;
+
+        for(Seat s: seatHashSet)
+        {
+            for(int c=65;c<=90;c++)
+            {
+                if(String.valueOf(s.name.charAt(0)).hashCode()==String.valueOf((char) c).hashCode())
+                {
+                  if(i!=c)
+                  System.out.println();
+                  System.out.print(s+" ");
+                  i=c;
+                  break;
+                }
+            }
+
+//            System.out.print(s+"\n");
+
+
+
+        }
+
+
+    }
 
 
 }
