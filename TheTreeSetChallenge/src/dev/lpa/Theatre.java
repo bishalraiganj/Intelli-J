@@ -117,4 +117,42 @@ public class Theatre {
     }
 
 
+        public static void booking(Theatre t,String abc,int s)
+        {
+
+            if(abc.length()>26||abc.length()==0||s>abc.length()*t.seatCount
+            )
+            {
+                System.out.println("Invalid Arguments passed for " +
+                        "one or more of the paramerers based on the conditions " +
+                        "specified in the static booking method in the" +
+                        "theatre class");
+                return ;
+            }
+
+            int reservedSeats =0;
+            for(char c:abc.toCharArray())
+            {
+//                String s1= String.valueOf(c);
+            for(Seat seat:t.seatSet)
+            {
+                if(c==seat.name.charAt(0)&&seat.getStatus()==false&&
+                reservedSeats<=s)
+                {
+                    seat.status=true;
+
+                }
+
+
+
+            }
+
+
+
+
+            }
+
+        }
+
+
 }

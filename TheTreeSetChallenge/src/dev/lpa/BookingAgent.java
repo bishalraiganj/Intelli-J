@@ -21,4 +21,10 @@ public class BookingAgent {
 
 
     }
+
+    public BookingAgent(Theatre t,String rows,int seatCount)
+    {
+        Theatre.booking(t,rows,seatCount);
+
+    }
 }
