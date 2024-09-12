@@ -58,8 +58,29 @@ public class Theatre {
         for(Seat s: seats)
         {
             System.out.printf("%-8s%s",s.seatNum+(s.reserved ?"(\u25CF)": ""),
-                    (index++ +1%seatsPerRow==0?"\n":""));
+                    (index++ +1)%seatsPerRow==0?"\n":"");
         }
         System.out.println(separatorLine);
     }
+
+    public String reserveSeat(char row,int seat) {
+        Seat requestedSeat = new Seat(row, seat);
+        Seat requested = seats.ceiling(requestedSeat);
+
+        if (requested == null || !requested.seatNum.equals(requestedSeat.seatNum)) {
+            System.out.print("-->No Such Seat:" + requestedSeat);
+            System.out.printf(": Seat must be between %s and %s%n", seats.first(), seats.last());
+
+        } else {
+            if (!requested.reserved) {
+                requested.reserved = true;
+
+                return requested.seatNum;
+            }
+            else
+                System.out.println("Seat's already reserved");
+        }
+        return null;
+    }
+
 }
