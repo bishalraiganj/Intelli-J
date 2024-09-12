@@ -140,7 +140,7 @@ public class Theatre {
                 reservedSeats<=s)
                 {
                     seat.status=true;
-
+                    reservedSeats++;
                 }
 
 

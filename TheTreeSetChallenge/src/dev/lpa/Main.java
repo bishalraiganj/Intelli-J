@@ -14,6 +14,14 @@ public class Main {
         System.out.println("\n"+"-".repeat(50));
         BookingAgent bishal = new BookingAgent(bishalsScreen,'E',24);
         bishalsScreen.printSeatMap();
+        bishalsScreen.seatSet.ceiling(new Theatre.Seat("B008")).setStatus(true);
+
+        System.out.println("afterMass booking"+"-".repeat(50));
+        BookingAgent massBooking = new BookingAgent(bishalsScreen,"ABCDE",15);
+        bishalsScreen.printSeatMap();
+        System.out.println("-".repeat(50));
+
+
     }
 
 }
