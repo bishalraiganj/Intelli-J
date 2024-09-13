@@ -16,10 +16,13 @@ public class Main {
         bishalsScreen.printSeatMap();
         bishalsScreen.seatSet.ceiling(new Theatre.Seat("B008")).setStatus(true);
 
-        System.out.println("afterMass booking"+"-".repeat(50));
+        System.out.println("\n\n\n Before booking Multiple rows\n\n ");
+        bishalsScreen.printSeatMap();
+
+        System.out.println("\nafterMass booking\n"+"-".repeat(50));
         BookingAgent massBooking = new BookingAgent(bishalsScreen,"ABCDE",15);
         bishalsScreen.printSeatMap();
-        System.out.println("-".repeat(50));
+        System.out.println("\n"+"-".repeat(50));
 
 
     }

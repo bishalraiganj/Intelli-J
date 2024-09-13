@@ -137,7 +137,7 @@ public class Theatre {
             for(Seat seat:t.seatSet)
             {
                 if(c==seat.name.charAt(0)&&seat.getStatus()==false&&
-                reservedSeats<=s)
+                reservedSeats<s)
                 {
                     seat.status=true;
                     reservedSeats++;

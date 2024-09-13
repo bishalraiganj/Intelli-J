@@ -14,7 +14,11 @@ public class BookingAgent {
         bookSeat(rodgersNYC,'B',11);
         bookSeat(rodgersNYC,'M',1);
 
-        bookSeat
+        bookSeat(rodgersNYC,'E',9);
+        bookSeat(rodgersNYC,'F',8);
+        bookSeat(rodgersNYC,'G',7);
+
+        bookSeat(rodgersNYC,7,'E','I',3,10);
 
 
 
@@ -38,10 +42,10 @@ public class BookingAgent {
 
     public static void bookSeats(Theatre theatre,int tickets,char minRow,int minSeat,int maxSeat)
     {
-        bookSeats(theatre,tickets,minRow,minRow,minSeat,maxSeat);
+        bookSeat(theatre,tickets,minRow,minRow,minSeat,maxSeat);
 
     }
-    public static void bookSeats(Theatre theatre,int tickets,char minRow,char maxRow,
+    public static void bookSeat(Theatre theatre,int tickets,char minRow,char maxRow,
                                  int minSeat,int maxSeat)
     {
         var seats =theatre.reserveSeats(tickets,minRow,maxRow,minSeat,maxSeat);
