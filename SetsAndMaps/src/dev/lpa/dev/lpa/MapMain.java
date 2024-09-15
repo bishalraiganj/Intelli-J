@@ -67,16 +67,30 @@ public class MapMain {
 
         for(Contact contact : fullList)
         {
-            contacts.putIfAbsent(contact.getName(),contact);
-            if(cont)
+           Contact duplicate= contacts.putIfAbsent(contact.getName(),contact);
+            if(duplicate !=null)
+            {
+                contacts.put(contact.getName(),contact.mergeContactData(duplicate));
+            }
+        }
+        System.out.println("-".repeat(50));
+        contacts.forEach((k,v)->System.out.println("Key = "+ k+ ", Value = "+ v));
 
+        System.out.println("-".repeat(50));
+        contacts.clear();
+
+        fullList.forEach((contact)->contacts.merge(contact.getName(),contact,(previous,current)->
+        {
+
+            System.out.println("Prev : "+previous+ ": Current "+ current);
+            Contact merged =contact.mergeContactData(previous);
+            System.out.println("Merged : "+ merged);
+            return merged;
 
         }
-
+        ));
+        contacts.forEach((k,v)->System.out.println("Key : " + k+ ", Value :"+ v));
 
 
     }
-
-
-
 }
