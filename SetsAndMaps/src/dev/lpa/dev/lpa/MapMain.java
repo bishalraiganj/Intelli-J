@@ -89,7 +89,29 @@ public class MapMain {
 
         }
         ));
+
+        System.out.println("-".repeat(50));
+        contacts.clear();
+        // The following is a reduced / succint version of the above code snippet
+
+        fullList.forEach((contact)->contacts.merge(contact.getName(),contact,(previous,current)
+        ->contact.mergeContactData(previous)));
         contacts.forEach((k,v)->System.out.println("Key : " + k+ ", Value :"+ v));
+
+        //The following code snippet is another alternative of the above
+        //with method reference in place of a lamba expression which is abstraction
+        // of the implementation of the BiFucntion functional interface overriding its sam
+        // with the following behaviour
+
+        System.out.println("-".repeat(50));
+        contacts.clear();
+
+        fullList.forEach((contact)->contacts.merge(contact.getName(),contact,Contact::mergeContactData));
+        contacts.forEach((k,v)->System.out.println("Key : "+ k + ", Value :"+ v));
+
+        fullList.forEach((c)->System.out.println("-".repeat(40)+"\n"+"\nContact --->"+c+"\n"));
+
+
 
 
     }
