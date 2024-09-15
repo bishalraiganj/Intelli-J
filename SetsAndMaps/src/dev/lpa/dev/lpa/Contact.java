@@ -59,8 +59,8 @@ public class Contact {
     {
 
         Contact newContact = new Contact(name);
-        newContact.emails.addAll(emails);
-        newContact.phones.addAll(phones);
+        newContact.emails.addAll(this.emails);
+        newContact.phones.addAll(this.phones);
         newContact.emails.addAll(contact.emails);
         newContact.phones.addAll(contact.phones);
          return newContact;
