@@ -117,6 +117,16 @@ public class MapMain {
         }
         contacts.forEach((k,v)->System.out.println("Key ="+k + ",Value="+v));
 
+        System.out.println("-".repeat(50));
+        success = contacts.remove("Daisy Duck",daisy);
+        if(success)
+        {
+            System.out.println("Successfully removed element"+daisy);
+        }
+        else
+            System.out.println("Did not match on both key :%s and value: %s %n".formatted("Daisy Duck",daisy));
+            contacts.forEach((k,v)->System.out.println("key =" + k + ", value ="+ v));
+
 
 
     }

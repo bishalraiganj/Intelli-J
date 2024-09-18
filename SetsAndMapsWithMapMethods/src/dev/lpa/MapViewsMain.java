@@ -1,0 +1,41 @@
+package dev.lpa;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class MapViewsMain {
+
+    public static void main(String[] args)
+    {
+
+        Map<String,Contact> contacts = new HashMap<>();
+        ContactData.getData("phone").forEach((c)->contacts.put(c.getName(),c));
+        ContactData.getData("email").forEach((c)->contacts.put(c.getName(),c));
+
+        Set<String> keysView  = contacts.keySet();
+        System.out.println(keysView);
+
+        System.out.println("-".repeat(40));
+        keysView.forEach((System.out::println));
+
+        Set<String> copyOfKeys = new TreeSet<>(contacts.keySet());
+        System.out.println(copyOfKeys);
+
+        if(contacts.containsKey("Linus Van Pelt"))
+        {
+            System.out.println("Linus and I go way back, so of course I have info");
+        }
+
+        keysView.remove("Daffy Duck");
+        System.out.println(keysView);
+        contacts.forEach((k,v)->System.out.println(v));
+
+
+
+
+    }
+
+
+}
