@@ -79,12 +79,12 @@ public class MapViewsMain {
         var nodeSet = contacts.entrySet();
         for(Map.Entry<String,Contact> entry : nodeSet )
         {
-
+            System.out.println(nodeSet.getClass().getName());
             if(!(entry.getKey().equals(entry.getValue().getName())))
             {
+                System.out.println(entry.getClass().getName());
                 System.out.println("Key doesnt match name : "+ entry.getKey()
                 + ": "+entry.getValue());
-
             }
 
 
