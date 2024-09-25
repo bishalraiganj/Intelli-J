@@ -50,33 +50,38 @@ public class Main {
 
        Map<Character,String> cLocation = locationsHashMap.get("road").getNextPlace();
 
-       for(Map.Entry<Character,String> entry : cLocation.entrySet())
-       {
-           String d = entry.getValue();
-           char c = entry.getKey();
-            String direction = switch(c)
+        while(!cLocation.isEmpty()) {
+            System.out.println("                                     Current Location : %s".formatted(currentLocationKey));
+            for (Map.Entry<Character, String> entry : cLocation.entrySet()) {
+                String d = entry.getValue();
+                char c = entry.getKey();
+                String direction = switch (c) {
+                    case 'W' -> "West";
+                    case 'E' -> "East";
+                    case 'N' -> "North";
+                    case 'S' -> "South";
+
+                    default -> null;
+                };
+
+
+                System.out.println("%s goes to: %s ".formatted(direction, d));
+            }
+
+            System.out.println("                                        Enter the the direction to go to   ");
+
+            Scanner directionInput = new Scanner(System.in);
+            String inputString= directionInput.nextLine();
+            char inputChar = inputString.toUpperCase().charAt(0);
+            if(inputChar=='Q')
             {
-                case 'W'-> "West";
-                case 'E' -> "East";
-                case 'N' -> "North";
-                case 'S' -> "South";
+                return;
+            }
+            currentLocationKey = cLocation.get(inputChar);
+            cLocation.clear();
+            cLocation=locationsHashMap.get(cLocation).getNextPlace();
 
-                default ->null;
-            };
-
-
-
-
-         System.out.println("%s goes to: %s ".formatted(direction,d));
-       }
-
-       System.out.println("                                        Enter the the direction to go to   ");
-
-       Scanner directionInput = new Scanner(System.in);
-       directionInput.nextLine();
-
-
-
+        }
 
 
 
