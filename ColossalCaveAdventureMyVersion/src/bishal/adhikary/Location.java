@@ -6,8 +6,8 @@ public  class Location {
 
 
     private String description;
-    private Map<String,String> nextPlace;
-    public Location(String description,Map<String,String> nextPlace)
+    private Map<Character,String> nextPlace;
+    public Location(String description,Map<Character,String> nextPlace)
     {
         this.description = description;
         this.nextPlace = nextPlace;
@@ -16,7 +16,7 @@ public  class Location {
     {
         return description;
     }
-    public Map<String,String> getNextPlace()
+    public Map<Character,String> getNextPlace()
     {
         return nextPlace;
     }
@@ -24,9 +24,15 @@ public  class Location {
     {
         this.description = description;
     }
-    public void setNextPlace(Map<String,String> nextPlace)
+    public void setNextPlace(Map<Character,String> nextPlace)
     {
         this.nextPlace = nextPlace;
+    }
+
+    @Override
+    public String toString()
+    {
+        return " \n Locations Description : %s  ".formatted(description)+"\n NearBy Places :"+nextPlace+"\n"+"-".repeat(50)+"\n";
     }
 
 
