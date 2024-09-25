@@ -51,7 +51,7 @@ public class Main {
        Map<Character,String> cLocation = locationsHashMap.get("road").getNextPlace();
 
         while(!cLocation.isEmpty()) {
-            System.out.println("                                     Current Location : %s".formatted(currentLocationKey));
+            System.out.println("                                     Current Location : %s \n                        ------------- %s --------------- ".formatted(currentLocationKey,locationsHashMap.get(currentLocationKey).getDescription()));
             for (Map.Entry<Character, String> entry : cLocation.entrySet()) {
                 String d = entry.getValue();
                 char c = entry.getKey();
