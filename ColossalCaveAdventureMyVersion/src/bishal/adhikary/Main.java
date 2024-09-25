@@ -44,13 +44,40 @@ public class Main {
         if(currentLocationKey=="road") {
 
 
-            System.out.println(" \n                                       :::::::: You are on the Road :::::::::  \n" +"                                       Choose from the following directions to go  \n");
-
-
-
-
-
+            System.out.println(" \n                                       :::::::: You are on the Road :::::::::  \n" +"                                       Choose from the following directions to go  \n                 " +
+                    "             Enter W for West , E for East , N for North and S for South \n ");
         }
+
+       Map<Character,String> cLocation = locationsHashMap.get("road").getNextPlace();
+
+       for(Map.Entry<Character,String> entry : cLocation.entrySet())
+       {
+           String d = entry.getValue();
+           char c = entry.getKey();
+            String direction = switch(c)
+            {
+                case 'W'-> "West";
+                case 'E' -> "East";
+                case 'N' -> "North";
+                case 'S' -> "South";
+
+                default ->null;
+            };
+
+
+
+
+         System.out.println("%s goes to: %s ".formatted(direction,d));
+       }
+
+       System.out.println("                                        Enter the the direction to go to   ");
+
+       Scanner directionInput = new Scanner(System.in);
+       directionInput.nextLine();
+
+
+
+
 
 
     }
