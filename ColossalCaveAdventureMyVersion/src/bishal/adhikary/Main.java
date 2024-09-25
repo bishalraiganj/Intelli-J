@@ -78,8 +78,7 @@ public class Main {
                 return;
             }
             currentLocationKey = cLocation.get(inputChar);
-            cLocation.clear();
-            cLocation=locationsHashMap.get(cLocation).getNextPlace();
+            cLocation=locationsHashMap.get(currentLocationKey).getNextPlace();
 
         }
 
