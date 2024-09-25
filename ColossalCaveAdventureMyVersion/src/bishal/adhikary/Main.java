@@ -10,8 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        Map.Entry<String,Location> currentLocation;
+        Map<Character,String> hashMapForTheRoad = new HashMap<>();
+        hashMapForTheRoad.put('W',"hill");
+        hashMapForTheRoad.putIfAbsent('E',"well house");
+        hashMapForTheRoad.putIfAbsent('S',"valley");
+        hashMapForTheRoad.putIfAbsent('N',"forest");
+        Location currentLocation=new Location("at  the end of the road",hashMapForTheRoad);
+        String currentLocationKey = "road";
         Scanner s = new Scanner(
                 """
                         road ,   at  the end of the road ,W: hill ,E:well house ,S:valley ,N:forest
@@ -28,13 +33,24 @@ public class Main {
 
         Map<String,Location> locationsHashMap = passPlacesData(s);
         System.out.print("""
+                                                                                               
+                                                                                               
+                                                                                           
                                                                                                The   Colossal Cave Adventure game ReCreated by Bishal Adhikary
                                                                                                  
                                                                                                   Go through the cave and complete tasks and explore the cave 
                                                                                                  
                                                                                                """);
-        if(currentLocation.getValue()==locationsHashMap)
-        System.out.println(" \n                                                        You are on the Road ")
+        if(currentLocationKey=="road") {
+
+
+            System.out.println(" \n                                       :::::::: You are on the Road :::::::::  \n" +"                                       Choose from the following directions to go  \n");
+
+
+
+
+
+        }
 
 
     }
