@@ -26,14 +26,14 @@ public class Main {
 
 //        System.out.println(passPlacesData(s));
 
-
+        Map<String,Location> locationsHashMap = passPlacesData(s);
         System.out.print("""
                                                                                                The   Colossal Cave Adventure game ReCreated by Bishal Adhikary
                                                                                                  
                                                                                                   Go through the cave and complete tasks and explore the cave 
                                                                                                  
                                                                                                """);
-        if(currentLocation==)
+        if(currentLocation.getValue()==locationsHashMap)
         System.out.println(" \n                                                        You are on the Road ")
 
 
