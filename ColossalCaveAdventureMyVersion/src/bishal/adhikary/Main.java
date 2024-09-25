@@ -75,33 +75,42 @@ public class Main {
 
     {
         Map<String, Location> locations = new HashMap<>();
-        Scanner s1 = new Scanner(placesData);
-        while(s1.hasNext()) // it will look for tokens created with the default whitespace delimitter a space
+        Scanner s = new Scanner(placesData);
+        while (s.hasNext()) // it will look for tokens created with the default whitespace delimitter a space
         {
 
-            String line = s1.nextLine();
+            String line = s.nextLine();
             String[] tokens = line.split(",");
-
-            Arrays.asList(tokens).replaceAll(String::trim);
+            if (tokens.length <= 6 && tokens.length >= 2) {
+                Arrays.asList(tokens).replaceAll(String::trim);
 //                System.out.println(Arrays.toString(tokens));
 //                System.out.println(tokens[1]);
-            Map<Character,String> neighbouringLocations = new HashMap<>();
-            for(int i=2;i>=2&&i<=tokens.length;i++ )
-            {
-                String[] directionsAndPlaces = tokens[i].split(":");
-                Arrays.asList(directionsAndPlaces).replaceAll(String::trim);
-                neighbouringLocations.putIfAbsent( directionsAndPlaces[0].charAt(0),directionsAndPlaces[1]);
+                Map<Character, String> neighbouringLocations = new HashMap<>();
+                for (int i = 2; i >= 2 && i < tokens.length; i++) {
+                    String[] directionsAndPlaces = tokens[i].split(":");
+                    Arrays.asList(directionsAndPlaces).replaceAll(String::trim);
+                    neighbouringLocations.putIfAbsent(directionsAndPlaces[0].charAt(0), directionsAndPlaces[1]);
 
 
+                }
+                locations.putIfAbsent(tokens[0], new Location(tokens[1], neighbouringLocations));
+
+            } else {
+                System.out.println("Somethings wrong with the structure of the  places data ");
+                return null;
             }
-            locations.putIfAbsent(tokens[0],new Location(tokens[1],neighbouringLocations));
 
+        }
+        if (!locations.isEmpty())
+        {
+            return locations;
         }
 /*
         System.out.println(Arrays.asList(t).forEach(Arrays.asList(t).indexOf(m));
 */
+        System.out.println("Something  is wrong with the structure of the places data");
+        return null;
 
-        return locations;
     }
 
     }
