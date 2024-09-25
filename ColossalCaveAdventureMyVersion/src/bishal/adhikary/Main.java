@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-
+        Map.Entry<String,Location> currentLocation;
         Scanner s = new Scanner(
                 """
                         road ,   at  the end of the road ,W: hill ,E:well house ,S:valley ,N:forest
@@ -24,7 +24,17 @@ public class Main {
                         """);
 
 
-        System.out.println(passPlacesData(s));
+//        System.out.println(passPlacesData(s));
+
+
+        System.out.print("""
+                                                                                               The   Colossal Cave Adventure game ReCreated by Bishal Adhikary
+                                                                                                 
+                                                                                                  Go through the cave and complete tasks and explore the cave 
+                                                                                                 
+                                                                                               """);
+        if(currentLocation==)
+        System.out.println(" \n                                                        You are on the Road ")
 
 
     }
