@@ -56,7 +56,7 @@ public class AdventureGame {
            Location location = new Location(parts[1],nextPlaces);
            adventureMap.put(parts[0],location);
         }
-        adventureMap.forEach((k,v)->System.out.printf("%s:%s%n",k,v));
+//        adventureMap.forEach((k,v)->System.out.printf("%s:%s%n",k,v));
     }
 
     private Map<Compass,String> loadDirections(String nextPlaces)
@@ -76,7 +76,7 @@ public class AdventureGame {
     public void visit(Location location)
     {
         System.out.printf("*** You're standing %s *** %n",location.description);
-        System.out.println("\t From here, you can see:");
+        System.out.println("\tFrom here, you can see:");
 
         location.nextPlaces.forEach((k,v)->{
             System.out.printf("\t• A %s to the %s (%s) %n ",v,k.getString(),k);
