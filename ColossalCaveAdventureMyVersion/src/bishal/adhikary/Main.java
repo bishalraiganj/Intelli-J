@@ -48,7 +48,7 @@ public class Main {
                     "             Enter W for West , E for East , N for North and S for South \n ");
         }
 
-       Map<Character,String> cLocation = locationsHashMap.get("road").getNextPlace();
+       Map<Character,String> cLocation = hashMapForTheRoad;
 
         while(!cLocation.isEmpty()) {
             System.out.println("                                     Current Location : %s \n                        ------------- %s --------------- ".formatted(currentLocationKey,locationsHashMap.get(currentLocationKey).getDescription()));
@@ -78,6 +78,8 @@ public class Main {
                 return;
             }
             currentLocationKey = cLocation.get(inputChar);
+            cLocation.clear();
+
             cLocation=locationsHashMap.get(currentLocationKey).getNextPlace();
 
         }
