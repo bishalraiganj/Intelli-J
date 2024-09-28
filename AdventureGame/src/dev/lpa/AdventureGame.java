@@ -40,11 +40,12 @@ public class AdventureGame {
 
     public AdventureGame(String customLocations)
     {
+        loadLocations(GAME_LOCATIONS);
         if(customLocations!=null)
         {
             loadLocations(customLocations);
         }
-        loadLocations(GAME_LOCATIONS);
+
     }
 
     private void loadLocations(String data)
