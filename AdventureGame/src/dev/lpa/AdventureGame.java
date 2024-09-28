@@ -15,6 +15,7 @@ public class AdventureGame {
             forest,at the edge of a thick dark forest,S:road,E:lake
             lake,by an alpine lake surrounded by wildflowers,W:forest,S:well house
             stream,near a stream with a rocky bed,W:valley, N:well house
+            
             """;
     private enum Compass{
         E,N,S,W;
