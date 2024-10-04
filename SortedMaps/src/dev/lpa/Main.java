@@ -1,10 +1,7 @@
 package dev.lpa;
 
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Main {
 
@@ -28,6 +25,21 @@ public class Main {
         addPurchase("Joe Jones",jmc,149.99);
         addPurchase("Bill Brown",python,159.99);
 
+        purchases.forEach((k,v)->System.out.println(k + ":" + v));
+        System.out.println("-".repeat(60));
+        students.forEach((k,v)->System.out.println(k + ":" + v));
+
+        NavigableMap<LocalDate,List<Purchase>> datedPurchases = new TreeMap<>();
+        for(Purchase p : purchases.values())
+        {
+            datedPurchases.compute(p.purchaseDate(),(pdate,plist)->{
+            List<Purchase> list = (plist==null)?new ArrayList<>():plist;
+            list.add(p);
+            return list;
+            });
+        }
+        datedPurchases.forEach((k,v)->System.out.println(k + ":" + v));
+
 
     }
 
@@ -44,7 +56,7 @@ public class Main {
             existingStudent.addCourse(course);
         }
 
-        int day = purchases.size()+1;
+        int day = new Random().nextInt(1,5);
         String key = course.courseId()+"_"+existingStudent.getId();
         int year = LocalDate.now().getYear();
         Purchase purchase = new Purchase(course.courseId(),existingStudent.getId(),price,year,day);
