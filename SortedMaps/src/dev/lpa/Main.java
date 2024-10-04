@@ -1,5 +1,6 @@
 package dev.lpa;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -34,6 +35,13 @@ public class Main {
         {
             existingStudent.addCourse(course);
         }
+
+        int day = purchases.size()+1;
+        String key = course.courseId()+"_"+existingStudent.getId();
+        int year = LocalDate.now().getYear();
+        Purchase purchase = new Purchase(course.courseId(),existingStudent.getId(),price,year,day);
+        purchases.put(key,purchase);
+
 
 
     }

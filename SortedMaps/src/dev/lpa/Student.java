@@ -29,7 +29,7 @@ public class Student
 {
     private static int lastId=1;
 
-    private static String name;
+    private String name;
 
     private int id;
 
