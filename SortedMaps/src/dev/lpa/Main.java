@@ -53,6 +53,23 @@ public class Main {
         Map<LocalDate,List<Purchase>> week1Purchases = datedPurchases.headMap(week1);
         Map<LocalDate,List<Purchase>> week2Purchases = datedPurchases.tailMap(week1);
 
+//        System.out.println("-".repeat(60));
+//        week1Purchases.forEach((k,v)->System.out.println(k + ":" + v));
+//        System.out.println("-".repeat(60));
+//        week2Purchases.forEach((k,v)->System.out.println(k + ":" + v ));
+//        System.out.println("-".repeat(70));
+
+
+        displayStats(1,week1Purchases);
+        displayStats(2,week2Purchases);
+
+        System.out.println("-".repeat(50));
+        LocalDate lastDate = datedPurchases.lastKey();
+        var previousEntry = datedPurchases.lastEntry();
+
+
+
+
 
 
 
@@ -80,7 +97,27 @@ public class Main {
 
 
 
+
+
     }
+
+    public static void displayStats(int period,Map<LocalDate,List<Purchase>> periodData)
+    {
+        System.out.println("-".repeat(50));
+        Map<String,Integer> weeklyCounts = new TreeMap<>();
+        periodData.forEach((key,value)->{
+            System.out.println(key + ":" + value);
+            for(Purchase p : value)
+            {
+                weeklyCounts.merge(p.courseId(),1,Integer::sum);
+            }
+
+        });
+        System.out.printf("Week %d Purchases = %s%n",period,weeklyCounts);
+
+    }
+
+
 
 
 }
