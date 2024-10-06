@@ -67,7 +67,8 @@ public class Main {
         LocalDate lastDate = datedPurchases.lastKey();
         var previousEntry = datedPurchases.lastEntry();
 
-
+        List<Purchase> lastDaysData = previousEntry.getValue();
+        System.out.println(lastDate + " purchases : " + lastDaysData.size());
 
 
 
