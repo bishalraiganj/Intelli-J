@@ -77,7 +77,10 @@ public class Main {
         var reversed  = datedPurchases.descendingMap();
 
         LocalDate firstDate = reversed.firstKey();
-        Map.Entry<LocalDate,List<Purchase>> nextEntry = reversed.firstEntry();
+//        Map.Entry<LocalDate,List<Purchase>> nextEntry = reversed.firstEntry();
+        Map.Entry<LocalDate,List<Purchase>> nextEntry = reversed.pollFirstEntry();
+
+//        System.out.println(nextEntry.getClass().getName());
 
         while (nextEntry != null)
         {
@@ -85,12 +88,14 @@ public class Main {
             System.out.println(firstDate + " purchases : " + lastDaysData.size());
 
             LocalDate nextDate = reversed.higherKey(firstDate);
-            nextEntry = reversed.higherEntry(firstDate);
+//            nextEntry = reversed.higherEntry(firstDate);
+            nextEntry = reversed.pollFirstEntry();
+
             firstDate = nextDate ;
-
-
         }
 
+        System.out.println("-".repeat(50));
+        datedPurchases.forEach((k,v)->System.out.println(k + ":" + v ));
 
 
     }
