@@ -17,5 +17,11 @@ public class Main
 
         var annsDaysSet = EnumSet.copyOf(annsWorkDays);
         System.out.println(annsDaysSet.getClass().getSimpleName());
+        annsDaysSet.forEach(System.out::println);
+
+        var allDaysSet = EnumSet.allOf(WeekDay.class);
+        System.out.println("-".repeat(48));
+        allDaysSet.forEach(System.out::println);
+
     }
 }
