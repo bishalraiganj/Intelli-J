@@ -4,6 +4,7 @@ package dev.lpa;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main
 {
@@ -23,5 +24,13 @@ public class Main
         System.out.println("-".repeat(48));
         allDaysSet.forEach(System.out::println);
 
+        Set<WeekDay> newPersonDays = EnumSet.complementOf(annsDaysSet);
+        System.out.println("-".repeat(50));
+        newPersonDays.forEach(System.out::println);
+
+        Set<WeekDay> anotherWay = EnumSet.copyOf(allDaysSet);
+        anotherWay.removeAll(annsDaysSet);
+        System.out.println("-".repeat(50));
+        anotherWay.forEach(System.out::println);
     }
 }
