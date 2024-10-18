@@ -1,10 +1,7 @@
 package dev.lpa;
 
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Main
 {
@@ -36,6 +33,14 @@ public class Main
         Set<WeekDay> businessDays = EnumSet.range(WeekDay.MONDAY,WeekDay.FRIDAY);
         System.out.println("-".repeat(50));
         businessDays.forEach((s)->System.out.println(s.toString()));
+
+        Map<WeekDay,String[]> employeeMap = new EnumMap<>(WeekDay.class);
+        employeeMap.put(WeekDay.FRIDAY,new String[] {"Ann","Mary","Bob"});
+        employeeMap.put(WeekDay.MONDAY,new String[] {"Mary","Bob"});
+        employeeMap.forEach((k,v)-> System.out.println(k + " : " + Arrays.toString(v)));
+
+
+
 
     }
 }
