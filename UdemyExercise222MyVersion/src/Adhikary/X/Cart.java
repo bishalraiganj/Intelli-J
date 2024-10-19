@@ -7,10 +7,36 @@ import java.util.Map;
 public class Cart {
 
     private int id;
-    Map<Product,Integer> products = new HashMap<>();
-    LocalDate date ;
-    String Type;
+    private Map<Product,Integer> products = new HashMap<>();
+    private LocalDate date ;
+    private String type;
 
+    public Cart(int id, LocalDate date, String type)
+    {
+        this.id = id;
+        this.date = date;
+        this.type = type;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    private Map<Product,Integer> getProducts()
+    {
+        return products;
+    }
+
+    private LocalDate getDate()
+    {
+        return date;
+    }
+
+    private String type()
+    {
+        return type;
+    }
     public void addItem(Product p , int qty)
     {
         products.put(p,qty);
