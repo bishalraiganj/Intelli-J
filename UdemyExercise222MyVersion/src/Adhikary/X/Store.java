@@ -18,7 +18,9 @@ class IdComparator implements Comparator<Cart> {
 public class Store {
     private IdComparator idComparator = new IdComparator();
     private HashMap<Product,InventoryItem> inventory = new HashMap<>();
-    private Set<Cart> carts = new TreeSet<>(idComparator);
+//    private Set<Cart> carts = new TreeSet<>(Comparator.comparing( ( o1)->o1.getId()));  Here , We have a lambda expression inside the comparing method which has the function functional interface as its parameter in its method signature
+
+    private Set<Cart> carts = new TreeSet<>(Comparator.comparing(Cart::getId));
 
 
 
