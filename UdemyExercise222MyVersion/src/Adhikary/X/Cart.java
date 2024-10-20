@@ -41,12 +41,15 @@ public class Cart {
     public void addItem(InventoryItem p, int qty)
     {
 
-        if(products.containsKey(p))
-        {
+        if(products.containsKey(p)) {
 
-            products.put(p,products.get(p)+qty);
-            System.out.println("Added to the Cart \n "+this); // here "this" keyword refers to the current instance and printing the current instance means implicitly invoking the Overriden toString on the cart instance
-
+            products.put(p, products.get(p) + qty);
+            System.out.println("Added to the Cart \n " + this); // here "this" keyword refers to the current instance and printing the current instance means implicitly invoking the Overriden toString on the cart instance
+            p.reserveItem(qty);
+            if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow())
+            {
+                p.placeInventoryItem(p.getQtyReorder());
+            }
 
         }
 
@@ -54,11 +57,26 @@ public class Cart {
             products.putIfAbsent(p,qty);
             System.out.println("Added to the Cart \n "+this);
 
+            p.reserveItem(qty);
+            if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow())
+           {
+             p.placeInventoryItem(p.getQtyReorder());
+           }
+
     }
 
-    public void removeItem(Product p)
+    public void removeItem(InventoryItem p,int qty)
     {
-        products.remove(p);
+        if(products.containsKey(p))
+        {
+            products.put(p,products.get(p)-qty);
+            System.out.println("Removed From the Cart "+p.getProduct().getName()+ " x"+qty+" \n"+this);
+            p.releaseItem(qty);
+            System.out.println("\n"+this);
+        }
+        else
+            System.out.println("Product is not in the cart");
+
     }
 
 //    public void printSalesSlip()

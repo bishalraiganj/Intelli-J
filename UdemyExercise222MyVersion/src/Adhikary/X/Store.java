@@ -63,6 +63,18 @@ public class Store {
             else if(input ==2)
             {
                 System.out.println("Enter the product name ");
+                String productName = s.nextLine();
+                for(InventoryItem item: inventory.values())
+                {
+                    if(item.getProduct().getName().equalsIgnoreCase(productName))
+                    {
+                        System.out.println("Product is in the Store\n Enter the quantity to remove from the cart");
+                        int qty = s.nextInt();
+
+                        c.removeItem(item,qty);
+                    }
+                }
+
             }
             else
             {
