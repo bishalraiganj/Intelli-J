@@ -7,13 +7,14 @@ import java.util.Map;
 public class Cart {
 
     private int id;
-    private Map<Product,Integer> products = new HashMap<>();
+    private Map<InventoryItem,Integer> products = new HashMap<>();
     private LocalDate date ;
     private String type;
 
-    public Cart(int id, LocalDate date, String type)
+    public Cart(int id,Map<InventoryItem,Integer> products,LocalDate date, String type)
     {
         this.id = id;
+        this.products = products;
         this.date = date;
         this.type = type;
     }
@@ -23,7 +24,7 @@ public class Cart {
         return id;
     }
 
-    private Map<Product,Integer> getProducts()
+    private Map<InventoryItem,Integer> getProducts()
     {
         return products;
     }
@@ -37,9 +38,17 @@ public class Cart {
     {
         return type;
     }
-    public void addItem(Product p , int qty)
+    public void addItem(InventoryItem p, int qty)
     {
-        products.put(p,qty);
+
+        if(products.containsKey(p)&&p.get)
+        {
+            System.out.println("A")
+            products.put(p,qty);
+
+        }
+
+
     }
 
     public void removeItem(Product p)
