@@ -112,4 +112,11 @@ public class Store {
     }
 
 
+    public void listProductsByCategory()
+    {
+        System.out.println("INVENTORY");
+        inventory.forEach((k,v)->System.out.println(k +"      " + v));
+
+    }
+
 }

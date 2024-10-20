@@ -80,5 +80,16 @@ public class InventoryItem {
 //    }
 
 
+    @Override
+    public String toString()
+    {
+
+       return  "Name = "+this.product.getName()+"\n"
+               +"Stock = "+this.qtyTotal+"\n"
+               +"Reserved Stock = "+this.qtyReserved+"\n"
+               +"Reorder Quantity = "+this.qtyReorder+"\n"
+               +"Quantity of Low Trigger/Threshold = "+this.qtyLow+"\n";
+
+    }
 
 }

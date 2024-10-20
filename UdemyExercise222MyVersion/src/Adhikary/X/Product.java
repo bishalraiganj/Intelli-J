@@ -34,4 +34,15 @@ public class Product {
     {
         return category;
     }
+
+    @Override
+    public String toString()
+    {
+        return  "SKU= " + sku + "\n"
+               +"Name" + name + "\n"
+               +"Manufacturer"+manufacturer + "\n"
+               +"Category" +  category + "\n";
+
+
+    }
 }
