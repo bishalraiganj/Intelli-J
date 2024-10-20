@@ -41,13 +41,18 @@ public class Cart {
     public void addItem(InventoryItem p, int qty)
     {
 
-        if(products.containsKey(p)&&p.get)
+        if(products.containsKey(p))
         {
-            System.out.println("A")
-            products.put(p,qty);
+
+            products.put(p,products.get(p)+qty);
+            System.out.println("Added to the Cart \n "+this); // here "this" keyword refers to the current instance and printing the current instance means implicitly invoking the Overriden toString on the cart instance
+
 
         }
 
+        else
+            products.putIfAbsent(p,qty);
+            System.out.println("Added to the Cart \n "+this);
 
     }
 
@@ -56,14 +61,19 @@ public class Cart {
         products.remove(p);
     }
 
-    public void printSalesSlip()
+//    public void printSalesSlip()
+//    {
+//
+//        products.forEach((k,v)->System.out.println(  k.getName() + "( " + k.getSku() + " )" + " x"+ v + " = %f".formatted(v*(k.)
+//
+//    }
+
+    @Override
+    public String toString()
     {
-
-
-        products.forEach((k,v)->System.out.println(  k.getName() + "( " + k.getSku() + " )" + " x"+ v + " = %f".formatted(v*(k.)
-
-
-
+        System.out.println("Cart ID:"+id+"\n Products in The Cart : \n");
+        products.forEach((k,v)->System.out.println(k.getProduct().getName()+" Quantity x"+v));
+        return "Date Created:" +date+"\n Type :"+type;
 
     }
 }

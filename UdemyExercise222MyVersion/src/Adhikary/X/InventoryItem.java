@@ -20,7 +20,7 @@ public class InventoryItem {
 
     }
 
-    public Product getProcuct() {
+    public Product getProduct() {
         return product;
     }
 
@@ -42,6 +42,11 @@ public class InventoryItem {
 
     public double getSalesPrice() {
         return salesPrice;
+    }
+
+    public void setQtyReserved(int qtyReserved)
+    {
+        this.qtyReserved = qtyReserved;
     }
 
 
@@ -68,7 +73,11 @@ public class InventoryItem {
         System.out.println("Added %d %s to the Inventory");
     }
 
-
+//    @Override
+//    public boolean equals(Object o)
+//    {
+//        if(this.product.getName()=)
+//    }
 
 
 
