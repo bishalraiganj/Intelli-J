@@ -62,6 +62,11 @@ public class Product implements Comparable<Product> {
             return 0;
         }
 
-       return 1+ this.getCategory().compareTo(p.getCategory());
+       if( this.getCategory().compareTo(p.getCategory())<0)
+       {
+           return category.compareTo(p.getCategory())-1;
+       }
+       else
+           return this.category.compareTo(p.getCategory());
     }
 }
