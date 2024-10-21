@@ -1,6 +1,6 @@
 package Adhikary.X;
 
-public class Product {
+public class Product implements Comparable<Product> {
 
     private String sku;
     private String name;
@@ -38,11 +38,30 @@ public class Product {
     @Override
     public String toString()
     {
-        return  "SKU= " + sku + "\n"
-               +"Name" + name + "\n"
-               +"Manufacturer"+manufacturer + "\n"
-               +"Category" +  category + "\n";
+        return  "SKU = " + sku + "\n"
+               +"Name = " + name + "\n"
+               +"Manufacturer = "+manufacturer + "\n"
+               +"Category = " +  category ;
 
 
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+
+        return this ==o;
+    }
+
+    @Override
+    public int compareTo(Product p)
+    {
+
+        if(equals(p))
+        {
+            return 0;
+        }
+
+       return 1+ this.getCategory().compareTo(p.getCategory());
     }
 }

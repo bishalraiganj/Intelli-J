@@ -114,8 +114,15 @@ public class Store {
 
     public void listProductsByCategory()
     {
-        System.out.println("INVENTORY");
-        inventory.forEach((k,v)->System.out.println(k +"      " + v));
+
+
+        System.out.println("INVENTORY\n"+inventory);
+
+        Map<Product,InventoryItem> sortedInventory = new TreeMap<>(inventory);
+        System.out.println("\n\n This is the Sorted Inventory\n\n"+sortedInventory+"\n\n");
+        sortedInventory.forEach((k,v)->{System.out.print("Product\n"+k +"\nStock\n" + v+"\n\n\n");});
+
+
 
     }
 

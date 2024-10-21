@@ -1,6 +1,6 @@
 package Adhikary.X;
 
-public class InventoryItem {
+public class InventoryItem implements Comparable<InventoryItem> {
 
 
     private Product product;
@@ -86,10 +86,17 @@ public class InventoryItem {
 
        return  "Name = "+this.product.getName()+"\n"
                +"Stock = "+this.qtyTotal+"\n"
+               +"Sales Price = "+this.salesPrice+"\n"
                +"Reserved Stock = "+this.qtyReserved+"\n"
                +"Reorder Quantity = "+this.qtyReorder+"\n"
                +"Quantity of Low Trigger/Threshold = "+this.qtyLow+"\n";
 
+    }
+
+    @Override
+    public int compareTo(InventoryItem o)
+    {
+        return this.product.getCategory().compareTo(o.getProduct().getCategory());
     }
 
 }
