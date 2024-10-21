@@ -25,16 +25,22 @@ public class Store {
         this.inventory = inventory;
         this.aisleInventory = aisleInventory;
         this.carts = carts;
+        System.out.println(carts+"\n\n");
+    }
+
+    public void addToCartsSet(Cart cart)
+    {
+        carts.add(cart);
     }
 
     public void manageStoreCarts(Cart c) {
         Scanner s = new Scanner(System.in);
         if (carts.contains(c)) {
-            System.out.println("Cart Already Exists! \n Manage Cart : " + c.getId() + "\n Press 1.Add Cart \n 2.Remove From Cart");
+            System.out.println("Cart Already Exists! \n Manage Cart : " + c.getId() + "\n Press 1.Add Cart \n       2.Remove From Cart");
 
             int input = s.nextInt();
             if (input == 1) {
-                System.out.println("Enter the product name");
+                System.out.print("Enter the product name \n");
                 String productName = s.nextLine();
                 for (InventoryItem item : inventory.values()) {
                     if (item.getProduct().getName().equalsIgnoreCase(productName)) {
@@ -71,6 +77,9 @@ public class Store {
 
         } else
             System.out.println("Cart not found ! Want to add the cart and Manage Y/N ?");
+
+
+
         if (s.nextLine().equalsIgnoreCase("y")) {
 
             carts.add(c);

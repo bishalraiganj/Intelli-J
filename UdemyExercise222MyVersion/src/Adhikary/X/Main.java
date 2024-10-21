@@ -31,12 +31,16 @@ public class Main {
         footballCartMap.put(footballs,1);
         Cart footballCart= new Cart(1,footballCartMap, LocalDate.now(),"Virtual");
         Set<Cart> niviaDominatorCart = new TreeSet<>();
+        niviaDominatorCart.add(footballCart);
 
         Map<Product,InventoryItem> aisleInventoryMap = new HashMap<>();
 
         Store bishalSportsStore = new Store(itemsInInventory,aisleInventoryMap,niviaDominatorCart);
 
         bishalSportsStore.listProductsByCategory();
+//        bishalSportsStore.addToCartsSet(footballCart);
+        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+
 
 
 
