@@ -1,10 +1,7 @@
 package Adhikary.X;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Main {
 
@@ -30,7 +27,7 @@ public class Main {
         Map<InventoryItem,Integer> footballCartMap = new HashMap<>();
         footballCartMap.put(footballs,1);
         Cart footballCart= new Cart(1,footballCartMap, LocalDate.now(),"Virtual");
-        Set<Cart> niviaDominatorCart = new TreeSet<>();
+        Set<Cart> niviaDominatorCart = new TreeSet<>(Comparator.comparing(Cart::getId));
         niviaDominatorCart.add(footballCart);
 
         Map<Product,InventoryItem> aisleInventoryMap = new HashMap<>();

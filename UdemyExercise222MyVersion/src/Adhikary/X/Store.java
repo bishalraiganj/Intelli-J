@@ -17,14 +17,15 @@ public class Store {
     private Map<Product, InventoryItem> inventory = new HashMap<>();
 //    private Set<Cart> carts = new TreeSet<>(Comparator.comparing( ( o1)->o1.getId()));  Here , We have a lambda expression inside the comparing method which has the function functional interface as its parameter in its method signature
 
-    private Set<Cart> carts = new TreeSet<>(Comparator.comparing(Cart::getId));
+    private Set<Cart> carts ;
 
-    private Map<Product, InventoryItem> aisleInventory = new HashMap<>();
+    private Map<Product, InventoryItem> aisleInventory ;
 
     public Store(Map<Product, InventoryItem> inventory, Map<Product, InventoryItem> aisleInventory, Set<Cart> carts) {
         this.inventory = inventory;
         this.aisleInventory = aisleInventory;
-        this.carts = carts;
+        this.carts = new TreeSet<>(Comparator.comparing(Cart::getId));
+        this.carts.addAll(carts);
         System.out.println(carts+"\n\n");
     }
 

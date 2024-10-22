@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart implements Comparable<Cart> {
+public class Cart {
 
     private int id;
     private Map<InventoryItem,Integer> products = new HashMap<>();
@@ -102,12 +102,12 @@ public class Cart implements Comparable<Cart> {
 
     }
 
-    @Override
-    public int compareTo(Cart c)
-    {
-
-        return this.date.compareTo(c.getDate());
-    }
+//    @Override
+//    public int compareTo(Cart c)
+//    {
+//
+//        return this.date.compareTo(c.getDate());
+//    }
 
 
 }
