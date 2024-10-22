@@ -42,21 +42,39 @@ public class Store {
             int input = s.nextInt();
             if (input == 1) {
                 System.out.print("Enter the product name \n");
+                s.nextLine();
                 String productName = s.nextLine();
-                for (InventoryItem item : inventory.values()) {
-                    if (item.getProduct().getName().equalsIgnoreCase(productName)) {
-                        System.out.println("Product is Available in the Store \n " +
-                                "Current Stocks :" + (item.getQtyTotal() - item.getQtyReserved()));
+//                for (InventoryItem item : inventory.values()) {
+//                    if (item.getProduct().getName().equalsIgnoreCase(productName)) {
+//                        System.out.println("Product is Available in the Store \n " +
+//                                "Current Stocks :" + (item.getQtyTotal() - item.getQtyReserved()));
+//                        int qty = s.nextInt();
+//                        if (item.getQtyTotal() - item.getQtyReserved() >= qty) {
+//
+//                            System.out.println("In Stock, Adding to Your Cart");
+//                            c.addItem(item, qty);
+//
+//
+//                        }
+//                    }
+//                }
+
+                inventory.forEach((k,v)->{if(v.getProduct().getName().equalsIgnoreCase(productName))
+                {
+
+                    System.out.println("Product is Available in the Store \n " +
+                                "Current Stocks :" + (v.getQtyTotal() - v.getQtyReserved()));
+                    System.out.println("Enter the Quantity to add");
                         int qty = s.nextInt();
-                        if (item.getQtyTotal() - item.getQtyReserved() >= qty) {
+                        s.nextLine();
+                        if (v.getQtyTotal() - v.getQtyReserved() >= qty) {
 
                             System.out.println("In Stock, Adding to Your Cart");
-                            c.addItem(item, qty);
+                            c.addItem(v, qty);
+
+                }}});
 
 
-                        }
-                    }
-                }
                 System.out.println(" Product not found");
 
             } else if (input == 2) {

@@ -36,7 +36,9 @@ public class Main {
 
         bishalSportsStore.listProductsByCategory();
 //        bishalSportsStore.addToCartsSet(footballCart);
-        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+//        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+
+        bishalSportsStore.manageStoreCarts(footballCart);
 
 
 

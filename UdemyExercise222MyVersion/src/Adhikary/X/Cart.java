@@ -48,7 +48,9 @@ public class Cart {
             p.reserveItem(qty);
             if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow())
             {
+
                 p.placeInventoryItem(p.getQtyReorder());
+
             }
 
         }
