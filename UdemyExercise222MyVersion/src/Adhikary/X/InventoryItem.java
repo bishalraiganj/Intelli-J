@@ -81,6 +81,11 @@ public class InventoryItem implements Comparable<InventoryItem> {
 
 
     @Override
+    public boolean equals(Object o)
+    {
+        return this.product.equals(((InventoryItem) o).getProduct());
+    }
+    @Override
     public String toString()
     {
 

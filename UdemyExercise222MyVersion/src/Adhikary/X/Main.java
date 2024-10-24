@@ -30,15 +30,33 @@ public class Main {
         Set<Cart> niviaDominatorCart = new TreeSet<>(Comparator.comparing(Cart::getId));
         niviaDominatorCart.add(footballCart);
 
+
         Map<Product,InventoryItem> aisleInventoryMap = new HashMap<>();
 
-        Store bishalSportsStore = new Store(itemsInInventory,aisleInventoryMap,niviaDominatorCart);
+//        Store bishalSportsStore = new Store(itemsInInventory,aisleInventoryMap,niviaDominatorCart);
 
-        bishalSportsStore.listProductsByCategory();
+//        bishalSportsStore.listProductsByCategory();
 //        bishalSportsStore.addToCartsSet(footballCart);
 //        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
 
-        bishalSportsStore.manageStoreCarts(footballCart);
+//        bishalSportsStore.manageStoreCarts(footballCart);
+
+
+        // Creating a Cart with multiple items in it in the following code but using the same Store bishalSportsStore
+
+
+        Map<InventoryItem,Integer> mapCollectionForSportsItems = Map.of(pumaShoes,3,nikeShoes,0,shoes,2,footballs,4);
+        Map<InventoryItem,Integer> mapForSportsItems = new HashMap<>(mapCollectionForSportsItems);
+
+        Cart sportItems =  new Cart(629760961,mapForSportsItems,LocalDate.now(),"Virtual");
+        niviaDominatorCart.add(sportItems);
+//        Set<Cart> sportItemsCartsSet = new TreeSet<>(Comparator.comparing(Cart::getId));
+        Store bishalSportsStore = new Store(itemsInInventory,aisleInventoryMap,niviaDominatorCart);
+        bishalSportsStore.listProductsByCategory();
+//        bishalSportsStore.manageStoreCarts(sportItems);
+
+        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+
 
 
 

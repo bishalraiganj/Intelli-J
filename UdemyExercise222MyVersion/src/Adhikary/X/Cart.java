@@ -104,7 +104,7 @@ public class Cart {
     @Override
     public String toString()
     {
-        System.out.println("Cart ID:"+id+"\n Products in The Cart : \n");
+        System.out.println("Cart ID:"+id+"\nProducts in The Cart :");
         products.forEach((k,v)->System.out.println(k.getProduct().getName()+" Quantity x"+v));
         return "Date Created:" +date+"\n Type :"+type;
 

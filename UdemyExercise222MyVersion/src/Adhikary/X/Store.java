@@ -14,7 +14,7 @@ class IdComparator implements Comparator<Cart> {
 
 public class Store {
     //    private IdComparator idComparator = new IdComparator();
-    private Map<Product, InventoryItem> inventory = new HashMap<>();
+    private Map<Product, InventoryItem> inventory ;
 //    private Set<Cart> carts = new TreeSet<>(Comparator.comparing( ( o1)->o1.getId()));  Here , We have a lambda expression inside the comparing method which has the function functional interface as its parameter in its method signature
 
     private Set<Cart> carts ;
@@ -103,14 +103,26 @@ public class Store {
 
             } else if (input == 2) {
                 System.out.println("Enter the product name ");
+                s.nextLine();
                 String productName = s.nextLine();
+                int productAvailabilityCounter = 0;
                 for (InventoryItem item : inventory.values()) {
                     if (item.getProduct().getName().equalsIgnoreCase(productName)) {
                         System.out.println("Product is in the Store\n Enter the quantity to remove from the cart");
-                        int qty = s.nextInt();
 
+                        int qty = s.nextInt();
+                        s.nextLine();
                         c.removeItem(item, qty);
+                        productAvailabilityCounter++;
                     }
+                    if(productAvailabilityCounter==1)
+                    {
+                        break;
+                    }
+                }
+                if(productAvailabilityCounter==0)
+                {
+                    System.out.println("Product Not Found ! NOT IN STORE");
                 }
 
             } else {
@@ -191,10 +203,10 @@ public class Store {
     {
 
 
-        System.out.println("INVENTORY\n"+inventory);
+//        System.out.println("INVENTORY\n"+inventory);
 
         Map<Product,InventoryItem> sortedInventory = new TreeMap<>(inventory);
-        System.out.println("\n\n This is the Sorted Inventory\n\n"+sortedInventory+"\n\n");
+//        System.out.println("\n\n This is the Sorted Inventory\n\n"+sortedInventory+"\n\n");
         sortedInventory.forEach((k,v)->{System.out.print("Product\n"+k +"\nStock\n" + v+"\n\n\n");});
 
 
