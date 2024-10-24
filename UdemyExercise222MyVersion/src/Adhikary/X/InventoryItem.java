@@ -70,7 +70,7 @@ public class InventoryItem implements Comparable<InventoryItem> {
     public void placeInventoryItem(int qty)
     {
         qtyTotal +=qty;
-        System.out.println("Added %d %s to the Inventory");
+        System.out.printf("Added %d %s to the Inventory, because low triggered / low threshold reached",qty,this.product.getName());
     }
 
 //    @Override

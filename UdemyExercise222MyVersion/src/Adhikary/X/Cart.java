@@ -43,9 +43,15 @@ public class Cart {
 
         if(products.containsKey(p)) {
 
-            products.put(p, products.get(p) + qty);
-            System.out.println("Added to the Cart \n " + this); // here "this" keyword refers to the current instance and printing the current instance means implicitly invoking the Overriden toString on the cart instance
-            p.reserveItem(qty);
+            if(p.getQtyTotal()-p.getQtyReserved()>=qty)
+            {
+                products.put(p, products.get(p) + qty);
+                System.out.println("Added to the Cart \n " + this); // here "this" keyword refers to the current instance and printing the current instance means implicitly invoking the Overriden toString on the cart instance
+                p.reserveItem(qty);
+            }
+
+
+
             if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow())
             {
 
@@ -55,16 +61,16 @@ public class Cart {
 
         }
 
-        else
-            products.putIfAbsent(p,qty);
-            System.out.println("Added to the Cart \n "+this);
+        else {
+            products.putIfAbsent(p, qty);
+            System.out.println("Added to the Cart \n " + this);
 
             p.reserveItem(qty);
-            if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow())
-           {
-             p.placeInventoryItem(p.getQtyReorder());
-           }
+            if (p.getQtyTotal() - p.getQtyReserved() <= p.getQtyLow()) {
+                p.placeInventoryItem(p.getQtyReorder());
+            }
 
+        }
     }
 
     public void removeItem(InventoryItem p,int qty)

@@ -44,38 +44,48 @@ public class Store {
                 System.out.print("Enter the product name \n");
                 s.nextLine();
                 String productName = s.nextLine();
-//                for (InventoryItem item : inventory.values()) {
-//                    if (item.getProduct().getName().equalsIgnoreCase(productName)) {
-//                        System.out.println("Product is Available in the Store \n " +
-//                                "Current Stocks :" + (item.getQtyTotal() - item.getQtyReserved()));
-//                        int qty = s.nextInt();
-//                        if (item.getQtyTotal() - item.getQtyReserved() >= qty) {
-//
-//                            System.out.println("In Stock, Adding to Your Cart");
-//                            c.addItem(item, qty);
-//
-//
-//                        }
-//                    }
-//                }
-
-                inventory.forEach((k,v)->{if(v.getProduct().getName().equalsIgnoreCase(productName))
-                {
-
-                    System.out.println("Product is Available in the Store \n " +
-                                "Current Stocks :" + (v.getQtyTotal() - v.getQtyReserved()));
-                    System.out.println("Enter the Quantity to add");
+                for (InventoryItem item : inventory.values()) {
+                    if (item.getProduct().getName().equalsIgnoreCase(productName)) {
+                        System.out.println("Product is Available in the Store \n " +
+                                "Current Stocks :" + (item.getQtyTotal() - item.getQtyReserved()));
+                        System.out.println("Enter The Quantity to add \n");
                         int qty = s.nextInt();
                         s.nextLine();
-                        if (v.getQtyTotal() - v.getQtyReserved() >= qty) {
+                        if (item.getQtyTotal() - item.getQtyReserved() >= qty) {
 
                             System.out.println("In Stock, Adding to Your Cart");
-                            c.addItem(v, qty);
-
-                }}});
+                            c.addItem(item, qty);
 
 
-                System.out.println(" Product not found");
+                        }
+                    }
+                }
+
+//                int productAvailabilityCounter =0;
+//                inventory.forEach((k,v)->{if(v.getProduct().getName().equalsIgnoreCase(productName))
+//                {
+//
+//                    System.out.println("Product is Available in the Store \n " +
+//                                "Current Stocks :" + (v.getQtyTotal() - v.getQtyReserved()));
+//                    System.out.println("Enter the Quantity to add");
+//                        int qty = s.nextInt();
+//                        s.nextLine();
+//                        if(v.getQtyTotal() - v.getQtyReserved() >= qty) {
+//
+//                            System.out.println("In Stock, Adding to Your Cart");
+//                            c.addItem(v, qty);
+//
+//
+//
+//                }
+//
+//
+//                }
+//
+//                });
+//
+//
+//                System.out.println(" Product not found");
 
             } else if (input == 2) {
                 System.out.println("Enter the product name ");
@@ -94,25 +104,30 @@ public class Store {
             }
 
 
-        } else
+        } else {
             System.out.println("Cart not found ! Want to add the cart and Manage Y/N ?");
-
+        }
 
 
         if (s.nextLine().equalsIgnoreCase("y")) {
 
             carts.add(c);
-            System.out.println(" \n Manage Cart : " + c.getId() + "\n Press 1.Add Cart \n 2.Remove From Cart");
+            System.out.println(" \n Manage Cart : " + c.getId() + "\n Press 1.Add Cart \n");
 
             int input = s.nextInt();
+            s.nextLine();
             if (input == 1) {
                 System.out.println("Enter the product name");
                 String productName = s.nextLine();
+                int counterForProductAvailability=0;
                 for (InventoryItem item : inventory.values()) {
+
                     if (item.getProduct().getName().equalsIgnoreCase(productName)) {
                         System.out.println("Product is Available in the Store \n " +
                                 "Current Stocks :" + (item.getQtyTotal() - item.getQtyReserved()));
+                        System.out.println("Enter the Quantity to add \n");
                         int qty = s.nextInt();
+                        s.nextLine();
                         if (item.getQtyTotal() - item.getQtyReserved() >= qty) {
 
                             System.out.println("In Stock, Adding to Your Cart");
@@ -120,9 +135,21 @@ public class Store {
 
 
                         }
+                        counterForProductAvailability++;
+                    }
+                    if(counterForProductAvailability==1)  //we have the following code snippet because the advanced for loop used in its enclosing code uses inventory.values() which returns a collection that may have duplicate values because inventory is a hashMap where only keys are unique
+                        // so in inventory there can be duplicate values  , we used this if condition to fix repeating the entire enclosing code inside the for loop by returning control once a match is found, the loop counter is altered and the control is returned from the for loop
+                    {
+//                        return;
+                        break;
                     }
                 }
-                System.out.println(" Product not found");
+
+                if(counterForProductAvailability==0)
+                {
+                    System.out.println("Product not found ! Not in Store");
+                }
+
 
             } else if (input == 2) {
                 System.out.println("Enter the product name ");
