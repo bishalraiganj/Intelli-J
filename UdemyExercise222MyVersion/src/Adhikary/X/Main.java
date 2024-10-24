@@ -57,6 +57,7 @@ public class Main {
 
         bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
 
+        bishalSportsStore.listProductsByCategory();
 
 
 

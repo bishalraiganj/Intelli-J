@@ -19,17 +19,18 @@ public class Cart {
         this.type = type;
     }
 
+
     public int getId()
     {
         return id;
     }
 
-    private Map<InventoryItem,Integer> getProducts()
+    public Map<InventoryItem,Integer> getProducts()
     {
         return products;
     }
 
-    private LocalDate getDate()
+    public  LocalDate getDate()
     {
         return date;
     }
@@ -78,7 +79,7 @@ public class Cart {
         if(products.containsKey(p))
         {
             products.put(p,products.get(p)-qty);
-            System.out.println("Removed From the Cart "+p.getProduct().getName()+ " x"+qty+" \n"+this);
+            System.out.println("Removed From the Cart "+p.getProduct().getName()+ " x"+qty+" \n");
             p.releaseItem(qty);
             System.out.println("\n"+this);
         }

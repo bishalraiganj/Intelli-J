@@ -112,7 +112,15 @@ public class Store {
 
                         int qty = s.nextInt();
                         s.nextLine();
-                        c.removeItem(item, qty);
+                        if(c.getProducts().get(item)>=qty&&c.getProducts().get(item)!=0)
+                        {
+                            c.removeItem(item, qty);
+                        }
+                        else
+                        {
+                        System.out.println("Cart Doesnt contain enough Quantity to be removed");
+                        }
+
                         productAvailabilityCounter++;
                     }
                     if(productAvailabilityCounter==1)
