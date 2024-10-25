@@ -221,4 +221,12 @@ public class Store {
 
     }
 
+    public void checkOutCart()
+    {
+        carts.forEach(System.out::println);
+
+
+
+    }
+
 }
