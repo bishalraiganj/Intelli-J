@@ -26,6 +26,12 @@ public class Store {
         this.aisleInventory = aisleInventory;
         this.carts = new TreeSet<>(Comparator.comparing(Cart::getId));
         this.carts.addAll(carts);
+        carts.forEach((e)->{
+
+           e.getProducts().forEach(InventoryItem::reserveItem);
+
+
+        });
         System.out.println(carts+"\n\n");
     }
 
