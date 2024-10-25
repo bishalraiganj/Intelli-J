@@ -59,7 +59,7 @@ public class Main {
 
         bishalSportsStore.listProductsByCategory();
 
-
+        bishalSportsStore.checkOutCart();
 
 
 

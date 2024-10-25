@@ -225,6 +225,28 @@ public class Store {
     {
         carts.forEach(System.out::println);
 
+        System.out.println("Enter the Cart ID to check out");
+        Scanner s= new Scanner(System.in);
+        int input=s.nextInt();
+        s.nextLine();
+
+        carts.forEach((e)->{
+            if(e.getId()==input)
+            {
+                System.out.println("Intiating CHECK OUT ......");
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
 
 
     }

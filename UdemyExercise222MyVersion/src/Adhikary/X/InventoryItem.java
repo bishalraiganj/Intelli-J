@@ -63,7 +63,9 @@ public class InventoryItem implements Comparable<InventoryItem> {
 
     public void sellItem(int qty)
     {
+
         System.out.printf("Sold  %d  %s",qty,product.getName());
+        qtyReserved -=qty;
         qtyTotal -= qty;
     }
 

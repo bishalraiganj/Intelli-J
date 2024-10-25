@@ -107,7 +107,7 @@ public class Cart {
     {
         System.out.println("Cart ID:"+id+"\nProducts in The Cart :");
         products.forEach((k,v)->System.out.println(k.getProduct().getName()+" Quantity x"+v));
-        return "Date Created:" +date+"\n Type :"+type;
+        return "Date Created:" +date+"\n Type :"+type+"\n\n";
 
     }
 
