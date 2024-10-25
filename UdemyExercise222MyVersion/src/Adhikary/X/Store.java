@@ -233,7 +233,9 @@ public class Store {
         carts.forEach((e)->{
             if(e.getId()==input)
             {
-                System.out.println("Intiating CHECK OUT ......");
+                System.out.println("Initiating CHECK OUT ......");
+
+                e.getProducts().forEach(InventoryItem::sellItem);
 
 
             }
