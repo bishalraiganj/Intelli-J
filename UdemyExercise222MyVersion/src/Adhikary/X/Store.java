@@ -240,21 +240,31 @@ public class Store {
             if(e.getId()==input)
             {
                 System.out.println("Initiating CHECK OUT ......");
-
                 e.getProducts().forEach(InventoryItem::sellItem);
+            }
+        });
+    }
+
+    public void abandonCarts()
+    {
+        System.out.println("Enter the Cart ID to abandon");
+        Scanner s = new Scanner(System.in);
+        int input= s.nextInt();
+        s.nextLine();
+        carts.forEach((e)-> {
+
+
+            if (e.getId() == input) {
+                carts.remove(e);
+                System.out.println("Cart is abandonded");
+
+
 
 
             }
 
 
-
         });
-
-
-
-
-
-
 
 
     }

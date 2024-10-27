@@ -55,14 +55,15 @@ public class Main {
         bishalSportsStore.listProductsByCategory();
 //        bishalSportsStore.manageStoreCarts(sportItems);
 
-        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+//        bishalSportsStore.manageStoreCarts(new Cart(2,new HashMap<InventoryItem,Integer> (),LocalDate.now(),"Virtual"));
+
+//        bishalSportsStore.listProductsByCategory();
+//
+//        bishalSportsStore.checkOutCart();
 
         bishalSportsStore.listProductsByCategory();
 
-        bishalSportsStore.checkOutCart();
-
-        bishalSportsStore.listProductsByCategory();
-
+        bishalSportsStore.abandonCarts();
 
 
 
