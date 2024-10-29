@@ -20,6 +20,16 @@ public class InventoryItem {
         this.qtyLow = qtyLow;
     }
 
+    public InventoryItem(Product product, double price, int qtyTotal,int qtyLow)
+    {
+        this.product = product;
+        this.price=price;
+        this.qtyTotal=qtyTotal;
+        this.qtyReorder=this.qtyTotal;
+        this.qtyLow=qtyLow;
+    }
+
+
     public Product getProduct()
     {
         return product;
@@ -62,19 +72,20 @@ public class InventoryItem {
     private void placeInventoryOrder()
     {
         System.out.printf("Ordering qty %d : %s%n",qtyReorder,product);
-
-
-
     }
+
+
 
     @Override
     public String toString()
     {
-
-        return "%s, $%2.f : [%04d,% 2d]".formatted(product,price,qtyTotal,qtyReserved);
-
-
+        return "%s, $%.2f : [%04d,% 2d]".formatted(product,price,qtyTotal,qtyReserved);
     }
+
+
+
+
+
 
 
 }
