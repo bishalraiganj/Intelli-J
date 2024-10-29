@@ -22,6 +22,7 @@ public class Store {
     myStore.stockAisles();
     myStore.listProductsByCategory();
 
+    myStore.manageStoreCarts();
 
 
 
@@ -30,6 +31,12 @@ public class Store {
   public void manageStoreCarts()
   {
 
+    Cart cart1 = new Cart(Cart.CartType.PHYSICAL,1);
+    carts.add(cart1);
+
+    InventoryItem item = aisleInventory.get(Category.PRODUCE).get("apple");
+    cart1.addItem(item,6);
+    System.out.println(cart1);
 
 
   }

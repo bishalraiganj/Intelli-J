@@ -89,7 +89,7 @@ public class Cart {
     public String toString()
     {
         return "Cart{"+
-                "id="+
+                "id="+id+
                 ", cartDate="+cartDate+
                 ", products="+products+
                 ", products=" +products+
