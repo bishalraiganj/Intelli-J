@@ -54,15 +54,25 @@ public class Store {
 
   public void listProductsByCategory()
   {
-
     aisleInventory.keySet().forEach((k)->{
 
       System.out.println("-".repeat(20)+ k + "-".repeat(20));
       aisleInventory.get(k).keySet().forEach(System.out::println);
+    });
+  }
+
+  public void  listProductsByCategory(boolean includeHeader,boolean includeDetail)
+  {
+    aisleInventory.keySet().forEach((k)->{
+      if(includeHeader) System.out.println("-".repeat(20)+ k + "-".repeat(20));
+      if(!includeDetail)
+      {
+        aisleInventory.get(k).keySet().forEach(System.out::println);
+      }
+        else
+          aisleInventory.get(k).values().forEach(System.out::println);
 
     });
-
-
   }
 
   private void stockStore()

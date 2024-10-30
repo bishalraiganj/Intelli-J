@@ -92,7 +92,6 @@ public class Cart {
                 "id="+id+
                 ", cartDate="+cartDate+
                 ", products="+products+
-                ", products=" +products+
                 '}';
     }
 
