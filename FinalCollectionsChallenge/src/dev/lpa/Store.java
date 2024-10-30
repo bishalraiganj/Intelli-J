@@ -23,6 +23,9 @@ public class Store {
     myStore.listProductsByCategory();
 
     myStore.manageStoreCarts();
+    myStore.listProductsByCategory(false,true);
+
+
 
 
 
@@ -36,7 +39,18 @@ public class Store {
 
     InventoryItem item = aisleInventory.get(Category.PRODUCE).get("apple");
     cart1.addItem(item,6);
+    cart1.addItem(aisleInventory.get(Category.PRODUCE).get("pear"),5);
+    cart1.addItem(aisleInventory.get(Category.BEVERAGE).get("coffee"),1);
     System.out.println(cart1);
+
+    cart1.removeItem(aisleInventory.get(Category.PRODUCE).get("pear"),2);
+    System.out.println(cart1);
+
+    Cart cart2 = new Cart(Cart.CartType.VIRTUAL,1);
+    carts.add(cart2);
+    cart2.addItem(inventory.get("L103"),20);
+    cart2.addItem(inventory.get("B100"),10);
+    System.out.println(cart2);
 
 
   }
@@ -54,11 +68,7 @@ public class Store {
 
   public void listProductsByCategory()
   {
-    aisleInventory.keySet().forEach((k)->{
-
-      System.out.println("-".repeat(20)+ k + "-".repeat(20));
-      aisleInventory.get(k).keySet().forEach(System.out::println);
-    });
+   listProductsByCategory(true,false);
   }
 
   public void  listProductsByCategory(boolean includeHeader,boolean includeDetail)

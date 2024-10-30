@@ -64,7 +64,7 @@ public class Cart {
         else
         {
             products.merge(item.getProduct().sku(),qty,(oldVal,newVal)->oldVal-newVal);
-            System.out.printf("%d [%s]s removed%n",qty,item.getProduct().sku());
+            System.out.printf("%d [%s]s removed%n",qty,item.getProduct().name());
         }
         item.releaseItem(qty);
     }
