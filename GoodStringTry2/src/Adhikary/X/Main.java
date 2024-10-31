@@ -7,13 +7,14 @@ public class Main {
     public static void main(String[] args)
     {
 
-
+      boolean b = validateName("Bis hal");
+      System.out.println(b);
 
 
 
     }
 
-    public Map<String,String> askInput()
+    public static Map<String,String> askInput()
     {
         Scanner s= new Scanner(System.in);
         System.out.println(" \n rules for good String and name : \n 1<=len(good string)<=100 \n 1<=len(name)<=10^4 \n Good String will consist of lower ,upper case alphabets, digits and symbols \n Name will consist of only space, lower, upper, case alphabets \n Characters are case sensitive \n "+
@@ -32,10 +33,10 @@ public class Main {
 
     }
 
-    public boolean validateName(String name)
+    public static boolean validateName(String name)
     {
-        Set<Integer> setOfSymbolCharsNotAllowed = new HashSet<>();
-        for(int i=33,j=0;i<=30&&i<=126;i++)
+        Set<Integer> setOfSymbolAsciiValuesNotAllowed = new TreeSet<>();
+        for(int i=33,j=0;i<=126;i++)
         {
             if(i==48)
             {
@@ -47,17 +48,26 @@ public class Main {
             }
             if(i==97)
             {
-                i=122;
+                i=123;
             }
-            setOfSymbolCharsNotAllowed.add(i);
+            setOfSymbolAsciiValuesNotAllowed.add(i);
+        }
+//        setOfSymbolAsciiValuesNotAllowed.forEach(System.out::println);
+//        System.out.println(setOfSymbolAsciiValuesNotAllowed.size());
+        for(char c:name.toCharArray())
+        {
+            if(setOfSymbolAsciiValuesNotAllowed.contains((int) c))
+            {
+                return false;
+            }
         }
 
 
-
+        return true;
 
     }
 
-    public void findDistance(Map<String,String> map)
+    public static void findDistance(Map<String,String> map)
     {
 
 
