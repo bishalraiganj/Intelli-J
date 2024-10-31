@@ -104,6 +104,10 @@ public class Main {
             String goodString = entry.getKey();
             String name = entry.getValue();
 
+            char[] gsArr = goodString.toCharArray();
+            char[] nArr = name.toCharArray();
+
+
 
 
         }
