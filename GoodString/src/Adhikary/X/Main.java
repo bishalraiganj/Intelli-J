@@ -1,8 +1,6 @@
 package Adhikary.X;
 
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Main {
 
@@ -10,7 +8,9 @@ public class Main {
     {
 
 
-        System.out.println(askInput());
+
+        findDistance(askInput());
+
 
 
 
@@ -107,9 +107,71 @@ public class Main {
             char[] gsArr = goodString.toCharArray();
             char[] nArr = name.toCharArray();
 
+            char previousSelect;
+            int psInt=0;
+            int distance =0;
 
 
+            for(char n:nArr)
+            {
 
+                Set<Integer>  equiDistantArr= new HashSet<>();
+                int indexCounter=1;
+               List<Integer> asciiValues = new ArrayList<>();
+                for(char g:gsArr)
+                {
+                           asciiValues.add((int) g);
+                }
+
+                for(int g:asciiValues)
+                {
+                    if(indexCounter==1)
+                    {
+                        psInt=g;
+                    }
+                    if((Math.abs(((int) n)-psInt)>Math.abs(n-g))&&indexCounter>1)
+                    {
+                        psInt=g;
+
+                    }
+                    if(indexCounter>1&&(Math.abs((int)n-g))==Math.abs((int) n-psInt))
+                    {
+                        equiDistantArr.add(g);
+                        equiDistantArr.add(psInt);
+
+                    }
+                    indexCounter++;
+                }
+
+                if(!equiDistantArr.isEmpty())
+                {
+                    int v=0;
+                    int r;
+                    int ic=1;
+
+                    for(int i:equiDistantArr)
+                    {
+                        if(ic==1)
+                        {
+                            v=Math.abs((int) n -i);
+                            r=i;
+                        }
+                        if(v>Math.abs(((int) n)-i)&&ic>1)
+                        {
+                            v=Math.abs((int) n-i);
+
+                        }
+
+
+                    }
+
+                    distance+=v;
+                    continue;
+                }
+                distance+=Math.abs((int) n -psInt);
+            }
+
+            System.out.println("distance is :"+distance);
         }
 
 
