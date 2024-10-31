@@ -31,6 +31,11 @@ public class Cart {
         this.id = id;
     }
 
+    public Map<String,Integer> getProducts()
+    {
+        return products;
+    }
+
     public int getId()
     {
         return id;

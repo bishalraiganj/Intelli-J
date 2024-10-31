@@ -1,5 +1,6 @@
 package dev.lpa;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Store {
@@ -24,6 +25,12 @@ public class Store {
 
     myStore.manageStoreCarts();
     myStore.listProductsByCategory(false,true);
+
+    myStore.carts.forEach(System.out::println);
+
+    myStore.abandonCarts();
+    myStore.listProductsByCategory(false,true);
+    myStore.carts.forEach(System.out::println);
 
 
 
@@ -52,17 +59,80 @@ public class Store {
     cart2.addItem(inventory.get("B100"),10);
     System.out.println(cart2);
 
+    Cart cart3 = new Cart(Cart.CartType.VIRTUAL,0);
+    carts.add(cart3);
+    cart3.addItem(inventory.get("R777"),998);
+    System.out.println(cart3);
+
+    if(!checkOutCart(cart3))
+    {
+      System.out.println("Something went wrong, could not check out");
+    }
+
+    Cart cart4 = new Cart(Cart.CartType.PHYSICAL,0);
+    carts.add(cart4);
+    cart4.addItem(aisleInventory.get(Category.BEVERAGE).get("tea"),1);
+    System.out.println(cart4);
+
+
+
 
   }
 
-  public boolean checkOutCart()
+  public boolean checkOutCart(Cart cart)
   {
-      return false;
 
+      for(var cartItem : cart.getProducts().entrySet())
+      {
+        var item = inventory.get(cartItem.getKey());
+        var qty = cartItem.getValue();
+        if(!item.sellItem(qty)) return false;
+      }
+
+      cart.printSalesSlip(inventory);
+      carts.remove(cart);
+      return true ;
   }
+
+
 
   public void abandonCarts()
   {
+
+    int dayOfYear  = LocalDate.now().getDayOfYear();
+    Cart lastCart=null;
+    for(Cart cart : carts)
+    {
+      if(cart.getCartDate().getDayOfYear()==dayOfYear)
+      {
+
+        break;
+      }
+      lastCart = cart;
+    }
+
+    var oldCarts  = carts.headSet(lastCart,true);
+    Cart abandonedCart = null;
+
+    for(Cart cart : oldCarts)
+    {
+      for(String sku : cart.getProducts().keySet())
+      {
+        var item = inventory.get(sku);
+        item.releaseItem(cart.getProducts().get(sku));
+      }
+    }
+
+    while((abandonedCart = oldCarts.pollFirst())!=null)
+    {
+
+      for(String sku : abandonedCart.getProducts().keySet()) {
+        InventoryItem item = inventory.get(sku);
+        item.releaseItem(abandonedCart.getProducts().get(sku));
+
+      }
+
+    }
 
   }
 
