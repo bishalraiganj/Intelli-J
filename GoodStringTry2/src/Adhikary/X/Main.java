@@ -67,6 +67,18 @@ public class Main {
 
     }
 
+    public void finalizeName(String name)
+    {
+        if(validateName(name))
+        {
+            
+
+        }
+
+
+
+    }
+
     public static void findDistance(Map<String,String> map)
     {
 
