@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args)
     {
 
-      System.out.println( validateName(askInput()));
+      finalizeName(( validateName(askInput())));
 
 
 
@@ -34,7 +34,7 @@ public class Main {
 
     }
 
-    public static boolean validateName(TreeMap<String,String> map)
+    public static TreeMap<String,String> validateName(TreeMap<String,String> map)
     {
 
         String name = map.firstEntry().getValue();
@@ -62,13 +62,13 @@ public class Main {
             if(setOfSymbolAsciiValuesNotAllowed.contains((int) c))
             {
                 System.out.println("\n Not a VALID NAME! Special Symbol chars Except 'SPACE' isn't allowed \n");
-                return false;
+                return null;
             }
         }
 
 
         System.out.println("\n Name is Valid according to the constraints");
-        return true;
+        return map;
 
     }
 
@@ -84,8 +84,136 @@ public class Main {
 //
 //    }
 
-    public static void findDistance(Map<String,String> map)
+    public static void finalizeName(TreeMap<String,String> map){
+
+
+
+        String goodString = map.firstEntry().getKey();
+        String name = map.firstEntry().getValue();
+//        char[] goodStringArr  = goodString.toCharArray();
+//        char[] nameArr =  name.toCharArray();
+//
+//        Set<Character> goodStringSet = new LinkedHashSet<>();
+//        for(char c:goodStringArr)
+//        {
+//            goodStringSet.add(c);
+//        }
+//        Set<Character> nameSet = new LinkedHashSet<>();
+//        for(char c:nameArr)
+//        {
+//            nameSet.add(c);
+//        }
+//        Set<Character> retainedSet = new LinkedHashSet<>(goodStringSet);
+//        retainedSet.retainAll(goodStringSet);
+//
+//        Set<Character> finalNameSet = new LinkedHashSet<>(nameSet);
+//        finalNameSet.removeAll(retainedSet);
+//
+//        finalNameSet.forEach(System.out::print);
+
+        List<Character> goodStringList  = new ArrayList<>();
+        for(char c : goodString.toCharArray())
+        {
+            goodStringList.add(c);
+        }
+        List<Character> nameList = new ArrayList<>();
+        for(char c: name.toCharArray())
+        {
+            nameList.add(c);
+        }
+        nameList.removeIf((k)-> goodStringList.contains(k));
+
+        nameList.forEach(System.out::print);
+
+        System.out.println("\n");
+
+        findDistance(goodStringList,nameList);
+
+
+
+
+
+
+    }
+
+    public static void findDistance(List<Character>  goodStringList,List<Character> nameList)
     {
+
+
+        char previousSelect='\u0000';
+        List<Character> goodList = new ArrayList<>();
+        for(char c : nameList)
+        {
+            List<Character> sDistance = new ArrayList<>();
+            TreeMap<Character,Integer> map = new TreeMap<>(new Comparator(){
+
+                @Override
+                public int compare(Object o1,Object o2)
+                {
+                    char i1 = (char) o1;
+                    char i2 = (char) o2;
+                    if(Math.abs((int ) i1-(int) c )==Math.abs((int ) c-(int) i2 ))
+                    {
+                        return 1;
+                    }
+                    if(Math.abs((int ) i1-(int) c )>Math.abs((int ) c-(int) i2 ))
+                        return 1;
+                    return -1;
+                };
+            });
+
+//            System.out.println("\n");
+
+            for(char d : goodStringList)
+            {
+                map.putIfAbsent(d,Math.abs((int) c-(int) d));
+            }
+//                goodList.add(map.firstKey());
+            map.forEach((k, v) -> System.out.print("Key :" + k + " Value :" + v + " "));
+
+            System.out.println("");
+
+//                goodList.forEach(System.out::print);
+
+            if(previousSelect == '\u0000')
+            {
+                previousSelect = map.firstKey();
+            }
+            char firstChar = map.pollFirstEntry().getKey();
+            while(firstChar ==map.firstKey())
+            {
+                sDistance.add(firstChar);
+                sDistance.add(map.firstKey());
+                firstChar = map.pollFirstEntry().getKey();
+            }
+            if(!sDistance.isEmpty())
+            {
+                TreeMap<Character,Integer> sDistanceMap = new TreeMap<>((Comparator)(o1,o2)-> {
+
+                    if(Math.abs((int ) o1-(int) c )==Math.abs((int ) c-(int) o2 ))
+                    {
+                        return 0;
+                    }
+                    if(Math.abs((int ) o1-(int) c )>Math.abs((int ) c-(int) o2 ))
+                        return 1;
+                    return -1;
+
+                });
+                for(char c3 : sDistance)
+                {
+                    sDistanceMap.putIfAbsent(c3,Math.abs((int) previousSelect-(int) c3));
+                }
+
+                goodList.add(sDistanceMap.firstKey());
+                previousSelect=sDistanceMap.firstKey();
+
+            }
+            else
+                goodList.add(firstChar);
+                previousSelect=firstChar;
+        }
+
+        goodList.forEach(System.out::print);
 
 
     }
