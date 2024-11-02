@@ -1,5 +1,7 @@
 package Adhikary.X;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class Main {
@@ -7,14 +9,13 @@ public class Main {
     public static void main(String[] args)
     {
 
-      boolean b = validateName("Bis hal");
-      System.out.println(b);
+      System.out.println( validateName(askInput()));
 
 
 
     }
 
-    public static Map<String,String> askInput()
+    public static TreeMap<String,String> askInput()
     {
         Scanner s= new Scanner(System.in);
         System.out.println(" \n rules for good String and name : \n 1<=len(good string)<=100 \n 1<=len(name)<=10^4 \n Good String will consist of lower ,upper case alphabets, digits and symbols \n Name will consist of only space, lower, upper, case alphabets \n Characters are case sensitive \n "+
@@ -23,7 +24,7 @@ public class Main {
         System.out.println("Enter the Name : \n");
         String name = s.nextLine();
 
-        Map<String,String> map = new HashMap<>();
+        TreeMap<String,String> map = new TreeMap<>();
         map.put(goodString,name);
         return map;
     }
@@ -33,8 +34,10 @@ public class Main {
 
     }
 
-    public static boolean validateName(String name)
+    public static boolean validateName(TreeMap<String,String> map)
     {
+
+        String name = map.firstEntry().getValue();
         Set<Integer> setOfSymbolAsciiValuesNotAllowed = new TreeSet<>();
         for(int i=33,j=0;i<=126;i++)
         {
@@ -58,26 +61,28 @@ public class Main {
         {
             if(setOfSymbolAsciiValuesNotAllowed.contains((int) c))
             {
+                System.out.println("\n Not a VALID NAME! Special Symbol chars Except 'SPACE' isn't allowed \n");
                 return false;
             }
         }
 
 
+        System.out.println("\n Name is Valid according to the constraints");
         return true;
 
     }
 
-    public void finalizeName(String name)
-    {
-        if(validateName(name))
-        {
-            
-
-        }
-
-
-
-    }
+//    public void finalizeName(String name)
+//    {
+//        if(validateName(name))
+//        {
+//
+//
+//        }
+//
+//
+//
+//    }
 
     public static void findDistance(Map<String,String> map)
     {
