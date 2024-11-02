@@ -6,8 +6,8 @@ public class Main {
 
     public static void main(String[] args)
     {
-        String goodString = "(@HR*i{kcQl";
-        String name = "Vyom";
+        String goodString = "6*K4AQf]gpi";
+        String name = "Nainika";
 //        char[] goodStringArr  = goodString.toCharArray();
 //        char[] nameArr =  name.toCharArray();
 //
@@ -80,12 +80,12 @@ public class Main {
             {
                 map.putIfAbsent(d,Math.abs((int) c-(int) d));
             }
-                goodList.add(map.firstKey());
+//                goodList.add(map.firstKey());
                 map.forEach((k, v) -> System.out.print("Key :" + k + " Value :" + v + " "));
 
                 System.out.println("");
 
-                goodList.forEach(System.out::print);
+//                goodList.forEach(System.out::print);
 
                 if(previousSelect == '\u0000')
                 {
@@ -98,10 +98,32 @@ public class Main {
                     sDistance.add(map.firstKey());
                     firstChar = map.pollFirstEntry().getKey();
                 }
+                if(!sDistance.isEmpty())
+                {
+                    TreeMap<Character,Integer> sDistanceMap = new TreeMap<>((Comparator)(o1,o2)-> {
 
+                        if(Math.abs((int ) o1-(int) c )==Math.abs((int ) c-(int) o2 ))
+                        {
+                            return 0;
+                        }
+                        if(Math.abs((int ) o1-(int) c )>Math.abs((int ) c-(int) o2 ))
+                            return 1;
+                        return -1;
 
+                    });
+                 for(char c3 : sDistance)
+                 {
+                    sDistanceMap.putIfAbsent(c3,Math.abs((int) c-(int) c3));
+                 }
+
+                 goodList.add(sDistanceMap.firstKey());
+
+                }
+                else
+                    goodList.add(firstChar);
         }
 
+                goodList.forEach(System.out::print);
 
 
     }
