@@ -113,14 +113,16 @@ public class Main {
                     });
                  for(char c3 : sDistance)
                  {
-                    sDistanceMap.putIfAbsent(c3,Math.abs((int) c-(int) c3));
+                    sDistanceMap.putIfAbsent(c3,Math.abs((int) previousSelect-(int) c3));
                  }
 
                  goodList.add(sDistanceMap.firstKey());
+                 previousSelect=sDistanceMap.firstKey();
 
                 }
                 else
                     goodList.add(firstChar);
+                    previousSelect=firstChar;
         }
 
                 goodList.forEach(System.out::print);
