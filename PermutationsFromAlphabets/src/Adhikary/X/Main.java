@@ -10,7 +10,7 @@ public class Main
     {
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         Scanner s = new Scanner(System.in);
-        System.out.println("Enter the length of Permutations to create from alphabets , letters arent repeated\n");
+        System.out.println("Enter the length of Permutations to create from alphabets ,Where  letters arent repeated\n");
         int length = s.nextInt();
         s.nextLine();
 
@@ -23,16 +23,20 @@ public class Main
         {
             for (String str : previousString)
             {
+                if(previousString.get(0).length()<length)
+                {
+                    for(String s1 : removeString(str))
+                    {
+                     newString.add(str + s1);
 
-
-
+                    }
+                }
             }
-
+            previousString = newString;
+            newString.clear();
         }
 
-
-
-
+        previousString.forEach(System.out::println);
     }
 
 
