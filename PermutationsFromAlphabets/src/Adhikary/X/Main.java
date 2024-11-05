@@ -1,13 +1,10 @@
 package Adhikary.X;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
-    public static void main(String... args)
-    {
+    public static void main(String... args) {
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         Scanner s = new Scanner(System.in);
         System.out.println("Enter the length of Permutations to create from alphabets ,Where  letters arent repeated\n");
@@ -15,12 +12,17 @@ public class Main
         s.nextLine();
 
 
-        List<String>  previousString = new ArrayList<>();
-        List<String> newString = new ArrayList<>();
-
-
-        while(previousString.get(0).length()<=length)
+        List<String> previousString = new ArrayList<>();
+        for (char c : alphabets.toCharArray())
         {
+            previousString.add(String.valueOf(c));
+        }
+
+
+
+        while(previousString.get(0).length()<length)
+        {
+            List<String> newString = new ArrayList<>();
             for (String str : previousString)
             {
                 if(previousString.get(0).length()<length)
@@ -32,11 +34,23 @@ public class Main
                     }
                 }
             }
-            previousString = newString;
-            newString.clear();
+
+            if(newString.size()!=0)
+            {
+                previousString.clear();
+                previousString.addAll(newString);
+            }
         }
 
+        previousString.sort(Comparator.comparing((k)->k));
+
         previousString.forEach(System.out::println);
+
+        System.out.println("\n Enter the rank of the String to find the string  : \n");
+        int rank =  s.nextInt();
+        s.nextLine();
+        findRank(previousString,rank);
+
     }
 
 
@@ -55,7 +69,14 @@ public class Main
         return afterString;
     }
 
+    public static void findRank(List<String> permutationsList,int rank)
+    {
+        TreeMap<Integer,String>  rankedPermutations = new TreeMap<>(Comparator.comparing((k)->k));
+        for(String s : permutationsList)
+        {
+            rankedPermutations.putIfAbsent(permutationsList.indexOf(s)+1,s);
+        }
+        System.out.println("The String Ranked :"+rank +" is :" + rankedPermutations.get(rank));
 
-
-
+    }
 }
