@@ -12,7 +12,10 @@ public class Main
         s.nextLine();
 
 
-        List<String> previousString = new ArrayList<>();
+        if(length<=8&&length>=1)
+        {
+
+            List<String> previousString = new ArrayList<>();
         for (char c : alphabets.toCharArray())
         {
             previousString.add(String.valueOf(c));
@@ -50,6 +53,7 @@ public class Main
         int rank =  s.nextInt();
         s.nextLine();
         findRank(previousString,rank);
+        }
 
     }
 
@@ -79,4 +83,48 @@ public class Main
         System.out.println("The String Ranked :"+rank +" is :" + rankedPermutations.get(rank));
 
     }
+
+    public void findRank2(int rank,int length)
+    {
+        TreeMap<Integer,String> rankedAlphabets = new TreeMap<>(new Comparator<Integer>(){
+
+            @Override
+            public int compare(Integer o1, Integer o2)
+            {
+                return o1.compareTo(o2);
+            }
+        });
+
+        String alphabets = "abcdefghijklmnopqrstuvwxyz";
+        int lc =1;
+        for(char c : alphabets.toCharArray())
+        {
+            rankedAlphabets.putIfAbsent(lc,String.valueOf(c));
+            lc++;
+        }
+        int lc2=1;
+        while(lc2<=length)
+        {
+
+
+
+        }
+
+
+
+    }
+
+    public int factorial(int n,int loopCounter)
+    {
+        int lc=loopCounter ;
+        if(lc<n-1)
+        {
+            n=n*n-1;
+            lc++;
+            factorial(n,lc);
+        }
+        return n;
+    }
+
+
 }

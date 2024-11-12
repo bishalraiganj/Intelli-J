@@ -14,7 +14,7 @@ public class Main
         s.nextLine();
 
 
-        if(length<=26&&length>=1)
+        if(length<=8&&length>=1)
         {
             
 
