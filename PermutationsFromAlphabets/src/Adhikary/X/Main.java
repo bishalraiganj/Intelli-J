@@ -102,6 +102,8 @@ public class Main
             rankedAlphabets.putIfAbsent(lc,String.valueOf(c));
             lc++;
         }
+
+
         int lc2=0;
         int max =26;
         StringBuilder permutation  = new StringBuilder();
@@ -114,7 +116,8 @@ public class Main
            }
            else
            {
-              double decimal = div
+              double decimal = div-Math.floor(div);
+              decimal*(26-lc2)
 
            }
 
