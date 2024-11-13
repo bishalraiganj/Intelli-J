@@ -102,9 +102,22 @@ public class Main
             rankedAlphabets.putIfAbsent(lc,String.valueOf(c));
             lc++;
         }
-        int lc2=1;
-        while(lc2<=length)
+        int lc2=0;
+        int max =26;
+        StringBuilder permutation  = new StringBuilder();
+        while(lc2<length)
         {
+           double div = rank/((factorial(max-lc2)/factorial(26-length)));
+           if(integerCheck(div))
+           {
+               permutation.append("z");
+           }
+           else
+           {
+              double decimal = div
+
+           }
+
 
 
 
@@ -114,17 +127,23 @@ public class Main
 
     }
 
-    public int factorial(int n,int loopCounter)
+    public static int factorial(int n) {
+
+        int res = n;
+        while (n >= 2) {
+            res = res *( n - 1 );
+            n--;
+        }
+        return res;
+    }
+
+    public static  boolean integerCheck(double n)
     {
-        int lc=loopCounter ;
-        if(lc<n-1)
+        if(n-Math.floor(n)==0)
         {
-            n=n*n-1;
-            lc++;
-            factorial(n,lc);
+            return true;
         }
-        return n;
+         return false;
     }
-
 
 }
