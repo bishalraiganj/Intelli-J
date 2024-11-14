@@ -147,7 +147,7 @@ public class Main
         int lc = 0;
         while (lc < length)
         {
-            double div = rank/(factorial(26-lc)/(factorial(26-length)));
+            double div = (double)rank/(factorial(26-lc)/(factorial(26-length)));
             if(integerCheck(div))
             {
                 Set<String> set = new LinkedHashSet<>();
