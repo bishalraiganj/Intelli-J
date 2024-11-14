@@ -86,12 +86,12 @@ public class Main
 
     public void findRank2(int rank,int length)
     {
-        TreeMap<Integer,String> rankedAlphabets = new TreeMap<>(new Comparator<Integer>(){
+        TreeMap<String,Integer> rankedAlphabets = new TreeMap<>(new Comparator<String>(){
 
             @Override
-            public int compare(Integer o1, Integer o2)
+            public int compare(String o1, String o2)
             {
-                return o1.compareTo(o2);
+                return rankedAlphabets.get(o1).compareTo(rankedAlphabets.get(o2));
             }
         });
 
@@ -99,7 +99,7 @@ public class Main
         int lc =1;
         for(char c : alphabets.toCharArray())
         {
-            rankedAlphabets.putIfAbsent(lc,String.valueOf(c));
+            rankedAlphabets.putIfAbsent(String.valueOf(c),lc);
             lc++;
         }
 
@@ -114,9 +114,14 @@ public class Main
            {
                permutation.append("z");
            }
-           else
-           {
-              double decimal = div-Math.floor(div);
+           else {
+               double decimal = div - Math.floor(div);
+               for (int i = 1; i <=permutation.length(); i++)
+               {
+                   if(rankedpermutation.charAt(i)
+
+
+               }
               decimal*(26-lc2)
 
            }
