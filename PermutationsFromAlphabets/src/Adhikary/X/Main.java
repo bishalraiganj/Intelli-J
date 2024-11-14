@@ -168,18 +168,19 @@ public class Main
 
                 permutation.append(new TreeSet<>(set).last());
             }
-
-
-
-
-
+            else
+            {
+                double difference = div-Math.floor(div);
+                int index = (int) Math.ceil(difference*(26-lc));
+                for(char c : permutation.toString().toCharArray())
+                {
+                    if(alphabets.indexOf(c)+1<1+alphabets.indexOf(alphabets.charAt(((int)Math.ceil(difference*(26-lc))))));
+                    index++;
+                }
+                permutation.append(alphabets.charAt(index));
+            }
         }
-
-
-
-
-
-
+            System.out.println("The Permutation Ranked :" +rank + "is :" + permutation);
     }
 
     public static int factorial(int n) {
