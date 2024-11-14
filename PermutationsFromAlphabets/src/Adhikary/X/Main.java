@@ -140,6 +140,48 @@ public class Main
 //        System.out.println("The Permutation Ranked:" + rank + "is : " +permutation.toString());
 //    } Ineffiecient also wrong logic
 
+
+    public static void findRank2(int rank,int length) {
+        String alphabets = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder  permutation = new StringBuilder();
+        int lc = 0;
+        while (lc < length)
+        {
+            double div = rank/(factorial(26-lc)/(factorial(26-length)));
+            if(integerCheck(div))
+            {
+                Set<String> set = new LinkedHashSet<>();
+                for(char c : alphabets.toCharArray())
+                {
+                    set.add(String.valueOf(c));
+                }
+                set.removeIf((k)->{
+                    for(char c : permutation.toString().toCharArray())
+                    {
+                        if(k.equals(String.valueOf(c)))
+                        {
+                            return true;
+                        }
+                    }
+                    return  false;
+                });
+
+                permutation.append(new TreeSet<>(set).last());
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+
+    }
+
     public static int factorial(int n) {
 
         int res = n;
