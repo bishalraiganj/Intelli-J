@@ -86,21 +86,29 @@ public class Main
 
     public void findRank2(int rank,int length)
     {
+        HashMap<String,Integer> ra = new HashMap<>();
         TreeMap<String,Integer> rankedAlphabets = new TreeMap<>(new Comparator<String>(){
 
             @Override
             public int compare(String o1, String o2)
             {
-                return rankedAlphabets.get(o1).compareTo(rankedAlphabets.get(o2));
+                return ra.get(o1).compareTo(ra.get(o2));
             }
         });
+        rankedAlphabets.putAll(ra);
 
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         int lc =1;
         for(char c : alphabets.toCharArray())
         {
-            rankedAlphabets.putIfAbsent(String.valueOf(c),lc);
+            ra.putIfAbsent(String.valueOf(c),lc);
             lc++;
+        }
+
+        TreeMap<Integer,String> intString = new TreeMap<>();
+        for(String s : rankedAlphabets.keySet())
+        {
+            intString.putIfAbsent(rankedAlphabets.get(s),s);
         }
 
 
@@ -116,19 +124,19 @@ public class Main
            }
            else {
                double decimal = div - Math.floor(div);
+               
+               double letterIndex = decimal*(26-lc2);
                for (int i = 1; i <=permutation.length(); i++)
                {
-                   if(rankedpermutation.charAt(i)
-
-
+                   if(rankedAlphabets.get(permutation.charAt(i))<letterIndex)
+                   {
+                       letterIndex++;
+                   }
                }
-              decimal*(26-lc2)
-
+               permutation.append(intString.get(letterIndex));
            }
 
-
-
-
+           System.out.println("The Permutation Ranked:" + rank + "is : " +permutation.toString());
         }
 
 
