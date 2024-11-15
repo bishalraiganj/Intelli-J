@@ -145,27 +145,28 @@ public class Main
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder  permutation = new StringBuilder();
         int lc = 0;
+        Set<String> set = new LinkedHashSet<>();
+        for(char c : alphabets.toCharArray())
+        {
+            set.add(String.valueOf(c));
+        }
         while (lc < length)
         {
             double div = (double)rank/numOfPermutationsAtPosition(length,lc);
+
+            set.removeIf((k)->{
+                for(char c : permutation.toString().toCharArray())
+                {
+                    if(k.equals(String.valueOf(c)))
+                    {
+                        return true;
+                    }
+                }
+                return  false;
+            });
+
             if(integerCheck(div))
             {
-                Set<String> set = new LinkedHashSet<>();
-                for(char c : alphabets.toCharArray())
-                {
-                    set.add(String.valueOf(c));
-                }
-                set.removeIf((k)->{
-                    for(char c : permutation.toString().toCharArray())
-                    {
-                        if(k.equals(String.valueOf(c)))
-                        {
-                            return true;
-                        }
-                    }
-                    return  false;
-                });
-
                 permutation.append(new TreeSet<>(set).last());
                 lc++;
             }
