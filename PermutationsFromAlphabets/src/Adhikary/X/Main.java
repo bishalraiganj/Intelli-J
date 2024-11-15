@@ -176,11 +176,20 @@ public class Main
                 int index = (int) Math.ceil(difference*(26-lc))-1;
                 for(char c : permutation.toString().toCharArray())
                 {
-                    if(alphabets.indexOf(c)<index);
+                    if(alphabets.indexOf(c)<index)
                     index++;
                 }
-                permutation.append(alphabets.charAt(index));
-                lc++;
+                if(index>alphabets.indexOf((new TreeSet<String>(set).last().charAt(0))))
+                {
+                    permutation.append(new TreeSet<>(set).last());
+                    lc++;
+                }
+                else
+                {
+
+                    permutation.append(alphabets.charAt(index));
+                    lc++;
+                }
             }
         }
             System.out.println(" The Permutation Ranked : " +rank + " is : " + permutation);
