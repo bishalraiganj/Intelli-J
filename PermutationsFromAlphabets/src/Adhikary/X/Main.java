@@ -172,17 +172,17 @@ public class Main
             else
             {
                 double difference = div-Math.floor(div);
-                int index = (int) Math.ceil(difference*(26-lc));
+                int index = (int) Math.ceil(difference*(26-lc))-1;
                 for(char c : permutation.toString().toCharArray())
                 {
-                    if(alphabets.indexOf(c)+1<1+alphabets.indexOf(alphabets.charAt(((int)Math.ceil(difference*(26-lc))))));
+                    if(alphabets.indexOf(c)<index);
                     index++;
                 }
                 permutation.append(alphabets.charAt(index));
                 lc++;
             }
         }
-            System.out.println("The Permutation Ranked :" +rank + "is :" + permutation);
+            System.out.println(" The Permutation Ranked : " +rank + " is : " + permutation);
     }
 
     public static int  numOfPermutationsAtPosition(int length,int lc)
