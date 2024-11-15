@@ -147,7 +147,7 @@ public class Main
         int lc = 0;
         while (lc < length)
         {
-            double div = (double)rank/(factorial(26-lc)/(factorial(26-length)));
+            double div = (double)rank/numOfPermutationsAtPosition(length,lc);
             if(integerCheck(div))
             {
                 Set<String> set = new LinkedHashSet<>();
@@ -167,6 +167,7 @@ public class Main
                 });
 
                 permutation.append(new TreeSet<>(set).last());
+                lc++;
             }
             else
             {
@@ -178,9 +179,23 @@ public class Main
                     index++;
                 }
                 permutation.append(alphabets.charAt(index));
+                lc++;
             }
         }
             System.out.println("The Permutation Ranked :" +rank + "is :" + permutation);
+    }
+
+    public static int  numOfPermutationsAtPosition(int length,int lc)
+    {
+
+        int numOfCharsInCurrPosition = 26-lc,numOfLength=length-lc;
+        int res = numOfCharsInCurrPosition;
+        for(int i =1 ;i<numOfLength;i++)
+        {
+            res *=(numOfCharsInCurrPosition-1);
+            numOfCharsInCurrPosition--;
+        }
+        return res;
     }
 
     public static int factorial(int n) {
