@@ -1,5 +1,6 @@
 package Adhikary.X;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Main
@@ -47,8 +48,14 @@ public class Main
 
         previousString.sort(Comparator.comparing((k)->k));
 
-        previousString.forEach(System.out::println);
+//        previousString.forEach(System.out::println);
 
+            int iterationCount=1;
+            for(String e: previousString )
+            {
+                System.out.println(iterationCount +" : " + e);
+                iterationCount++;
+            }
         System.out.println("\n Enter the rank of the String to find the string  : \n");
         int rank =  s.nextInt();
         s.nextLine();
@@ -142,6 +149,32 @@ public class Main
 
 
     public static void findRank2(int rank,int length) {
+        /*
+                     EXPLANATION
+        (LOGIC) -   say, permutation length n, of alphabets without repetitions, rank is x
+        each permutation have n positions ,
+        for  each position in the permutation , number of permutations including that position wil be (26-i)*(26-i-1)*(26-i-2)*....*(26-n+1)
+        in the above expression i is the position subtracted by 1, ex : for first position including this position we can have
+        26*25*23*....*(26-n+1) number of permutations ,,
+        |
+        |
+        26 alphabets possible in the first position
+
+        to find the  alphabet at first position of the permutation ranked  x
+        divide rank by number of permutations possible for the length possible when including the position ex : finding the first position alphabet
+        means permutations of length n ,
+        if the result is an integer it means the result is the last alphabet that is not already on the permutation
+        if it is in decimal then multiply the decimal part of the quotient to the number of alphabets possible in that position
+        the result of the above division represents the position of alphabets if we order the alphabets lexicographically
+        now , if the alphabets in the permutation have serial indexes less than the serial index of the result then we have to increase
+        the result index by the same number of alphabets in the permutation having indexes less than that of the quotient ,,,
+        now after addition the quotient represent the index of the alphabet in that position , if the quotient after indexing becomes greater than the index of the last
+        alphabet available then the last alphabet available is the one at that position
+
+
+
+
+         */
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder  permutation = new StringBuilder();
         int lc = 0;
@@ -152,7 +185,7 @@ public class Main
         }
         while (lc < length)
         {
-            double div = (double)rank/numOfPermutationsAtPosition(length,lc);
+            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)));
 
             set.removeIf((k)->{
                 for(char c : permutation.toString().toCharArray())
@@ -165,6 +198,7 @@ public class Main
                 return  false;
             });
 
+            List<String> availableAlphabetsList = new ArrayList<>(set);
             if(integerCheck(div))
             {
                 permutation.append(new TreeSet<>(set).last());
@@ -172,24 +206,10 @@ public class Main
             }
             else
             {
-                double difference = div-Math.floor(div);
+                double difference = div.subtract(BigDecimal.valueOf(Math.floor(div.doubleValue()))).doubleValue();
                 int index = (int) Math.ceil(difference*(26-lc))-1;
-                for(char c : permutation.toString().toCharArray())
-                {
-                    if(alphabets.indexOf(c)<index)
-                    index++;
-                }
-                if(index>alphabets.indexOf((new TreeSet<String>(set).last().charAt(0))))
-                {
-                    permutation.append(new TreeSet<>(set).last());
-                    lc++;
-                }
-                else
-                {
-
-                    permutation.append(alphabets.charAt(index));
-                    lc++;
-                }
+                permutation.append(availableAlphabetsList.get(index));
+                lc++;
             }
         }
             System.out.println(" The Permutation Ranked : " +rank + " is : " + permutation);
@@ -218,9 +238,9 @@ public class Main
         return res;
     }
 
-    public static  boolean integerCheck(double n)
+    public static  boolean integerCheck(BigDecimal n)
     {
-        if(n-Math.floor(n)==0)
+        if(n.subtract(BigDecimal.valueOf(Math.floor(n.doubleValue())))==BigDecimal.valueOf(0))
         {
             return true;
         }
