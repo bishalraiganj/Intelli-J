@@ -6,7 +6,7 @@ public class Main {
 
         System.out.println(factorial(11)+" \n Integer Check : " + integerCheck(33.000001));
         System.out.println("-".repeat(50));
-        System.out.println(numOfPermutationsAtPosition(3,3));
+        System.out.println(numOfPermutationsAtPosition(2,0));
 
 
 

@@ -1,6 +1,7 @@
 package Adhikary.X;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class Main
@@ -185,7 +186,7 @@ public class Main
         }
         while (lc < length)
         {
-            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)));
+            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)),15, RoundingMode.HALF_UP);
 
             set.removeIf((k)->{
                 for(char c : permutation.toString().toCharArray())
@@ -240,7 +241,7 @@ public class Main
 
     public static  boolean integerCheck(BigDecimal n)
     {
-        if(n.subtract(BigDecimal.valueOf(Math.floor(n.doubleValue())))==BigDecimal.valueOf(0))
+        if(n.subtract(BigDecimal.valueOf(Math.floor(n.doubleValue()))).equals(BigDecimal.valueOf(0)))
         {
             return true;
         }
