@@ -186,7 +186,7 @@ public class Main
         }
         while (lc < length)
         {
-            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)),15, RoundingMode.HALF_UP);
+            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)),15, RoundingMode.HALF_UP).setScale(6,RoundingMode.HALF_UP);
 
             set.removeIf((k)->{
                 for(char c : permutation.toString().toCharArray())
@@ -207,9 +207,14 @@ public class Main
             }
             else
             {
-                double difference = div.subtract(BigDecimal.valueOf(Math.floor(div.doubleValue()))).doubleValue();
-                int index = (int) Math.ceil(difference*(26-lc))-1;
-                permutation.append(availableAlphabetsList.get(index));
+                BigDecimal difference = div.subtract(div.setScale(0,RoundingMode.FLOOR)).setScale(6,RoundingMode.HALF_UP);
+                BigDecimal lcD = BigDecimal.valueOf(lc);
+
+                BigDecimal di = BigDecimal.valueOf(26).subtract(lcD);
+
+                BigDecimal d= difference.multiply(di);
+                BigDecimal index = d.setScale(0,RoundingMode.CEILING).subtract(BigDecimal.valueOf(1));
+                permutation.append(availableAlphabetsList.get(index.intValue()));
                 lc++;
             }
         }
@@ -241,7 +246,7 @@ public class Main
 
     public static  boolean integerCheck(BigDecimal n)
     {
-        if(n.subtract(BigDecimal.valueOf(Math.floor(n.doubleValue()))).equals(BigDecimal.valueOf(0)))
+        if(n.subtract(n.setScale(0,RoundingMode.FLOOR)).equals(BigDecimal.valueOf(0)))
         {
             return true;
         }
