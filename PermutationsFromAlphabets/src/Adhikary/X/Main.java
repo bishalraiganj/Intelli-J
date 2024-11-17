@@ -189,7 +189,7 @@ public class Main
             BigDecimal  positionIndex = new BigDecimal(String.valueOf(lc));
             BigDecimal pLength = new BigDecimal(String.valueOf(length));
             BigDecimal pRank = new BigDecimal(String.valueOf(rank));
-            BigDecimal div = pRank.divide(new BigDecimal((String.valueOf(numOfPermutationsAtPosition(length,lc)))),18, RoundingMode.DOWN);
+            BigDecimal div = pRank.divide(new BigDecimal((String.valueOf(numOfPermutationsAtPosition(length,lc)))),18, RoundingMode.DOWN); // truncating using RoundingMode.DOWN fixed the pecision issues compared to using RoundingMode.HALF_UP
 
 
 
