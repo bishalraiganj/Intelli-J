@@ -190,10 +190,6 @@ public class Main
             BigDecimal pLength = new BigDecimal(String.valueOf(length));
             BigDecimal pRank = new BigDecimal(String.valueOf(rank));
             BigDecimal div = pRank.divide(new BigDecimal((String.valueOf(numOfPermutationsAtPosition(length,lc)))),18, RoundingMode.DOWN); // truncating using RoundingMode.DOWN fixed the pecision issues compared to using RoundingMode.HALF_UP
-
-
-
-
             set.removeIf((k)->{
                 for(char c : permutation.toString().toCharArray())
                 {
@@ -215,10 +211,7 @@ public class Main
             {
                 System.out.println("\n "+div + "\n");
                 BigDecimal difference = div.subtract(div.setScale(0,RoundingMode.DOWN));
-
-
                 BigDecimal di = BigDecimal.valueOf(26).subtract(positionIndex); // number of alphabets possible at that position lc+1
-
                 BigDecimal d= difference.multiply(di);
                 BigDecimal test = d.setScale(0,RoundingMode.CEILING);
                 BigDecimal index = test.subtract(BigDecimal.valueOf(1));
