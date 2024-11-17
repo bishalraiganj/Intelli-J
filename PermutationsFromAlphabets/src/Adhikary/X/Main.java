@@ -186,7 +186,13 @@ public class Main
         }
         while (lc < length)
         {
-            BigDecimal div = BigDecimal.valueOf(rank).divide(BigDecimal.valueOf(numOfPermutationsAtPosition(length,lc)),15, RoundingMode.HALF_UP).setScale(6,RoundingMode.HALF_UP);
+            BigDecimal  positionIndex = new BigDecimal(String.valueOf(lc));
+            BigDecimal pLength = new BigDecimal(String.valueOf(length));
+            BigDecimal pRank = new BigDecimal(String.valueOf(rank));
+            BigDecimal div = pRank.divide(new BigDecimal((String.valueOf(numOfPermutationsAtPosition(length,lc)))),18, RoundingMode.DOWN);
+
+
+
 
             set.removeIf((k)->{
                 for(char c : permutation.toString().toCharArray())
@@ -207,14 +213,17 @@ public class Main
             }
             else
             {
-                BigDecimal difference = div.subtract(div.setScale(0,RoundingMode.FLOOR)).setScale(6,RoundingMode.HALF_UP);
-                BigDecimal lcD = BigDecimal.valueOf(lc);
+                System.out.println("\n "+div + "\n");
+                BigDecimal difference = div.subtract(div.setScale(0,RoundingMode.DOWN));
 
-                BigDecimal di = BigDecimal.valueOf(26).subtract(lcD);
+
+                BigDecimal di = BigDecimal.valueOf(26).subtract(positionIndex); // number of alphabets possible at that position lc+1
 
                 BigDecimal d= difference.multiply(di);
-                BigDecimal index = d.setScale(0,RoundingMode.CEILING).subtract(BigDecimal.valueOf(1));
+                BigDecimal test = d.setScale(0,RoundingMode.CEILING);
+                BigDecimal index = test.subtract(BigDecimal.valueOf(1));
                 permutation.append(availableAlphabetsList.get(index.intValue()));
+                availableAlphabetsList.forEach(System.out::print);
                 lc++;
             }
         }
@@ -246,11 +255,8 @@ public class Main
 
     public static  boolean integerCheck(BigDecimal n)
     {
-        if(n.subtract(n.setScale(0,RoundingMode.FLOOR)).equals(BigDecimal.valueOf(0)))
-        {
-            return true;
-        }
-         return false;
+//        return n.setScale(3,RoundingMode.HALF_UP).divide(n.setScale(0,RoundingMode.DOWN),3,RoundingMode.HALF_UP).equals(BigDecimal.ONE.setScale(3,RoundingMode.HALF_UP));
+        return n.setScale(3,RoundingMode.HALF_UP).subtract(n.setScale(0,RoundingMode.DOWN)).equals(BigDecimal.ZERO.setScale(3,RoundingMode.HALF_UP));
     }
 
 }
