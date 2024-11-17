@@ -9,7 +9,7 @@ public class Main
     public static void main(String... args) {
         String alphabets = "abcdefghijklmnopqrstuvwxyz";
         Scanner s = new Scanner(System.in);
-        System.out.println("Enter the length of Permutations to create from alphabets ,Where  letters arent repeated\n");
+        System.out.println("Enter the length of Permutations to create from alphabets ,Where  letters arent repeated (Code Written By Bishal Adhikary ) \n");
         int length = s.nextInt();
         s.nextLine();
 
