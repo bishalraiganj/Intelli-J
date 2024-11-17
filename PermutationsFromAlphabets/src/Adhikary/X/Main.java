@@ -82,7 +82,7 @@ public class Main
         return afterString;
     }
 
-    public static void findRank(List<String> permutationsList,int rank)
+    public static void findRank(List<String> permutationsList,int rank) // Brute-Forcing ALGORITHM  In-Efficient and unusable
     {
         TreeMap<Integer,String>  rankedPermutations = new TreeMap<>(Comparator.comparing((k)->k));
         for(String s : permutationsList)
@@ -149,7 +149,7 @@ public class Main
 //    } Ineffiecient also wrong logic
 
 
-    public static void findRank2(int rank,int length) {
+    public static void findRank2(int rank,int length) {  // efficient usable algorithm but very very complex logic
         /*
                      EXPLANATION
         (LOGIC) -   say, permutation length n, of alphabets without repetitions, rank is x
