@@ -209,14 +209,14 @@ public class Main
             }
             else
             {
-                System.out.println("\n "+div + "\n");
+//                System.out.println("\n "+div + "\n");
                 BigDecimal difference = div.subtract(div.setScale(0,RoundingMode.DOWN));
                 BigDecimal di = BigDecimal.valueOf(26).subtract(positionIndex); // number of alphabets possible at that position lc+1
                 BigDecimal d= difference.multiply(di);
                 BigDecimal test = d.setScale(0,RoundingMode.CEILING);
                 BigDecimal index = test.subtract(BigDecimal.valueOf(1));
                 permutation.append(availableAlphabetsList.get(index.intValue()));
-                availableAlphabetsList.forEach(System.out::print);
+//                availableAlphabetsList.forEach(System.out::print);
                 lc++;
             }
         }
