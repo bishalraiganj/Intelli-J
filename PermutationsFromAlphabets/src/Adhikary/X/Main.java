@@ -1,3 +1,6 @@
+
+// PermutationsFromAlphabets © 2024 by Bishal Adhikary is licensed under CC BY-NC 4.0
+
 package Adhikary.X;
 
 import java.math.BigDecimal;
@@ -171,7 +174,6 @@ public class Main
         the result index by the same number of alphabets in the permutation having indexes less than that of the quotient ,,,
         now after addition the quotient represent the index of the alphabet in that position , if the quotient after indexing becomes greater than the index of the last
         alphabet available then the last alphabet available is the one at that position
-
 
 
 
