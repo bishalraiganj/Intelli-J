@@ -10,12 +10,19 @@ public class ChildClass extends BaseClass {
         System.out.println("[Child:optionalMethod]: EXTRA Stuff Here");
         super.optionalMethod();
     }
+//
+//    @Override
+//    public void recommendedMethod()
+//    {
+//        System.out.println("[Child:recommendedMethod]: I'll do things my way ");
+//        optionalMethod();
+//    }
 
-    @Override
-    public void recommendedMethod()
+
+    public static void mandatoryMethod()
     {
-        System.out.println("[Child:recommendedMethod]: I'll do things my way ");
-        optionalMethod();
+
+        System.out.println("[Child:mandatoryMethod]: NON-NEGOTIABLE");
     }
 
 
