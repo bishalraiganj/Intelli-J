@@ -4,6 +4,11 @@ import Adhikary.X.generic.BaseClass;
 
 public class ChildClass extends BaseClass {
 
+    public static void recommendedStatic()
+    {
+        System.out.println("[Child.recommended]: My own important stuff");
+    }
+
     @Override
     public void optionalMethod()
     {
@@ -19,7 +24,7 @@ public class ChildClass extends BaseClass {
 //    }
 
 
-    public static void mandatoryMethod()
+    private static void mandatoryMethod()
     {
 
         System.out.println("[Child:mandatoryMethod]: NON-NEGOTIABLE");

@@ -2,10 +2,10 @@ package Adhikary.X.generic;
 
 public class BaseClass {
 
-    public final void recommendedMethod() {
+    public static void recommendedMethod() {
         System.out.println("[BaseClass.recommendedMethod]: Best Way to do it");
-        optionalMethod();
-        mandatoryMethod();
+        optionalStatic();
+        mandatoryStatic();
     }
 
     public static void recommendedStatic()
