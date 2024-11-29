@@ -1,7 +1,26 @@
-package Adhikary.X;
+  package Adhikary.X; //// I created this in Intelli-J inside this package Adhikary.X also uploaded on Git-Hub in realTime
+
+
 
 import java.util.*;
 
+ class Connection {
+
+    public Employee e ;
+    public Connection(Employee e)
+    {
+        this.e = e;
+    }
+}
+ class Employee {
+
+    public int id;
+    public Employee(int id)
+    {
+        this.id = id;
+    }
+
+}
 public class Main {
 
     public static void main(String... args)
