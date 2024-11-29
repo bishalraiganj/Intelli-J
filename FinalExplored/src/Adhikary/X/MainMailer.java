@@ -10,7 +10,7 @@ public class MainMailer {
     public static void main(String... args)
     {
 
-        String[] names = {"Ann Jones","Ann Jones Ph.d.","Bob Jones M.D. ","Carol Jones","Ed Green Ph.D.","Ed Green M.D.","Ed Black"};
+        String[] names = {"Ann Jones","Ann Jones Ph.D.","Bob Jones M.D. ","Carol Jones","Ed Green Ph.D.","Ed Green M.D.","Ed Black"};
         List<StringBuilder> population = getNames(names);
         Map<StringBuilder,Integer> counts = new TreeMap<>();
         population.forEach((s)->{
@@ -18,6 +18,39 @@ public class MainMailer {
             counts.merge(s,1,Integer::sum);
 
         });
+
+        System.out.println(counts);
+
+        StringBuilder annJonesPhd = new StringBuilder("Ann Jones Ph.D.");
+        System.out.println("There are "+ counts.get(annJonesPhd) + " records for " + annJonesPhd);
+
+        List<StringBuilder> cleanedNames = standardizedNames(population);
+        System.out.println(cleanedNames);
+
+        System.out.println("There are "+ counts.get(annJonesPhd) + " records for " + annJonesPhd);
+        System.out.println(counts);
+
+        StringBuilder annJones = new StringBuilder("Ann Jones");
+        System.out.println("There are " + counts.get(annJones) + " records for "+annJones);
+        System.out.println("-".repeat(50));
+        counts.forEach((k,v)->System.out.println(k + ":" + v));
+
+        System.out.println("-".repeat(50));
+        counts.keySet().forEach((k)->System.out.println(k + ":" + counts.get(k)));
+
+
+        System.out.println("-".repeat(60));
+        StringBuilder s1 = new StringBuilder("Bishal");
+        StringBuilder s2 = new StringBuilder("Bishal");
+
+
+
+        counts.put(s1,1);
+        counts.put(s2,2);
+
+        System.out.println(" S1 = " + counts.get(s1) + "; s2 =  " + counts.get(s2));
+
+
 
 
 
@@ -39,5 +72,24 @@ public class MainMailer {
         return list;
 
     }
+    private static List<StringBuilder> standardizedNames(List<StringBuilder> list)
+    {
+        List<StringBuilder> newList = new ArrayList<>();
+        for(var name : list)
+        {
+
+            for(String suffix : new String[] {"Ph.D.","M.D."})
+            {
+                int startIndex = -1;
+                if((startIndex = name.indexOf(suffix))>-1)
+                {
+                    name.replace(startIndex-1, startIndex+suffix.length(),"");
+                }
+            }
+            newList.add(name);
+        }
+        return newList;
+    }
+
 
 }
