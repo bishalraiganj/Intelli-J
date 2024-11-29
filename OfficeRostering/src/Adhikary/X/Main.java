@@ -9,7 +9,7 @@ public class Main {
     public static void main(String... args)
     {
 
-        rosterCalculation();
+       System.out.println( rosterCalculation());
 
 
 
@@ -36,8 +36,8 @@ public class Main {
         {
             String cInput = s.nextLine();
             String[] c = cInput.split(" ");
-            int id= Integer.parseInt(inputs[0]);
-            int friendsId = Integer.parseInt(inputs[1]);
+            int id= Integer.parseInt(c[0]);
+            int friendsId = Integer.parseInt(c[1]);
             connectionsMap.put(id,friendsId);
         }
 
