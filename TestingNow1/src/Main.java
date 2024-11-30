@@ -1,10 +1,7 @@
-  package Adhikary.X; //// I created this in Intelli-J inside this package Adhikary.X also uploaded on Git-Hub in realTime
-
-
-
 import java.util.*;
 
- class Connection {
+
+class Connection {
 
     public Employee e ;
     public Connection(Employee e)
@@ -12,7 +9,7 @@ import java.util.*;
         this.e = e;
     }
 }
- class Employee {
+class Employee {
 
     public int id;
     public Employee(int id)
@@ -23,28 +20,15 @@ import java.util.*;
 }
 public class Main {
 
-    public static void main(String... args)
+    public static int main(String... args)
     {
-       System.out.println( rosterCalculation());
 
 
-
-
-
-
-
-    }
-    public static boolean  inputValidation(int n,int m,int k)
-    {
-        return n > 3 && m < 30 && k < 50 && k >1;
-    }
-    public static int rosterCalculation()
-    {
         Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
-        String[] inputs = input.split(" ");
-        int numOfWorkers= Integer.parseInt(inputs[0]);
-        int numOfConnections = Integer.parseInt(inputs[1]);
+//        String input = s.nextLine();
+//        String[] inputs = input.split(" ");
+        int numOfWorkers= s.nextInt();
+        int numOfConnections = s.nextInt();
         List<Employee> employees = new ArrayList<>();
         for(int i= 0;i<numOfWorkers;i++)
         {
@@ -55,10 +39,10 @@ public class Main {
 
         for(int i = 0 ; i < numOfConnections ; i++)
         {
-            String cInput = s.nextLine();
-            String[] c = cInput.split(" ");
-            int id= Integer.parseInt(c[0]);
-            int friendsId = Integer.parseInt(c[1]);
+//            String cInput = s.nextLine();
+//            String[] c = cInput.split(" ");
+            int id= s.nextInt();
+            int friendsId = s.nextInt();
 
             connectionsMap.put(new Connection(employees.get(id)),friendsId);
         }
@@ -91,12 +75,14 @@ public class Main {
             }
 
 
+            System.out.println( dayCount);
             return dayCount;
         }
-        return 0;
-
-
-
+        return -1;
+    }
+    public static boolean inputValidation(int n,int m,int k)
+    {
+        return n > 3 && m < 30 && k < 50 && k >1;
     }
 
     public static LinkedHashMap<Employee,Boolean> friendsMap(List<Employee> eList,Employee employee, Map<Connection,Integer> connectionsMap,Map<Employee,Boolean> allStatusMap)
@@ -133,7 +119,7 @@ public class Main {
                 return true;
             }
         }
-         if (workerStatus== false)
+        if (workerStatus== false)
         {
             int wfoCount = 0;
             for(boolean e : map.values())
@@ -148,8 +134,9 @@ public class Main {
                 return true;
             }
         }
-            return false;
+        return false;
     }
+
 
 
 
