@@ -10,4 +10,11 @@ public class PersonOfInterest extends PersonImmutable{
 
     }
 
+//    @Override
+//    public PersonImmutable[] getKids()
+//    {
+//        return super.kids;
+//
+//    }
+
 }

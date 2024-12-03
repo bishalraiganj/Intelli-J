@@ -2,6 +2,7 @@ package Adhikary.external;
 
 import Adhikary.X.PersonImmutable;
 import Adhikary.external.domain.LivingPerson;
+import Adhikary.hacker.PersonOfInterest;
 
 public class MainImmutable {
 
@@ -32,6 +33,17 @@ public class MainImmutable {
         LivingPerson anne = new LivingPerson("Anne",null);
         johnLiving.addKid(anne);
         System.out.println(johnLiving);
+
+        PersonOfInterest johnCopy = new PersonOfInterest(john);
+        System.out.println(johnCopy);
+
+        kids=johnCopy.getKids();
+        kids[1] = anne;
+        System.out.println(johnCopy);
+        System.out.println(john);
+
+
+
 
 
     }
