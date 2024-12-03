@@ -24,4 +24,16 @@ public class LivingPerson extends PersonImmutable {
         return null;
     }
 
+    public void addKid(PersonImmutable person)
+    {
+        for(int i = 0;i<kids.length;i++)
+        {
+            if(kids[i]==null)
+            {
+                kids[i]=person;
+                break;
+            }
+        }
+    }
+
 }
