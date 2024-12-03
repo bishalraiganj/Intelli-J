@@ -1,6 +1,13 @@
 package Adhikary.hacker;
 
-public class PersonOfInterest {
+import Adhikary.X.PersonImmutable;
 
+public class PersonOfInterest extends PersonImmutable{
+
+    public PersonOfInterest(PersonImmutable person)
+    {
+        super(person);
+
+    }
 
 }
