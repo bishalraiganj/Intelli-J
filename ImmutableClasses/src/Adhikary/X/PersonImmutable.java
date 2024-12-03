@@ -18,6 +18,13 @@ public class PersonImmutable {
        this(name,dob,null);
     }
 
+    protected PersonImmutable(PersonImmutable person)
+    {
+        this.name=person.name;
+        this.dob=person.dob;
+        this.kids=person.kids;
+    }
+
 
 
     public String getName()

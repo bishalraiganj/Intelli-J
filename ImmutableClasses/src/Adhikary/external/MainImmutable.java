@@ -1,6 +1,7 @@
 package Adhikary.external;
 
 import Adhikary.X.PersonImmutable;
+import Adhikary.external.domain.LivingPerson;
 
 public class MainImmutable {
 
@@ -25,6 +26,8 @@ public class MainImmutable {
 
         johnsKids[0] = new PersonImmutable("Ann","04/04/1936");
         System.out.println(john);
+
+        LivingPerson johnLiving = new LivingPerson(john.getName(),john.getKids());
 
 
     }
