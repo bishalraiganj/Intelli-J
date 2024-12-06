@@ -23,12 +23,13 @@ enum AccountType{
 
 public class BankAccount {
 
-    private  AccountType accountType ;
-    private BigDecimal  balance =new BigDecimal("0.0");
+    private final AccountType accountType ;
+    private final BigDecimal  balance ;
 
     public BankAccount(AccountType accountType)
     {
         this.accountType = accountType;
+        this.balance = BigDecimal.ZERO;
     }
     public BankAccount(AccountType accountType,BigDecimal balance)
     {
@@ -46,12 +47,12 @@ public class BankAccount {
         return new BigDecimal(balance.toString());
     }
 
-    protected void addBalance(BigDecimal amount)
-    {
-       balance=  balance.add(amount);
-    }
+//    protected void addBalance(BigDecimal amount)
+//    {
+//       balance=  balance.add(amount);
+//    }
 
-    // Untested
+    // The class and its fields are immutable
 
 
 
