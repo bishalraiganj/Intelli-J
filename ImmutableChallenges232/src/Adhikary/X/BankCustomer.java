@@ -35,12 +35,12 @@ public class BankCustomer {
 
     public List<BankAccount> getAccounts()
     {
-        return List.copyOf(accounts);
+        return new ArrayList<>(accounts);
     }
     @Override
     public String toString()
     {
-        return "Customer Name = "+name+" \n Customer Id = "+ id;
+        return "Customer Name = "+name+" \n Customer Id = "+ id + " \n Accounts = " + accounts;
     }
 
 

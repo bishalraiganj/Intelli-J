@@ -23,6 +23,28 @@ public class Main {
 
         //The following codes are trying to mutate fields for the above objects :
 
+        //Since the fields in the above objects are String , enum and BigDecimals which are immutable ,which implies neither getter nor passing an argument to the constructor of these objects will have side effects
+
+        System.out.println("-".repeat(50));
+       bishalsBankAccounts.add(new BankAccount("SBI",AccountType.RECURRINGDEPOSIT,new BigDecimal("4000")));
+//       bishalAdhikary.getAccounts().forEach(((s)->System.out.println(s)));
+       System.out.println(bishalAdhikary);
+       System.out.println("-".repeat(50));
+       bishalsBankAccounts.forEach(System.out::println);
+
+       System.out.println("-".repeat(50));
+       List<BankAccount> accountsList = bishalAdhikary.getAccounts();
+       accountsList.add(new BankAccount("SBI",AccountType.SALARY,new BigDecimal("2244.99")));
+       accountsList.forEach(((s)->System.out.println(s)));
+       System.out.println("-".repeat(50));
+//       bishalAdhikary.getAccounts().forEach(((s)->System.out.println(s)));
+        System.out.println(bishalAdhikary);
+       System.out.println("-".repeat(50));
+
+
+
+
+
 
     }
 
