@@ -14,9 +14,10 @@ public class BankCustomerHacker extends BankCustomer{
         super(bankCustomer);
     }
 
+    @Override
     public List<BankAccount> getAccounts()
     {
-        return super.getAccounts();
+        return accounts;
     }
 
 

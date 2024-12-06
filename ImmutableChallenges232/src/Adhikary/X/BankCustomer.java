@@ -6,19 +6,19 @@ import java.util.List;
 public class BankCustomer {
     private final String name;
     private final int id;
-    private final List<BankAccount> accounts;
+    protected final List<BankAccount> accounts;
 
     public BankCustomer(String name, int id, List<BankAccount> accounts) {
         this.name = name;
         this.id = id;
-        this.accounts = List.copyOf(accounts);
+        this.accounts = new ArrayList<>(accounts);
     }
 
     public BankCustomer(BankCustomer bankCustomer)
     {
         this.name = bankCustomer.name;
         this.id = bankCustomer.id;
-        this.accounts = List.copyOf(bankCustomer.accounts);
+        this.accounts = new ArrayList<>(bankCustomer.accounts);
     }
 
     public BankCustomer(String name, int id) {

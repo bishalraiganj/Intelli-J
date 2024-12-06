@@ -41,6 +41,15 @@ public class Main {
         System.out.println(bishalAdhikary);
        System.out.println("-".repeat(50));
 
+        // The Following checks the copy constructors vulnerability
+
+        BankCustomerHacker bishalHacker = new BankCustomerHacker(bishalAdhikary);
+        List<BankAccount> hackerAccountsList =  bishalHacker.getAccounts();
+        hackerAccountsList.add(new BankAccount("IDFC",AccountType.FIXEDDEPOSIT,new BigDecimal("5000")));
+        hackerAccountsList.forEach(((s)->System.out.println(s)));
+        System.out.println("-".repeat(50));
+        System.out.println(bishalAdhikary);
+
 
 
 
