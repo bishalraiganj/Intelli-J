@@ -43,4 +43,10 @@ public class BankCustomer {
         return "Customer Name = "+name+" \n Customer Id = "+ id;
     }
 
+
+
+
+
+
+
 }
