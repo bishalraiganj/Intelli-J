@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 record Person(String name,String dob,Person[] kids){
 
+    public Person(Person p )
+    {
+        this(p.name(),p.dob(),p.kids()== null ? null : Arrays.copyOf(p.kids(),p.kids().length));
+    }
     @Override
     public String toString()
     {
@@ -25,13 +29,15 @@ public class Main {
         Person jill = new Person("jill","05/05/1965",new Person[] {joe,jim});
 
         Person[] persons = {joe,jim,jack,jane,jill};
+        Person[] personsCopy = persons.clone();
 //        Person[] personsCopy = Arrays.copyOf(persons,persons.length);
-        Person[] personsCopy = new Person[5];
-        for(int i=0; i<persons.length;i++)
-        {
-            var current = persons[i];
-            personsCopy[i] = new Person(current.name(),current.dob(),current.kids());
-        }
+//        Person[] personsCopy = new Person[5];
+//        Arrays.setAll(personsCopy,i->new Person(persons[i]));
+//        for(int i=0; i<persons.length;i++)
+//        {
+//
+//            personsCopy[i] = new Person(persons[i]);
+//        }
 
         var jillsKids = personsCopy[4].kids();
         jillsKids[1] = jane;
@@ -44,6 +50,11 @@ public class Main {
                 System.out.println("Equal References " + persons[i]);
             }
         }
+
+        System.out.println(persons[4]);
+        System.out.println(personsCopy[4]);
+
+
 
 
     }
