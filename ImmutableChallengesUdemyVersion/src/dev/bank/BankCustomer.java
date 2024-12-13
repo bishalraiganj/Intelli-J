@@ -28,7 +28,9 @@ public class BankCustomer {
     {
         return String.valueOf(customerId);
     }
-    public List<BankAccount> getAccounts()
+    public List<BankAccount> getAccounts() //returns a Shallow copy , which implies that
+            // the account objects are the same as in the list object and only returns a
+    // copy of the ArrayList
     {
         return new ArrayList<>(accounts);
     }

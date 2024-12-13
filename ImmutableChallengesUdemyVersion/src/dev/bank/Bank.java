@@ -57,6 +57,24 @@ public class Bank {
     public void doTransaction(String id,BankAccount.AccountType type,double amount)
     {
         BankCustomer customer = customers.get(id);
+        List<BankAccount> accounts = customer.getAccounts();
+        for(BankAccount account : accounts)
+        {
+            if(account.getAccountType()==type)
+            {
+                if(Math.abs(account.getBalance())<Math.abs(amount)&&amount<0)
+                {
+                    System.out.println("Not Enough Balance ! Transaction Failed");
+                }
+                else
+                {
+                    account.setBalance(account.getBalance() + amount);
+                    System.out.println("Transaction Successful" + " Balance : "+ account.getBalance());
+
+                }
+
+            }
+        }
 
 
 
