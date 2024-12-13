@@ -35,27 +35,32 @@ public class Transaction {
         return transactionAmount;
     }
 
-    public void setRoutingNumber(int routingNumber)
+//    public void setRoutingNumber(int routingNumber)
+//    {
+//        this.routingNumber = routingNumber;
+//    }
+//
+//    public void setCustomerId(int customerId)
+//    {
+//        this.customerId = customerId;
+//    }
+//
+//    public void setTransactionId(long transactionId)
+//    {
+//        this.transactionId = transactionId;
+//    }
+//
+//    public void setTransactionAmount(double transactionAmount)
+//    {
+//        this.transactionAmount = transactionAmount ;
+//    }
+
+
+    @Override
+    public String toString()
     {
-        this.routingNumber = routingNumber;
+        return " Transaction : RoutingNumber : %d CustomerId : %d TransactionId : %d TransactionAmount : $%.2f \n\n".formatted(routingNumber,customerId,transactionId,transactionAmount);
     }
-
-    public void setCustomerId(int customerId)
-    {
-        this.customerId = customerId;
-    }
-
-    public void setTransactionId(long transactionId)
-    {
-        this.transactionId = transactionId;
-    }
-
-    public void setTransactionAmount(double transactionAmount)
-    {
-        this.transactionAmount = transactionAmount ;
-    }
-
-
 
 
 }

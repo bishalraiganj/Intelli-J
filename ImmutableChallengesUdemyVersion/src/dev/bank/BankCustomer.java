@@ -36,17 +36,29 @@ public class BankCustomer {
         return List.copyOf(accounts);
     }
 
-    public BankAccount getAccount(BankAccount.AccountType accountType) // doesnt have  the transactions map that are in the original accounts since it returns a new BankAccount with empty transactions map
+//    public BankAccount getAccount(BankAccount.AccountType accountType) // doesnt have  the transactions map that are in the original accounts since it returns a new BankAccount with empty transactions map
+//    {
+//       for(BankAccount a : accounts)
+//        {
+//            if(a.getAccountType()== accountType)
+//            {
+//                return new BankAccount(accountType,a.getBalance());
+//            }
+//        }
+//       return null;
+//
+//    }
+
+    public BankAccount getAccount(BankAccount.AccountType accountType)
     {
-       for(BankAccount a : accounts)
+        for(BankAccount account : accounts)
         {
-            if(a.getAccountType()== accountType)
+            if(account.getAccountType() == accountType)
             {
-                return new BankAccount(accountType,a.getBalance());
+                return account;
             }
         }
-       return null;
-
+        return null;
     }
 
     @Override

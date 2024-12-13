@@ -75,10 +75,10 @@ public class Bank {
                     System.out.println("Not Enough Balance ! Transaction Failed");
                 }
                 else
-                {
+                {   long transactionId=++lastTransactionId;
                     account.setBalance(account.getBalance() + amount);
-                    System.out.println("Transaction Successful" + " Balance : "+ account.getBalance());
-                    account.commitTransaction(routingNumber,++lastTransactionId,customer.getCustomerId(),amount);
+                    System.out.println("Transaction Successful" +"id : "+ transactionId+ " Balance : "+ account.getBalance());
+                    account.commitTransaction(routingNumber,transactionId,customer.getCustomerId(),amount);
 
                 }
 

@@ -3,8 +3,10 @@ package Adhikary.X;
 import dev.bank.Bank;
 import dev.bank.BankAccount;
 import dev.bank.BankCustomer;
+import dev.dto.Transaction;
 
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String... args)
@@ -29,8 +31,23 @@ public class Main {
         System.out.println(bishalCustomer);
 
         bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,100.00);
+        System.out.println("Added 1");
+        System.out.println("Added 2");
+        bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,500.00);
 
         System.out.println("-".repeat(50)+"\n"+bishalCustomer);
+
+        BankAccount bishalAccount = bishalCustomer.getAccount(BankAccount.AccountType.SAVINGS);
+        Map<Long, Transaction> transactions = bishalAccount.getTransactions();
+        System.out.println(transactions);
+        System.out.println("-".repeat(50));
+
+        Transaction transaction = transactions.get(Long.valueOf(1));
+
+        System.out.println(transaction);
+
+
+
 
 //        bishalBank.doTransaction()
 
