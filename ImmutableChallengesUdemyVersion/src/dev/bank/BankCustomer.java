@@ -36,7 +36,7 @@ public class BankCustomer {
         return List.copyOf(accounts);
     }
 
-    public BankAccount getAccount(BankAccount.AccountType accountType)
+    public BankAccount getAccount(BankAccount.AccountType accountType) // doesnt have  the transactions map that are in the original accounts since it returns a new BankAccount with empty transactions map
     {
        for(BankAccount a : accounts)
         {

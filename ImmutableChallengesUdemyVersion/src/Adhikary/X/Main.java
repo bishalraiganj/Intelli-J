@@ -30,6 +30,8 @@ public class Main {
 
         bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,100.00);
 
+        System.out.println("-".repeat(50)+"\n"+bishalCustomer);
+
 //        bishalBank.doTransaction()
 
 

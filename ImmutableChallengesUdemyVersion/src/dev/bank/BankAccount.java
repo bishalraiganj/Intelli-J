@@ -42,7 +42,7 @@ public class BankAccount {
 
     protected void commitTransaction(int routingNumber,long transactionId,String customerId, double transactionAmount)
     {
-        Transaction transaction = new Transaction(routingNumber, Integer.getInteger(customerId),transactionId,transactionAmount);
+        Transaction transaction = new Transaction(routingNumber, Integer.parseInt(customerId),transactionId,transactionAmount);
         transactions.put(transactionId,transaction);
 
     }
