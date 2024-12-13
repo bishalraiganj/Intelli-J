@@ -12,7 +12,7 @@ public class BankCustomer {
 
     private final List<BankAccount> accounts  =  new ArrayList<> ();
 
-    public BankCustomer(String name, double checkingAmount,double savingsAmount)
+     BankCustomer(String name, double checkingAmount,double savingsAmount)
     {
         this.name = name;
         this.customerId = lastCustomerId++;
@@ -24,9 +24,26 @@ public class BankCustomer {
     {
         return name;
     }
+    public String getCustomerId()
+    {
+        return String.valueOf(customerId);
+    }
     public List<BankAccount> getAccounts()
     {
         return new ArrayList<>(accounts);
+    }
+
+    public BankAccount getAccount(BankAccount.AccountType accountType)
+    {
+       for(BankAccount a : accounts)
+        {
+            if(a.getAccountType()== accountType)
+            {
+                return new BankAccount(accountType,a.getBalance());
+            }
+        }
+       return null;
+
     }
 
     @Override
