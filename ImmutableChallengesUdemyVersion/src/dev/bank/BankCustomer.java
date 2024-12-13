@@ -32,7 +32,8 @@ public class BankCustomer {
             // the account objects are the same as in the list object and only returns a
     // copy of the ArrayList
     {
-        return new ArrayList<>(accounts);
+//        return new ArrayList<>(accounts);
+        return List.copyOf(accounts);
     }
 
     public BankAccount getAccount(BankAccount.AccountType accountType)

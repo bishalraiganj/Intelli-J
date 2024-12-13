@@ -2,6 +2,7 @@ package dev.bank;
 
 import dev.dto.Transaction;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,28 +25,33 @@ public class Bank {
         this.customers = new LinkedHashMap<> ();
     }
 
-    public BankCustomer getCustomer(String id) // immutable version of getCustomer with defensive coding
+//    public BankCustomer getCustomer(String id) // immutable version of getCustomer with defensive coding , BUT this new returned BankCustomer instance  doesnt copy or have all the nested fields
+//    {
+//        BankCustomer customer = customers.get(id);
+//        List<BankAccount> accounts  = customer.getAccounts();
+//        final double checkingAmount ;
+//        final double savingsAmount ;
+//        double tempCheckingAmount =0.0;
+//        double tempSavingsAmount = 0.0;
+//        for(BankAccount account : accounts)
+//        {
+//            if(account.getAccountType()==BankAccount.AccountType.CHECKING)
+//            {
+//                tempCheckingAmount=account.getBalance();
+//            }
+//            if(account.getAccountType() == BankAccount.AccountType.SAVINGS)
+//            {
+//                tempSavingsAmount = account.getBalance();
+//            }
+//        }
+//        checkingAmount = tempCheckingAmount;
+//        savingsAmount = tempSavingsAmount;
+//        return new BankCustomer(customer.getName(),checkingAmount,savingsAmount);
+//    }
+
+    public BankCustomer getCustomer(String id)
     {
-        BankCustomer customer = customers.get(id);
-        List<BankAccount> accounts  = customer.getAccounts();
-        final double checkingAmount ;
-        final double savingsAmount ;
-        double tempCheckingAmount =0.0;
-        double tempSavingsAmount = 0.0;
-        for(BankAccount account : accounts)
-        {
-            if(account.getAccountType()==BankAccount.AccountType.CHECKING)
-            {
-                tempCheckingAmount=account.getBalance();
-            }
-            if(account.getAccountType() == BankAccount.AccountType.SAVINGS)
-            {
-                tempSavingsAmount = account.getBalance();
-            }
-        }
-        checkingAmount = tempCheckingAmount;
-        savingsAmount = tempSavingsAmount;
-        return new BankCustomer(customer.getName(),checkingAmount,savingsAmount);
+        return customers.get(id);
     }
 
 
@@ -78,13 +84,12 @@ public class Bank {
 
             }
         }
-
-
-
     }
 
+    @Override
+    public String toString()
+    {
 
-
-
-
+        return " Routing Number :"+routingNumber+" \n Last Transaction Id :"+lastTransactionId+"  \n Customers : "+customers.toString();
+    }
 }
