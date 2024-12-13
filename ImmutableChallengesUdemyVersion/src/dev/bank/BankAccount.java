@@ -37,7 +37,7 @@ public class BankAccount {
 
     public Map<Long,Transaction> getTransactions()
     {
-        return transactions;
+        return Map.copyOf(transactions);
     }
 
     protected void commitTransaction(int routingNumber,long transactionId,String customerId, double transactionAmount)

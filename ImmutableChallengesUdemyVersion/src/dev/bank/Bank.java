@@ -1,5 +1,7 @@
 package dev.bank;
 
+import dev.dto.Transaction;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +72,7 @@ public class Bank {
                 {
                     account.setBalance(account.getBalance() + amount);
                     System.out.println("Transaction Successful" + " Balance : "+ account.getBalance());
+                    account.commitTransaction(routingNumber,++lastTransactionId,customer.getCustomerId(),amount);
 
                 }
 
