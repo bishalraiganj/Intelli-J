@@ -34,6 +34,8 @@ public class Main {
         System.out.println("Added 1");
         System.out.println("Added 2");
         bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,500.00);
+        bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,200.00);
+        bishalBank.doTransaction(String.valueOf(10000000),BankAccount.AccountType.SAVINGS,-45.00);
 
         System.out.println("-".repeat(50)+"\n"+bishalCustomer);
 
@@ -45,6 +47,10 @@ public class Main {
         Transaction transaction = transactions.get(Long.valueOf(1));
 
         System.out.println(transaction);
+
+        System.out.println("-".repeat(50));
+
+        System.out.println(transactions.toString());
 
 
 
