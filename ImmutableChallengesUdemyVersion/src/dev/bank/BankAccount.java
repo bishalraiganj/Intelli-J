@@ -2,6 +2,7 @@ package dev.bank;
 
 import dev.dto.Transaction;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class BankAccount {
 
     public Map<Long,Transaction> getTransactions()
     {
-        return new LinkedHashMap<>(transactions);
+        return Collections.unmodifiableMap(transactions);
     }
 
     protected void commitTransaction(int routingNumber,long transactionId,String customerId, double transactionAmount)
