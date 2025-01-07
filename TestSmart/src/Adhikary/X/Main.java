@@ -7,15 +7,17 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Map<Long,Integer> map = new HashMap<> ();
-        map.put(Long.valueOf(1),1);
-        map.put(Long.valueOf(2),2);
-        map.put(Long.valueOf(3),3);
-        map.put(Long.valueOf(4),4);
+        Parent parent = new Parent(new Mutable("1"),new Mutable("2"));
+        Child child = new Child(parent);
 
-        System.out.println(map.toString());
+        if(child.getA() == parent.getA())
+        {
+            System.out.println("True");
+        }
 
-
+        child.getA().setA("84");
+        System.out.println(child);
+        System.out.println(parent);
     }
 
 }
