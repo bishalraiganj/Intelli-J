@@ -1,7 +1,6 @@
 package Adhikary.X;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Game <T extends Player>    {
     private final String gameName ;
@@ -13,8 +12,8 @@ public abstract class Game <T extends Player>    {
     public Game(String gameName,List<T> players,Map<Character,GameAction> standardActions)
     {
         this.gameName = gameName;
-        this.players = players;
-        this.standardActions=standardActions;
+        this.players = new ArrayList<T> (players);
+        this.standardActions=new LinkedHashMap<Character,GameAction> (standardActions);
     }
     public  abstract T createNewPlayer(String name);
 
@@ -27,7 +26,7 @@ public abstract class Game <T extends Player>    {
 
     public boolean executeGameAction(Character key)
     {
-
+         return    standardActions.get(key).action().test(players.indexOf()
     }
 
 
