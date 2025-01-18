@@ -11,7 +11,7 @@ public abstract class Game<T extends Player> {
 
     private final List<T> players = new ArrayList<>();
 
-    private final Map<Character, GameAction> standardActions = null;
+    private  Map<Character, GameAction> standardActions ;
 
     public Game(String gameName) {
         this.gameName = gameName;
