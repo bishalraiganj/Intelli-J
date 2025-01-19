@@ -1,7 +1,12 @@
 package Adhikary.X.game;
 
-public record Shooter(String name) {
+public record Shooter(String name) implements Player {
 
+    @Override
+    public String name()
+    {
+        return name;
+    }
     boolean findPrize()
     {
         System.out.println("Prize found, Score should be adjusted. ");
