@@ -1,6 +1,7 @@
 package Adhikary.X;
 
 import Adhikary.X.Pirate.Pirate;
+import Adhikary.X.Pirate.PirateGame;
 import Adhikary.X.Pirate.Weapon;
 import Adhikary.X.game.GameConsole;
 import Adhikary.X.game.Shooter;
@@ -25,6 +26,12 @@ public class Main {
 
         Pirate tim = new Pirate("Tim");
         System.out.println(tim);
+
+        PirateGame.getTowns(0).forEach(System.out::println);
+        System.out.println("-".repeat(50));
+        PirateGame.getTowns(1).forEach(System.out::println);
+        System.out.println("-".repeat(50));
+
 
 
 

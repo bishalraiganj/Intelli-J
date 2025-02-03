@@ -3,12 +3,29 @@ package Adhikary.X.Pirate;
 import Adhikary.X.game.Game;
 import Adhikary.X.game.GameAction;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PirateGame extends Game<Pirate> {
 
     private static final List<List<String>> levelMap;
+    //----------------------------
+
+    static {
+        levelMap = new ArrayList<>();
+        System.out.println("Loading Data...");
+        loadData();
+
+        if(levelMap.size()==0)
+        {
+            throw new RuntimeException("Could not load data, try later");
+        }
+        System.out.println("Finished Loading data");
+    }
+
+    //----------------------------
 
 
 
@@ -26,8 +43,53 @@ public class PirateGame extends Game<Pirate> {
     @Override
     public Map<Character, GameAction> getGameActions(int playerIndex)
     {
-        return null;
+        Pirate pirate =getPlayer(playerIndex);
+        System.out.println(pirate);
+        List<Weapon> weapons = Weapon.getWeaponsByLevel(pirate.value("level"));
+
+        Map<Character,GameAction> map = new LinkedHashMap<>();
+        for(Weapon weapon: weapons)
+        {
+
+
+
+
+
+
+        }
+        
     }
+
+    private static void loadData()
+    {
+        levelMap.add(new ArrayList<>(List.of("Bridgetown,Barbados","Fitts Village,Barbados",
+                "Holetown,Barbados")));
+        levelMap.add(new ArrayList<>(List.of("Fort-de-France,Martinique",
+                "Sainte-Anne,Martinique",
+                "Le Vauclin,Martinique")));
+    }
+
+    public static List<String> getTowns(int level)
+    {
+        if(level<=levelMap.size()-1)
+        {
+            return levelMap.get(level);
+        }
+            return null;
+    }
+
+    public boolean useWeapon(int playerIndex)
+    {
+        return getPlayer(playerIndex).useWeapon();
+    }
+
+    @Override
+    public boolean executeGameAction(int player,GameAction action)
+    {
+        getPlayer(player).setCurrentWeapon(Weapon.getWeaponByChar(action.key()));
+        return super.executeGameAction(player,action);
+    }
+
 
 
 }
