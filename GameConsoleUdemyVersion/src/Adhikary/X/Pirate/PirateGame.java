@@ -50,14 +50,11 @@ public class PirateGame extends Game<Pirate> {
         Map<Character,GameAction> map = new LinkedHashMap<>();
         for(Weapon weapon: weapons)
         {
-
-
-
-
-
-
+            char init = weapon.name().charAt(0);
+            map.put(init,new GameAction(init,"use"+weapon,this::useWeapon));
         }
-        
+        map.putAll(getStandardActions());
+        return map;
     }
 
     private static void loadData()
