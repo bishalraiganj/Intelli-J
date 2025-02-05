@@ -33,9 +33,11 @@ public class Main {
         System.out.println("-".repeat(50));
 
 
-        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
-        int playerIndex = console.addPlayer();
-        console.playGame(playerIndex);
+//        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
+//        int playerIndex = console.addPlayer();
+//        console.playGame(playerIndex);
+
+
 
 
 
