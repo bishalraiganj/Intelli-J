@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Game<T extends Player>  {
+public sealed abstract class SealedGame<T extends Player> permits ShooterGame {
 
     private final String gameName;
 
@@ -15,7 +15,7 @@ public abstract class Game<T extends Player>  {
 
     private  Map<Character, GameAction> standardActions ;
 
-    public Game(String gameName) {
+    public SealedGame(String gameName) {
         this.gameName = gameName;
     }
 
