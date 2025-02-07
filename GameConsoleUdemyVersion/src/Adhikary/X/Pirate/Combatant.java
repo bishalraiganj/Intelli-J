@@ -4,7 +4,7 @@ import Adhikary.X.game.Player;
 
 import java.util.*;
 
-public class Combatant implements Player {
+public sealed class Combatant implements Player {
 
     private final String name;
 
