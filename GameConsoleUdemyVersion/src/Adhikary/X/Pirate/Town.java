@@ -3,10 +3,20 @@ package Adhikary.X.Pirate;
 import java.util.List;
 import java.util.Map;
 
-public record Town(String name, String island, List<Integer> levels, Map<String,Loot> loots,Map<String,Feature> features) {
+public record Town(String name, String island, List<Integer> levels, Map<String,Loot> loots,Map<String,Feature> features,Map<String,Pirate> opponents)  {
+
+    Town {
 
 
 
+
+
+    }
+
+    public Town(String name)
+    {
+        this.name = name;
+    }
 
 
 }

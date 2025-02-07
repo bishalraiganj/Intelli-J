@@ -1,11 +1,21 @@
 package Adhikary.X.Pirate;
 
 public enum Loot {
-    GOLDCOIN(50),PERALNECKLACE(25);
 
-    private final int points;
-    Loot(int points)
+    SILEVER_COIN(5),
+    GOLD_COIN(10),
+    GOLD_RING(125),
+    PEARL_NECKLACE(250),
+    GOLD_BAR(500);
+
+    private final int worth;
+    Loot(int worth)
     {
-        this.points = points;
+        this.worth = worth;
+    }
+
+    public int getWorth()
+    {
+        return worth;
     }
 }

@@ -4,7 +4,7 @@ import Adhikary.X.game.Player;
 
 import java.util.*;
 
-public class Pirate implements Player {
+public class Pirate implements Player{
 
     private final String name;
 
