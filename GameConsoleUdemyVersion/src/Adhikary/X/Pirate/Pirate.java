@@ -4,61 +4,73 @@ import Adhikary.X.game.Player;
 
 import java.util.*;
 
-public class Pirate implements Player{
+public final class Pirate extends Combatant{
 
-    private final String name;
-
-    private final Map<String,Integer> gameData;
+//    private final String name;
+//
+//    private final Map<String,Integer> gameData;
 
     private final List<String> townsVisited = new LinkedList<>();
 
-    private Weapon currentWeapon ;
+    private List<Loot> loot;
+
+    private List<Combatant> opponents;
+
+    private List<Feature> features;
+
+//    private Weapon currentWeapon ;
+
+//    public Pirate(String name)
+//    {
+//        this.name = name;
+//    }
 
     public Pirate(String name)
     {
-        this.name = name;
-    }
-
-    //-------------------------------------------------
-
-    {
-        gameData = new HashMap<>(Map.of("health",100,"score",0,
-                "level",0,"townIndex",0));
+        super(name,Map.of("level",0,"townIndex",0));
         visitTown();
     }
 
-    public Weapon getCurrentWeapon()
-    {
-        return currentWeapon;
-    }
+    //-------------------------------------------------
+//
+//    {
+//        gameData = new HashMap<>(Map.of("health",100,"score",0,
+//                "level",0,"townIndex",0));
+//        visitTown();
+//    }
 
-    void  setCurrentWeapon(Weapon currentWeapon)
-    {
-        this.currentWeapon=currentWeapon;
-    }
+//    public Weapon getCurrentWeapon()
+//    {
+//        return currentWeapon;
+//    }
+//
+//    void  setCurrentWeapon(Weapon currentWeapon)
+//    {
+//        this.currentWeapon=currentWeapon;
+//    }
 
-    int value(String name)
-    {
-        return gameData.get(name);
-    }
-
-    private void setValue(String name,int value)
-    {
-        gameData.put(name,value);
-    }
-    private void adjustValue(String name,int adj)
-    {
-        gameData.compute(name,(k,v)->v+=adj);
-    }
-    private void adjustHealth(int adj)
-    {
-        int health = value("health");
-        health += adj;
-        setValue("health",((health<0? 0:(health>100?100:health))));
-    }
+//    int value(String name)
+//    {
+//        return gameData.get(name);
+//    }
+//
+//    private void setValue(String name,int value)
+//    {
+//        gameData.put(name,value);
+//    }
+//    private void adjustValue(String name,int adj)
+//    {
+//        gameData.compute(name,(k,v)->v+=adj);
+//    }
+//    private void adjustHealth(int adj)
+//    {
+//        int health = value("health");
+//        health += adj;
+//        setValue("health",((health<0? 0:(health>100?100:health))));
+//    }
     boolean useWeapon()
     {
-        System.out.println("Used the "+ currentWeapon);
+        System.out.println("Used the "+ super.getCurrentWeapon());
         return visitNextTown();
     }
     boolean visitTown()
@@ -74,18 +86,19 @@ public class Pirate implements Player{
         }
         return true;
     }
-    @Override
-    public String name()
-    {
-        return name;
-    }
-    @Override
-    public String toString()
+//    @Override
+//    public String name()
+//    {
+//        return name;
+//    }
+
+
+    public String information()
     {
         String current = ((LinkedList<String>) townsVisited).getLast();
         String[] simpleNames = new String[townsVisited.size()];
         Arrays.setAll(simpleNames,(i)->townsVisited.get(i).split(",")[0]);
-        return "--->" + current + "\nPirate "+name + " " + gameData +
+        return "--->" + current + "\n" + super.information() +
                 "\n\ttownsVisited=" +Arrays.toString(simpleNames);
     }
 

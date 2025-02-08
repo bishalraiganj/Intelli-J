@@ -4,7 +4,8 @@ import Adhikary.X.game.Player;
 
 import java.util.*;
 
-public abstract class Combatant implements Player {
+public sealed abstract class Combatant implements Player permits Pirate , Islander , Soldier
+{
 
     private final String name;
 
