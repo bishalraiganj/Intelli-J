@@ -24,11 +24,48 @@ public record Town(String name, String island, int level, List<Loot> loot,List<F
         }
     }
 
+    public Town(String name,String island, int level)
+    {
+        this(name,island,level,null,null,null);
+    }
+
     private <T> List<T> randomReduce(List<T> list,int size)
     {
         Collections.shuffle(list);
         return list.subList(0,size);
     }
+
+    @Override
+    public String toString()
+    {
+        return name + ", " + island;
+    }
+
+    public String information() {
+        return "Town: " + this + "\n\tloot=" + loot +
+                "\n\tfeatures=" + features +
+                "\n\topponents=" + opponents;
+    }
+
+    @Override
+    public List<Loot> loot()
+    {
+        return (loot==null?null:new ArrayList<>(loot));
+    }
+
+    @Override
+    public List<Combatant> opponents()
+    {
+        return (opponents == null?null:new ArrayList<>(opponents));
+    }
+
+    @Override
+    public List<Feature> features()
+    {
+        return (features == null ? null : new ArrayList<>(features));
+    }
+
+
 
 
 }
