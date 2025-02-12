@@ -2,11 +2,7 @@ package Adhikary.X;
 
 import Adhikary.X.Pirate.Pirate;
 import Adhikary.X.Pirate.PirateGame;
-import Adhikary.X.Pirate.Town;
 import Adhikary.X.Pirate.Weapon;
-import Adhikary.X.game.GameConsole;
-import Adhikary.X.game.Shooter;
-import Adhikary.X.game.ShooterGame;
 
 import java.util.List;
 
@@ -34,9 +30,12 @@ public class Main {
         System.out.println("-".repeat(50));
 
 
-          Town bridgetown = new Town("Bridgetown","Barbados",0);
-          System.out.println(bridgetown);
-          System.out.println(bridgetown.information());
+
+
+
+//          Town bridgetown = new Town("Bridgetown","Barbados",0);
+//          System.out.println(bridgetown);
+//          System.out.println(bridgetown.information());
 //        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
 //        int playerIndex = console.addPlayer();
 //        console.playGame(playerIndex);
