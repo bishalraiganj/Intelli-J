@@ -24,9 +24,9 @@ public class Main {
         Pirate tim = new Pirate("Tim");
         System.out.println(tim);
 
-        PirateGame.getTowns(0).forEach(System.out::println);
+        PirateGame.getTowns(0).forEach((t)->System.out.println(t.information()));
         System.out.println("-".repeat(50));
-        PirateGame.getTowns(1).forEach(System.out::println);
+        PirateGame.getTowns(1).forEach((t)->System.out.println(t.information()));
         System.out.println("-".repeat(50));
 
 

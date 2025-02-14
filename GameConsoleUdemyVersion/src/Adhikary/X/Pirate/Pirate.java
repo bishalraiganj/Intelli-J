@@ -2,7 +2,7 @@ package Adhikary.X.Pirate;
 
 import java.util.*;
 
-public final class Pirate extends Combatant{
+public final class Pirate extends Combatant {
 
 //    private final String name;
 //
@@ -23,9 +23,8 @@ public final class Pirate extends Combatant{
 //        this.name = name;
 //    }
 
-    public Pirate(String name)
-    {
-        super(name,Map.of("level",0,"townIndex",0));
+    public Pirate(String name) {
+        super(name, Map.of("level", 0, "townIndex", 0));
         visitTown();
     }
 
@@ -47,7 +46,7 @@ public final class Pirate extends Combatant{
 //        this.currentWeapon=currentWeapon;
 //    }
 
-//    int value(String name)
+    //    int value(String name)
 //    {
 //        return gameData.get(name);
 //    }
@@ -66,20 +65,23 @@ public final class Pirate extends Combatant{
 //        health += adj;
 //        setValue("health",((health<0? 0:(health>100?100:health))));
 //    }
-    boolean useWeapon()
-    {
-        System.out.println("Used the "+ super.getCurrentWeapon());
-        return visitNextTown();
-    }
-    boolean visitTown()
-    {
-       List<Town> levelTowns = PirateGame.getTowns(value("level"));
-       if(levelTowns == null) return true;
-       Town town = levelTowns.get(value("townIndex"));
+    boolean useWeapon() {
 
-        if(town != null)
-        {
+
+
+
+    }
+
+    boolean visitTown() {
+        List<Town> levelTowns = PirateGame.getTowns(value("level"));
+        if (levelTowns == null) return true;
+        Town town = levelTowns.get(value("townIndex"));
+
+        if (town != null) {
             townsVisited.add(town);
+            loot = town.loot();
+            opponents = town.opponents();
+            features = town.features();
             return false;
         }
         return true;
@@ -91,14 +93,53 @@ public final class Pirate extends Combatant{
 //    }
 
 
-    public String information()
-    {
-        String current = ((LinkedList<String>) townsVisited).getLast();
+    public String information() {
+        var current = ((LinkedList<Town>) townsVisited).getLast(); //Here Var is a Town 
         String[] simpleNames = new String[townsVisited.size()];
-        Arrays.setAll(simpleNames,(i)->townsVisited.get(i).split(",")[0]);
+        Arrays.setAll(simpleNames, (i) -> townsVisited.get(i).name());
         return "--->" + current + "\n" + super.information() +
-                "\n\ttownsVisited=" +Arrays.toString(simpleNames);
+                "\n\ttownsVisited=" + Arrays.toString(simpleNames);
     }
+
+    boolean hasExpirences() {
+        return ((features != null) && features.size() > 0);
+    }
+
+    boolean hasOpponents() {
+        return (opponents != null && opponents.size() > 0);
+    }
+
+    boolean findLoot()
+    {
+        if (loot.size() >0 )
+        {
+            Loot item = loot.remove(0);
+            System.out.println("Found "+ item + "!");
+            adjustValue("Score",item.getWorth());
+            System.out.println(name() + "'s score is now " + value("score"));
+        }
+        if(loot.size() == 0)
+        {
+            return visitNextTown();
+        }
+        return false;
+    }
+
+    boolean experienceFeature() {
+        if (features.size() > 0)
+        {
+            Feature item = features.remove(0);
+            System.out.println("Ran into " + item + "!");
+            adjustHealth(item.getHealthPoints());
+            System.out.println(name() + "'s health is now " + value("health"));
+        }
+            return (value("health") <= 0);
+
+
+
+
+    }
+    
 
     private boolean visitNextTown() {
         int townIndex = value("townIndex");
