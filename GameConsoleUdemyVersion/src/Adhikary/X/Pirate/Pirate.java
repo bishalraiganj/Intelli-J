@@ -67,10 +67,28 @@ public final class Pirate extends Combatant {
 //    }
     boolean useWeapon() {
 
-
-
-
+        int count = opponents.size();
+        if(count > 0)
+        {
+            int opponentIndex = count - 1;
+            if (count >1)
+            {
+                opponentIndex = new Random().nextInt(count);
+            }
+            Combatant combatant = opponents.get(opponentIndex);
+            if(super.useWeapon(combatant))
+            {
+                opponents.remove(opponentIndex);
+            }
+            else
+            {
+                return combatant.useWeapon(this);
+            }
+        }
+        return false;
     }
+
+
 
     boolean visitTown() {
         List<Town> levelTowns = PirateGame.getTowns(value("level"));
