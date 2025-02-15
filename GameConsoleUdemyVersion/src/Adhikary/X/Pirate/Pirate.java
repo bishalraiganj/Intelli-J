@@ -119,7 +119,7 @@ public final class Pirate extends Combatant {
                 "\n\ttownsVisited=" + Arrays.toString(simpleNames);
     }
 
-    boolean hasExpirences() {
+    boolean hasExperiences() {
         return ((features != null) && features.size() > 0);
     }
 

@@ -48,11 +48,20 @@ public class PirateGame extends Game<Pirate> {
         List<Weapon> weapons = Weapon.getWeaponsByLevel(pirate.value("level"));
 
         Map<Character,GameAction> map = new LinkedHashMap<>();
-        for(Weapon weapon: weapons)
+        if(pirate.hasOpponents())
         {
-            char init = weapon.name().charAt(0);
-            map.put(init,new GameAction(init,"use"+weapon,this::useWeapon));
+            for(Weapon weapon: weapons)
+            {
+                char init = weapon.name().charAt(0);
+                map.put(init,new GameAction(init,"use "+weapon,this::useWeapon));
+            }
         }
+        map.put('F',new GameAction('F',"Find Loot",this::findLoot));
+        if(pirate.hasExperiences())
+        {
+            map.put('X',new GameAction('X',"Experience Town Feature",this::experienceFeature));
+        }
+
         map.putAll(getStandardActions());
         return map;
     }
@@ -95,6 +104,16 @@ public class PirateGame extends Game<Pirate> {
     {
         System.out.println(getPlayer(playerIndex).information());
         return false;
+    }
+
+    private boolean findLoot(int playerIndex)
+    {
+        return getPlayer(playerIndex).findLoot();
+    }
+
+    private boolean experienceFeature(int playerIndex)
+    {
+        return getPlayer(playerIndex).experienceFeature();
     }
 
 

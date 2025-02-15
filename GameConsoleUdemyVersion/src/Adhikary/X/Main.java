@@ -3,6 +3,7 @@ package Adhikary.X;
 import Adhikary.X.Pirate.Pirate;
 import Adhikary.X.Pirate.PirateGame;
 import Adhikary.X.Pirate.Weapon;
+import Adhikary.X.game.GameConsole;
 
 import java.util.List;
 
@@ -14,20 +15,20 @@ public class Main {
 //        int playerIndex = console.addPlayer();
 //        console.playGame(playerIndex);
 
-        Weapon weapon = Weapon.getWeaponByChar('P');
-        System.out.println("Weapon = "+ weapon + ", hitPoints=" + weapon.getHitPoints()+
-                ", minLevel = " + weapon.getMinLevel());
-
-        List<Weapon> list = Weapon.getWeaponsByLevel(1);
-        list.forEach(System.out::println);
-
-        Pirate tim = new Pirate("Tim");
-        System.out.println(tim);
-
-        PirateGame.getTowns(0).forEach((t)->System.out.println(t.information()));
-        System.out.println("-".repeat(50));
-        PirateGame.getTowns(1).forEach((t)->System.out.println(t.information()));
-        System.out.println("-".repeat(50));
+//        Weapon weapon = Weapon.getWeaponByChar('P');
+//        System.out.println("Weapon = "+ weapon + ", hitPoints=" + weapon.getHitPoints()+
+//                ", minLevel = " + weapon.getMinLevel());
+//
+//        List<Weapon> list = Weapon.getWeaponsByLevel(1);
+//        list.forEach(System.out::println);
+//
+//        Pirate tim = new Pirate("Tim");
+//        System.out.println(tim);
+//
+//        PirateGame.getTowns(0).forEach((t)->System.out.println(t.information()));
+//        System.out.println("-".repeat(50));
+//        PirateGame.getTowns(1).forEach((t)->System.out.println(t.information()));
+//        System.out.println("-".repeat(50));
 
 
 
@@ -36,9 +37,9 @@ public class Main {
 //          Town bridgetown = new Town("Bridgetown","Barbados",0);
 //          System.out.println(bridgetown);
 //          System.out.println(bridgetown.information());
-//        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
-//        int playerIndex = console.addPlayer();
-//        console.playGame(playerIndex);
+        var console = new GameConsole<>(new PirateGame("The Pirate Game"));
+        int playerIndex = console.addPlayer();
+        console.playGame(playerIndex);
 
 
 
