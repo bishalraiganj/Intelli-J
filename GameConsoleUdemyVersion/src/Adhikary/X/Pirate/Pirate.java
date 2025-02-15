@@ -133,7 +133,7 @@ public final class Pirate extends Combatant {
         {
             Loot item = loot.remove(0);
             System.out.println("Found "+ item + "!");
-            adjustValue("Score",item.getWorth());
+            adjustValue("score",item.getWorth());
             System.out.println(name() + "'s score is now " + value("score"));
         }
         if(loot.size() == 0)
