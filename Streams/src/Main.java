@@ -51,19 +51,25 @@ public class Main {
 //        firstOnes.forEach(System.out::println);
 //        bingoPool.forEach(System.out::println);
 
-        bingoPool.stream()
+        var tempStream = bingoPool.stream()
                 .limit(15)
                 .filter((s)->s.indexOf('G')==0 || s.indexOf('O')==0)
                 .map((s)->s.charAt(0) + "-" + s.substring(1))
-                .sorted()
-                .forEach((s)->System.out.print(s + " "));
+                .sorted();
+
+        tempStream.forEach((s)->System.out.print(s + " "));
+//                .forEach((s)->System.out.print(s + " "));
 
         System.out.println("\n"+ "-".repeat(50));
 
-        for(int i = 0; i< 15 ; i++)
-        {
-            System.out.println(bingoPool.get(i));
-        }
+//        for(int i = 0; i< 15 ; i++)
+//        {
+//            System.out.println(bingoPool.get(i));
+//        }
+
+
+
+
 
 
 
