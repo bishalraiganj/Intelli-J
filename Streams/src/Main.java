@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -17,5 +19,53 @@ public class Main {
         }
 
         bingoPool.forEach(System.out::println);
+
+        Collections.shuffle(bingoPool);
+        for(int i = 0; i< 15 ; i++)
+        {
+            System.out.println(bingoPool.get(i));
+        }
+        System.out.println("-".repeat(50));
+
+//        List<String> firstOnes = bingoPool.subList(0,15);
+        List<String> firstOnes  = new ArrayList<>(bingoPool.subList(0,15));
+//      firstOnes.sort(null);// It still sorts by the natural order which is the override version of compareTo method when implementing the Comparable interface ,
+        firstOnes.sort(Comparator.naturalOrder());
+        firstOnes.replaceAll((s)->{
+            if(s.indexOf('G')==0 || s.indexOf('O')==0)
+            {
+                String updated = s.charAt(0) + "-" + s.substring(1);
+                System.out.print(updated + " ");
+                return updated;
+            }
+            return s;
+        });
+        System.out.println("\n"+ "-".repeat(50));
+
+        for(int i = 0; i< 15 ; i++)
+        {
+            System.out.println(bingoPool.get(i));
+        }
+        System.out.println("-".repeat(50));
+
+//        firstOnes.forEach(System.out::println);
+//        bingoPool.forEach(System.out::println);
+
+        bingoPool.stream()
+                .limit(15)
+                .filter((s)->s.indexOf('G')==0 || s.indexOf('O')==0)
+                .map((s)->s.charAt(0) + "-" + s.substring(1))
+                .sorted()
+                .forEach((s)->System.out.print(s + " "));
+
+        System.out.println("\n"+ "-".repeat(50));
+
+        for(int i = 0; i< 15 ; i++)
+        {
+            System.out.println(bingoPool.get(i));
+        }
+
+
+
     }
-}
+} 
