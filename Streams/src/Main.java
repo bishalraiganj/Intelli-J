@@ -136,6 +136,20 @@ public class Main {
                 .filter(Main::isPrime)
                 .forEach((s)->System.out.print(s + " "));
 
+        System.out.println("\n" + "-".repeat(50));
+
+        List<String> bSequence = new ArrayList<>();
+        String b = "B";
+        for(int i = 1 ; i<=15 ; i++)
+        {
+            bSequence.add( b + i);
+        }
+
+        Stream<String> bSequenceStream = bSequence.stream();
+
+
+
+
 
     }
 
