@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 public class Main {
 
+    static int counter = 0 ;
 
     public static void main(String[] args) {
         int seed = 1;
@@ -33,9 +34,27 @@ public class Main {
 
         streamG.forEach(System.out::println);
 
+//        seed+=15;
+//        counter=seed;
+//        Stream<String> streamO = Stream.generate(()->"O"+counter++) // This is not safe because it creates side effect meaning , it directly modifies a static variable which maybe used else where
+//                                       .limit(15);
+//        streamO.forEach(System.out::println);
+
+        seed+=15;
+        int rSeed = seed;
+
+        Stream<String> streamO  = Stream.generate(Main::getCounter) // This approach is better because,  it doesn't alter a shared mutable state in this case the counter
+                // and since streams are supposed to be functional this better also this makes it thread safe and using a separate counter logic instead directly using the counter variable makes this code cleaner
+                .limit(15)
+                .map((e)->"O"+(rSeed+e));
+
+        streamO.forEach(System.out::println);
 
 
+    }
 
-
+    public static int  getCounter()
+    {
+        return counter++;
     }
 }
