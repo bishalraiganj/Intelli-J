@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -32,7 +33,7 @@ public class Main {
         seed += 15;
         Stream<String> streamG = Stream.of("G46","G47","G48","G49","G50","G51","G52","G53","G54","G55","G56","G57","G58","G59","G60");
 
-        streamG.forEach(System.out::println);
+
 
 //        seed+=15;
 //        counter=seed;
@@ -48,13 +49,39 @@ public class Main {
                 .limit(15)
                 .map((e)->"O"+(rSeed+e));
 
-        streamO.forEach(System.out::println);
+//        streamO.forEach(System.out::println);
+        System.out.println("-".repeat(50));
+
+        Stream<String> streamBI = Stream.concat(streamB,streamI);
+        Stream<String> streamNG = Stream.concat(streamN,streamG);
+        Stream<String> streamBING = Stream.concat(streamBI,streamNG);
+
+        Stream.concat(streamBING,streamO)
+                .forEach(System.out::println);
+
+        System.out.println("-".repeat(50));
+
+        Stream.generate(()->new Random().nextInt(rSeed,rSeed+15))
+                .distinct()
+                .limit(15)
+                .sorted()
+                .map((i)->"0"+i)
+                .forEach(System.out::println);
+
+
+
 
 
     }
+
+
 
     public static int  getCounter()
     {
         return counter++;
     }
+
+
+
+
 }
