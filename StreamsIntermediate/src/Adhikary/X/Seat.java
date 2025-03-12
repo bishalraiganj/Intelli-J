@@ -12,4 +12,11 @@ public record Seat(char rowMarker,int seatNumber,double price) {
         return "%c%03d %.0f".formatted(rowMarker,seatNumber,price);
 
     }
+
+
+
+
+
+
+
 }

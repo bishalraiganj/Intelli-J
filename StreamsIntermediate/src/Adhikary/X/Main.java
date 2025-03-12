@@ -30,6 +30,19 @@ public class Main {
                 .sorted()
                 .forEach((e)->System.out.printf("%c ",e));
 
+        System.out.println("-".repeat(50));
+
+        int maxSeats = 100;
+        int seatsInRow = 10;
+        Stream<Seat> stream  =
+                Stream.iterate(0,(e)->e<maxSeats,(e)->e+1)
+                        .map((e)->new Seat((char)('A'+(e/seatsInRow)),(e%seatsInRow)+1));
+
+                stream.forEach(System.out::println);
+
+
+
+
 
 
 
