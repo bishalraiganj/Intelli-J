@@ -34,9 +34,14 @@ public class Main {
 
         int maxSeats = 100;
         int seatsInRow = 10;
-        Stream<Seat> stream  =
+        var stream   =
                 Stream.iterate(0,(e)->e<maxSeats,(e)->e+1)
-                        .map((e)->new Seat((char)('A'+(e/seatsInRow)),(e%seatsInRow)+1));
+                        .map((e)->new Seat((char)('A'+(e/seatsInRow)),(e%seatsInRow)+1))
+                        .mapToDouble(Seat::price)
+                        .mapToObj("%.2f"::formatted);
+
+
+
 
                 stream.forEach(System.out::println);
 
