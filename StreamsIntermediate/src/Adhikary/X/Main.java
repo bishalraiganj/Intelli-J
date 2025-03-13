@@ -1,5 +1,6 @@
 package Adhikary.X;
 
+import java.util.Comparator;
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -37,8 +38,13 @@ public class Main {
         var stream   =
                 Stream.iterate(0,(e)->e<maxSeats,(e)->e+1)
                         .map((e)->new Seat((char)('A'+(e/seatsInRow)),(e%seatsInRow)+1))
-                        .mapToDouble(Seat::price)
-                        .mapToObj("%.2f"::formatted);
+                        .skip(5)
+                        .limit(10)
+                        .peek((s)->System.out.println("--> " + s))
+                        .sorted(Comparator.comparing(Seat::price).thenComparing(Seat::toString));
+//                        .mapToDouble(Seat::price)
+//                        .boxed()
+//                        .map("%.2f"::formatted);
 
 
 
