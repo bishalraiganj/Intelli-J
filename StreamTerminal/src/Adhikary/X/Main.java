@@ -1,5 +1,6 @@
 package Adhikary.X;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -14,6 +15,12 @@ public class Main {
                 .filter((i)->i%4==0)
                 .peek(System.out::println)
                 .summaryStatistics();
+
+        System.out.println("-".repeat(50));
+
+        Seat[] seats = new Seat[100];
+        Arrays.setAll(seats,(i)->new Seat((char) ('A'+i/10),i%10+1));
+        Arrays.asList(seats).forEach(System.out::println);
 
 
 
