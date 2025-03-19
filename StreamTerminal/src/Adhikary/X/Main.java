@@ -42,6 +42,8 @@ public class Main {
                 .noneMatch(Seat::isReserved);
         System.out.println("eventWashedOut = " + eventWashedOut);
 
+        
+
 
 
 
