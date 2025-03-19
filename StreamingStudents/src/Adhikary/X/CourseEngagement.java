@@ -42,8 +42,9 @@ public class CourseEngagement {
 
     public int getMonthsSinceActive()
     {
-        return (int) Stream.iterate(getLastActivityYear(),(i)->i<= LocalDate.now().getYear(),(i)->i+1)
-                .count() *12;
+        return (int) Stream.iterate(getLastActivityYear()+1,(i)-> i< LocalDate.now().getYear(),(i)->i+1)
+//                .peek(System.out::println)
+                .count() *12+(12-lastActivityDate.getMonthValue())   ;
     }
 
     public LocalDate getLastActivityDate()
