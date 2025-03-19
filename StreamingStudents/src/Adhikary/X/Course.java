@@ -27,5 +27,11 @@ public final class  Course {
         return lectureCount;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Course Code =%s Title = %s Lecture Count = %s".formatted(courseCode,title,lectureCount);
+    }
+
 
 }
