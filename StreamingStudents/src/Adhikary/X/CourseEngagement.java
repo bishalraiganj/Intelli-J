@@ -42,10 +42,24 @@ public class CourseEngagement {
 
     public int getMonthsSinceActive()
     {
-        return (int) Stream.iterate(getLastActivityYear()+1,(i)-> i< LocalDate.now().getYear(),(i)->i+1)
-                .filter((e)->e<LocalDate.now().getYear()&&lastActivityDate.getYear()!=LocalDate.now().getYear()-1)
-                .peek(System.out::println)
-                .count() *12+(lastActivityDate.getYear()==LocalDate.now().getYear()?LocalDate.now().getMonthValue()-lastActivityDate.getMonthValue():(12-lastActivityDate.getMonthValue())+LocalDate.now().getMonthValue());
+//        return (int) Stream.iterate(getLastActivityYear()+1,(i)-> i< now.getYear(),(i)->i+1)
+//                .filter((e)->e<now.getYear()&&lastActivityDate.getYear()!=now.getYear()-1)
+//                .peek(System.out::println)
+//                .count() *12+(lastActivityDate.getYear()==now.getYear()?now.getMonthValue()-lastActivityDate.getMonthValue():(12-lastActivityDate.getMonthValue())+now.getMonthValue());
+
+        LocalDate now = LocalDate.now();
+        if(lastActivityDate.getYear()==now.getYear())
+        {
+            return now.getMonthValue()-lastActivityDate.getMonthValue();
+        }
+        else if(lastActivityDate.getYear()==now.getYear()-1)
+        {
+            return (12-lastActivityDate.getMonthValue())+now.getMonthValue();
+        }
+        else
+
+            return (now.getYear()-lastActivityDate.getYear()-1)*12+(12-lastActivityDate.getMonthValue())+now.getMonthValue();
+
     }
 
     public LocalDate getLastActivityDate()
