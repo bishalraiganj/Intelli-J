@@ -5,11 +5,11 @@ import java.util.stream.Stream;
 
 public class CourseEngagement {
 
-    private final Course course;
-    private final LocalDate enrollmentDate;
-    private final String engagementType;
-    private final int lastLecture;
-    private final LocalDate lastActivityDate;
+    private  Course course;
+    private  LocalDate enrollmentDate;
+    private  String engagementType;
+    private  int lastLecture;
+    private  LocalDate lastActivityDate;
 
     public CourseEngagement(Course course,LocalDate enrollmentDate,String engagementType,int lastLecture,LocalDate lastActivityDate)
     {
@@ -62,11 +62,17 @@ public class CourseEngagement {
 
     }
 
-    public LocalDate getLastActivityDate()
+    public double getPercentComplete()
     {
-        return lastActivityDate;
+        return (double) lastLecture/( (double)course.getLectureCount()/100);
+
     }
 
+    public void watchLecture(int lecture,LocalDate date)
+    {
+        lastLecture = lecture;
+        lastActivityDate = date;
+    }
 
 
 }
