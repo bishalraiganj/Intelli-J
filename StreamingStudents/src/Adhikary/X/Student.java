@@ -1,5 +1,8 @@
 package Adhikary.X;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 public class Student {
 
     private final long studentId;
@@ -8,9 +11,10 @@ public class Student {
     private final int ageEnrolled;
     private final String gender;
     private final boolean programmingExperience;
+    private final Map<String,CourseEngagement> engagementMap;
 
 
-    public Student(long studentId,String countryCode,int yearEnrolled,int ageEnrolled,String gender,boolean programmingExperience)
+    public Student(long studentId,String countryCode,int yearEnrolled,int ageEnrolled,String gender,boolean programmingExperience,Map<String,CourseEngagement> engagementMap)
     {
         this.studentId = studentId;
         this.countryCode = countryCode;
@@ -18,6 +22,7 @@ public class Student {
         this.ageEnrolled =  ageEnrolled;
         this.gender = gender;
         this.programmingExperience = programmingExperience;
+        this.engagementMap = engagementMap;
     }
 
     public long getStudentId()
@@ -45,6 +50,18 @@ public class Student {
         return programmingExperience;
     }
 
+
+    public int  getAge()
+    {
+        LocalDate currentDate = LocalDate.now();
+        return (currentDate.getYear()-yearEnrolled)+ageEnrolled;
+    }
+
+    public int getYearsSinceEnrolled()
+    {
+        LocalDate currentDate = LocalDate.now();
+        return (currentDate.getYear()-yearEnrolled);
+    }
 
 
 
