@@ -1,5 +1,7 @@
 package Adhikary.X;
 
+import com.sun.source.tree.Tree;
+
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Map;
@@ -24,7 +26,9 @@ public class Student {
         this.ageEnrolled =  ageEnrolled;
         this.gender = gender;
         this.programmingExperience = programmingExperience;
-        this.engagementMap = engagementMap;
+        this.engagementMap =new TreeMap<>(Comparator.comparing((e)->engagementMap.get(e)));
+//        this.engagementMap = new TreeMap<>(Comparator.comparing(CourseEngagement::engagementMap.get(e)))
+        this.engagementMap.putAll(engagementMap);
     }
 
     public long getStudentId()
@@ -77,8 +81,7 @@ public class Student {
 
     public int getMonthsSinceActive()
     {
-        Map<String,Integer> monthsSinceActiveMap = new TreeMap<>(Comparator.comparing(()))
-
+       return new TreeMap<>(engagementMap).firstEntry().getValue().getMonthsSinceActive();
 
     }
 
