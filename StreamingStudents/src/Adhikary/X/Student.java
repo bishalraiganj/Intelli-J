@@ -89,17 +89,41 @@ public class Student {
 
     public  void addCourse(Course course)
     {
-        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,LocalDate.now(),"Enrollment",0,LocalDate.now()));
+        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,LocalDate.now(),"Enrollment",new Random().nextInt(1,course.getLectureCount()+1),LocalDate.now()));
     }
 
     public void addCourse(Course course,LocalDate enrollDate)
     {
-        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,enrollDate,"Enrollment",0,LocalDate.now()));
+        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,enrollDate,"Enrollment",new Random().nextInt(1,course.getLectureCount()+1),LocalDate.now()));
     }
 
     public void watchLecture(String courseCode,int lectureNumber,int month,int year)
     {
         engagementMap.get(courseCode).watchLecture(lectureNumber,LocalDate.of(year,month,new Random().nextInt(1,29)));
+    }
+
+    public static Student getRandomStudent(Course... courses)
+    {
+        Student randomStudent = new Student(new Random().nextLong(6297609615L,62976096156L)
+                ,"INDIA",new Random().nextInt(2000,2025)
+                ,new Random().nextInt(17,25)
+                ,(new Random().nextBoolean()?"Male":"Female")
+                ,new Random().nextBoolean(),new TreeMap<>());
+//        Arrays.stream(courses)
+//                .forEach((c)->randomStudent.engagementMap.put(c.getCourseCode(),new CourseEngagement(c,LocalDate.of(new Random().nextInt(2020,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)),"Enrollment",0
+//                        ,LocalDate.now())));
+
+        for(Course c:courses)
+        {
+
+            randomStudent.addCourse(c,LocalDate.of(new Random().nextInt(2017,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)));
+        }
+
+
+
+
+
+
     }
 
 
