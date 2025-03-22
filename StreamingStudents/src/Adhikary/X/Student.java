@@ -4,6 +4,7 @@ import com.sun.source.tree.Tree;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -56,6 +57,11 @@ public class Student {
         return programmingExperience;
     }
 
+    public Map<String,CourseEngagement> getEngagementMap()
+    {
+        return engagementMap;
+    }
+
 
     public int  getAge()
     {
@@ -81,9 +87,10 @@ public class Student {
 
     public int getMonthsSinceActive()
     {
-       return new TreeMap<>(engagementMap).firstEntry().getValue().getMonthsSinceActive();
-
+       return new LinkedHashMap<>(engagementMap).firstEntry().getValue().getMonthsSinceActive();
     }
+
+
 
 
 
