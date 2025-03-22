@@ -1,7 +1,9 @@
 package Adhikary.X;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Student {
 
@@ -61,6 +63,23 @@ public class Student {
     {
         LocalDate currentDate = LocalDate.now();
         return (currentDate.getYear()-yearEnrolled);
+    }
+
+    public int getMonthsSinceActive(String courseCode)
+    {
+      return  engagementMap.get(courseCode).getMonthsSinceActive();
+    }
+
+    public double getPercentComplete(String courseCode)
+    {
+        return engagementMap.get(courseCode).getPercentComplete();
+    }
+
+    public int getMonthsSinceActive()
+    {
+        Map<String,Integer> monthsSinceActiveMap = new TreeMap<>(Comparator.comparing(()))
+
+
     }
 
 

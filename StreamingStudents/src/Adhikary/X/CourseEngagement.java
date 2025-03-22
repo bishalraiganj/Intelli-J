@@ -3,7 +3,7 @@ package Adhikary.X;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-public class CourseEngagement {
+public class CourseEngagement implements Comparable<CourseEngagement>{
 
     private  Course course;
     private  LocalDate enrollmentDate;
@@ -72,6 +72,12 @@ public class CourseEngagement {
     {
         lastLecture = lecture;
         lastActivityDate = date;
+    }
+
+    @Override
+    public int compareTo(CourseEngagement o)
+    {
+        return Integer.valueOf(getMonthsSinceActive()).compareTo(o.getMonthsSinceActive()); // Simpler Solution Using Integer.compare(int v1,int v2);
     }
 
 
