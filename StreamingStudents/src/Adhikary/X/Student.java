@@ -3,10 +3,7 @@ package Adhikary.X;
 import com.sun.source.tree.Tree;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Student {
 
@@ -89,6 +86,23 @@ public class Student {
     {
        return new LinkedHashMap<>(engagementMap).firstEntry().getValue().getMonthsSinceActive();
     }
+
+    public  void addCourse(Course course)
+    {
+        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,LocalDate.now(),"Enrollment",0,LocalDate.now()));
+    }
+
+    public void addCourse(Course course,LocalDate enrollDate)
+    {
+        engagementMap.put(course.getCourseCode(),new CourseEngagement(course,enrollDate,"Enrollment",0,LocalDate.now()));
+    }
+
+    public void watchLecture(String courseCode,int lectureNumber,int month,int year)
+    {
+        engagementMap.get(courseCode).watchLecture(lectureNumber,LocalDate.of(year,month,new Random().nextInt(1,29)));
+    }
+
+
 
 
 
