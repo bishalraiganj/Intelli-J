@@ -5,8 +5,8 @@ import java.util.stream.Stream;
 
 public class CourseEngagement implements Comparable<CourseEngagement>{
 
-    private  Course course;
-    private  LocalDate enrollmentDate;
+    private final Course course;
+    private final LocalDate enrollmentDate;
     private  String engagementType;
     private  int lastLecture;
     private  LocalDate lastActivityDate;

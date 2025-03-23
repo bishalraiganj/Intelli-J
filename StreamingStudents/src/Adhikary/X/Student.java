@@ -119,7 +119,7 @@ public class Student {
             randomStudent.addCourse(c,LocalDate.of(new Random().nextInt(2017,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)));
         }
 
-
+        randomStudent.engagementMap.forEach((k,v)->v.watchLecture(new Random().nextInt()))
 
 
 
