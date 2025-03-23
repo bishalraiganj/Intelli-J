@@ -9,7 +9,7 @@ public class Main {
     {
 
 
-        System.out.println(Arrays.toString(sortColors(new int[]{0, 1, 2, 1, 0, 2, 2, 1, 0})));
+        System.out.println(Arrays.toString(sortColors(new int[]{0, 1, 2,1,2,2,0,1,0,1,1,1,0})));
 
 
     }
