@@ -72,8 +72,8 @@ public class Student {
             System.out.println("\n  "+c.getCourseCode()+"  "+randomCourseEnrollmentDate);
 
 
-            int engagementYear = random.nextInt(courseYear,LocalDate.now().getYear()+1);
-            int engagementMonth = random.nextInt(1,(randomCourseEnrollmentDate.getYear()<currentDate.getYear()?13:currentDate.getMonthValue()+1));
+            int engagementYear = random.nextInt(randomCourseEnrollmentDate.getYear(),LocalDate.now().getYear()+1);
+            int engagementMonth = random.nextInt(1,(engagementYear<currentDate.getYear()?13:currentDate.getMonthValue()+1));
 
             int engagementDateBound ;
 
