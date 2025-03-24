@@ -16,7 +16,7 @@ public class Student {
     private final Map<String,CourseEngagement> engagementMap;
 
 
-    public Student(long studentId,String countryCode,int yearEnrolled,int ageEnrolled,String gender,boolean programmingExperience,Map<String,CourseEngagement> engagementMap)
+    public Student(long studentId,String countryCode,int yearEnrolled,int ageEnrolled,String gender,boolean programmingExperience,Course[] courses) // yearEnrolled must be less than the current year otherwise logic inside this constructor would fail
     {
         this.studentId = studentId;
         this.countryCode = countryCode;
@@ -24,9 +24,31 @@ public class Student {
         this.ageEnrolled =  ageEnrolled;
         this.gender = gender;
         this.programmingExperience = programmingExperience;
-        this.engagementMap =new TreeMap<>(Comparator.comparing((e)->engagementMap.get(e)));
+//        this.engagementMap =new TreeMap<>(Comparator.comparing((e)->engagementMap.get(e)));
 //        this.engagementMap = new TreeMap<>(Comparator.comparing(CourseEngagement::engagementMap.get(e)))
-        this.engagementMap.putAll(engagementMap);
+
+        Random random = new Random();
+        Map<String,CourseEngagement> courseMap  = new TreeMap<>();
+        for(Course c :courses )
+        {
+
+            LocalDate currentDate = LocalDate.now();
+            int courseYear = random.nextInt(yearEnrolled,currentDate.getYear()+1); // This is a random year between student enrollment and current year
+            int courseDate = random.nextInt(1,(courseYear<currentDate.getYear()?29:currentDate.getDayOfYear()+1)); // This is a random date between the year of students enrollment and current date
+            int courseMonth =  random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1)); // This is a random month selected between students year and current years month value
+
+            LocalDate randomCourseEnrollmentDate = LocalDate.of(courseYear,courseMonth,courseDate);
+
+            int engagementYear = random.nextInt(randomCourseEnrollmentDate.getYear(),courseYear+1);
+            int engagementMonth = random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1));
+            int engagementDate = random.nextInt(1,(courseYear<currentDate.getYear()?29:currentDate.getDayOfMonth()+1));
+
+
+            courseMap.putIfAbsent(c.getCourseCode(),new CourseEngagement(c,randomCourseEnrollmentDate,"Engagement",
+                    random.nextInt(1,c.lectureCount+1),LocalDate.of(engagementYear,engagementMonth,engagementDate)));
+        }
+        this.engagementMap = new TreeMap<>(Comparator.comparing(courseMap::get));
+        this.engagementMap.putAll(courseMap);
     }
 
     public long getStudentId()
@@ -102,29 +124,29 @@ public class Student {
         engagementMap.get(courseCode).watchLecture(lectureNumber,LocalDate.of(year,month,new Random().nextInt(1,29)));
     }
 
-    public static Student getRandomStudent(Course... courses)
-    {
-        Student randomStudent = new Student(new Random().nextLong(6297609615L,62976096156L)
-                ,"INDIA",new Random().nextInt(2000,2025)
-                ,new Random().nextInt(17,25)
-                ,(new Random().nextBoolean()?"Male":"Female")
-                ,new Random().nextBoolean(),new TreeMap<>());
-//        Arrays.stream(courses)
-//                .forEach((c)->randomStudent.engagementMap.put(c.getCourseCode(),new CourseEngagement(c,LocalDate.of(new Random().nextInt(2020,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)),"Enrollment",0
-//                        ,LocalDate.now())));
-
-        for(Course c:courses)
-        {
-
-            randomStudent.addCourse(c,LocalDate.of(new Random().nextInt(2017,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)));
-        }
-
-        randomStudent.engagementMap.forEach((k,v)->v.watchLecture(new Random().nextInt()))
-
-
-
-
-    }
+//    public static Student getRandomStudent(Course... courses)
+//    {
+//        Student randomStudent = new Student(new Random().nextLong(6297609615L,62976096156L)
+//                ,"INDIA",new Random().nextInt(2000,2025)
+//                ,new Random().nextInt(17,25)
+//                ,(new Random().nextBoolean()?"Male":"Female")
+//                ,new Random().nextBoolean(),new TreeMap<>());
+////        Arrays.stream(courses)
+////                .forEach((c)->randomStudent.engagementMap.put(c.getCourseCode(),new CourseEngagement(c,LocalDate.of(new Random().nextInt(2020,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)),"Enrollment",0
+////                        ,LocalDate.now())));
+//
+//        for(Course c:courses)
+//        {
+//
+//            randomStudent.addCourse(c,LocalDate.of(new Random().nextInt(2017,2025),new Random().nextInt(1,12),new Random().nextInt(1,29)));
+//        }
+//
+//        randomStudent.engagementMap.forEach((k,v)->v.watchLecture(new Random().nextInt()))
+//
+//
+//
+//
+//    }
 
 
 

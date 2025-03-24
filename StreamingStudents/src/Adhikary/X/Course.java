@@ -3,7 +3,7 @@ package Adhikary.X;
 public final class  Course {
     private final String courseCode;
     private final String title;
-    private final int lectureCount;
+    public final int lectureCount;
 
     public Course(String courseCode,String title,int lectureCount)
     {

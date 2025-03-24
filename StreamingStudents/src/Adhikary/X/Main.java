@@ -22,24 +22,29 @@ public class Main
                 "ADALGO01",adAlgo1
         ));
 
-
-        Student bishalAdhikary = new Student(6297609615L,"INDIA",2010,24,"MALE",true,engagementMap);
-
+        Course[] programmingCourses = {java,dsa,advancedAlgorithms};
 
 
 
 
+        Student bishalAdhikary = new Student(6297609615L,"INDIA",2010,24,"MALE",true,programmingCourses);
 
 
-        System.out.println(bishal1.getMonthsSinceActive());
-        System.out.println("\n"+bishal1.getPercentComplete()+" %");
 
-        System.out.println("-".repeat(50));
-        System.out.println(bishalAdhikary.getMonthsSinceActive());
 
-        System.out.println(bishal1.getMonthsSinceActive());
 
-        System.out.println("-".repeat(50));
+
+
+
+//        System.out.println(bishal1.getMonthsSinceActive());
+//        System.out.println("\n"+bishal1.getPercentComplete()+" %");
+//
+//        System.out.println("-".repeat(50));
+//        System.out.println(bishalAdhikary.getMonthsSinceActive());
+//
+//        System.out.println(bishal1.getMonthsSinceActive());
+//
+//        System.out.println("-".repeat(50));
 
 
 
