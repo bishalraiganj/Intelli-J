@@ -80,6 +80,12 @@ public class CourseEngagement implements Comparable<CourseEngagement>{
         return Integer.valueOf(getMonthsSinceActive()).compareTo(o.getMonthsSinceActive()); // Simpler Solution Using Integer.compare(int v1,int v2);
     }
 
+    @Override
+    public String toString()
+    {
+        return "Code : "+getCourseCode()+"\n Enrollment Date : " + getEnrollmentYear() +"\n Last Lecture Number : " +lastLecture + "\n Last Activiy Date : " + lastActivityDate;
+    }
+
 //    @Override
 //    public String toString()
 //    {

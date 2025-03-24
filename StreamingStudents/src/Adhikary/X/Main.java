@@ -28,6 +28,9 @@ public class Main
 
 
         Student bishalAdhikary = new Student(6297609615L,"INDIA",2010,24,"MALE",true,programmingCourses);
+        bishalAdhikary.getEngagementMap().forEach((k,v)->System.out.println("Course :"+k+" Engagement : \n ( "+v+ ")"));
+
+
 
 
 
