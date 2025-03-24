@@ -3,6 +3,7 @@ package Adhikary.X;
 import com.sun.source.tree.Tree;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.*;
 
 public class Student {
@@ -14,6 +15,7 @@ public class Student {
     private final String gender;
     private final boolean programmingExperience;
     private final Map<String,CourseEngagement> engagementMap;
+
 
 
     public Student(long studentId,String countryCode,int yearEnrolled,int ageEnrolled,String gender,boolean programmingExperience,Course[] courses) // yearEnrolled must be less than the current year otherwise logic inside this constructor would fail
@@ -34,12 +36,43 @@ public class Student {
 
             LocalDate currentDate = LocalDate.now();
             int courseYear = random.nextInt(yearEnrolled,currentDate.getYear()+1); // This is a random year between student enrollment and current year
-            int courseDate = random.nextInt(1,(courseYear<currentDate.getYear()?29:currentDate.getDayOfYear()+1)); // This is a random date between the year of students enrollment and current date
-            int courseMonth =  random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1)); // This is a random month selected between students year and current years month value
+
+            int courseMonth =  random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1));
+            int courseDateBound ;
+            if(courseMonth==2)
+        {
+            if(Year.isLeap(courseYear))
+            {
+                courseDateBound = 29;
+            }
+            courseDateBound=28;
+        }
+            else
+                courseDateBound = switch(courseMonth)
+                {
+                    case 1->31;
+                    case 2->28;
+                    case 3->31;
+                    case 4->30;
+                    case 5->31;
+                    case 6->30;
+                    case 7->31;
+                    case 8->31;
+                    case 9->30;
+                    case 10->31;
+                    case 11->30;
+
+                    default->31;
+                };
+            int courseDate = random.nextInt(1,courseDateBound);                 // between the year of students enrollment and current date
+             // This is a random month selected between students year and current years month value
 
             LocalDate randomCourseEnrollmentDate = LocalDate.of(courseYear,courseMonth,courseDate);
 
-            int engagementYear = random.nextInt(randomCourseEnrollmentDate.getYear(),courseYear+1);
+            System.out.println("\n  "+c.getCourseCode()+"  "+randomCourseEnrollmentDate);
+
+
+            int engagementYear = random.nextInt(courseYear,LocalDate.now().getYear()+1);
             int engagementMonth = random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1));
             int engagementDate = random.nextInt(1,(courseYear<currentDate.getYear()?29:currentDate.getDayOfMonth()+1));
 
