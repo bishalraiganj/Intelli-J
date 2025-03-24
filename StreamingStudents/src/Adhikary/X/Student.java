@@ -64,7 +64,7 @@ public class Student {
 
                     default->31;
                 };
-            int courseDate = random.nextInt(1,courseDateBound);                 // between the year of students enrollment and current date
+            int courseDate = random.nextInt(1,courseDateBound+1);                 // between the year of students enrollment and current date
              // This is a random month selected between students year and current years month value
 
             LocalDate randomCourseEnrollmentDate = LocalDate.of(courseYear,courseMonth,courseDate);
@@ -73,8 +73,39 @@ public class Student {
 
 
             int engagementYear = random.nextInt(courseYear,LocalDate.now().getYear()+1);
-            int engagementMonth = random.nextInt(1,(courseYear<currentDate.getYear()?13:currentDate.getMonthValue()+1));
-            int engagementDate = random.nextInt(1,(courseYear<currentDate.getYear()?29:currentDate.getDayOfMonth()+1));
+            int engagementMonth = random.nextInt(1,(randomCourseEnrollmentDate.getYear()<currentDate.getYear()?13:currentDate.getMonthValue()+1));
+
+            int engagementDateBound ;
+
+            if(randomCourseEnrollmentDate.getMonthValue()==2)
+            {
+                if(Year.isLeap(engagementYear))
+                {
+                    engagementDateBound =29;
+                }
+                else
+                {
+                    engagementDateBound =28;
+                }
+            }
+            else
+
+                engagementDateBound = switch(randomCourseEnrollmentDate.getMonthValue())
+                {
+                    case 1->31;
+                    case 2->28;
+                    case 3->31;
+                    case 4->30;
+                    case 5->31;
+                    case 6->30;
+                    case 7->31;
+                    case 8->31;
+                    case 9->30;
+                    case 10->31;
+                    case 11->30;
+                    default->31;
+                };
+            int engagementDate = random.nextInt(1,engagementDateBound+1);
 
 
             courseMap.putIfAbsent(c.getCourseCode(),new CourseEngagement(c,randomCourseEnrollmentDate,"Engagement",
