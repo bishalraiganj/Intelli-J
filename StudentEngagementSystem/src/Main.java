@@ -1,8 +1,5 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Main {
@@ -30,14 +27,14 @@ public class Main {
         System.out.println("-".repeat(50));
 
 
-        Student[] studentsArr = new Student[20];
+        Student[] studentsArr = new Student[2000];
 
 
 
 
 
                 Stream.generate(()->Student.getRandomStudent(jmc,pymc))
-                .limit(20)
+                .limit(2000)
                 .forEach((e)-> {
                     studentsArr[index] = e;
                     index++;
@@ -112,6 +109,15 @@ public class Main {
 
                           );
                 System.out.println("Conditions Match Status:" +conditions);
+
+                Stream<Student> conditionsMatchedStudents = Arrays.stream(studentsArr)
+                        .filter((e)->e.getEngagementMap().values().stream().allMatch((f)->f.getLastActivityYear()==LocalDate.now().getYear())&&e.getYearsSinceEnrolled()>7)
+                        .sorted(Comparator.comparing(Student::getAge).reversed())
+                        .limit(5)        ;
+//                        .filter((e)->e.getYearsSinceEnrolled()>new Random().nextInt(8,59));
+
+                conditionsMatchedStudents.forEach(System.out::println);
+
 
                 /*System.out.println(
                         Arrays.toString(studentsArr));*/
