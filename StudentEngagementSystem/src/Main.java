@@ -27,14 +27,14 @@ public class Main {
         System.out.println("-".repeat(50));
 
 
-        Student[] studentsArr = new Student[2000];
+        Student[] studentsArr = new Student[1000];
 
 
 
 
 
                 Stream.generate(()->Student.getRandomStudent(jmc,pymc))
-                .limit(2000)
+                .limit(1000)
                 .forEach((e)-> {
                     studentsArr[index] = e;
                     index++;
