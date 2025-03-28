@@ -14,4 +14,6 @@ public record Course(String courseCode,String title,int lectureCount) {
     {
         return "%s %s".formatted(courseCode,title);
     }
+
+
 }

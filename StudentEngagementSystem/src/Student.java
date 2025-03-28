@@ -40,7 +40,7 @@ public class Student {
 
     public void addCourse(Course newCourse,LocalDate enrollDate)
     {
-        engagementMap.put(newCourse.courseCode(),new CourseEngagement(newCourse,enrollDate,"Enrollment"))
+        engagementMap.put(newCourse.courseCode(),new CourseEngagement(newCourse,enrollDate,"Enrollment"));
     }
 
     public long getStudentId()
@@ -53,7 +53,7 @@ public class Student {
         return countryCode;
     }
 
-    public int yearEnrolled()
+    public int getYearEnrolled()
     {
         return yearEnrolled;
     }
@@ -120,6 +120,41 @@ public class Student {
         }
     }
 
+    private static String  getRandomVal(String... data)
+    {
+        return data[random.nextInt(data.length)];
+    }
+
+    public static Student getRandomStudent(Course... courses)
+    {
+        int maxYear = LocalDate.now().getYear()+1;
+
+        Student student = new Student(getRandomVal("AU","CA","CN","GB","IN","UA","US"),random.nextInt(2015,maxYear),random.nextInt(18,90),
+
+                    getRandomVal("M","F","U"),
+                    random.nextBoolean(),
+                    courses);
+        for(Course c : courses)
+        {
+            int lecture =  random.nextInt(1,c.lectureCount());
+            int year = random.nextInt(student.getYearEnrolled(),maxYear);
+            int month = random.nextInt(1,13);
+            if(year== maxYear-1)
+            {
+                if(month>LocalDate.now().getMonthValue())
+                {
+                    month =  LocalDate.now().getMonthValue();
+                }
+
+            }
+            student.watchLecture(c.courseCode(),lecture,month,year);
+
+        }
+
+        return student;
+
+    }
+
     @Override
     public String toString()
     {
@@ -129,12 +164,13 @@ public class Student {
                 ", yearEnrolled=" +yearEnrolled+
                 ", ageEnrolled="+ ageEnrolled+
                 ", gender=' "+ gender+'\''+
-                ", programmingExperience" + programmingExperience+
+                ", programmingExperience=" + programmingExperience+
                 ", engagementMap=" + engagementMap +
                 '}';
 
 
     }
+
 
 
 
