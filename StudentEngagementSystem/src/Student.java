@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -25,7 +26,118 @@ public class Student {
         this.gender   = gender;
         this.programmingExperience = programmingExperience;
 
+        for(Course course  : courses)
+        {
+            addCourse(course, LocalDate.of(yearEnrolled,1,1));
+        }
+
     }
+
+    public void addCourse(Course newCourse)
+    {
+        addCourse(newCourse,LocalDate.now());
+    }
+
+    public void addCourse(Course newCourse,LocalDate enrollDate)
+    {
+        engagementMap.put(newCourse.courseCode(),new CourseEngagement(newCourse,enrollDate,"Enrollment"))
+    }
+
+    public long getStudentId()
+    {
+        return studentId;
+    }
+
+    public String getCountryCode()
+    {
+        return countryCode;
+    }
+
+    public int yearEnrolled()
+    {
+        return yearEnrolled;
+    }
+
+    public int ageEnrolled()
+    {
+        return ageEnrolled;
+    }
+
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public boolean hasProgrammingExperience()
+    {
+        return programmingExperience;
+    }
+
+    public Map<String,CourseEngagement> getEngagementMap()
+    {
+        return Map.copyOf(engagementMap);
+    }
+
+    public int getYearsSinceEnrolled()
+    {
+        return LocalDate.now().getYear() - yearEnrolled;
+    }
+
+    public int getAge()
+    {
+        return ageEnrolled+getYearsSinceEnrolled();
+    }
+
+    public int getMonthsSinceActive(String courseCode)
+    {
+        CourseEngagement info  = engagementMap.get(courseCode);
+        return info==null?0:info.getMonthsSinceActive();
+    }
+
+    public int getMonthsSinceActive()
+    {
+        int inactiveMonths = (LocalDate.now().getYear()-2014)*12;
+        for(String key :engagementMap.keySet())
+        {
+            inactiveMonths = Math.min(inactiveMonths,engagementMap.get(key).getMonthsSinceActive());
+        }
+        return inactiveMonths;
+    }
+
+    public double getPercentComplete(String courseCode)
+    {
+        var info = engagementMap.get(courseCode);
+        return info==null?0:info.getPercentComplete();
+    }
+
+    public void watchLecture(String courseCode,int lectureNumber,int month,int year)
+    {
+        var activity = engagementMap.get(courseCode);
+
+        if(activity != null)
+        {
+            activity.watchLecture(lectureNumber,LocalDate.of(year,month,1));
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        return  "Student{"+
+                "StudentId=" + studentId+
+                ", countryCode=' "+countryCode+'\''+
+                ", yearEnrolled=" +yearEnrolled+
+                ", ageEnrolled="+ ageEnrolled+
+                ", gender=' "+ gender+'\''+
+                ", programmingExperience" + programmingExperience+
+                ", engagementMap=" + engagementMap +
+                '}';
+
+
+    }
+
+
+
 
 
 }
