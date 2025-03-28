@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
@@ -29,18 +30,22 @@ public class Main {
         System.out.println("-".repeat(50));
 
 
-        Student[] studentsArr = new Student[1000];
+        Student[] studentsArr = new Student[20];
 
 
 
 
 
                 Stream.generate(()->Student.getRandomStudent(jmc,pymc))
-                .limit(1000)
+                .limit(20)
                 .forEach((e)-> {
                     studentsArr[index] = e;
                     index++;
+                    System.out.println(e);
                 });
+
+                System.out.println("-".repeat(50));
+
 
 
                 long maleStudentsCount =Arrays.stream(studentsArr)
@@ -95,6 +100,18 @@ public class Main {
                         .forEach(System.out::println);
                 System.out.println("CountryCodes List:" +countryCodes.toString());
 
+                boolean conditions =Arrays.stream(studentsArr)
+                        .anyMatch((e)->
+
+                            e.getEngagementMap().values().stream().allMatch((f)->f.getLastActivityYear()== LocalDate.now().getYear())&&e.getYearsSinceEnrolled()>7
+//                            for(CourseEngagement cE:e.getEngagementMap().values())
+//                            {
+//
+//
+//                            }
+
+                          );
+                System.out.println("Conditions Match Status:" +conditions);
 
                 /*System.out.println(
                         Arrays.toString(studentsArr));*/
