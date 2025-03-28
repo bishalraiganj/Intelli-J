@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Main {
@@ -70,6 +73,28 @@ public class Main {
                         .filter((e)->e.getAge()>60)
                         .count();
                 System.out.println("Range greater than 60 :"+range60);
+
+
+
+                IntSummaryStatistics ageStatistics = Arrays.stream(studentsArr)
+                        .mapToInt(Student::getAge)
+                        .summaryStatistics();
+                System.out.println("Age Statistics : " +ageStatistics);
+
+
+                List<String> countryCodes = new ArrayList<>();
+                Arrays.stream(studentsArr)
+                        .filter((e)->{
+                            if(countryCodes.indexOf(e.getCountryCode())<0)
+                            {
+                                countryCodes.add(e.getCountryCode());
+                                return true;
+                            }
+                            return false;
+                        })
+                        .forEach(System.out::println);
+                System.out.println("CountryCodes List:" +countryCodes.toString());
+
 
                 /*System.out.println(
                         Arrays.toString(studentsArr));*/
