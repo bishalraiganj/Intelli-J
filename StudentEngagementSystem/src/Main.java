@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
@@ -168,6 +169,37 @@ public class Main {
 
                 System.out.println("# of students >= 60 = "+ (students.length-total));
 
+                IntStream ageStream = Arrays.stream(students)
+                        .mapToInt(Student::getAgeEnrolled);
+                System.out.println(ageStream.summaryStatistics());
+
+                IntStream currentAgeStream = Arrays.stream(studentsArr)
+                        .mapToInt(Student::getAge);
+
+                System.out.println(currentAgeStream.summaryStatistics());
+
+                Arrays.stream(studentsArr)
+                        .map(Student::getCountryCode)
+                        .distinct()
+                        .sorted()
+                        .forEach((s)->System.out.print(s + " "));
+
+                System.out.println("-".repeat(50));
+
+                boolean longTerm = Arrays.stream(studentsArr)
+                        .anyMatch((e)->e.getMonthsSinceActive()<12&&e.getAge()-e.getAgeEnrolled()>=7);
+                System.out.println("LongTerm students? " + longTerm);
+
+                long longTermCount = Arrays.stream(studentsArr)
+                        .filter((e)->e.getAge()-e.getAgeEnrolled()>=7&&e.getMonthsSinceActive()<12)
+                        .count();
+                System.out.println("LongTerm students? " + longTermCount);
+
+                Arrays.stream(studentsArr)
+                        .filter((e)->e.getAge()-e.getAgeEnrolled()>=7&&e.getMonthsSinceActive()<12)
+                        .filter((e)->!e.hasProgrammingExperience())
+                        .limit(5)
+                        .forEach(System.out::println);
 
 
 

@@ -58,7 +58,7 @@ public class Student {
         return yearEnrolled;
     }
 
-    public int ageEnrolled()
+    public int getAgeEnrolled()
     {
         return ageEnrolled;
     }
