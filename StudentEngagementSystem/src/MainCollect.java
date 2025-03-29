@@ -1,7 +1,4 @@
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -44,6 +41,22 @@ public class MainCollect {
                 .filter((e)->e.getAge()<30&&e.getCountryCode().equals("AU"))
                 .collect(()->new TreeSet<>(Comparator.comparing(Student::getStudentId)),TreeSet::add,TreeSet::addAll);
         youngAussies2.forEach((s)->System.out.print(s.getStudentId()+" "));
+        System.out.println("\n"+"-".repeat(50));
+
+
+        List<String> cList = new ArrayList<>();
+        String countryList = students.stream()
+                .map(Student::getCountryCode)
+                .filter((e)->{
+                    if(cList.indexOf(e)<0) {
+                        cList.add(e);
+                        return true;
+                    }
+                    return false;
+                })
+                .sorted()
+                .reduce("",(a,b)->a + " " +b);
+        System.out.println("Country List: " + countryList.trim());
         System.out.println("\n"+"-".repeat(50));
 
 
