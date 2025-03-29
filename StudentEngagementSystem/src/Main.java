@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class Main {
@@ -38,7 +39,7 @@ public class Main {
                 .forEach((e)-> {
                     studentsArr[index] = e;
                     index++;
-                    System.out.println(e);
+//                    System.out.println(e);
                 });
 
                 System.out.println("-".repeat(50));
@@ -117,6 +118,60 @@ public class Main {
 //                        .filter((e)->e.getYearsSinceEnrolled()>new Random().nextInt(8,59));
 
                 conditionsMatchedStudents.forEach(System.out::println);
+
+
+
+                System.out.println("-".repeat(50));
+
+//                var maleStudents = Stream.generate(()->Student.getRandomStudent(jmc,pymc))
+//                        .limit(1000);
+//                        maleStudents = maleStudents.filter((e)->e.getGender().equals("M"));
+        
+                Student[] students = new Student[1000];
+                Arrays.setAll(students,(i)->Student.getRandomStudent(jmc,pymc));
+
+                Stream<Student> maleStudents = Arrays.stream(students)
+                                .filter((e)->e.getGender().equals("M"));
+                System.out.println("# of Male Students: "+ maleStudents.count());
+
+                System.out.println("-".repeat(50));
+
+                for(String gender:List.of("M","F","U"))
+                {
+                    Stream<Student>  myStudents = Arrays.stream(students)
+                            .filter((e)->e.getGender().equals(gender));
+                    System.out.println("# of " + gender + "Students: "+myStudents.count());
+                }
+
+                System.out.println("-".repeat(50));
+
+                List<Predicate<Student>> list = List.of((s)->s.getAge()<30,(Student s)->s.getAge()>=30&&s.getAge()<60);
+
+//                for(Predicate<Student> predicate:list)
+//                {
+//                    Stream<Student> myStudents = Arrays.stream(students)
+//                            .filter(predicate);
+//                    System.out.println((predicate.test(new Student("IN",2024,9,"M",true,jmc,pymc))?"# of age<30: ":"# of age<60: ")+ myStudents.count());
+//
+//
+//                } // This can also be used here the predicate is checked to determine the range being printed but the logic is complex
+
+                long total=0;
+                for(int i=0;i<list.size();i++)
+                {
+                    Stream<Student> myStudents = Arrays.stream(students)
+                            .filter(list.get(i));
+                    long cnt=myStudents.count();
+                    total+=cnt;
+                    System.out.printf("# of students (%s) = %d%n".formatted((i==0?" < 30":">=30 && < 60"),cnt));
+                }
+
+                System.out.println("# of students >= 60 = "+ (students.length-total));
+
+
+
+
+
 
 
                 /*System.out.println(
