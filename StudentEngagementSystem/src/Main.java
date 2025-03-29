@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -195,11 +196,21 @@ public class Main {
                         .count();
                 System.out.println("LongTerm students? " + longTermCount);
 
-                Arrays.stream(studentsArr)
+                var longTimeLearners =Arrays.stream(studentsArr)
                         .filter((e)->e.getAge()-e.getAgeEnrolled()>=7&&e.getMonthsSinceActive()<12)
                         .filter((e)->!e.hasProgrammingExperience())
                         .limit(5)
-                        .forEach(System.out::println);
+                        .toArray(Student[]::new); // the size of the stream elements are implicitly passed as argument to the overidden apply method of the IntFunction functional Interface implementation created using the method reference.
+
+
+                var learners = Arrays.stream(studentsArr)
+                        .filter((e)->e.getAge()-e.getAgeEnrolled()>=7&&e.getMonthsSinceActive()<12)
+                        .filter((e)->!e.hasProgrammingExperience())
+                        .limit(5)
+                        .collect(Collectors.toList());
+
+                Collections.shuffle(learners);
+
 
 
 
