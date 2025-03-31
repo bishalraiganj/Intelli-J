@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -86,6 +83,21 @@ public class MainChallenge {
                     System.out.print(e.getStudentId()+" ");
                 });
 
+        System.out.println("\n"+"-".repeat(50));
+
+        Comparator<Student> uniqueSorted = longTermStudent.thenComparing(Student::getStudentId);
+        students1.stream()
+                .filter((e)->e.getMonthsSinceActive("JMC")==0)
+                .filter((e)->e.getPercentComplete("JMC")>=topPercent)
+                .sorted(longTermStudent)
+                .limit(10)
+//                .peek(System.out::println)
+//                .collect(()->new ArrayList<>(),(ArrayList<Student> e1,Student e2)->e1.add(e2),ArrayList::addAll)
+                .collect(()->new TreeSet<>(uniqueSorted),(TreeSet<Student> e1,Student e2)->e1.add(e2),TreeSet::addAll)
+                .forEach((Student e)->{
+                    e.addCourse(jgms);
+                    System.out.print(e.getStudentId()+" ");
+                });
 
 
 
