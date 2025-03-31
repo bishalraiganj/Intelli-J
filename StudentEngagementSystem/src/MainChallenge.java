@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class MainChallenge {
@@ -34,6 +35,19 @@ public class MainChallenge {
 
         longestStudents.forEach(System.out::println);
         System.out.println("\n"+"-".repeat(50));
+
+
+
+        List<Student> students =  Stream.iterate(1,(e)->e<=5000,(e)->e+1)
+                .map((e)->Student.getRandomStudent(jmc,pymc))
+                .collect(()->new ArrayList<>(),(e1,e2)->e1.add(e2),ArrayList::addAll);
+
+        List<Student> students1 = IntStream.rangeClosed(1,5000)
+                .mapToObj((e)->Student.getRandomStudent(jmc,pymc))
+                .collect(ArrayList::new,ArrayList::add,(e1,e2)->e1.addAll(e2));
+
+
+
 
 
 

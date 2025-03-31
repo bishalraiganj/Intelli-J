@@ -147,7 +147,7 @@ public class Student {
                 }
 
             }
-            student.watchLecture(c.courseCode(),lecture,month,year);
+            student.watchLecture(c.courseCode(),lecture ,month,year);
 
         }
 
