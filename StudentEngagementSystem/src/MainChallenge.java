@@ -47,6 +47,47 @@ public class MainChallenge {
                 .collect(ArrayList::new,ArrayList::add,(e1,e2)->e1.addAll(e2));
 
 
+        double totalPercent = students1.stream()
+                .mapToDouble((e)->e.getPercentComplete("JMC"))
+                .reduce(0,Double::sum);
+        double avePercent  = totalPercent/ students1.size();
+        System.out.printf("Average Percentage Complete = %.2f%% %n",avePercent);
+
+        int topPercent = (int) (1.25*avePercent);
+        System.out.printf("Best Percentage Complete = %d%% %n",topPercent);
+
+        Comparator<Student> longTermStudent = Comparator.comparing(Student::getYearEnrolled);
+
+        List<Student> hardWorkers= students1.stream()
+            .filter((e)->e.getMonthsSinceActive("JMC")==0)
+            .filter((e)->e.getPercentComplete("JMC")>=topPercent)
+                .sorted(longTermStudent)
+                .limit(10)
+                .map((e)->{
+                    e.addCourse(jgms);
+                    return e;
+                })
+                .peek((e)->System.out.println(e))
+                .collect(()->new ArrayList<>(),(e1,e2)->e1.add(e2),ArrayList::addAll);
+
+        System.out.println("hardWorkers :" + hardWorkers.size());
+
+        System.out.println("-".repeat(50));
+
+
+        students1.stream()
+                .filter((e)->e.getMonthsSinceActive("JMC")==0)
+                .filter((e)->e.getPercentComplete("JMC")>=topPercent)
+                .sorted(longTermStudent)
+                .limit(10)
+                .collect(()->new ArrayList<>(),(ArrayList<Student> e1,Student e2)->e1.add(e2),ArrayList::addAll)
+                .forEach((Student e)->{
+                    e.addCourse(jgms);
+                    System.out.print(e.getStudentId()+" ");
+                });
+
+
+
 
 
 
