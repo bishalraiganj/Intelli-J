@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MainMapping {
@@ -25,6 +26,25 @@ public class MainMapping {
 
 //            Map<String,Student> mappedStudents = students.stream()
 //                    .collect
+
+
+            Map<String,List<Student>> mappedStudents = students.stream()
+                    .collect(Collectors.groupingBy((t)->t.getCountryCode()));
+            mappedStudents.forEach((k,v)->System.out.println(k + " " + v.size()));
+
+            System.out.println("-".repeat(50));
+            int minAge = 25;
+            Map<String,List<Student>> youngerSet = students.stream()
+                    .collect(Collectors.groupingBy((Student t)->t.getCountryCode(),Collectors.filtering(( Student e)->e.getAge()<=minAge,Collectors.toList())));
+            youngerSet.forEach((k,v)->System.out.println(k + " " + v.size()));
+
+            System.out.println("-".repeat(50)+" \n Below we have the result of The Collectors.partitioningBy() %n");
+
+            Map<Boolean,List<Student>> experienced =  students.stream()
+                    .collect(Collectors.partitioningBy((Student t)->t.hasProgrammingExperience()));
+            System.out.println("Experienced Students = "+ experienced.get(true).size());
+
+
 
 
 
