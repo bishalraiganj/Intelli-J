@@ -42,7 +42,29 @@ public class MainMapping {
 
             Map<Boolean,List<Student>> experienced =  students.stream()
                     .collect(Collectors.partitioningBy((Student t)->t.hasProgrammingExperience()));
-            System.out.println("Experienced Students = "+ experienced.get(true).size());
+            System.out.println("Experienced Students : " + experienced.get(true).size());
+
+
+            Map<Boolean,Long> expCount = students.stream()
+                    .collect(Collectors.partitioningBy((t)->t.hasProgrammingExperience(),Collectors.counting()));
+            System.out.println("Experienced Students : "+ expCount.get(true));
+
+
+            System.out.println("-".repeat(50));
+            Map<Boolean,Long> experiencedAndActive = students.stream()
+                    .collect(Collectors.partitioningBy((e)->e.getMonthsSinceActive()==0&& e.hasProgrammingExperience(),Collectors.counting()));
+            System.out.println("Experienced and Active Students : " + experiencedAndActive.get(true));
+
+            System.out.println("-".repeat(50)+"\n Returning a multi-level map of students keyed by country code then the students of this country by another map keyed by gender \n");
+
+            Map<String,Map<String,List<Student>>> multiLevel = students.stream()
+                    .collect(Collectors.groupingBy((t)->t.getCountryCode(),Collectors.groupingBy((t1)->t1.getGender())));
+            multiLevel.forEach((k,v)->{
+                System.out.println(k);
+                v.forEach((k1,v1)-> System.out.println("\t" + k1 + " " + v1.size()));
+            });
+
+
 
 
 
