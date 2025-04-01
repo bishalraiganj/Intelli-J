@@ -16,7 +16,15 @@ public class MainMapping {
 
 
             Map<String,Student> studentsMap = students.stream()
+                    .limit(20)
                     .collect(()->new TreeMap<String,Student>(),(TreeMap<String,Student> e1,Student e2)->e1.put(String.valueOf(e2.getStudentId()),e2),(e3,e4)->e3.putAll(e4));
+            studentsMap.forEach((k,v)->System.out.println(k+" " +v));
+
+            System.out.println("-".repeat(50));
+
+
+//            Map<String,Student> mappedStudents = students.stream()
+//                    .collect
 
 
 
