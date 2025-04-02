@@ -1,7 +1,5 @@
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Student {
 
@@ -125,16 +123,57 @@ public class Student {
         return data[random.nextInt(data.length)];
     }
 
+    private static Course[] getRandomSelection(Course... courses)
+    {
+        int courseCount  = random.nextInt(1,courses.length+1);
+        List<Course> courseList = new ArrayList<>(Arrays.asList(courses));
+        Collections.shuffle(courseList);
+        List<Course> selectedCourses = courseList.subList(0,courseCount);
+        return selectedCourses.toArray(new Course[0]);
+        
+    }
+
     public static Student getRandomStudent(Course... courses)
     {
         int maxYear = LocalDate.now().getYear()+1;
+        Course[] randomCourses = getRandomSelection(courses);
+
+//        int lastIndexRandomNumber = random.nextInt(courses.length);
+//        Course[] coursesRandom = new Course[lastIndexRandomNumber+1];
+//        for(int i=0;i<=lastIndexRandomNumber;i++)
+//        {
+//            coursesRandom[i] = courses[i];
+//        }
+
+
+
 
         Student student = new Student(getRandomVal("AU","CA","CN","GB","IN","UA","US"),random.nextInt(2015,maxYear),random.nextInt(18,90),
 
                     getRandomVal("M","F","U"),
                     random.nextBoolean(),
-                    courses);
-        for(Course c : courses)
+                    randomCourses);
+
+//        for(int i =0;i<=lastIndexRandomNumber;i++)
+//        {
+//            Course c= courses[i];
+//            int lecture = random.nextInt(30,c.lectureCount());
+//            int year = random.nextInt(student.getYearEnrolled(),maxYear);
+//            int month = random.nextInt(1,13);
+//            if(year==maxYear-1)
+//            {
+//
+//                if(month>LocalDate.now().getMonthValue())
+//                {
+//                    month = LocalDate.now().getMonthValue();
+//                }
+//
+//            }
+//            student.watchLecture(c.courseCode(),lecture,month,year);
+//
+//        }
+
+        for(Course c : randomCourses)
         {
             int lecture =  random.nextInt(30,c.lectureCount());
             int year = random.nextInt(student.getYearEnrolled(),maxYear);

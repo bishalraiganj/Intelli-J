@@ -10,7 +10,7 @@ public class MainCollect {
         Course pymc = new Course("PYMC","Python Masterclass");
         Course jmc = new Course("JMC","Java Masterclass");
 
-        List<Student> students = Stream.generate(()->Student.getRandomStudent())
+        List<Student> students = Stream.generate(()->Student.getRandomStudent(jmc,pymc))
                 .limit(1000)
                 .toList();
 
