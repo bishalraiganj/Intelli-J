@@ -47,6 +47,28 @@ public class MainFinalChallenge {
 //                .mapToDouble((e)->e.getPercentComplete())
                 percentages.forEach((k,v)-> System.out.println(k + " " + v));
 
+                System.out.println("-".repeat(50));
+
+        Map<String,Map<Integer,List<CourseEngagement>>>      yearMap =    students.stream()
+                        .flatMap((e)->e.getEngagementMap().values().stream())
+                        .collect(Collectors.groupingBy(( CourseEngagement e)->e.getCourse(),Collectors.groupingBy((e1)->e1.getLastActivityYear(),Collectors.toList())));
+
+
+        Map<String,Map<Integer,Long>>      yearMap2 =    students.stream()
+                .flatMap((e)->e.getEngagementMap().values().stream())
+                .collect(Collectors.groupingBy(( CourseEngagement e)->e.getCourse(),Collectors.groupingBy((e1)->e1.getLastActivityYear(),Collectors.counting())));
+        yearMap2.forEach((k,v)->System.out.println(k + " " + v));
+
+        System.out.println("-".repeat(50));
+
+        students.stream()
+                .flatMap((e)->e.getEngagementMap().values().stream())
+                .collect(Collectors.groupingBy((e)->e.getEnrollmentDate(),Collectors.groupingBy((e1)->e1.getCourse(),Collectors.counting())))
+                .forEach((k,v)->System.out.println(k + ": " + v));
+
+
+
+
 
 
 
