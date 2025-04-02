@@ -41,9 +41,9 @@ public class MainFinalChallenge {
 
         System.out.println("-".repeat(50));
 
-        Map<String,Double>  percentages = students.stream()
+        Map<String,DoubleSummaryStatistics>  percentages = students.stream()
                 .flatMap((e)->e.getEngagementMap().values().stream())
-                .collect((Collectors.groupingBy((e)->e.getCourse(),Collectors.averagingDouble((e)->e.getPercentComplete()))));
+                .collect((Collectors.groupingBy((e)->e.getCourse(),Collectors.summarizingDouble((e)->e.getPercentComplete()))));
 //                .mapToDouble((e)->e.getPercentComplete())
                 percentages.forEach((k,v)-> System.out.println(k + " " + v));
 
