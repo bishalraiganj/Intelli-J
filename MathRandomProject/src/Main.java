@@ -67,7 +67,22 @@ public class Main {
                 .limit(10)
                 .forEach(System.out::println);
 
+        System.out.println("-".repeat(50));
+        r.ints(10,0,10)
+                .forEach(System.out::println);
 
+        System.out.println("-".repeat(50));
+
+        long nanoTime = System.nanoTime();
+        Random pseudoRandom = new Random(nanoTime);
+        pseudoRandom.ints(10,0,10)
+                .forEach((e)->System.out.print(e + " "));
+
+        System.out.println("\n"+"-".repeat(50));
+
+        Random notReallyRandom =  new Random(nanoTime);
+        notReallyRandom.ints(10,0,10)
+                .forEach((e)->System.out.print(e + " "));
 
 
 
