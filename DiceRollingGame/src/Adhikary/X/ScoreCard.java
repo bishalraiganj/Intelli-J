@@ -1,4 +1,4 @@
-package Adhikary.X.game;
+package Adhikary.X;
 
 public enum ScoreCard {
 }
