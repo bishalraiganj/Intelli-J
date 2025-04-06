@@ -51,12 +51,17 @@ public class DiceGame<T extends Player> {
 
             String input = scanner.nextLine();
 
+            boolean complexLogic = input.replace(" ","").chars().filter((e)->e<48||e>57).mapToObj((e)->Integer.valueOf(e)).
+                    collect(()->new ArrayList<>(),(ArrayList<Integer> e1,Integer e2)->e1.add(e2),(e3,e4)->e3.addAll(e4))
+                    .size()<1 ;
+            boolean easyLogic = input.replace(" ","").chars().mapToObj((e)->Character.valueOf((char) e)).allMatch((e)->Character.isDigit(e));
+
 
             if (input.equals("")) {
                 System.out.println("Hope ! To See you again !Your Score :0");
                 runStatus = false;
             }
-            else if ((input.toCharArray().length < 12))
+            else if ((input.toCharArray().length < 12)&&complexLogic)
             {
 
 
