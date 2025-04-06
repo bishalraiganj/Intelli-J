@@ -80,6 +80,7 @@ public class DiceGame<T extends Player> {
                         if (index < 0 || index > dices.size() - 1) {
                             return true;
                         }
+                        else
                         return false;
                     }
             );
