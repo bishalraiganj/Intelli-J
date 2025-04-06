@@ -76,7 +76,10 @@ public class DiceGame<T extends Player> {
                     int index = dices.values().stream().collect(() -> new ArrayList<>(), (e1, e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(s));
                     System.out.println("Index :" + index);
 //                int newValue = random.nextInt(1,7);
-                    dices.put(index, -1);
+                    if(index>=0)
+                    {
+                        dices.put(index, -1);
+                    }
 //                System.out.println("Rolled Dice.%d New Value.%d".formatted(index,newValue));
 //                dices.forEach((k,v)->System.out.println(k + " " +v));
 
