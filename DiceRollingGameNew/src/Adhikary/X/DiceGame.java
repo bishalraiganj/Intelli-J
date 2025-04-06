@@ -61,42 +61,83 @@ public class DiceGame<T extends Player> {
             boolean logicStatusEntityLength = Arrays.stream(str).anyMatch((e)->e.toCharArray().length>1);
 
 
+//            boolean checkExistence =
+//                    ((input.split(" ").length <6&& input.split(" ").length>0&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength)  ?
+//                        Arrays.stream(input.split(" ")).anyMatch((e) -> {
+//                                    int index = dices.values().stream().collect(() -> new ArrayList<>(), (ArrayList<Integer> e1, Integer e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(e));
+//                                    if (index < 0 || index > dices.size() - 1) {
+//                                        return false;
+//                                    }
+//                                    return true;
+//                                }
+//                        ):false);
+
+            boolean existenceInPreviousDice=false;
+
+        if(!input.equals("") && (input.split(" ").length <6&& input.split(" ").length>0)&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength) {
+            existenceInPreviousDice = Arrays.stream(input.split(" ")).anyMatch((e) -> {
+                        int index = dices.values().stream().collect(() -> new ArrayList<>(), (ArrayList<Integer> e1, Integer e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(e));
+                        if (index < 0 || index > dices.size() - 1) {
+                            return true;
+                        }
+                        return false;
+                    }
+            );
+        }
+
+//                forEach((e)-> {
+//
+//                            int index =dices.values().stream().collect(() -> new ArrayList<>(), (ArrayList<Integer> e1, Integer e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(e));
+//                            if (index<0||index>dices.size()-1) {
+//                                return
+//
+//                            }
+//                        }
+//                );
+//            }
+
+
+
+
             if (input.equals("")) {
                 System.out.println("Hope ! To See you again !Your Score :0");
                 runStatus = false;
             }
             else if ((input.split(" ").length <6&& input.split(" ").length>0)&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength) /* First logic checks whether there are less than 6 entities and more than one entities present i
             in the String or not , second condition checks where each characters are numeric digits  or not ,third condition checks each entity is of length 1 or not
-            */
-            {
+            */ {
+                if (existenceInPreviousDice) {
+                    System.out.println("Wrong Input ! one or more of the values do not exist");
+                } else {
 
 
-                String[] sArr = input.split(" ");
-                for (String s : sArr) {
-                    int index = dices.values().stream().collect(() -> new ArrayList<>(), (e1, e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(s));
-                    System.out.println("Index :" + index);
+                    String[] sArr = input.split(" ");
+                    for (String s : sArr) {
+                        int index = dices.values().stream().collect(() -> new ArrayList<>(), (e1, e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4)).indexOf(Integer.valueOf(s));
+                        System.out.println("Index :" + index);
 //                int newValue = random.nextInt(1,7);
-                    if(index>=0)
-                    {
-                        dices.put(index, -1);
-                    }
+                        if (index >= 0) {
+                            dices.put(index, -1);
+                        }
 //                System.out.println("Rolled Dice.%d New Value.%d".formatted(index,newValue));
 //                dices.forEach((k,v)->System.out.println(k + " " +v));
 
 //                System.out.println("New Dice Values :");
 //                dices.forEach((k,v)->"( Dice.%d Face:%d".formatted(k,v));
 
-                }
-                for (Integer i : dices.keySet()) {
-                    int newValue = random.nextInt(1, 7);
-                    if (dices.get(i) == -1) {
-                        System.out.println("Rolled Dice.%d New Dice Face:%d".formatted(i, newValue));
-                        dices.put(i, newValue);
                     }
-                }
+                    for (Integer i : dices.keySet()) {
+                        int newValue = random.nextInt(1, 7);
+                        if (dices.get(i) == -1) {
+                            System.out.println("Rolled Dice.%d New Dice Face:%d".formatted(i, newValue));
+                            dices.put(i, newValue);
+                        }
+                    }
 
-                System.out.println("New Dice Values:");
-                dices.forEach((k, v) -> System.out.println("( Dice.%d Face:%d)".formatted(k, v)));
+                    System.out.println("New Dice Values:");
+                    dices.forEach((k, v) -> System.out.println("( Dice.%d Face:%d)".formatted(k, v)));
+
+                }
             }
             else if(input.equalsIgnoreCase("s"))
             {
