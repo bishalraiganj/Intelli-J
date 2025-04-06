@@ -51,17 +51,23 @@ public class DiceGame<T extends Player> {
 
             String input = scanner.nextLine();
 
-            boolean complexLogic = input.replace(" ","").chars().filter((e)->e<48||e>57).mapToObj((e)->Integer.valueOf(e)).
+           boolean complexLogic = input.replace(" ","").chars().filter((e)->e<48||e>57).mapToObj((e)->Integer.valueOf(e)).
                     collect(()->new ArrayList<>(),(ArrayList<Integer> e1,Integer e2)->e1.add(e2),(e3,e4)->e3.addAll(e4))
                     .size()<1 ;
-            boolean easyLogic = input.replace(" ","").chars().mapToObj((e)->Character.valueOf((char) e)).allMatch((e)->Character.isDigit(e));
+            boolean easyLogicIsDigit = input.replace(" ","").chars().mapToObj((e)->Character.valueOf((char) e)).allMatch((e)->Character.isDigit(e));
+            boolean easyLogicIsNotDigitNew =  input.replace(" ","").chars().anyMatch((e)->(e<48||e>57)); // more effiecient than the easyLogicIsDigit
+
+            String[] str = input.split(" ");
+            boolean logicStatusEntityLength = Arrays.stream(str).anyMatch((e)->e.toCharArray().length>1);
 
 
             if (input.equals("")) {
                 System.out.println("Hope ! To See you again !Your Score :0");
                 runStatus = false;
             }
-            else if ((input.toCharArray().length < 12)&&complexLogic)
+            else if ((input.split(" ").length <6&& input.split(" ").length>1)&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength) /* First logic checks whether there are less than 6 entities and more than one entities present i
+            in the String or not , second condition checks where each characters are numeric digits  or not ,third condition checks each entity is of length 1 or not
+            */
             {
 
 
