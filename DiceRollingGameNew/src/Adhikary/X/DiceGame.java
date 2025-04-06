@@ -44,7 +44,7 @@ public class DiceGame<T extends Player> {
                     
                                                                                                                  :MENU:
                                                                                                Press ! Enter to End the Game :
-                                                                                               Enter the Dice no's separated by SPACE to roll them AGAIN !
+                                                                                               Enter the Dice Face Value's separated by SPACE to roll them AGAIN !
                                                                                                Enter s to See the Scoring Combinations !
                     """);
 
@@ -55,7 +55,7 @@ public class DiceGame<T extends Player> {
                     collect(()->new ArrayList<>(),(ArrayList<Integer> e1,Integer e2)->e1.add(e2),(e3,e4)->e3.addAll(e4))
                     .size()<1 ;
             boolean easyLogicIsDigit = input.replace(" ","").chars().mapToObj((e)->Character.valueOf((char) e)).allMatch((e)->Character.isDigit(e));
-            boolean easyLogicIsNotDigitNew =  input.replace(" ","").chars().anyMatch((e)->(e<48||e>57)); // more effiecient than the easyLogicIsDigit
+            boolean easyLogicIsNotDigitNew =  input.replace(" ","").chars().anyMatch((e)->(e<49||e>54)); // more effiecient than the easyLogicIsDigit
 
             String[] str = input.split(" ");
             boolean logicStatusEntityLength = Arrays.stream(str).anyMatch((e)->e.toCharArray().length>1);
@@ -65,7 +65,7 @@ public class DiceGame<T extends Player> {
                 System.out.println("Hope ! To See you again !Your Score :0");
                 runStatus = false;
             }
-            else if ((input.split(" ").length <6&& input.split(" ").length>1)&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength) /* First logic checks whether there are less than 6 entities and more than one entities present i
+            else if ((input.split(" ").length <6&& input.split(" ").length>0)&&!easyLogicIsNotDigitNew&&!logicStatusEntityLength) /* First logic checks whether there are less than 6 entities and more than one entities present i
             in the String or not , second condition checks where each characters are numeric digits  or not ,third condition checks each entity is of length 1 or not
             */
             {
@@ -102,11 +102,46 @@ public class DiceGame<T extends Player> {
             }
             else
             {
-                System.out.println("Wrong input only enter from the dice value's separated by SPACE or any valid option from the menu");
+                System.out.println("Wrong input ! ONLY enter from the dice value's separated by SPACE or any valid option from the menu");
             }
 
 
         }
+    }
+
+    public static List<Integer> gameLogic(List<Integer> dices,String input) {
+        Random random = new Random();
+//        List<Integer> dices = random.ints(5, 1, 7)
+//
+//                .mapToObj((e) -> Integer.valueOf(e))
+//                .peek((e)->System.out.println(e))
+//                .collect(() -> new ArrayList<>(), (e1, e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4));
+
+
+        Arrays.stream(input.split(" ")).map(Integer::valueOf).forEach((e)->
+        {
+            System.out.println("input entity:"+e+", dice.contains:"+dices.contains(e)+"indexOf:"+dices.indexOf(e));
+            if(dices.contains(e))
+            {
+                dices.set(dices.indexOf(e),-1);
+                System.out.println("did execute for :"+e);
+            }
+        });
+        System.out.println(dices);
+
+        List<Integer> newDices =  new ArrayList<>(dices);
+
+        dices.stream().forEach((e)->{
+
+            if(e==-1)
+            {
+                newDices.set(newDices.indexOf(e),random.nextInt(1,7));
+            }
+        });
+//        newDices.stream().forEach((e)->dices.set(e,random.nextInt(1,7)));
+
+        return newDices;
+
     }
 
 
