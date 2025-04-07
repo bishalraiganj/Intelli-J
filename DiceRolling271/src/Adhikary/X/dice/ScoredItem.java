@@ -39,15 +39,16 @@ public enum ScoredItem {
     }
 
     private Map<Integer, Integer> mapDice(List<Integer> dice) {
-
+       // Maps dice face values by the face values being Entry key and their number of occurences being Entry value
         Map<Integer, Integer> map = new HashMap<>();
         for (int d : dice) {
-            map.merge(d, 1, Math::addExact );
+            map.merge(d, 1, Math::addExact ); // Since, HashMap is empty each face value from the dice list is added with 1 value the first time then adding 1 to each value with every next
+            //occurences of the same face value
         }
         return map;
     }
     private int getMax(List<Integer> dice) {
-
+        // This returns the maximum number of occurences of a particular face value in the list
         Map<Integer, Integer> map = new HashMap<>();
         int max = 0;
         for (int d : dice) {
