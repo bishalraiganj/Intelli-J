@@ -1,6 +1,8 @@
 package Adhikary.X;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
@@ -102,8 +104,30 @@ public class Main {
         System.out.println(sevenPM.range(ChronoField.MINUTE_OF_DAY));
         System.out.println(sevenPM.range(ChronoField.SECOND_OF_DAY));
 
+        System.out.println("-".repeat(50));
         LocalDateTime todayAndNow = LocalDateTime.now();
         System.out.println(todayAndNow);
+
+        LocalDateTime May5Noon = LocalDateTime.of(2022,5,5,12,0);
+
+        System.out.printf("%tD %tr %n",May5Noon,May5Noon);
+        System.out.printf("%1tF %1$tT %n",May5Noon);
+
+        System.out.println(todayAndNow.format(DateTimeFormatter.ISO_WEEK_DATE));
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+        System.out.println(May5Noon.format(dtf));
+
+        System.out.println(May5Noon.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+
+        LocalDateTime May6Noon = May5Noon.plusHours(24);
+        System.out.println(May6Noon.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+
+        System.out.println("-".repeat(50));
+
+        
+
+
 
 
 
