@@ -1,5 +1,8 @@
 package Adhikary.X;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String... args)
     {
@@ -11,6 +14,72 @@ public class Main {
 
         String helloWorld3 = Main.format("%s %s","Hello","World");
         System.out.println("Using Main.format: " + helloWorld3);
+
+        String testString  = "Anyone can Learn abc's, 123's, and any regular expression";
+        String replacement = "(-)";
+
+        String[] patterns = {
+                "[a-zA-Z]*$",
+                "^[a-zA-Z]{3}",
+                "[aA]ny\\b"
+        };
+        for(String pattern : patterns)
+        {
+            String output = testString.replaceFirst(pattern, replacement);
+            System.out.println("Pattern: " + pattern  + " => " + output);
+        }
+
+        String paragraph = """
+                Double, double toil and trouble;
+                Fire burn and caldron bubble.
+                Fillet of a fenny snake,
+                In the caldron boil and bake
+                Eye of newt and toe of frog,
+                Wool of bat and tongue of dog,
+                Adder's fork and blind-worm's sting,
+                Lizard's leg and howlet's wing,
+                For a charm of powerful trouble,
+                Like a hell-broth boil and bubble.
+                """;
+
+        String[] lines  = paragraph.split("\\R");
+        System.out.println("This paragraph has " + lines.length + " lines");
+        String[] words = paragraph.split("\\s");
+        System.out.println("This paragraph has " + words.length + " words");
+
+        System.out.println(paragraph.replaceAll("ble\\b","[GRUB]"));
+        System.out.println(paragraph.replaceAll("[a-zA-Z]+ble","[GRUB]"));
+        System.out.println(paragraph.replaceAll(".+ble","[GRUB]"));
+
+        System.out.println("-".repeat(50));
+
+        Scanner scanner = new Scanner(paragraph);
+        System.out.println(scanner.delimiter());
+        System.out.println("-".repeat(50));
+        scanner.useDelimiter("\\R");
+
+//        while(scanner.hasNext())
+//        {
+//            String element = scanner.next();
+//            System.out.println(element);
+//        }
+
+//        scanner.tokens()
+//                .map((s)->s.replaceAll("\\p{Punct}",""))
+////                .map((e)->Arrays.stream(e.split("\\s+")).count())
+//
+//                .flatMap((e)->Arrays.stream(e.split("\\s+")))
+//                .filter((e)->e.matches("[a-zA-Z]+ble"))
+//                .forEach((e)->System.out.println(e));
+
+        System.out.println("-".repeat(50));
+        System.out.println(scanner.findInLine("[a-zA-Z]+ble"));
+        System.out.println(scanner.findInLine("[a-zA-Z]+ble"));
+
+
+        scanner.close();
+
+
 
 
     }
