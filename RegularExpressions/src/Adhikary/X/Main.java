@@ -77,9 +77,39 @@ public class Main {
         System.out.println(scanner.findInLine("[a-zA-Z]+ble"));
 
 
-        scanner.close();
+
+        System.out.println("-".repeat(50));
+
+        String testString2 = "Hello, World test String2  ";
+
+        String partStart = "^Hello, World.*";
+        String partMiddle  = ".*Hello, World.*";
+        System.out.println(testString2.matches(partStart));
+
+        System.out.println("-".repeat(50));
 
 
+
+
+        String exact = "Hello, World";
+//        String regex2 = " *- *";
+//        Scanner scanner2 = new Scanner(System.in);
+//
+//        scanner2.useDelimiter(regex2);
+//
+//        int val = scanner2.nextInt(); // input value from keyboard as is :  1345-5654-3443444-44-
+//        scanner2.nextInt();
+//        scanner2.nextInt();
+//        int val4 = scanner2.nextInt();
+//        System.out.println(val);
+//        System.out.println(val4);
+        System.out.println("-".repeat(50));
+
+        String regexTest1 = "Hello, World";
+        String testString3 = "Hello, World";
+        Scanner scanner3 = new Scanner(testString3);
+
+        System.out.println(testString3.matches(regexTest1));
 
 
     }
