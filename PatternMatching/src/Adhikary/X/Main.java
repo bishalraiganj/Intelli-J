@@ -41,13 +41,52 @@ public class Main {
                 <h3>Summary</h3>
                 """;
 
-        Pattern htmlPattern = Pattern.compile("<[hH]\\d>.*</[hH]\\d>");
+        Pattern htmlPattern = Pattern.compile("<[hH](?<level>\\d)>(.*)</[hH]\\d>");
         Matcher htmlMatcher = htmlPattern.matcher(htmlSnippet);
 
         while(htmlMatcher.find())
         {
-            System.out.println("group: " + htmlMatcher.group());
+//            System.out.println("group: " + htmlMatcher.group());
+//            System.out.println("group: " + htmlMatcher.group(0));
+            System.out.println( htmlMatcher.group("level") +" " +  htmlMatcher.group(2));
+            System.out.println("index = " + htmlMatcher.start("level")); // referring to the captured group for the current match of the input string of this matcherInstance
         }
+
+        System.out.println("-".repeat(50));
+        htmlMatcher.reset();
+        htmlMatcher.results().forEach((e)->System.out.println(e.group(1) + " " + e.group(2)));
+        System.out.println("-".repeat(50));
+
+        String tabbedText = """
+                group1	group2	group3
+                1	2	3
+                a	b	d
+                """;
+        tabbedText.lines()
+//                .forEach(System.out::println);
+                .flatMap((e)->Pattern.compile("\\t").splitAsStream(e))
+                .forEach((e)->System.out.println(e));
+
+        htmlMatcher.reset();
+        String updatedSnippet = htmlMatcher.replaceFirst((mr)->"<em>"+mr.group(2)+"</em>");
+        System.out.println("-".repeat(50));
+        System.out.println(updatedSnippet);
+        System.out.println(htmlMatcher.start()+ " " + htmlMatcher.end());
+        System.out.println(htmlMatcher.group(2));
+
+        System.out.println("-".repeat(50));
+
+//        System.out.print("here".repeat(50));
+        htmlMatcher.usePattern(Pattern.compile("<([hH]\\d)>(.*)</\\1>"));
+        htmlMatcher.reset();
+        System.out.println("Using back reference replaced All <h> with <em>: \n" + htmlMatcher.replaceAll((mr)->"<em>$2</em>") );
+
+
+        System.out.println("-".repeat(50));
+        htmlMatcher.reset();
+        System.out.println("-".repeat(50));
+        System.out.println("Using Back Reference: \n" + htmlMatcher.replaceFirst((mr)->"<em>$2</em>"));
+
 
 
 
