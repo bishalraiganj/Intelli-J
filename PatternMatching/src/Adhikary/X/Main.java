@@ -87,6 +87,23 @@ public class Main {
         System.out.println("-".repeat(50));
         System.out.println("Using Back Reference: \n" + htmlMatcher.replaceFirst((mr)->"<em>$2</em>"));
 
+        System.out.println("-".repeat(50));
+        htmlMatcher.reset();
+        StringBuffer sb = new StringBuffer();
+        int index = 1;
+        while(htmlMatcher.find())
+        {
+            htmlMatcher.appendReplacement(sb,switch (htmlMatcher.group(1).toLowerCase())
+            {
+                case "h1" -> "<head>$2</head>";
+                case "h2"-> "<em>$2</em>";
+                default-> "<$1>"+ index++ + ". $2</$1>";
+            });
+        }
+        htmlMatcher.appendTail(sb);
+        System.out.println(sb);
+
+
 
 
 
