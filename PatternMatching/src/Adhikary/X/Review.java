@@ -118,13 +118,22 @@ public class Review {
 
 
         m.reset();
-        m.usePattern(Pattern.compile("<([a-zA-Z_0-9]+)[^>]*>([^\r\n</>]*)(/\\1>)*")); // here , I have replaced \\w with the character class [a-zA-Z_0-9] and \\v in second group with \r and \n
+        m.usePattern(Pattern.compile("<([a-z_0-9]+)[^>]*>([^\r\n</>]*)(</\\1>)*",Pattern.CASE_INSENSITIVE)); // here , I have replaced \\w with the character class [a-zA-Z_0-9] and \\v in second group with \r and \n
         m.results()
                 .forEach((mr)->System.out.println("Full tag:" + mr.group(0)
                         + "\n\tType: " + mr.group(1)
                         + "\n\tText: " + mr.group(2)
                 ));
 
+        System.out.println("-".repeat(50) + "\n now");
+        m.reset();
+        m.usePattern(Pattern.compile("<([\\w]+)[^>]*>([^\\v</>]*)(</\\1>)",Pattern.CASE_INSENSITIVE));
+        m.results()
+                .filter((mr)->mr.group(1).toLowerCase().startsWith("h"))
+                .forEach((mr)->System.out.println("Full tag: " + mr.group(0)
+                        + "\n\tType: " + mr.group(1)
+                        + "\n\tText: " + mr.group(2)
+                ));
 
 
 
