@@ -21,27 +21,32 @@ public class Main {
 				""";
 
 
-		String testString  = """
-				match1-sdsf.sff
-				.noMatch/
-				.no3match.
-				match-match.m-m
-				no..Match
-				matchmatch
-				""";
+//		String testString  = """
+//				match1-sdsf.sff
+//				.noMatch/
+//				.no3match.
+//				match-match.m-m
+//				no..Match
+//				matchmatch
+//				""";
 
-		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)"); //first caturing group is the username/localpart 2nd group is the domain part
-		Matcher m = emailPattern.matcher(emails);
+		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)");
+		Pattern emailPatternForMultilineInput = Pattern.compile("([0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+)");
+		Matcher m = emailPatternForMultilineInput.matcher(emails);
 
-		System.out.println(Pattern.matches("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)","john.boy@valid.com"));
+//		System.out.println(Pattern.matches("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)","john.boy@valid.com"));
 
 
 //		System.out.println(m.find());
 		m.results()
-				.forEach((mr)->System.out.println(mr.group()));
+				.forEach((mr)->System.out.println(mr.group(0)));
 
 
+
+
+		System.out.println("-".repeat(50));
 		emails.lines()
+//				.peek((e)->System.out.println(e+ "\n"+ "-".repeat(50)))
 				.map((e)->{
 					if(Pattern.matches(emailPattern.pattern(),e))
 						return e;
@@ -50,6 +55,17 @@ public class Main {
 				})
 				.forEach((e)->System.out.println(e));
 
+
+
+		System.out.println("-".repeat(50));
+
+		m.reset();
+		while(m.find())
+		{
+			System.out.println("Valid Match: " + m.group(0)
+		                      +"\n"+"Username: " + m.group(1)
+					          +"\n"+"Domain: " + m.group(2));
+		}
 
 	}
 
