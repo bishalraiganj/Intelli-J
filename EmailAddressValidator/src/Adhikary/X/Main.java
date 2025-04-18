@@ -30,8 +30,13 @@ public class Main {
 				matchmatch
 				""";
 
-		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(.[a-zA-Z0-9]+)+$)");
+		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(.[a-zA-Z0-9]+)+$)"); //first caturing group is the username/localpart 2nd group is the domain part
+		System.out.println(Pattern.matches("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)","jo-hn.boy@val4-didc.o.m"));
+
 		Matcher m = emailPattern.matcher(emails);
+
+		m.results()
+				.forEach((mr)->System.out.println(mr.group()));
 
 
 
