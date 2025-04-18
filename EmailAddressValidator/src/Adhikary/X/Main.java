@@ -64,7 +64,7 @@ public class Main {
 		{
 			System.out.println("Valid Match: " + m.group(0)
 		                      +"\n"+"Username: " + m.group(1)
-					          +"\n"+"Domain: " + m.group(2));
+					          +"\n"+"Domain: " + m.group(4));
 		}
 
 	}
