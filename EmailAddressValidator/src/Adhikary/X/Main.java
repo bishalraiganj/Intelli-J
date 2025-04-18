@@ -30,15 +30,25 @@ public class Main {
 				matchmatch
 				""";
 
-		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(.[a-zA-Z0-9]+)+$)"); //first caturing group is the username/localpart 2nd group is the domain part
-		System.out.println(Pattern.matches("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)","jo-hn.boy@val4-didc.o.m"));
-
+		Pattern emailPattern = Pattern.compile("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)"); //first caturing group is the username/localpart 2nd group is the domain part
 		Matcher m = emailPattern.matcher(emails);
 
+		System.out.println(Pattern.matches("(^[0-9a-zA-Z]+([._-]([0-9a-zA-Z])+)*)@([0-9a-zA-Z]+([-._][0-9a-zA-Z]+)*(\\.[a-zA-Z0-9]+)+$)","john.boy@valid.com"));
+
+
+//		System.out.println(m.find());
 		m.results()
 				.forEach((mr)->System.out.println(mr.group()));
 
 
+		emails.lines()
+				.map((e)->{
+					if(Pattern.matches(emailPattern.pattern(),e))
+						return e;
+					return"";
+
+				})
+				.forEach((e)->System.out.println(e));
 
 
 	}
