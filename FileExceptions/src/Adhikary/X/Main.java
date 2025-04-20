@@ -80,6 +80,10 @@ public class Main {
 		{
 			throw new RuntimeException(e);
 		}
+		catch(Exception e)
+		{
+			System.out.println("Something unrealted and unexpected happened");
+		}
 		finally {
 			System.out.println("Maybe I'd log something either way...");
 		}
