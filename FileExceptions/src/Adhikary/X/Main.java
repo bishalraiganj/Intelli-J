@@ -24,8 +24,8 @@ public class Main {
 //		}
 //
 
-		testFile(filename);
-		testFile2(filename);
+//		testFile(filename);
+		testFile2(null);
 		File file = new File(filename);
 		if(!file.exists())
 		{
@@ -68,13 +68,13 @@ public class Main {
 
 
 
-	private static void testFile2(String filename)
-	{
-		try(FileReader reader = new FileReader(filename))
-		{
-		}catch (FileNotFoundException e)
-		{
+	private static void testFile2(String filename) {
+		try (FileReader reader = new FileReader(filename)) {
+		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
+		} catch(NullPointerException|IllegalArgumentException badData)
+		{
+			System.out.println("User has added bad data" + badData.getMessage());
 		}
 		catch(IOException e)
 		{
