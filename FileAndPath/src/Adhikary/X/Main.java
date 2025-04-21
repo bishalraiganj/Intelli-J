@@ -2,6 +2,8 @@ package Adhikary.X;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Main {
 
@@ -10,6 +12,11 @@ public class Main {
 
 		useFile("testfile.txt");
 
+		System.out.println("-".repeat(50));
+
+		usePath("pathFile.txt");
+
+		System.out.println("-".repeat(50));
 	}
 
 	private static void useFile(String fileName)
@@ -43,6 +50,49 @@ public class Main {
 				System.out.println("Would write to file here");
 			}
 		}
+	}
+
+	private static void usePath(String fileName)
+	{
+		Path path = Path.of(fileName);
+		boolean fileExists = Files.exists(path);
+
+		System.out.printf("File '%s' %s%n", fileName,fileExists ? "exists" : "does not exist" );
+		if(fileExists)
+		{
+			System.out.println("deleting file: " + fileName);
+			try {
+				Files.delete(path);
+				fileExists = false;
+			}
+			catch(IOException e)
+			{
+				System.out.println("Trace:");
+				e.printStackTrace();
+				System.out.println("-".repeat(50));
+			}
+		}
+
+		if(!fileExists)
+		{
+			try
+			{
+				Files.createFile(path);
+			}
+			catch (IOException e)
+			{
+				System.out.println("Something went wrong");
+
+			}
+			System.out.println("Created file: " + fileName);
+			if(Files.isWritable(path))
+			{
+				System.out.println("Would write to file here");
+			}
+
+		}
+
+
 
 
 
