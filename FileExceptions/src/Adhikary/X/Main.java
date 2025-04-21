@@ -12,8 +12,11 @@ import java.util.List;
 public class Main {
 
 	public static void main(String... args)  {
-		String filename = "testing.csv";
-		Path path = Paths.get(filename);
+
+		System.out.println("Current Working Directory (cwd) = " + new File("").getAbsolutePath());
+
+		String filename = "/files/testing.csv";
+//		Path path = Paths.get(filename);
 
 
 //		try {
@@ -25,15 +28,26 @@ public class Main {
 //
 
 //		testFile(filename);
-		testFile2(null);
+//		testFile2(null);
+
+
+
+
+
 		File file = new File(filename);
+		System.out.println(file.getAbsolutePath());
 		if(!file.exists())
 		{
 			System.out.println("I can't run unless this file exists");
-			System.out.println("Quitting Application, go figure it out");
+//			System.out.println("Quitting Application, go figure it out");
 			return;
 		}
 		System.out.println("I'm good to go.");
+
+		for(File f : File.listRoots())
+		{
+			System.out.println(f);
+		}
 
 
 	}
