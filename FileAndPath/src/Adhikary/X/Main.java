@@ -75,19 +75,29 @@ public class Main {
 
 		if(!fileExists)
 		{
-			try
-			{
+			try {
 				Files.createFile(path);
+				System.out.println("Created file: " + fileName);
+				if (Files.isWritable(path)) {
+//					System.out.println("Would write to file here");
+					Files.writeString(path, """
+							Here is some data,
+							For my life,
+							just to prove,
+							Using the Files class and path are better!
+							""");
+				}
+
+				System.out.println("And I can read too");
+				System.out.println("-".repeat(50));
+				Files.readAllLines(path)
+						.forEach((e)->System.out.println(e));
+
 			}
 			catch (IOException e)
 			{
 				System.out.println("Something went wrong");
 
-			}
-			System.out.println("Created file: " + fileName);
-			if(Files.isWritable(path))
-			{
-				System.out.println("Would write to file here");
 			}
 
 		}
