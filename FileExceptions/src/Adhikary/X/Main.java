@@ -17,9 +17,9 @@ public class Main {
 
 		String filename = "files/testing.csv";
 
-		File f1 = new File(".");
-		System.out.println("-".repeat(50));
-		System.out.println(f1.getAbsolutePath());
+//		File f1 = new File(".");
+//		System.out.println("-".repeat(50));
+//		System.out.println(f1.getAbsolutePath());
 //		Path path = Paths.get(filename);
 
 
@@ -38,7 +38,7 @@ public class Main {
 
 
 //		File file = new File(".",filename);
-		File file = new File(new File("").getAbsolutePath(),filename);
+		File file = new File(new File("/home/bishal").getAbsolutePath(),filename);
 		System.out.println(file.getAbsolutePath());
 		if(!file.exists())
 		{
