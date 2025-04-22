@@ -1,6 +1,7 @@
 package Adhikary.X;
 
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
@@ -45,11 +46,11 @@ public class Main {
 
 		System.out.println("-".repeat(50));
 
-		try (Stream<Path> paths = Files.find(path,2,
-				(p,attr)-> Files.isRegularFile(p)))
+		try (Stream<Path> paths = Files.find(path,Integer.MAX_VALUE,
+				(p,attr)-> attr.isRegularFile() && attr.size()>300))
 		{
 			paths
-					.filter((subPath)->Files.isRegularFile(subPath))
+//					.filter((subPath)->Files.isRegularFile(subPath))
 					.map((subPath)->listDir(subPath))
 					.forEach(System.out::println);
 
@@ -57,6 +58,17 @@ public class Main {
 		{
 			throw new RuntimeException(e);
 		}
+
+		System.out.println("=".repeat(50) + "DirectoryStream" + "=".repeat(50));
+
+		try(DirectoryStream<Path> dirs = Files.newDirectoryStream(path))
+		{
+			dirs.forEach((subPath)->System.out.println(Main.listDir(subPath)));
+		} catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
 
 
 	}
