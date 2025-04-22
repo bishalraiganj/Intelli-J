@@ -3,6 +3,9 @@ package Adhikary.X;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.stream.Stream;
 
 public class Main {
@@ -16,18 +19,30 @@ public class Main {
 		try(Stream<Path> paths = Files.list(path))
 		{
 
-			paths.forEach((stringSubPath)->System.out.println(stringSubPath));
+			paths
+			        .map((SubPath)->listDir(SubPath))
+					.forEach((SubPath)->System.out.println(SubPath));
 
 		} catch(IOException e)
 		{
 			throw new RuntimeException(e);
 		}
-
-
-
-
-
-
 	}
+
+	private static String listDir(Path path)
+	{
+		try{
+			boolean isDir = Files.isDirectory(path);
+			FileTime dateField = Files.getLastModifiedTime(path);
+			LocalDateTime modDT = LocalDateTime.ofInstant(dateField.toInstant(), ZoneId.systemDefault());
+			return "%tD %tT %-5s %12s %s".formatted(modDT,modDT, (isDir ? "<DIR>" : " "),(isDir ? " " :Files.size(path)),path);
+		}catch(IOException e)
+		{
+			System.out.println("Whoops! Something went wrong with " + path);
+			return path.toString();
+		}
+	}
+
+
 
 }
