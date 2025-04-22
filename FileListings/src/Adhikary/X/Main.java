@@ -59,9 +59,11 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
+		path = path.resolve(".idea");
+
 		System.out.println("=".repeat(50) + "DirectoryStream" + "=".repeat(50));
 
-		try(DirectoryStream<Path> dirs = Files.newDirectoryStream(path))
+		try(DirectoryStream<Path> dirs = Files.newDirectoryStream(path,"*.xml"))
 		{
 			dirs.forEach((subPath)->System.out.println(Main.listDir(subPath)));
 		} catch(IOException e)
