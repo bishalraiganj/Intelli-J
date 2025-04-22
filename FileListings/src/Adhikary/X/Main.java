@@ -27,6 +27,22 @@ public class Main {
 		{
 			throw new RuntimeException(e);
 		}
+
+		System.out.println("-".repeat(50));
+
+		try (Stream<Path> paths = Files.walk(path,2))
+		{
+			paths
+					.filter((subPath)->Files.isRegularFile(subPath))
+					.map((subPath)->listDir(subPath))
+					.forEach(System.out::println);
+
+		} catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+
 	}
 
 	private static String listDir(Path path)
