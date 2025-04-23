@@ -37,7 +37,19 @@ public class Main {
 		System.out.println("-".repeat(50));
 
 
+		Scanner sc = new Scanner(System.in);
 
+		String line = sc.nextLine();
+
+		Path p2 = Path.of(line);
+
+		try {
+			Files.walkFileTree(p2,new Main.StatsVisitor());
+		}
+		catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 
 
 
