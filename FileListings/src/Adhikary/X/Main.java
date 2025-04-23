@@ -71,6 +71,18 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
+		System.out.println("=".repeat(50) + "DirectoryStream" + "=".repeat(50));
+
+		try(DirectoryStream<Path> dirs = Files.newDirectoryStream(path,
+				(subPath)->subPath.getFileName().toString().endsWith(".xml")
+		&& Files.isRegularFile(subPath) && Files.size(subPath)>1000))
+		{
+			dirs.forEach((subPath)->System.out.println(Main.listDir(subPath)));
+		} catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
 
 
 	}
