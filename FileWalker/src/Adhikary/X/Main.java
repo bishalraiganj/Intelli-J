@@ -3,6 +3,8 @@ package Adhikary.X;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -46,13 +48,21 @@ public class Main {
 	public static  class StatsVisitor extends SimpleFileVisitor<Path>
 	{
 
-		private int level;
+		private Path initialPath = null;
+
+		private final Map<Path,Long> folderSizes = new LinkedHashMap<>();
+
+		private int initialCount;
+
+
+//		private int level;
 		@Override
-		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
-		{
-				Objects.requireNonNull(file);
-				Objects.requireNonNull(attrs);
-				System.out.println("\t".repeat(level + 1) + file.getFileName());
+		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+			Objects.requireNonNull(file);
+			Objects.requireNonNull(attrs);
+//				System.out.println("\t".repeat(level + 1) + file.getFileName());
+
+			folderSizes.merge(file.getParent(),0L,(o,n)->o += attrs.size());
 				return FileVisitResult.CONTINUE;
 		}
 
@@ -62,8 +72,25 @@ public class Main {
 		{
 			Objects.requireNonNull(dir);
 			Objects.requireNonNull(attrs);
-			level++;
-			System.out.println("\t".repeat(level) + dir.getFileName());
+//			level++;
+//			System.out.println("\t".repeat(level) + dir.getFileName());
+
+			if(initialPath ==  null)
+			{
+				initialPath = dir;
+				initialCount = dir.getNameCount();
+			}
+			else {
+				int relativeLevel = dir.getNameCount() - initialCount;
+				if (relativeLevel == 1)
+				{
+					folderSizes.clear();
+				}
+				folderSizes.put(dir,0L);
+			}
+
+
+
 			return FileVisitResult.CONTINUE;
 		}
 
@@ -75,7 +102,27 @@ public class Main {
 //			{
 //				throw exc;
 //			}
-			level--;
+//			level--;
+			if(dir.equals(initialPath))
+			{
+				return FileVisitResult.TERMINATE;
+			}
+			int relativeLevel =  dir.getNameCount()-initialCount;
+			if(relativeLevel==1)
+			{
+				folderSizes.forEach((key,value)->{
+
+					int level = key.getNameCount() - initialCount-1;
+					System.out.printf("%s[%s] - %,d bytes %n","\t".repeat(level),key.getFileName(),value);
+
+
+				});
+			}
+			else
+			{
+
+			}
+
 			return FileVisitResult.CONTINUE;
 
 		}
