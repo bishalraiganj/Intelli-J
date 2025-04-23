@@ -51,6 +51,7 @@ public class Main {
 		private Path initialPath = null;
 
 		private final Map<Path,Long> folderSizes = new LinkedHashMap<>();
+		private final Map<Path,Long> subFolderSizes =  new LinkedHashMap<>();
 
 		private int initialCount;
 
@@ -113,13 +114,16 @@ public class Main {
 				folderSizes.forEach((key,value)->{
 
 					int level = key.getNameCount() - initialCount-1;
-					System.out.printf("%s[%s] - %,d bytes %n","\t".repeat(level),key.getFileName(),value);
+					System.out.printf("%s[%s] - ,%d bytes( Files in it)  %n","\t".repeat(level),key.getFileName(),value);
 
 
 				});
 			}
 			else
 			{
+				long folderSize = folderSizes.get(dir);
+				folderSizes.merge(dir.getParent(),0L,(o,n)->o += folderSize);
+//				subFolderSizes.merge(dir.getParent(),0L,(o,n)->o += folderSize);
 
 			}
 
