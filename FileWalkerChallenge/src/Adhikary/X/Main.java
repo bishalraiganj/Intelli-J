@@ -129,7 +129,7 @@ public class Main {
 				folderStats.merge(dir.getParent(), list, (o, n) -> { //
 
 					o.set(1,folderStats.get(dir.getParent()).get(1) +   folderStats.get(dir).get(1)+folderStats.get(dir).get(0));
-					o.set(3, folderStats.get(dir).get(3) + 1);
+					o.set(3,folderStats.get(dir.getParent()).get(3)  + 1);
 					return o;
 
 				});
