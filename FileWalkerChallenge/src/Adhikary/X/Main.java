@@ -40,11 +40,11 @@ public class Main {
 
 		private Path initialPath = null;
 		private final Map<Path, List<Long>> folderStats =  new LinkedHashMap<>();
-		int levelCount ;
+		private int initialNameCount;
 
 
 		@Override
-		public   FileVisitResult  visitFile(Path file, BasicFileAttributes attrs)
+		public   FileVisitResult  visitFile(Path file, BasicFileAttributes attrs) throws IOException
 		{
 		 	Objects.requireNonNull(file);
 			Objects.requireNonNull(attrs);
@@ -74,7 +74,7 @@ public class Main {
 
 
 		@Override
-		public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs)
+		public FileVisitResult preVisitDirectory(Path dir , BasicFileAttributes attrs) throws IOException
 		{
 			Objects.requireNonNull(dir);
 			Objects.requireNonNull(attrs);
@@ -83,31 +83,37 @@ public class Main {
 			if(initialPath == null)
 			{
 				initialPath = dir;
+				initialNameCount = dir.getNameCount();
 			}
-			int relativeLevel =  dir.getNameCount()-initialPath.getNameCount();
+			else {
 
-			if(levelCount ==1)
-			{
-				folderStats.clear();
+
+
+				int relativeLevel = dir.getNameCount() - initialPath.getNameCount();
+
+				if (relativeLevel == 1) {
+					folderStats.clear();
+				}
+
+				List<Long> directoryStats = new ArrayList<>();
+				directoryStats.add(0, 0L);
+				directoryStats.add(1, 0L);
+				directoryStats.add(2, 0L);
+				directoryStats.add(3, 0L);
+
+				folderStats.put(dir, directoryStats);
+
+
 			}
 
-			List<Long> directoryStats = new ArrayList<>();
-			directoryStats.add(0,0L);
-			directoryStats.add(1,0L);
-			directoryStats.add(2,0L);
-			directoryStats.add(3,0L);
-
-			folderStats.put(dir,directoryStats);
 			return FileVisitResult.CONTINUE;
-
 		}
 
 
 		@Override
-		public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+		public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException
 		{
 			Objects.requireNonNull(dir);
-			Objects.requireNonNull(exc);
 
 			int relativeLevel = dir.getNameCount()-initialPath.getNameCount();
 			List<Long> list = new ArrayList<>();
@@ -115,19 +121,26 @@ public class Main {
 			list.add(1,0L);
 			list.add(2,0L);
 			list.add(3,0L);
-			folderStats.merge(dir.getParent(),list,(o,n)->{
+			if(dir.equals(initialPath))
+			{
+				return FileVisitResult.TERMINATE;
+			}
+			if(relativeLevel>1) {
+				folderStats.merge(dir.getParent(), list, (o, n) -> { //
 
-				o.set(1,o.get(1)+folderStats.get(dir).get(1));
-				o.set(3,folderStats.get(dir).get(3)+1);
-				return o;
+					o.set(1,folderStats.get(dir.getParent()).get(1) +   folderStats.get(dir).get(1)+folderStats.get(dir).get(0));
+					o.set(3, folderStats.get(dir).get(3) + 1);
+					return o;
 
-			});
-			if(relativeLevel ==1 ||  relativeLevel ==0)
+				});
+			}
+			if(relativeLevel ==1)
 			{
 
-				folderStats.forEach((path,statsList)->System.out.println("\t".repeat(relativeLevel) + "%s (files in it ) %d  (sub-folders size) %d  files - %d folders - %d ".formatted(path,statsList.get(0),statsList.get(1)
+				folderStats.forEach((path,statsList)->System.out.println("\t".repeat(path.getNameCount()-initialNameCount-1) + "%s (files in it ) %d bytes (sub-folders size) %d  files - %d folders - %d ".formatted(path.getFileName(),statsList.get(0),statsList.get(1)
 						,statsList.get(2),statsList.get(3))));
 
+				System.out.println("-".repeat(50));
 			}
 
 			return FileVisitResult.CONTINUE;
