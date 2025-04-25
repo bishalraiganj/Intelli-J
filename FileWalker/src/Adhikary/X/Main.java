@@ -197,8 +197,11 @@ public class Main {
 					int level = key.getNameCount() - initialCount-1;
 					System.out.printf("%s[%s] - ,%d bytes( Files in it)  -  %d bytes (total in SubFolders) %n","\t".repeat(level),key.getFileName(),value.getFirst(),value.get(1));
 
+					System.out.println("-".repeat(50));
+
 
 				});
+					System.out.println("\n");
 			}
 			else
 			{
