@@ -3,6 +3,7 @@ package Adhikary.X;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,9 +31,13 @@ public class ChallengeStreams {
 									throw new RuntimeException(exc);
 								}
 		})))
-					.forEach((key,value)->
+
+					.entrySet()
+					.stream()
+					.sorted(Comparator.comparing((e)->e.getKey().toString()))
+					.forEach((e)->
 					{
-						System.out.printf("[%s] %,d bytes, %d files %n",key,value.getSum(),value.getCount());
+						System.out.printf("[%s] %,d bytes, %d files %n",e.getKey(),e.getValue().getSum(),e.getValue().getCount());
 					});
 
 
