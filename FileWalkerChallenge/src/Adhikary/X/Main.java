@@ -13,7 +13,9 @@ public class Main {
 	public static void main(String... args)
 	{
 
-		System.out.println("Enter the File Path : \n");
+		System.out.printf("""
+		                                                        \n\nEnter the File Path : \n
+		""");
 
 		Scanner sc =  new Scanner(System.in);
 		String filePathString = sc.nextLine();
@@ -137,7 +139,7 @@ public class Main {
 			if(relativeLevel ==1)
 			{
 
-				folderStats.forEach((path,statsList)->System.out.println("\t".repeat(path.getNameCount()-initialNameCount-1) + "%s (files in it ) %d bytes (sub-folders size) %d  files - %d folders - %d ".formatted(path.getFileName(),statsList.get(0),statsList.get(1)
+				folderStats.forEach((path,statsList)->System.out.println("\t".repeat(path.getNameCount()-initialNameCount-1) + "%s (files in it ) = %d bytes || (sub-folders size) =  %d bytes || files  =  %d  || folders = %d ".formatted(path.getFileName(),statsList.get(0),statsList.get(1)
 						,statsList.get(2),statsList.get(3))));
 
 				System.out.println("-".repeat(50));
