@@ -39,7 +39,23 @@ public class Main {
 			e.printStackTrace();
 		}
 
+		System.out.println("-".repeat(50));
 
+
+		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt")))
+		{
+
+			bufferedReader.lines()
+					.forEach(System.out::println);
+
+
+
+		} catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		System.out.println("-".repeat(50));
 
 
 	}
