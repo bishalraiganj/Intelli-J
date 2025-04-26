@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
 
         Path startingPath = Path.of("..");
         FileVisitor<Path> statsVisitor = new StatsVisitor(1);
