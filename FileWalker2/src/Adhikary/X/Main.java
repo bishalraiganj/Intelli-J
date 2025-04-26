@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String... args) {
 
-        Path startingPath = Path.of(".");
-        FileVisitor<Path> statsVisitor = new StatsVisitor(Integer.MAX_VALUE);
+        Path startingPath = Path.of("c:/");
+        FileVisitor<Path> statsVisitor = new StatsVisitor(1);
         try {
             Files.walkFileTree(startingPath, statsVisitor);
         } catch (IOException e) {
