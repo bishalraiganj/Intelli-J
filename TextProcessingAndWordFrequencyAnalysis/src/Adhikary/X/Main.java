@@ -32,7 +32,7 @@ public class Main {
 
 		System.out.println("-".repeat(50)+ "Here invoked/called the analyzingSimply()" + "-".repeat(50));
 
-		analyzingSimply(path2);
+		analyzingSimply(path3);
 
 		System.out.println("-".repeat(50));
 
