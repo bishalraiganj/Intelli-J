@@ -2,19 +2,48 @@ package Adhikary.X;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.MatchResult;
+import java.util.stream.Stream;
 
 public class Main {
 
 	public static void main(String... args)
 	{
 
-		try(Scanner scanner = new Scanner(new File("file.txt")))
+		try(Scanner scanner = new Scanner(new File("fixedWidth.txt")))
 		{
-			while(scanner.hasNextLine())
-			{
-				System.out.println(scanner.nextLine());
-			}
+//			while(scanner.hasNextLine())
+//			{
+//				System.out.println(scanner.nextLine());
+//			}
+
+//			System.out.println(scanner.delimiter());
+//
+//			System.out.println("-".repeat(50));
+//			scanner.useDelimiter("$");
+//			scanner.tokens()
+//					.forEach(System.out::println);
+//
+//			System.out.println("-".repeat(50));
+
+//			scanner.findAll("[A-Za-z]{10,}")
+//					.map((matchResult)->matchResult.group())
+//					.distinct()
+//					.sorted()
+//					.forEach(System.out::println);
+
+
+			String[] results =
+					scanner
+							.findAll("(.{15})(.{3})(.{12})(.{8})(.{2}).*")
+							.map((matchResult)->matchResult.group(5))
+							.distinct()
+							.sorted()
+							.toArray((e)->new String[e]); // we can replace this lambda with the method reference String::new ,here the int size value is passed implicitly in the method reference by inference
+
+			System.out.println(Arrays.toString(results));
 
 
 		} catch(IOException e )
