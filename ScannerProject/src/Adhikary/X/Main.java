@@ -1,6 +1,8 @@
 package Adhikary.X;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -13,7 +15,7 @@ public class Main {
 	public static void main(String... args)
 	{
 
-		try(Scanner scanner = new Scanner(Path.of("fixedWidth.txt")))
+		try(Scanner scanner = new Scanner(new BufferedReader(new FileReader("fixedWidth.txt"))))
 		{
 //			while(scanner.hasNextLine())
 //			{
