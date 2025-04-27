@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FileWalker.iml" filepath="$PROJECT_DIR$/FileWalker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScannerProject.iml" filepath="$PROJECT_DIR$/ScannerProject.iml" />
     </modules>
   </component>
 </project>
