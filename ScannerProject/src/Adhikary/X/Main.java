@@ -25,6 +25,7 @@ public class Main {
 //			System.out.println(scanner.delimiter());
 //
 //			System.out.println("-".repeat(50));
+
 //			scanner.useDelimiter("$");
 //			scanner.tokens()
 //					.forEach(System.out::println);
