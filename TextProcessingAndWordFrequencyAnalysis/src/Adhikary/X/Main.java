@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,10 +23,19 @@ public class Main {
 		Path path = Path.of("file.txt");
 		Path path2 = Path.of("article.txt");
 		Path path3 = Path.of("bigben.txt");
+
 		analyzingStream(path3);
 
 
 		System.out.println("-".repeat(50));
+
+
+		System.out.println("-".repeat(50)+ "Here invoked/called the analyzingSimply()" + "-".repeat(50));
+
+		analyzingSimply(path2);
+
+		System.out.println("-".repeat(50));
+
 
 
 
@@ -88,6 +99,41 @@ public class Main {
 
 	private static void analyzingSimply(Path path)
 	{
+		Pattern pattern  = Pattern.compile("[A-Za-z0-9\\p{Punct}]+");
+
+		List<String> excluded = List.of("grand"
+						,"canyon"
+						,"retrieved"
+						,"archived"
+						,"service"
+						,"original");
+
+		try
+		{
+			Map<String,Long> wordFrequencies = new LinkedHashMap<>();
+			Matcher m = pattern.matcher(Files.readString(path));
+			while(m.find())
+			{
+				String processedWord  = m.group().replaceAll("\\p{Punct}","").toLowerCase();
+				if(processedWord.length()>=5) {
+					wordFrequencies.merge(processedWord, 1L, (o, n) -> o + 1);
+				}
+			}
+
+			 wordFrequencies.entrySet().stream()
+					.sorted(Comparator.comparing((entry)->entry.getValue(),Comparator.reverseOrder()))
+					 .filter((entry)->!excluded.contains(entry.getKey()))
+					.limit(10)
+					.forEach((entry)->System.out.println(entry.getKey() + " = " + entry.getValue()));
+//					.count();
+
+//			System.out.println("Word Count  : " + wordCount);
+		} catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+
 
 
 

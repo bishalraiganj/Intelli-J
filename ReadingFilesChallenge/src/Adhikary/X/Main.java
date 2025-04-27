@@ -51,12 +51,17 @@ public class Main {
 					.filter((e)->e.length()>4)
 					.collect(Collectors.groupingBy((e)->e,Collectors.counting()));
 
-			result.entrySet().stream()
+
+						result.entrySet().stream()
 					.sorted(Comparator.comparing((e)->e.getValue(),Comparator.reverseOrder()))
+//					.count();
 					.limit(10)
+
 					.forEach((e)->System.out
-					.println(e.getKey() + " - " + e.getValue() + "times"));
+					.println(e.getKey() + " - " + e.getValue() + " times"));
 			System.out.println("-".repeat(50));
+
+//			System.out.println("word count : " + wordCount);
 
 		} catch(IOException e)
 		{
