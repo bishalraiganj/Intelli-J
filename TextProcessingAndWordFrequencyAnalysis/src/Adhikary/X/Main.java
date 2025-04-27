@@ -19,7 +19,9 @@ public class Main {
 		System.out.println("-".repeat(50));
 
 		Path path = Path.of("file.txt");
-		analyzingStream(path);
+		Path path2 = Path.of("article.txt");
+		Path path3 = Path.of("bigben.txt");
+		analyzingStream(path3);
 
 
 		System.out.println("-".repeat(50));
@@ -40,7 +42,7 @@ public class Main {
 					.map((matchResult)-> matchResult.group().replaceAll("\\p{Punct}",""))
 					.filter((word)->word.length()>=5)
 //					.sorted()
-					.collect(Collectors.groupingBy((e)->e,()->new LinkedHashMap<>(),Collectors.counting()));
+					.collect(Collectors.groupingBy((e)->e.toLowerCase(),()->new LinkedHashMap<>(),Collectors.counting()));
 
 			wordFrequencies.entrySet().forEach(System.out::println);
 
@@ -59,12 +61,21 @@ public class Main {
 
 
 
-			wordFrequencies.entrySet()
+		 	LinkedHashMap<String,Long> orderedFrequencies =	wordFrequencies.entrySet()
 					.stream()
 					.sorted(Comparator.comparing((entry)->entry.getValue()))
-					.collect(()-> new LinkedHashMap<>(),(LinkedHashMap<String,Long> e1, Map.Entry<String,Long> e2)->e1.put(e2.getKey(),e2.getValue()),(e3,e4)->e3.putAll(e4))
-					.reversed()
-					.forEach((key,value)->System.out.println(key+ " = " + value));
+					.collect(()-> new LinkedHashMap<>(),(LinkedHashMap<String,Long> e1, Map.Entry<String,Long> e2)->e1.put(e2.getKey(),e2.getValue()),(e3,e4)->e3.putAll(e4));
+
+
+//			LinkedHashMap<String,Long> DescendingOrder =orderedFrequencies.reversed();
+
+//					.limit()
+					orderedFrequencies
+							.reversed() // this method returns  a sequenced map
+							.entrySet()
+							.stream()
+							.limit(10)
+							.forEach((entry)->System.out.println(entry.getKey()+ " = " + entry.getValue()));
 
 
 		} catch(IOException e)
