@@ -2,6 +2,7 @@ package Adhikary.X;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
@@ -12,7 +13,7 @@ public class Main {
 	public static void main(String... args)
 	{
 
-		try(Scanner scanner = new Scanner(new File("fixedWidth.txt")))
+		try(Scanner scanner = new Scanner(Path.of("fixedWidth.txt")))
 		{
 //			while(scanner.hasNextLine())
 //			{
@@ -38,7 +39,8 @@ public class Main {
 			String[] results =
 					scanner
 							.findAll("(.{15})(.{3})(.{12})(.{8})(.{2}).*")
-							.map((matchResult)->matchResult.group(5))
+							.skip(1)
+							.map((matchResult)->matchResult.group(3).trim())
 							.distinct()
 							.sorted()
 							.toArray((e)->new String[e]); // we can replace this lambda with the method reference String::new ,here the int size value is passed implicitly in the method reference by inference
