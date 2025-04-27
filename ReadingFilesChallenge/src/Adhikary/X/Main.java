@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -35,10 +36,18 @@ public class Main {
 
 			System.out.println("-".repeat(50));
 
-			Map<String,Long> result = br.lines()
+			List<String> excluded = List.of("grand"
+					,"canyon"
+					,"retrieved"
+					,"archived"
+					,"service"
+					,"original");
+
+						Map<String,Long> result = br.lines()
 					.flatMap((e)->pattern.splitAsStream(e))
 					.map((e)->e.replaceAll("\\p{Punct}+",""))
 					.map(String::toLowerCase)
+								.filter((e)->!excluded.contains(e))
 					.filter((e)->e.length()>4)
 					.collect(Collectors.groupingBy((e)->e,Collectors.counting()));
 
@@ -47,6 +56,7 @@ public class Main {
 					.limit(10)
 					.forEach((e)->System.out
 					.println(e.getKey() + " - " + e.getValue() + "times"));
+			System.out.println("-".repeat(50));
 
 		} catch(IOException e)
 		{
