@@ -33,17 +33,33 @@ public class Main {
 
 		Path path = Path.of("students.csv");
 
+//		try{
+//			Files.writeString(path,header);
+//			for(Student student : students)
+//			{
+//				Files.write(path,student.getEngagementRecords(),
+//						StandardOpenOption.APPEND);
+//			}
+//		} catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
+
+
 		try{
-			Files.writeString(path,header);
+			List<String> data = new ArrayList<>();
+			data.add(header);
 			for(Student student : students)
 			{
-				Files.write(path,student.getEngagementRecords(),
-						StandardOpenOption.APPEND);
+				data.addAll(student.getEngagementRecords());
 			}
-		} catch(IOException e)
+			Files.write(path,data,StandardOpenOption.APPEND);
+
+		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+
 
 
 	}

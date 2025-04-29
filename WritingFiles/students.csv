@@ -1,10 +1,22 @@
-Student Id,Country Code,Enrolled Year,Age,Gender,Experienced,Course Code,Engagement Month,Engagement Year,Engagement Type1,GB,10,2017,67,M,false,JMC,FEBRUARY,2020,Lecture 6
-1,GB,10,2017,67,M,false,Python,SEPTEMBER,2025,Lecture 12
-2,US,3,2023,79,F,false,JMC,JULY,2025,Lecture 12
-2,US,3,2023,79,F,false,Python,DECEMBER,2024,Lecture 7
-3,US,5,2025,59,U,false,JMC,MARCH,2025,Lecture 13
-3,US,5,2025,59,U,false,Python,DECEMBER,2025,Lecture 7
-4,IN,10,2020,38,U,false,JMC,FEBRUARY,2022,Lecture 9
-4,IN,10,2020,38,U,false,Python,FEBRUARY,2025,Lecture 9
-5,CN,4,2020,63,F,true,JMC,OCTOBER,2022,Lecture 14
-5,CN,4,2020,63,F,true,Python,OCTOBER,2021,Lecture 8
+Student Id,Country Code,Enrolled Year,Age,Gender,Experienced,Course Code,Engagement Month,Engagement Year,Engagement Type
+1,CN,1,2022,79,M,false,JMC,FEBRUARY,2024,Lecture 4
+1,CN,1,2022,79,M,false,Python,APRIL,2024,Lecture 10
+2,US,12,2023,84,U,false,JMC,NOVEMBER,2023,Lecture 3
+2,US,12,2023,84,U,false,Python,MAY,2023,Lecture 6
+3,IN,5,2024,59,U,true,JMC,JULY,2024,Lecture 4
+3,IN,5,2024,59,U,true,Python,AUGUST,2025,Lecture 11
+4,CN,11,2015,89,M,true,JMC,JUNE,2025,Lecture 12
+4,CN,11,2015,89,M,true,Python,DECEMBER,2019,Lecture 10
+5,CN,12,2023,41,U,false,JMC,DECEMBER,2024,Lecture 9
+5,CN,12,2023,41,U,false,Python,NOVEMBER,2023,Lecture 8
+Student Id,Country Code,Enrolled Year,Age,Gender,Experienced,Course Code,Engagement Month,Engagement Year,Engagement Type
+1,CN,3,2022,80,F,false,JMC,DECEMBER,2022,Lecture 12
+1,CN,3,2022,80,F,false,Python,SEPTEMBER,2023,Lecture 6
+2,IN,2,2019,89,U,true,JMC,APRIL,2024,Lecture 11
+2,IN,2,2019,89,U,true,Python,JULY,2023,Lecture 7
+3,US,11,2020,88,U,false,JMC,JANUARY,2025,Lecture 5
+3,US,11,2020,88,U,false,Python,JUNE,2024,Lecture 2
+4,US,4,2016,33,U,false,JMC,DECEMBER,2023,Lecture 14
+4,US,4,2016,33,U,false,Python,JULY,2024,Lecture 5
+5,IN,3,2022,43,M,false,JMC,AUGUST,2024,Lecture 10
+5,IN,3,2022,43,M,false,Python,MAY,2023,Lecture 2
