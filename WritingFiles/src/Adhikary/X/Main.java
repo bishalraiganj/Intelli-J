@@ -3,6 +3,10 @@ package Adhikary.X;
 import Adhikary.X.Student.Course;
 import Adhikary.X.Student.Student;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,8 +28,24 @@ public class Main {
 				.limit(5)
 				.collect(()->new ArrayList<>(),(ArrayList<Student> e1,Student e2)
 				->e1.add(e2),(e3,e4)->e3.addAll(e4));
-		System.out.println(header);
-		students.forEach((e)->e.getEngagementRecords().forEach((e1)->System.out.println(e1)));
+//		System.out.println(header);
+//		students.forEach((e)->e.getEngagementRecords().forEach((e1)->System.out.println(e1)));
+
+		Path path = Path.of("students.csv");
+
+		try{
+			Files.writeString(path,header);
+			for(Student student : students)
+			{
+				Files.write(path,student.getEngagementRecords(),
+						StandardOpenOption.APPEND);
+			}
+		} catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+
 	}
 
 
