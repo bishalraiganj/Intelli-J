@@ -6,7 +6,9 @@ import Adhikary.X.Student.Student;
 import Adhikary.X.Student.StudentDemographics;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -85,16 +87,16 @@ public class Main {
 		System.out.println("-".repeat(50));
 
 
-		try(BufferedWriter writer = Files.newBufferedWriter(path2))
+		try(FileWriter writer = new FileWriter("take3.csv"))
 		{
 			writer.write(header);
-			writer.newLine();
+//			writer.newLine();
 			for(Student student : students)
 			{
 				for(String record : student.getEngagementRecords())
 				{
 					writer.write(record);
-					writer.newLine();
+//					writer.newLine();
 				}
 
 			}
@@ -105,6 +107,26 @@ public class Main {
 			e.printStackTrace();
 		}
 
+		System.out.println("-".repeat(50));
+
+		try(PrintWriter writer = new PrintWriter("take4.csv"))
+		{
+			writer.write(header);
+			for(Student student : students)
+			{
+				for(String record : student.getEngagementRecords())
+				{
+					writer.write(record);
+				}
+			}
+
+
+		} catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		System.out.println("-".repeat(50));
 
 
 	}
