@@ -114,7 +114,7 @@ public class Main {
 
 		try(PrintWriter writer = new PrintWriter("take4.csv"))
 		{
-			writer.write(header);
+			writer.println(header);
 			for(Student student : students)
 			{
 				for(String record : student.getEngagementRecords())
