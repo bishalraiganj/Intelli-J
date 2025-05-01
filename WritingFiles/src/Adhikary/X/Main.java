@@ -91,12 +91,15 @@ public class Main {
 		{
 			writer.write(header);
 //			writer.newLine();
+
+			writer.write(System.lineSeparator());
 			for(Student student : students)
 			{
 				for(String record : student.getEngagementRecords())
 				{
 					writer.write(record);
 //					writer.newLine();
+					writer.write(System.lineSeparator());
 				}
 
 			}
@@ -116,7 +119,7 @@ public class Main {
 			{
 				for(String record : student.getEngagementRecords())
 				{
-					writer.write(record);
+					writer.println(record); // used println inplace of write() since both has the same functionality
 				}
 			}
 
