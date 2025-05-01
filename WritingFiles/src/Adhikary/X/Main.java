@@ -1,8 +1,11 @@
 package Adhikary.X;
 
 import Adhikary.X.Student.Course;
+import Adhikary.X.Student.CourseEngagement;
 import Adhikary.X.Student.Student;
+import Adhikary.X.Student.StudentDemographics;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,9 +56,51 @@ public class Main {
 			{
 				data.addAll(student.getEngagementRecords());
 			}
-			Files.write(path,data,StandardOpenOption.APPEND);
-
+			Files.write(path,data);
 		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+
+		System.out.println("-".repeat(50));
+		Path path2 = Path.of("take2.csv");
+		try(BufferedWriter writer = Files.newBufferedWriter(path2))
+		{
+			writer.write(header);
+			writer.newLine();
+			for(Student student : students)
+			{
+				for(String record : student.getEngagementRecords())
+				{
+					writer.write(record);
+					writer.newLine();
+				}
+			}
+		} catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		System.out.println("-".repeat(50));
+
+
+		try(BufferedWriter writer = Files.newBufferedWriter(path2))
+		{
+			writer.write(header);
+			writer.newLine();
+			for(Student student : students)
+			{
+				for(String record : student.getEngagementRecords())
+				{
+					writer.write(record);
+					writer.newLine();
+				}
+
+			}
+
+
+		} catch(IOException e)
 		{
 			e.printStackTrace();
 		}
