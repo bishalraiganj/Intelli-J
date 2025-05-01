@@ -30,7 +30,7 @@ public class Main {
 
 		List<Student>  students = Stream
 				.generate(()->Student.getRandomStudent(jmc,pymc))
-				.limit(5)
+				.limit(25)
 				.collect(()->new ArrayList<>(),(ArrayList<Student> e1,Student e2)
 				->e1.add(e2),(e3,e4)->e3.addAll(e4));
 //		System.out.println(header);
@@ -69,6 +69,7 @@ public class Main {
 		Path path2 = Path.of("take2.csv");
 		try(BufferedWriter writer = Files.newBufferedWriter(path2))
 		{
+			int count = 0;
 			writer.write(header);
 			writer.newLine();
 			for(Student student : students)
@@ -77,11 +78,26 @@ public class Main {
 				{
 					writer.write(record);
 					writer.newLine();
+					count++;
+					if(count % 5 == 0)
+					{
+						Thread.sleep(2000);
+						System.out.print(".");
+					}
+
+					if(count % 10 == 0)
+					{
+						writer.flush();
+					}
 				}
 			}
 		} catch(IOException e)
 		{
 			e.printStackTrace();
+		}
+		catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
 		}
 
 		System.out.println("-".repeat(50));
@@ -112,14 +128,34 @@ public class Main {
 
 		System.out.println("-".repeat(50));
 
-		try(PrintWriter writer = new PrintWriter("take4.csv"))
+		try(PrintWriter writer = new PrintWriter("take4.txt"))
 		{
 			writer.println(header);
 			for(Student student : students)
 			{
 				for(String record : student.getEngagementRecords())
 				{
-					writer.println(record); // used println inplace of write() since both has the same functionality
+					String[] recordData = record.split(",");
+					writer.printf("%-12d%-5s%2d%4d%3d%-1s".formatted(
+							 student.getStudentId() //Student Id
+							,student.getCountry() //Country Code
+							,student.getEnrollmentYear() // Enrolled Year
+							,student.getEnrollmentMonth() // Enrolled Month
+							,student.getEnrollmentAge() // Age
+							,student.getGender() // Gender
+					)); // used println inplace of write() since both has the same functionality
+
+					writer.printf("-1s",(student.hasExperience()?"Y":"N")); // Experienced in Programming ?
+
+					writer.format("%-3s%10.2f%-10s%-4s%-30s",
+							recordData[7] //Couse Code
+							,student.getPercentComplete(recordData[7]) //Percentage of Course Complete  )
+							,recordData[8] // Engagement Month
+							,recordData[9] // Engagement Year
+							,recordData[10] ); // Engagement Type
+
+					writer.println();
+
 				}
 			}
 
