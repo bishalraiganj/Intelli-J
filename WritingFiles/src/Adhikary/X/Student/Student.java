@@ -120,7 +120,16 @@ public class Student {
                 studentId, demographics, coursesEnrolled, engagementData);
     }
 
-    public List<String> getEngagementRecords() {
+	public String toJSON() {
+		return new StringJoiner(", ", "{", "}")
+				.add("\"studentId\":" + studentId)
+				.add("\"demographics\":" + demographics.toJSON())
+//				.add("\"coursesEnrolled\":" + coursesEnrolled)
+//				.add("\"engagementMap\":" + engagementMap)
+				.toString();
+	}
+
+	public List<String> getEngagementRecords() {
 
         int i = 0;
         List<String> engagementData = new ArrayList<>();
