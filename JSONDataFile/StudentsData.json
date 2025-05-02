@@ -1,0 +1,102 @@
+[
+{
+"studentId" : 1,
+"demographics" : {
+	"countryCode" : "AU",
+	"enrolledMonth" : 2,
+	"enrolledYear" : 2025,
+	"ageAtEnrollment" : 67,
+	"gender" : "M",
+	"previousProgrammingExperience" : true
+	},
+	"engagement" : [{
+		"courseCode" : "JMC",
+		"engagementType" : "Lecture 2",
+		"enrollmentMonth" : "NOVEMBER",
+		"enrollmentYear" : 2025
+
+}, { 
+		"courseCode" : "Python",
+		"engagementType" : "Lecture 2",
+		"enrollmentMonth" : "JULY",
+		"enrollmentYear" : 2025
+
+}]
+	}
+ 
+ ,{
+"studentId" : 2,
+"demographics" : {
+	"countryCode" : "US",
+	"enrolledMonth" : 12,
+	"enrolledYear" : 2020,
+	"ageAtEnrollment" : 68,
+	"gender" : "F",
+	"previousProgrammingExperience" : true
+	},
+	"engagement" : [{
+		"courseCode" : "JMC",
+		"engagementType" : "Lecture 12",
+		"enrollmentMonth" : "JANUARY",
+		"enrollmentYear" : 2020
+
+}, { 
+		"courseCode" : "Python",
+		"engagementType" : "Lecture 12",
+		"enrollmentMonth" : "OCTOBER",
+		"enrollmentYear" : 2020
+
+}]
+	}
+ 
+ ,{
+"studentId" : 3,
+"demographics" : {
+	"countryCode" : "US",
+	"enrolledMonth" : 7,
+	"enrolledYear" : 2015,
+	"ageAtEnrollment" : 18,
+	"gender" : "F",
+	"previousProgrammingExperience" : false
+	},
+	"engagement" : [{
+		"courseCode" : "JMC",
+		"engagementType" : "Lecture 7",
+		"enrollmentMonth" : "OCTOBER",
+		"enrollmentYear" : 2015
+
+}, { 
+		"courseCode" : "Python",
+		"engagementType" : "Lecture 7",
+		"enrollmentMonth" : "OCTOBER",
+		"enrollmentYear" : 2015
+
+}]
+	}
+ 
+ ,{
+"studentId" : 4,
+"demographics" : {
+	"countryCode" : "CN",
+	"enrolledMonth" : 10,
+	"enrolledYear" : 2017,
+	"ageAtEnrollment" : 79,
+	"gender" : "U",
+	"previousProgrammingExperience" : false
+	},
+	"engagement" : [{
+		"courseCode" : "JMC",
+		"engagementType" : "Lecture 10",
+		"enrollmentMonth" : "NOVEMBER",
+		"enrollmentYear" : 2017
+
+}, { 
+		"courseCode" : "Python",
+		"engagementType" : "Lecture 10",
+		"enrollmentMonth" : "APRIL",
+		"enrollmentYear" : 2017
+
+}]
+	}
+
+]
