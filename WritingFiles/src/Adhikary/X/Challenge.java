@@ -77,7 +77,7 @@ public class Challenge {
 
 		String delimiter = "," + System.lineSeparator();
 
-		String s2 = Stream.generate(()->Student.getRandomStudent())
+		String s2 = Stream.generate(()->Student.getRandomStudent(jmc,pymc))
 				.limit(1000)
 				.map((e)->e.toJSON())
 				.collect(Collectors.joining(delimiter,"[","]"));

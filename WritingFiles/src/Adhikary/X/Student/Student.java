@@ -121,11 +121,25 @@ public class Student {
     }
 
 	public String toJSON() {
+
+        StringJoiner courses  = new StringJoiner(",","[","]");
+        for(Course c : coursesEnrolled)
+        {
+            courses.add(c.toJSON());
+        }
+        StringJoiner engagements = new StringJoiner(",","[","]");
+
+        engagementMap.values()
+                .stream()
+                .map(CourseEngagement::toJSON)
+                .forEach((e)->engagements.add(e));
+
+
 		return new StringJoiner(", ", "{", "}")
 				.add("\"studentId\":" + studentId)
 				.add("\"demographics\":" + demographics.toJSON())
-//				.add("\"coursesEnrolled\":" + coursesEnrolled)
-//				.add("\"engagementMap\":" + engagementMap)
+				.add("\"coursesEnrolled\":" + courses)
+				.add("\"engagementMap\":" + engagements)
 				.toString();
 	}
 
