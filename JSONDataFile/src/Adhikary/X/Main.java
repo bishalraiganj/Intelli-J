@@ -12,7 +12,7 @@ public class Main {
 
 		StringJoiner sj =  new StringJoiner("\n} \n , {\n ,","[{\n","\n}]");
 		Stream.generate(()-> Student.getRandomStudent())
-				.limit(1000)
+				.limit(2)
 				.forEach((e)->{
 
 					StringJoiner engagementJoiner = new StringJoiner("\n}, { \n","[{\n","\n}]");
@@ -62,8 +62,7 @@ public class Main {
 
 				});
 
-
-
+		System.out.println(sj.toString());
 
 
 
