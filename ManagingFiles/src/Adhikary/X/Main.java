@@ -98,12 +98,12 @@ public class Main {
 		)
 		{
 
-//			new BufferedInputStream(urlInputStream).transferTo(System.out);
+			new BufferedInputStream(urlInputStream).transferTo(System.out);
 
 
 			BufferedOutputStream  bos = new BufferedOutputStream(new FileOutputStream("popData3.json"));
 
-			bos.write(urlInputStream.readAllBytes());
+			bos.write(uri.toURL().openStream().readAllBytes());
 			bos.flush();
 
 
