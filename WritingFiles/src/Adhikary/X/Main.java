@@ -170,6 +170,44 @@ public class Main {
 
 	}
 
+	public static void recurseCopy(Path source,Path target) throws IOException
+	{
+		Files.copy(source,target);
+		if(Files.isDirectory(source))
+		{
+			try(Stream<Path> children = Files.list(source))
+			{
+				children.collect(()->new ArrayList<>(),
+								(ArrayList<Path> e1,Path e2)->e1.add(e2)
+								,
+								(e3,e4)->e3.addAll(e4))
+						.forEach((pathInstance)->
+
+						{
+							try {
+								recurseCopy(pathInstance,target.resolve(pathInstance.getFileName()));
+
+							} catch (IOException e)
+							{
+								throw new RuntimeException(e);
+							}
+						});
+
+
+
+			} catch(IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+
+		}
+
+
+
+	}
+
+
 
 
 }

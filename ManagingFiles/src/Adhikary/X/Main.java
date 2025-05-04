@@ -4,33 +4,63 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Main {
 
 	public static void main(String... args)
 	{
-		File oldFile = new File("students.json");
-		File newFile = new File("student-activity.json");
+//		File oldFile = new File("students.json");
+//		File newFile = new File("student-activity.json");
+//
+//		if(oldFile.exists())
+//		{
+//			oldFile.renameTo(newFile);
+//			System.out.println("File renamed successfully");
+//		}
+//		else
+//		{
+//			System.out.println("File does not exist");
+//		}
+//
+//
+//		System.out.println(":".repeat(50));
+//		Path oldPath = oldFile.toPath();
+//		Path newPath = newFile.toPath();
 
-		if(oldFile.exists())
-		{
-			oldFile.renameTo(newFile);
-			System.out.println("File renamed successfully");
-		}
-		else
-		{
-			System.out.println("File does not exist");
-		}
+//		Path oldPath = Path.of("students.json");
+//		Path newPath = Path.of("files/student-activity.json");
+//
+//
+//
+//		try{
+////			Files.createDirectories(newPath.subpath(0,newPath.getNameCount()-1));
+//			Files.move(oldPath,newPath);
+//			System.out.println(oldPath + " moved (renamed to)--> " + newPath);
+//		} catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 
 
 		System.out.println(":".repeat(50));
-		Path oldPath = oldFile.toPath();
-		Path newPath = newFile.toPath();
+
+		Path fileDir = Path.of("files");
+		Path resourceDir = Path.of("resources");
 
 		try{
-			Files.move(newPath,oldPath);
-			System.out.println("Path renamed successfully ! Using the Files helper class");
-		} catch(IOException e)
+//			if(Files.exists(Path.of("resources")))
+//			{
+//				Files.walk(Path.of("resources"),Integer.MAX_VALUE,(new SimpleFileVisitor<Path>{
+//
+//			}))
+//				Files.delete(Path.of("resources"));
+
+			recurseCopy(fileDir,resourceDir);
+			System.out.println("Directory copied to " + resourceDir);
+		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -41,6 +71,45 @@ public class Main {
 
 
 	}
+
+
+	public static void recurseCopy(Path source,Path target) throws IOException
+	{
+		Files.copy(source,target);
+		if(Files.isDirectory(source))
+		{
+			 try(Stream<Path> children = Files.list(source))
+			 {
+				 children.collect(()->new ArrayList<>(),
+						 (ArrayList<Path> e1,Path e2)->e1.add(e2)
+				 ,
+						 (e3,e4)->e3.addAll(e4))
+				 .forEach((pathInstance)->
+
+						 {
+							 try {
+						 recurseCopy(pathInstance,target.resolve(pathInstance.getFileName()));
+
+							 } catch (IOException e)
+							 {
+								 throw new RuntimeException(e);
+							 }
+						 });
+
+
+
+			 } catch(IOException e)
+			 {
+				 throw new RuntimeException(e);
+			 }
+
+
+		}
+
+
+
+	}
+
 
 
 }
