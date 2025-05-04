@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -58,6 +59,10 @@ public class Main {
 //			}))
 //				Files.delete(Path.of("resources"));
 
+			if(Files.exists(resourceDir))
+			{
+				Files.delete(resourceDir);
+			}
 			recurseCopy(fileDir,resourceDir);
 			System.out.println("Directory copied to " + resourceDir);
 		} catch (IOException e)
@@ -75,7 +80,7 @@ public class Main {
 
 	public static void recurseCopy(Path source,Path target) throws IOException
 	{
-		Files.copy(source,target);
+		Files.copy(source,target, StandardCopyOption.REPLACE_EXISTING);
 		if(Files.isDirectory(source))
 		{
 			 try(Stream<Path> children = Files.list(source))
