@@ -92,11 +92,20 @@ public class Main {
 
 		String urlString = "https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=state:*";
 		URI uri = URI.create(urlString);
-		try(InputStream urlInputStream = uri.toURL().openStream()
+		try(InputStream urlInputStream = uri.toURL().openStream();
+
+
 		)
 		{
 
-			new BufferedInputStream(urlInputStream).transferTo(new FileOutputStream("popData.json"));
+//			new BufferedInputStream(urlInputStream).transferTo(System.out);
+
+
+			BufferedOutputStream  bos = new BufferedOutputStream(new FileOutputStream("popData3.json"));
+
+			bos.write(urlInputStream.readAllBytes());
+			bos.flush();
+
 
 		}catch(IOException e)
 		{
