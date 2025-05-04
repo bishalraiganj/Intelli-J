@@ -1,6 +1,7 @@
 package Adhikary.X;
 
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -78,17 +79,30 @@ public class Main {
 
 		System.out.println(":".repeat(50));
 
-		try(BufferedReader reader = new BufferedReader(new FileReader("files//student-activity.json"));
+//		try(BufferedReader reader = new BufferedReader(new FileReader("files//student-activity.json"));
+//
+//		PrintWriter writer = new PrintWriter("students-backup.json");
+//		)
+//		{
+//			reader.transferTo(writer);
+//		}catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 
-		PrintWriter writer = new PrintWriter("students-backup.json");
+		String urlString = "https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&for=state:*";
+		URI uri = URI.create(urlString);
+		try(InputStream urlInputStream = uri.toURL().openStream()
 		)
 		{
-			reader.transferTo(writer);
+
+			new BufferedInputStream(urlInputStream).transferTo(new FileOutputStream("popData.json"));
+
 		}catch(IOException e)
 		{
-			e.printStackTrace();
+//			throw new RuntimeException(e);
+			System.err.println("Error Message: " + e.getMessage());
 		}
-
 
 
 
