@@ -114,6 +114,56 @@ public class Main {
 		}
 
 
+		System.out.println(":".repeat(50));
+
+		Path  jsonPath = Path.of("USPopulationByState.json");
+
+		try(InputStreamReader reader = new InputStreamReader(uri.toURL().openStream());
+		BufferedWriter writer  = Files.newBufferedWriter(jsonPath))
+		{
+			reader.transferTo(writer);
+
+
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		try(InputStreamReader reader =  new InputStreamReader(uri.toURL().openStream());
+		PrintWriter writer = new PrintWriter(("USPopulationByState.csv")))
+		{
+			reader.transferTo(new Writer() {
+				@Override
+				public void write(char[] cbuf, int off, int len) throws IOException {
+
+					String jsonString = new String(cbuf,off,len).trim();
+					jsonString = jsonString.replace('[',' ').trim();
+					jsonString=jsonString.replaceAll("]","");
+					writer.write(jsonString);
+
+				}
+
+				@Override
+				public void flush() throws IOException {
+
+				}
+
+				@Override
+				public void close() throws IOException {
+
+				}
+			});
+
+
+
+		} catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+
+
+
 
 
 
