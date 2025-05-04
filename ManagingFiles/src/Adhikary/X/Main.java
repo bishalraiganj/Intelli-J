@@ -1,7 +1,6 @@
 package Adhikary.X;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -71,6 +70,21 @@ public class Main {
 			recurseCopy(fileDir,resourceDir);
 			System.out.println("Directory copied to " + resourceDir);
 		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+
+
+		System.out.println(":".repeat(50));
+
+		try(BufferedReader reader = new BufferedReader(new FileReader("files//student-activity.json"));
+
+		PrintWriter writer = new PrintWriter("students-backup.json");
+		)
+		{
+			reader.transferTo(writer);
+		}catch(IOException e)
 		{
 			e.printStackTrace();
 		}
