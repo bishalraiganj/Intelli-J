@@ -51,7 +51,7 @@ public class Main {
 		Path fileDir = Path.of("files");
 		Path resourceDir = Path.of("resources");
 
-		try{
+		try {
 //			if(Files.exists(Path.of("resources")))
 //			{
 //				Files.walk(Path.of("resources"),Integer.MAX_VALUE,(new SimpleFileVisitor<Path>{
@@ -59,9 +59,14 @@ public class Main {
 //			}))
 //				Files.delete(Path.of("resources"));
 
-			if(Files.exists(resourceDir))
+//			if (Files.exists(resourceDir)) {
+//				Files.delete(resourceDir);
+//			}
+
+//			Files.deleteIfExists(fileDir);
+			if (Files.exists(resourceDir))
 			{
-				Files.delete(resourceDir);
+				recurseDelete(resourceDir);
 			}
 			recurseCopy(fileDir,resourceDir);
 			System.out.println("Directory copied to " + resourceDir);
@@ -115,6 +120,44 @@ public class Main {
 
 	}
 
+	public static void recurseDelete(Path target) throws IOException
+	{
+		if(Files.isDirectory(target))
+		{
+			try(Stream<Path> children = Files.list(target))
+			{
+				children.collect(()->new ArrayList<>(),
+								(ArrayList<Path> e1,Path e2)->e1.add(e2)
+								,
+								(e3,e4)->e3.addAll(e4))
+						.forEach((pathInstance)->
+
+						{
+							try {
+								recurseDelete(pathInstance);
+
+							} catch (IOException e)
+							{
+								throw new RuntimeException(e);
+							}
+						});
+
+
+//				Files.delete(target);
+
+			} catch(IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+
+		}
+
+		Files.delete(target);
+
+
+
+	}
 
 
 }
