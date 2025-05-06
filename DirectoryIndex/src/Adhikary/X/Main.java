@@ -19,18 +19,64 @@ public class Main {
 
 		try
 		{
+
+
+			if (!Files.exists(p)) {
+				Files.createDirectory(p);
+			}
+			if(!Files.exists(p2))
+			{
+				Files.createDirectory(p2);
+			}
+			if(!Files.exists(p3))
+			{
+				Files.createDirectory(p3);
+			}
+
+
+
+
 			Files.walkFileTree(p,new SimpleFileVisitor<Path>(){
 
 
+				Path  currentFilePath = null;
+				Path  previousFilePath = null;
+				int firstVisitStatus = 0 ;
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
 				{
 					Objects.requireNonNull(file);
 
-					try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString()))
+					System.out.println(file.toAbsolutePath());
+					currentFilePath = file.getParent();
+
+					try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString(),true))
 
 					{
-						fw.append(file.getFileName().toString());
+						if(!currentFilePath.equals(previousFilePath))
+						{
+							firstVisitStatus = 0;
+						}
+//						System.out.println(file.getFileName());
+						if(!file.equals(file.getParent().resolve("index.txt")))
+						{
+
+
+							if(firstVisitStatus == 0)
+							{ // logic problem here
+								previousFilePath = file.getParent();
+								fw.write("\n" + file.getFileName().toString());
+								currentFilePath = file.getParent();
+								firstVisitStatus =1 ;
+
+
+							}
+							else
+							{
+								currentFilePath = file.getParent();
+								fw.append("\n"+file.getFileName().toString());
+							}
+						}
 
 					} catch(IOException e)
 					{
@@ -59,6 +105,15 @@ public class Main {
 
 				}
 
+				@Override
+				public FileVisitResult postVisitDirectory(Path dir , IOException e)
+				{
+					Objects.requireNonNull(dir);
+
+
+					return FileVisitResult.CONTINUE;
+				}
+
 
 
 
@@ -71,17 +126,7 @@ public class Main {
 
 			});
 
-			if (!Files.exists(p)) {
-				Files.createDirectory(p);
-			}
-			if(!Files.exists(p2))
-			{
-				Files.createDirectory(p2);
-			}
-			if(!Files.exists(p3))
-			{
-				Files.createDirectory(p3);
-			}
+
 
 		} catch(IOException e)
 		{
