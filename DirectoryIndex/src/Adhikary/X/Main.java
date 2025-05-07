@@ -42,64 +42,67 @@ public class Main {
 				int firstInvocationStatus = 0;
 				int visitedDirNum = 0;
 				int exitedDirNum = 0;
+				int firstDirExitStatus = 0;
 
 				Path p = null;
+				Path prevDir = null;
 
-				@Override
-				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
-				{
-					Objects.requireNonNull(file);
-					if(firstInvocationStatus==0)
-					{
-						try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString()))
-						{
-							fw.write(file.getFileName().toString());
-
-							p=file;
-							firstInvocationStatus++;
-
-					} catch(IOException e)
-						{
-							System.out.println("Error Message: " + e.getMessage());
-						}
-
-					}
-					else if(!file.getParent().equals(p.getParent()) && !file.getFileName().toString().equals("index.txt"))
-						{
-
-							try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString())) {
-								fw.write(file.getFileName().toString());
-
-								p = file;
-							} catch (IOException e)
-							{
-								e.printStackTrace();
-							}
-						}
-					else if(p.getParent().equals(file.getParent())&&!file.getFileName().toString().equals("index.txt"))
-					{
-						try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString(),true))
-						{
-							fw.append("\n" + file.getFileName().toString());
-						} catch(IOException e)
-						{
-							e.printStackTrace();
-						}
-					}
-
-
-
-					System.out.println(file.toAbsolutePath());
-
-
-
-
-
-
-					return FileVisitResult.CONTINUE;
-
-
-				}
+//				@Override
+//				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
+//				{
+//					Objects.requireNonNull(file);
+//
+//					if(firstInvocationStatus==0)
+//					{
+//						try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString()))
+//						{
+//							fw.write(file.getFileName().toString());
+//
+//							p=file;
+//							firstInvocationStatus++;
+//
+//					} catch(IOException e)
+//						{
+//							System.out.println("Error Message: " + e.getMessage());
+//						}
+//
+//					}
+//					else if(!file.getParent().equals(p.getParent()) && !file.getFileName().toString().equals("index.txt"))
+//						{
+//
+//							try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString())) {
+//								fw.write(file.getFileName().toString());
+//
+//								p = file;
+//							} catch (IOException e)
+//							{
+//								e.printStackTrace();
+//							}
+//						}
+//					else if(p.getParent().equals(file.getParent())&&!file.getFileName().toString().equals("index.txt"))
+//					{
+//						try(FileWriter fw = new FileWriter(file.getParent().resolve("index.txt").toString(),true))
+//						{
+//							fw.append("\n" + file.getFileName().toString());
+//						} catch(IOException e)
+//						{
+//							e.printStackTrace();
+//						}
+//					}
+//
+//
+//
+//					System.out.println(file.toAbsolutePath());
+//
+//
+//
+//
+//
+//
+//					return FileVisitResult.CONTINUE;
+//
+//
+//				}
 
 				@Override
 				public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException
@@ -121,8 +124,34 @@ public class Main {
 					Objects.requireNonNull(dir);
 					exitedDirNum++;
 
+
 					if(exitedDirNum!=visitedDirNum+1)  // this condition checks the  number of file in order
 					{
+						if(firstDirExitStatus == 0)
+						{
+							try(FileWriter fw = new FileWriter(dir.getParent().resolve("index.txt").toString()))
+							{
+								fw.write(dir.getFileName().toString());
+								prevDir = dir;
+								firstDirExitStatus++;
+							}
+						}
+						else if(!dir.equals(prevDir)&&exitedDirNum!=visitedDirNum)
+						{
+							try(FileWriter fw = new FileWriter(dir.getParent().resolve("index.txt").toString()))
+							{
+								fw.write(dir.getFileName().toString());
+								prevDir = dir;
+							}
+						}
+						else if(exitedDirNum!=visitedDirNum)
+						{
+							try(FileWriter fw = new FileWriter(dir.getParent().resolve("index.txt").toString(),true))
+							{
+								fw.append("\n"+dir.getFileName().toString());
+							}
+						}
+
 						if(!Files.exists(dir.resolve("index.txt")))
 						{
 							try {
