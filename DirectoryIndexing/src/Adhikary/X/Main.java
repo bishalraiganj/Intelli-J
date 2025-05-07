@@ -101,13 +101,28 @@ public class Main {
 		contentMap.forEach((k,v)->System.out.println("Path -( " + k + " ) - "  + "Contents : " +  v.toString()));
 
 //
-//		contentMap.entrySet().stream()
-//				.forEach((e)->{
-//
-//					try(FileWriter fw = new FileWriter(e.getKey().))
-//
-//
-//				})
+		contentMap.entrySet().stream()
+				.forEach((e)->{
+
+					try(FileWriter fw = new FileWriter(e.getKey().resolve("index.txt").toString()))
+					{
+						for(int i = 0 ; i<e.getValue().size();i++)
+						{
+							if(i==0&&!e.getValue().get(i).equals("index.txt"))
+							{
+								fw.write(e.getValue().get(i));
+							}
+							else if(!e.getValue().get(i).equals("index.txt"))
+								fw.append("\n"+e.getValue().get(i));
+						}
+
+					}catch(IOException f)
+					{
+						System.out.println("Error Message: " + f.getMessage());
+					}
+
+
+				});
 
 
 	}
