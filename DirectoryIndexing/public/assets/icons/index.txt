@@ -1,4 +1,4 @@
-
-(DIR)-"newDir1"
-(DIR)-"newDir2"
-newFile1.txt
+index.txt Properties : 2025-05-07T13:19:16.0287294Z
+(DIR)-"newDir1" Properties: 2025-05-07T13:25:02.8006909Z
+(DIR)-"newDir2" Properties: 2025-05-07T13:25:34.5177482Z
+newFile1.txt Properties : 2025-05-07T13:25:11.5260993Z

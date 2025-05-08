@@ -47,7 +47,7 @@ public class Main {
 					Objects.requireNonNull(file);
 					Objects.requireNonNull(attrs);
 
-					contentMap.get(file.getParent()).add(file.getFileName().toString());
+					contentMap.get(file.getParent()).add(file.getFileName().toString()+ " Properties : " + attrs.creationTime());
 
 					return FileVisitResult.CONTINUE;
 				}
@@ -83,7 +83,9 @@ public class Main {
 					dirExitedOrder++;
 					if(dirExitedOrder != dirVisitedOrder)
 					{
-						contentMap.get(dir.getParent()).add("(DIR)-\"" + dir.getFileName().toString() + "\"");
+						contentMap.get(dir.getParent()).add("(DIR)-\"" + dir.getFileName().toString() + "\"" + " Properties: " + Files.readAttributes(
+								dir,BasicFileAttributes.class).creationTime());
+
 					}
 					return FileVisitResult.CONTINUE;
 				}
