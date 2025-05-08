@@ -85,10 +85,10 @@ public class Main {
 					dirExitedOrder++;
 					if(dirExitedOrder != dirVisitedOrder)
 					{
-						List<String> content=contentMap.get(dir);
+						List<String> nestedContent=contentMap.get(dir);
 
-						contentMap.get(dir.getParent()).add("(DIR)-\"" + dir.getFileName().toString() + "\"" + " Properties: " + Files.readAttributes(
-								dir,BasicFileAttributes.class).creationTime() + "\n -----> \n  " + "\t"  +  content.toString());
+						contentMap.get(dir.getParent()).add("\n(DIR)-\"" + dir.getFileName().toString() + "\"\n" + " Properties: " + Files.readAttributes(
+								dir,BasicFileAttributes.class).creationTime() + "\n -----> \n  " + "\t"  +  nestedContent.toString());
 //						contentMap.get(dir.getParent()).add("nested contents in this ")
 
 					}
