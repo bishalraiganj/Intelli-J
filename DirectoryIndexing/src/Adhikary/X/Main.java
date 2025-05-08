@@ -47,7 +47,9 @@ public class Main {
 					Objects.requireNonNull(file);
 					Objects.requireNonNull(attrs);
 
-					contentMap.get(file.getParent()).add(file.getFileName().toString()+ " Properties : " + attrs.creationTime());
+					if(!file.getFileName().toString().equals("index.txt")) {
+						contentMap.get(file.getParent()).add(file.getFileName().toString() + " Properties : " + attrs.creationTime());
+					}
 
 					return FileVisitResult.CONTINUE;
 				}
@@ -83,8 +85,11 @@ public class Main {
 					dirExitedOrder++;
 					if(dirExitedOrder != dirVisitedOrder)
 					{
+						List<String> content=contentMap.get(dir);
+
 						contentMap.get(dir.getParent()).add("(DIR)-\"" + dir.getFileName().toString() + "\"" + " Properties: " + Files.readAttributes(
-								dir,BasicFileAttributes.class).creationTime());
+								dir,BasicFileAttributes.class).creationTime() + "\n -----> \n  " + "\t"  +  content.toString());
+//						contentMap.get(dir.getParent()).add("nested contents in this ")
 
 					}
 					return FileVisitResult.CONTINUE;
