@@ -1,0 +1,8 @@
+Directory Contents: 
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\icons
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\icons\newFile1.txt
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\icons\newFile2.txt
+C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\index.txt
+Generated: 2025-05-09T19:26:09.723650100
