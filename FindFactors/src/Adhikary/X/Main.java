@@ -21,7 +21,7 @@ public class Main {
 	{
 
 
-		System.out.println("Total number of factors : " + getFactCount(10));
+		System.out.println("Total number of factors : " + getFactCount(1024));
 
 
 	}
@@ -63,7 +63,7 @@ public class Main {
 			sumOfFactors(factPairMapResult);
 			fw.write("Total Number of Factors :" + numOfFac + "\n");
 			fw.write("Sum of all the factors : " + accumulatedSum + "\n");
-			fw.write(" Calculation Date :  " + LocalDateTime.now()+"\n");
+			fw.write(" Calculation Date :  " + LocalDateTime.now()+"\n"+":".repeat(200)+"\n");
 
 		} catch(IOException e)
 		{
