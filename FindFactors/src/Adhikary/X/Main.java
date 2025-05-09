@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class Main {
 	{
 
 
-		System.out.println("Total number of factors : " + getFactCount(48));
+		System.out.println("Total number of factors : " + getFactCount(1024));
 
 
 	}
@@ -38,6 +39,25 @@ public class Main {
 
 		boolean perfectSquareCheck = (n % Math.sqrt(n) == 0)? true : false;
 		int numOfFac = (perfectSquareCheck) ? (factPairMap.size() * 2) - 1 : factPairMap.size() * 2;
+
+
+		// Logging logic from here :-)
+
+		factPairMap.entrySet()
+				.stream()
+				.forEach((entry)->logCalculation(entry));
+
+		try(FileWriter fw = new FileWriter("calculationLog.txt", true))
+		{
+			fw.write(" Calculation Date :  " + LocalDateTime.now());
+
+		} catch(IOException e)
+		{
+			System.out.println("Error Message: " + e.getMessage());
+		}
+
+
+
 		return numOfFac;
 
 	}
@@ -47,7 +67,7 @@ public class Main {
 		if(!Files.exists(Path.of("calculationLog.txt")))
 		{
 			try {
-				Files.createDirectory(Path.of("calculationLog.txt"));
+				Files.createFile(Path.of("calculationLog.txt"));
 			} catch(IOException e)
 			{
 				System.out.println("Error Message : " + e.getMessage());
