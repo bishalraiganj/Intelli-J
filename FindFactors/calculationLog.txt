@@ -22,4 +22,47 @@
 32 - 32
 1 - 1024
 Sum of all the factors : 2079
- Calculation Date :  2025-05-09T08:35:24.832917
+ Calculation Date :  2025-05-09T08:35:24.8329172 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:41:12.5331299002 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:42:49.687379
+2 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:43:48.487685200
+1 - 13
+Sum of all the factors : 14
+ Calculation Date :  2025-05-09T08:48:43.0371752002 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:48:59.3387352002 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:49:16.4908747002 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:49:41.592066700
+2 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:49:57.742803200
+2 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:50:05.594448500
+2 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:53:52.174652200
+2 - 5
+1 - 10
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:54:28.130342900
+2 - 5
+1 - 10
+Total Number of Factors :4
+Sum of all the factors : 18
+ Calculation Date :  2025-05-09T08:56:20.227164300

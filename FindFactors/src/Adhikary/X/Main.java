@@ -21,7 +21,7 @@ public class Main {
 	{
 
 
-		System.out.println("Total number of factors : " + getFactCount(1024));
+		System.out.println("Total number of factors : " + getFactCount(10));
 
 
 	}
@@ -57,11 +57,13 @@ public class Main {
 				.stream()
 				.forEach((entry)->logCalculation(entry));
 
+		factPairMapResult = factPairMap;
 		try(FileWriter fw = new FileWriter("calculationLog.txt", true))
 		{
-			sumOfFactors(factPairMap);
+			sumOfFactors(factPairMapResult);
+			fw.write("Total Number of Factors :" + numOfFac + "\n");
 			fw.write("Sum of all the factors : " + accumulatedSum + "\n");
-			fw.write(" Calculation Date :  " + LocalDateTime.now());
+			fw.write(" Calculation Date :  " + LocalDateTime.now()+"\n");
 
 		} catch(IOException e)
 		{
@@ -71,7 +73,7 @@ public class Main {
 
 
 
-		factPairMapResult = factPairMap;
+
 		return numOfFac;
 
 	}
@@ -112,7 +114,7 @@ public class Main {
 
 		map.entrySet()
 				.stream()
-				.forEach((entry)->accumulatedSum+=entry.getKey() + entry.getValue());
+				.forEach((entry)->accumulatedSum+=(long) entry.getKey() + (long) entry.getValue());
 
 
 	}
