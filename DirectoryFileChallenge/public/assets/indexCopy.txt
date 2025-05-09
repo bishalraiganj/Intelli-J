@@ -7,4 +7,4 @@ C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\icons\ne
 C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\icons\newFile2.txt
 C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\index.txt
 C:\Users\Bishal Adhikary\Intelli-J\DirectoryFileChallenge\public\assets\indexCopy.txt
-Generated: 2025-05-09T20:05:35.776145800
+Generated: 2025-05-09T20:05:35.760375900
