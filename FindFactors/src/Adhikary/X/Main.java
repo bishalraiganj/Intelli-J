@@ -5,10 +5,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
+
+	private static Map<Integer,Integer> factPairMapResult  = null;
+	private static long accumulatedSum = 0;
+
+
 
 	public static void main(String... args)
 	{
@@ -18,6 +25,9 @@ public class Main {
 
 
 	}
+
+
+
 
 	private static int getFactCount(int n)
 	{
@@ -49,6 +59,8 @@ public class Main {
 
 		try(FileWriter fw = new FileWriter("calculationLog.txt", true))
 		{
+			sumOfFactors(factPairMap);
+			fw.write("Sum of all the factors : " + accumulatedSum + "\n");
 			fw.write(" Calculation Date :  " + LocalDateTime.now());
 
 		} catch(IOException e)
@@ -58,9 +70,15 @@ public class Main {
 
 
 
+
+		factPairMapResult = factPairMap;
 		return numOfFac;
 
 	}
+
+
+
+
 
 	private static void logCalculation(Map.Entry<Integer,Integer> entry)
 	{
@@ -84,6 +102,17 @@ public class Main {
 		{
 			System.out.println("Error Message : " + e.getMessage());
 		}
+
+	}
+
+
+
+	private static void sumOfFactors(Map<Integer,Integer> map)
+	{
+
+		map.entrySet()
+				.stream()
+				.forEach((entry)->accumulatedSum+=entry.getKey() + entry.getValue());
 
 
 	}
