@@ -56,7 +56,15 @@ public class Main {
 		System.out.println(fetchEmployee(id,employeeMap,"employees"));
 		System.out.println("Enter new salary: ");
 		double salary = sc.nextDouble();
-		updateRecord(id,employeeMap,"employees",salary);
+		updateRecord(id,employeeMap,"employees.dat",salary);
+//		try(RandomAccessFile ra = new RandomAccessFile(datPath,"rw"))
+//		{
+//			ra.seek()
+//
+//		}catch(IOException e)
+//		{
+//			System.out.println("Error Message: " +  e.getMessage());
+//		}
 		System.out.println("Updated Salary: " + fetchEmployee(id,employeeMap,"employees"));
 
 	}
