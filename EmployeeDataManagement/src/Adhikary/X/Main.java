@@ -2,9 +2,11 @@ package Adhikary.X;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Main {
 
@@ -15,22 +17,26 @@ public class Main {
 		loadIndex("employees.dat",employeeMap);
 		employeeMap.entrySet()
 				.stream()
-				.map(e->e.getKey())
-				.collect(()->new ArrayList<>(),(ArrayList<Integer> e1,Integer e2)->e1.add(e2)
-						,(e3,e4)->e3.addAll(e4))
+//				.map(e->e.getKey())
+//				.collect(()->new ArrayList<>(),(ArrayList<Integer> e1,Integer e2)->e1.add(e2)
+//						,(e3,e4)->e3.addAll(e4))
 				.forEach(System.out::println);
 
 
-		long offset =  employeeMap.get(21);
-		try(RandomAccessFile ra = new RandomAccessFile("employees.dat","rw"))
-		{
-			ra.seek(offset);
-			ra.writeUTF("Testing Record/ Bishal Adhikary / Salary : 999999999999");
-		}catch(IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-		System.out.println("record 21 \n\n" + fetchEmployee(21,employeeMap,"employees"));
+//		long offset =  employeeMap.get(21);
+//		try(RandomAccessFile ra = new RandomAccessFile("employees.dat","rw"))
+//		{
+//			ra.seek(offset);
+//			ra.writeUTF("Testing Record/ Bishal Adhikary / Salary : 999999999999");
+//		}catch(IOException e)
+//		{
+//			throw new RuntimeException(e);
+//		}
+
+
+
+//				populateRecords(employeeMap,"employees.dat");
+				System.out.println(" \n\n" + fetchEmployee(730,employeeMap,"employees"));
 
 
 
@@ -38,6 +44,7 @@ public class Main {
 
 
 	}
+
 
 	private static void loadIndex(String indexPath, Map<Integer, Long> employeeMap)
 	{
@@ -73,10 +80,12 @@ public class Main {
 		try(RandomAccessFile ra = new RandomAccessFile(datPath+".dat","r"))
 		{
 			ra.seek(offset);
-			String record = ra.readUTF();
-			System.out.println(record);
-			return record;
+//			String record = ra.readUTF();
 //			System.out.println(record);
+			String record = "Employee id : " + ra.readInt() + "" + " Salary: " +  ra.readDouble() + " First Name: " +  ra.readUTF() + " Last Name: " + ra.readUTF();
+//			System.out.println(record);
+
+			return record;
 
 
 		}catch(IOException e)
@@ -85,6 +94,43 @@ public class Main {
 		}
 
 
+
+	}
+
+	private static void populateRecords(Map<Integer,Long> map,String path)
+	{
+
+		map.forEach((k,v)->
+		{
+			try(RandomAccessFile ra = new RandomAccessFile(path,"rw"))
+			{
+				ra.seek(v);
+				System.out.println("offset before writing record: " + ra.getFilePointer());
+				ra.writeUTF(generateRecord(k).toString());
+				System.out.println("offset after writing record: " + ra.getFilePointer());
+
+
+			}
+			catch(IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+
+		});
+
+
+	}
+
+	private static Employee generateRecord(int id)
+	{
+		Random r = new Random();
+//		Employee random = new Employee(id,r.nextDouble(10,15)*100000,"FirstName: ["+(char) r.nextInt(65,90) + "]",
+//				"LastName:  "+(char) r.nextInt(65,90));
+		Employee record = new Employee(id,300000,"Bishal","Adhikary");
+		System.out.println(":".repeat(50) + record);
+
+		return record;
 
 	}
 

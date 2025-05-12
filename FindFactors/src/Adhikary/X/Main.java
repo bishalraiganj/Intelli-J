@@ -21,7 +21,7 @@ public class Main {
 	{
 
 
-		System.out.println("Total number of factors : " + getFactCount(1024));
+		System.out.println("Total number of factors : " + getFactCount(5096));
 
 
 	}
