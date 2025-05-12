@@ -20,7 +20,19 @@ public class Main {
 						,(e3,e4)->e3.addAll(e4))
 				.forEach(System.out::println);
 
-		System.out.println("record 730 \n\n" + fetchEmployee(21,employeeMap,"employees"));
+
+		long offset =  employeeMap.get(21);
+		try(RandomAccessFile ra = new RandomAccessFile("employees.dat","rw"))
+		{
+			ra.seek(offset);
+			ra.writeUTF("Testing Record/ Bishal Adhikary / Salary : 999999999999");
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+		System.out.println("record 21 \n\n" + fetchEmployee(21,employeeMap,"employees"));
+
+
 
 
 
