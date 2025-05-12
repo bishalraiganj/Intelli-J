@@ -35,6 +35,10 @@ public class Main {
 //				populateRecords(employeeMap,"employees.dat");
 				System.out.println(" \n\n" + fetchEmployee(730,employeeMap,"employees"));
 
+				System.out.println("=".repeat(50));
+
+				promptLogic();
+
 
 
 
