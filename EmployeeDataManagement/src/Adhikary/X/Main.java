@@ -20,6 +20,8 @@ public class Main {
 						,(e3,e4)->e3.addAll(e4))
 				.forEach(System.out::println);
 
+		System.out.println("record 730 \n\n" + fetchEmployee(21,employeeMap,"employees"));
+
 
 
 
@@ -47,6 +49,28 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
+
+
+
+	}
+
+
+	private static String fetchEmployee(int id, Map<Integer, Long> map, String datPath)
+	{
+		long offset =map.get(id);
+		try(RandomAccessFile ra = new RandomAccessFile(datPath+".dat","r"))
+		{
+			ra.seek(offset);
+			String record = ra.readUTF();
+			System.out.println(record);
+			return record;
+//			System.out.println(record);
+
+
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 
 
 
