@@ -3,10 +3,7 @@ package Adhikary.X;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
 
@@ -43,8 +40,22 @@ public class Main {
 
 
 
+
+
 	}
 
+	private static void promptLogic()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter employee id: ");
+		int id = sc.nextInt();
+		System.out.println(fetchEmployee(id,employeeMap,"employees"));
+		System.out.println("Enter new salary: ");
+		double salary = sc.nextDouble();
+		updateRecord(id,employeeMap,"employees",salary);
+		System.out.println("Updated Salary: " + fetchEmployee(id,employeeMap,"employees"));
+
+	}
 
 	private static void loadIndex(String indexPath, Map<Integer, Long> employeeMap)
 	{
@@ -131,6 +142,22 @@ public class Main {
 		System.out.println(":".repeat(50) + record);
 
 		return record;
+
+	}
+
+	private static void updateRecord(int id, Map<Integer,Long> map,String datPath,double salary)
+	{
+		long offset = map.get(id)+4;
+		try(RandomAccessFile ra = new RandomAccessFile(datPath,"rw"))
+		{
+			ra.seek(offset);
+			ra.writeDouble(salary);
+
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
 
 	}
 
