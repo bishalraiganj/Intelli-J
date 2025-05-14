@@ -1,9 +1,6 @@
 package Adhikary.X;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 
 public class Main {
@@ -13,16 +10,9 @@ public class Main {
  		Path dataFile = Path.of("data.dat");
 		 writeData(dataFile);
 
+		 System.out.println("-".repeat(50));
 
-
-
-
-
-
-
-
-
-
+		 readData(dataFile);
 
 
 	}
@@ -42,7 +32,7 @@ public class Main {
 			char myChar = 'Z';
 			float myFloat = 77.7f;
 			double myDouble = 98.6;
-			String myString = "I am Bishal Adhikary";
+			String myString = "Hello World";
 
 			long position = 0;
 
@@ -85,6 +75,32 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
+
+
+
+
+	}
+
+	private static void readData(Path dataFile)
+	{
+
+		try(DataInputStream dataInputStream = new DataInputStream(
+				new BufferedInputStream(new FileInputStream(dataFile.toFile()))))
+		{
+			System.out.println("myInt = " + dataInputStream.readInt());
+			System.out.println("myLong  = " + dataInputStream.readLong());
+			System.out.println("myBoolean = " + dataInputStream.readBoolean());
+			System.out.println("myChar = " + dataInputStream.readChar());
+			System.out.println("myFloat = " + dataInputStream.readFloat());
+			System.out.println("myDouble = "  + dataInputStream.readDouble());
+			System.out.println("myString = " + dataInputStream.readUTF());
+
+
+
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 
 
 
