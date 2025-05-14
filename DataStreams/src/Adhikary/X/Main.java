@@ -2,7 +2,42 @@ package Adhikary.X;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
+
+class Player implements Serializable
+{
+	private String name;
+
+	private int topScore;
+
+	private List<String> collectedWeapons  = new ArrayList<>();
+
+	public Player(String name,int topScore, List<String> collectedWeapons)
+	{
+		this.name = name;
+		this.topScore = topScore;
+		this.collectedWeapons = collectedWeapons;
+
+	}
+
+	@Override
+	public String toString()
+	{
+
+		return "Player{" +
+				"name='" + name + '\'' +
+				", topScore=" + topScore +
+				", collectedWeapons=" + collectedWeapons +
+				'}';
+
+	}
+
+
+
+
+}
 public class Main {
 
 	public static void main(String... args)
@@ -13,6 +48,13 @@ public class Main {
 		 System.out.println("-".repeat(50));
 
 		 readData(dataFile);
+
+		 System.out.println(":".repeat(50));
+
+		 Player tim =  new Player("Tim",100_000_010,List.of("knife","machete","pistol"));
+		 System.out.println(tim);
+
+
 
 
 	}
@@ -98,6 +140,38 @@ public class Main {
 
 
 		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static void writeObject(Path dataFile, Player player)
+	{
+		try(ObjectOutputStream objStream = new ObjectOutputStream(
+				new BufferedOutputStream(new FileOutputStream(dataFile.toFile()))
+		))
+		{
+			objStream.writeObject(player); // invoked the method that does the default serialization
+
+
+
+		}catch(IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static Player readPlayer(Path dataFile)
+	{
+		try(ObjectInputStream objStream = new ObjectInputStream(
+				new BufferedInputStream(new FileInputStream(dataFile.toFile()))
+		))
+		{
+			return (Player) objStream.readObject();
+
+
+		}
+		catch(IOException  | ClassNotFoundException e )
 		{
 			throw new RuntimeException(e);
 		}
