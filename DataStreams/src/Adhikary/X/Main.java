@@ -53,6 +53,12 @@ public class Main {
 
 		 Player tim =  new Player("Tim",100_000_010,List.of("knife","machete","pistol"));
 		 System.out.println(tim);
+		 Path timFile = Path.of("tim.dat");
+		 writeObject(timFile,tim);
+		 Player reconstitutedTim  = readPlayer(timFile);
+		 System.out.println(reconstitutedTim);
+
+		 System.out.println(":".repeat(50));
 
 
 
