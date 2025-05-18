@@ -22,7 +22,7 @@ public class Main {
 
 
 		CustomThread customThread = new CustomThread();
-		customThread.start();
+		customThread.run();
 
 		for(int i = 1; i <= 3 ; i++)
 		{
