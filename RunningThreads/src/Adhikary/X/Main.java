@@ -24,11 +24,12 @@ public class Main {
 				System.out.print(". ");
 				try{
 					Thread.sleep(500);
-					System.out.println("A.State = " + Thread.currentThread().getState());
+//					System.out.println("A.State = " + Thread.currentThread().getState());
 				}catch(InterruptedException e)
 				{
 					System.out.println("\nWhoops!!" + tName + " interrupted");
-					System.out.println("A1.State =  " + Thread.currentThread().getState());
+					Thread.currentThread().interrupt();
+//					System.out.println("A1.State =  " + Thread.currentThread().getState());
 					return;
 				}
 			}
@@ -36,31 +37,69 @@ public class Main {
 
 		});
 
-		System.out.println(thread.getName() + " thread starting");
-		thread.start();
-
-		long now = System.currentTimeMillis();
-
-		while(thread.isAlive())
+		Thread installThread = new Thread(()->
 		{
-			System.out.println("\nwaiting for my custom thread to complete");
-			try
-			{
-				Thread.sleep(1000);
-				System.out.println("B.State = " + thread.getState());
-
-				if(System.currentTimeMillis() - now > 2000)
+			try {
+				for (int i = 0; i < 3; i++)
 				{
-					thread.interrupt();
+					Thread.sleep(250);
+					System.out.println("Installing Step "  + (i + 1) + " is completed.");
 				}
 			}catch(InterruptedException e)
 			{
 				e.printStackTrace();
 			}
+		},"installThread");
+
+
+
+
+		Thread threadMonitor = new Thread(()->
+		{
+			long now = System.currentTimeMillis();
+			while(thread.isAlive())
+			{
+				try
+				{
+					Thread.sleep(1000);
+//				System.out.println("B.State = " + thread.getState());
+
+					if(System.currentTimeMillis() - now > 2000)
+					{
+						thread.interrupt();
+					}
+				}catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+		});
+
+		System.out.println(thread.getName() + " thread starting");
+		thread.start();
+		threadMonitor.start();
+
+		try {
+			thread.join();
+		}catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		if(!thread.isInterrupted())
+		{
+		installThread.start();
+		}else
+		{
+			System.out.println("Previous thread was interrupted, " +
+					installThread.getName()  + " can't run. ");
 		}
 
 
-		System.out.println("C.State = " + thread.getState());
+
+
+//		System.out.println("C.State = " + thread.getState());
 
 
 
