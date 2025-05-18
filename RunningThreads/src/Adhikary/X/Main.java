@@ -24,9 +24,11 @@ public class Main {
 				System.out.print(". ");
 				try{
 					Thread.sleep(500);
+					System.out.println("A.State = " + Thread.currentThread().getState());
 				}catch(InterruptedException e)
 				{
 					System.out.println("\nWhoops!!" + tName + " interrupted");
+					System.out.println("A1.State =  " + Thread.currentThread().getState());
 					return;
 				}
 			}
@@ -37,16 +39,41 @@ public class Main {
 		System.out.println(thread.getName() + " thread starting");
 		thread.start();
 
-		System.out.println("Main thread would continue here");
+		long now = System.currentTimeMillis();
 
-		try
+		while(thread.isAlive())
 		{
-			Thread.sleep(2000);
-		}catch(InterruptedException e)
-		{
-			e.printStackTrace();
+			System.out.println("\nwaiting for my custom thread to complete");
+			try
+			{
+				Thread.sleep(1000);
+				System.out.println("B.State = " + thread.getState());
+
+				if(System.currentTimeMillis() - now > 2000)
+				{
+					thread.interrupt();
+				}
+			}catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 		}
-		thread.interrupt();
+
+
+		System.out.println("C.State = " + thread.getState());
+
+
+
+//		System.out.println("Main thread would continue here");
+
+//		try
+//		{
+//			Thread.sleep(2000);
+//		}catch(InterruptedException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		thread.interrupt();
 
 //		while(thread.isAlive())
 //		{
