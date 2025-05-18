@@ -22,7 +22,23 @@ public class Main {
 
 
 		CustomThread customThread = new CustomThread();
-		customThread.run();
+		customThread.start();
+
+		Runnable runnable = () -> {
+			for (int i = 0 ; i <= 8 ; i++) {
+				System.out.print(" 2 ");
+				try {
+					TimeUnit.MILLISECONDS.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+
+		Thread myThread = new Thread(runnable);
+		myThread.start();
+
+
 
 		for(int i = 1; i <= 3 ; i++)
 		{
