@@ -12,6 +12,12 @@ public class Main {
 
 		printThreadState(currentThread);
 
+		System.out.println("-".repeat(50));
+
+		currentThread.setName("MainGuy");
+		currentThread.setPriority(Thread.MAX_PRIORITY);
+		printThreadState(currentThread);
+
 
 
 
