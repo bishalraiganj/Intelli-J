@@ -38,20 +38,30 @@ public class Main {
 		thread.start();
 
 		System.out.println("Main thread would continue here");
-		while(thread.isAlive())
+
+		try
 		{
-			System.out.print(" M ");
-			try {
-				TimeUnit.MILLISECONDS.sleep(300);
-			}catch(InterruptedException e)
-			{
-				System.out.println("Main thread interrupted");
-			}
-		}
-		if(!thread.isAlive())
+			Thread.sleep(2000);
+		}catch(InterruptedException e)
 		{
-			System.out.println(thread.getName() + " thread stopped" + " so stopping Main thread also :-)" );
+			e.printStackTrace();
 		}
+		thread.interrupt();
+
+//		while(thread.isAlive())
+//		{
+//			System.out.print(" M ");
+//			try {
+//				TimeUnit.MILLISECONDS.sleep(300);
+//			}catch(InterruptedException e)
+//			{
+//				System.out.println("Main thread interrupted");
+//			}
+//		}
+//		if(!thread.isAlive())
+//		{
+//			System.out.println(thread.getName() + " thread stopped" + " so stopping Main thread also :-)" );
+//		}
 
 
 	}
