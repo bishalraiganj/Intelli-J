@@ -58,6 +58,13 @@ public class Main {
 		mapLogs(listLogs(logReader(p))).forEach((k , v) -> System.out.println("Key: " + k + " | Value: " + v));
 
 
+		System.out.println(":".repeat(50));
+
+		List<String> logs = listLogs(logReader(p));
+		String testLevelString = "INFO";
+		long count = countLevel(logs,testLevelString);
+		System.out.println(testLevelString + " Count: " + count);
+
 
 		System.out.println("\n\n End of Instructions /Main thread :-)  \n ");
 
@@ -122,6 +129,20 @@ public class Main {
 
 
 		return map;
+	}
+
+	private static long countLevel(List<String> logs, String level)
+	{
+		long count = logs.stream()
+				.filter( (e)-> {
+
+					Pattern p = Pattern.compile(level);
+					Matcher matcher = p.matcher(e);
+					return matcher.find();
+
+				})
+				.count();
+		return count;
 	}
 
 }
