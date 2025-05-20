@@ -11,12 +11,13 @@ public class Main {
 			@Override
 			public void run()
 			{
-				int numCount = 0;
-				for(int i = 0;numCount<=5 ; i++ )
+				System.out.println("Even Thread Started: ");
+				int evenCount = 0;
+				for(int i = 1;evenCount<5 ; i++ )
 				{
 					if(i % 2 == 0)
 					{
-						System.out.print(i);
+						System.out.print(i + " ");
 						try {
 							TimeUnit.MILLISECONDS.sleep(1000);
 						}catch(InterruptedException e)
@@ -24,14 +25,38 @@ public class Main {
 							e.printStackTrace();
 						}
 
-						numCount++;
+						evenCount++;
 					}
 				}
 			}
 		}
 
+		Thread oddThread = new Thread(()->
+		{
+
+			System.out.println("oddThread Started: ");
+			int oddCount = 0 ;
+			for(int i = 1; oddCount<5 ; i++)
+			{
+				if(i % 2 != 0 )
+				{
+					System.out.print(i + " ");
+					try
+					{
+						TimeUnit.MILLISECONDS.sleep(1000);
+					}catch(InterruptedException e)
+					{
+						e.printStackTrace();
+					}
+					oddCount++;
+				}
+			}
+
+		});
+
 		Thread evenThreadInstance = new EvenThread();
 		evenThreadInstance.start();
+		oddThread.start();
 		while(evenThreadInstance.isAlive())
 		{
 			System.out.print(" . ");
