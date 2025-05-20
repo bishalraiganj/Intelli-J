@@ -65,6 +65,10 @@ public class Main {
 		long count = countLevel(logs,testLevelString);
 		System.out.println(testLevelString + " Count: " + count);
 
+		System.out.println(":".repeat(50));
+
+		loggedUsers(logs).forEach((k , v)-> System.out.println(k + " | Value: " + v));
+
 
 		System.out.println("\n\n End of Instructions /Main thread :-)  \n ");
 
@@ -143,6 +147,60 @@ public class Main {
 				})
 				.count();
 		return count;
+	}
+
+	private static Map<String,List<String>> loggedUsers(List<String> logs )
+	{
+		List<String> loggedList = logs.stream()
+				.filter((e)-> {
+
+					Pattern p = Pattern.compile("logged in");
+					Matcher matcher = p.matcher(e);
+					return matcher.find();
+
+				})
+				.collect(()->new ArrayList<>(),(ArrayList<String> e1,String e2)->e1.add(e2),(e3,e4)->e3.addAll(e4));
+
+		Map<String,List<String>> userMap = loggedList.stream()
+				.collect(Collectors.groupingBy((e)-> {
+
+					Pattern p = Pattern.compile("User.*logged in");
+					Matcher matcher = p.matcher(e);
+					matcher.find();
+						String str = matcher.group();
+						str = str.replaceAll("User", "");
+						str = str.replaceAll("logged in", "");
+						return str;
+
+
+
+				},Collectors.toList()));
+
+
+		userMap.forEach((k , v) -> System.out.println(k + " | value: " + v));
+
+		Map<String,List<String>> map = userMap.entrySet().stream()
+				.map((entry)-> {
+					List<String> ipList = new ArrayList<>();
+					for(String s : entry.getValue())
+					{
+						Pattern p = Pattern.compile("[0-9.]*");
+						Matcher matcher = p.matcher(s);
+						matcher.find();
+						ipList.add(matcher.group());
+					}
+
+					return Map.entry(entry.getKey(),ipList);
+				})
+				.collect(()->new LinkedHashMap<String,List<String>>(),(LinkedHashMap<String ,List<String>> e1, Map.Entry<String,List<String>> e2)->{
+
+					e1.put(e2.getKey(),e2.getValue());
+				},(e3,e4)->e3.putAll(e4));
+
+
+
+		return map;
+
 	}
 
 }
