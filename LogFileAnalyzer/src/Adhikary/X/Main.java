@@ -4,10 +4,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -53,6 +53,13 @@ public class Main {
 		System.out.println(":".repeat(50));
 		listLogs(logReader(p)).forEach(System.out::println);
 
+		System.out.println(":".repeat(50));
+
+		mapLogs(listLogs(logReader(p))).forEach((k , v) -> System.out.println("Key: " + k + " | Value: " + v));
+
+
+
+		System.out.println("\n\n End of Instructions /Main thread :-)  \n ");
 
 
 
@@ -95,7 +102,26 @@ public class Main {
 		List<String> list = new ArrayList<>(Arrays.asList(logs));
 
 		return list;
+	}
 
+	private static Map<String,List<String>> mapLogs(List<String> logs)
+	{
+		Map<String,List<String>> map = logs.stream()
+				.collect(Collectors.groupingBy((e)->{
+
+					Pattern pattern = Pattern.compile("^\\[.*]");
+
+					Matcher matcher = pattern.matcher(e);
+					 matcher.find();
+//					String match = matcher.group();
+//					String finalString = e.replace(match,"");
+//					return finalString;
+
+					return matcher.group();
+				},Collectors.toList()));
+
+
+		return map;
 	}
 
 }
