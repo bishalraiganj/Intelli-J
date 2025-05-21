@@ -79,6 +79,11 @@ public class Main {
 
 	}
 
+
+
+
+
+
 	private static void writeLog(Path path, String log) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("log.txt"))) {
 			bw.write(log);
@@ -88,6 +93,11 @@ public class Main {
 		}
 
 	}
+
+
+
+
+
 
 	private static String logReader(Path path) {
 		String str = "";
@@ -103,6 +113,15 @@ public class Main {
 		return str;
 	}
 
+
+
+
+
+
+
+
+
+
 	private static List<String> listLogs(String logString) {
 		String[] logs = logString.split("\n");
 
@@ -110,6 +129,16 @@ public class Main {
 
 		return list;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	private static Map<String, List<String>> mapLogs(List<String> logs) {
 		Map<String, List<String>> map = logs.stream()
@@ -130,6 +159,13 @@ public class Main {
 		return map;
 	}
 
+
+
+
+
+
+
+
 	private static long countLevel(List<String> logs, String level) {
 		long count = logs.stream()
 				.filter((e) -> {
@@ -142,6 +178,12 @@ public class Main {
 				.count();
 		return count;
 	}
+
+
+
+
+
+
 
 	private static Map<String, List<String>> loggedUsers(List<String> logs) {
 		List<String> loggedList = logs.stream()
@@ -194,6 +236,11 @@ public class Main {
 
 	}
 
+
+
+
+
+
 	private static Map<String, Map<String,List<String>>>   timedLogs(List<String> logs)
 	{
 		Map<String,Map<String,List<String>>>  map = logs.stream()
@@ -227,6 +274,85 @@ public class Main {
 
 
 
+	}
+
+	private static Map<String,Map<String,List<String>>> filterLogs(Map<String,Map<String,List<String>>> map, String date,String timeOrigin, String timeBound)
+	{
+
+		Map<String,Map<String,List<String>>> resultMap = new LinkedHashMap<>();
+
+		Pattern p = Pattern.compile("[0-9]+");
+		Matcher oM = p.matcher(timeOrigin);
+		Matcher bM = p.matcher(timeBound);
+
+		oM.find();
+		int oHour = Integer.valueOf(oM.group());
+		oM.find();
+		int oMin = Integer.valueOf(oM.group());
+		oM.find();
+		int oSec = Integer.valueOf(oM.group());
+
+		bM.find();
+		int bHour = Integer.valueOf(bM.group());
+		bM.find();
+		int bMin = Integer.valueOf(bM.group());
+		bM.find();
+		int bSec = Integer.valueOf(bM.group());
+
+
+
+		map.entrySet().stream()
+				.filter((entry)->{
+
+					Pattern p12 = Pattern.compile("[0-9-]+");
+					Matcher m = p12.matcher(entry.getKey());
+					m.find();
+					return m.group().equals(date);
+				})
+				.forEach((entry)->{
+
+					Map<String, List<String>> mp = new LinkedHashMap<>();
+
+
+					for(Map.Entry<String,List<String>> entryNested : entry.getValue().entrySet())
+					{
+
+						Pattern p1 = Pattern.compile("[0-9]+");
+						Matcher mKey = p1.matcher(entryNested.getKey());
+						mKey.find();
+						int mHour = Integer.valueOf(mKey.group());
+						mKey.find();
+						int mMinute = Integer.valueOf(mKey.group());
+						mKey.find();
+						int mSecond = Integer.valueOf(mKey.group());
+						if(mHour<=bHour && mHour>=oHour && mMinute<=bMin && mMinute>=oMin && mSecond<=bSec && mSecond>=oSec)
+						{
+							mp.put(entryNested.getKey(),entryNested.getValue());
+						}
+
+					}
+					resultMap.put(entry.getKey(),mp);
+
+
+				});
+
+		Map<String,Map<String,List<String>>> finalMap = resultMap.entrySet()
+				.stream()
+				.filter((entry)-> {
+
+					if(entry.getValue().size()>0)
+					{
+						return true;
+					}
+					return false;
+				})
+				.collect(()->new LinkedHashMap<>(),(LinkedHashMap<String,Map<String,List<String>>> e1, Map.Entry<String,Map<String,List<String>>> e2)-> e1.put(e2.getKey(),e2.getValue()),
+
+						(e3,e4)->e3.putAll(e4));
+
+
+
+		return finalMap;
 	}
 
 }
