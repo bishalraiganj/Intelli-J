@@ -16,6 +16,7 @@ public class Main {
 
 		String logData = """
 				[2025-05-18 09:23:45] INFO  - User john logged in from IP 192.168.0.10
+				[2025-05-19 08:21:24] INFO  - User john logged in from IP 192.169.0.12
 				[2025-05-18 09:24:10] ERROR - Invalid password attempt for user admin
 				[2025-05-18 09:24:30] WARN  - Disk space running low on server-01
 				[2025-05-18 09:25:01] INFO  - User alice uploaded file report.pdf
@@ -23,6 +24,7 @@ public class Main {
 				[2025-05-18 09:26:55] ERROR - User charlie attempted access to restricted area
 				[2025-05-18 09:27:15] DEBUG - Cache refreshed for user alice
 				[2025-05-18 09:28:03] INFO  - User david logged in from IP 192.168.0.22
+				[2025-05-19 08:21:19] INFO  - User david logged in from IP 192.167.0.10
 				[2025-05-18 09:29:11] ERROR - Failed to send email to user emily
 				[2025-05-18 09:30:42] WARN  - High memory usage detected
 				[2025-05-18 09:31:12] INFO  - User john downloaded monthly_report.xlsx
@@ -177,16 +179,17 @@ public class Main {
 				},Collectors.toList()));
 
 
-		userMap.forEach((k , v) -> System.out.println(k + " | value: " + v));
+//		userMap.forEach((k , v) -> System.out.println(k + " | value: " + v));
 
 		Map<String,List<String>> map = userMap.entrySet().stream()
 				.map((entry)-> {
 					List<String> ipList = new ArrayList<>();
 					for(String s : entry.getValue())
 					{
-						Pattern p = Pattern.compile("[0-9.]*");
+						Pattern p = Pattern.compile("[0-9]+([.][0-9]+)+");
 						Matcher matcher = p.matcher(s);
 						matcher.find();
+//						System.out.println(matcher.group());
 						ipList.add(matcher.group());
 					}
 
