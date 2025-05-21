@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-	public static void main(String... args)
-	{
+	public static void main(String... args) {
 
 		String logData = """
 				[2025-05-18 09:23:45] INFO  - User john logged in from IP 192.168.0.10
+				[2025-05-18 09:23:45] INFO  - User john logged in from IP 123.434.45.0
 				[2025-05-19 08:21:24] INFO  - User john logged in from IP 192.169.0.12
 				[2025-05-18 09:24:10] ERROR - Invalid password attempt for user admin
 				[2025-05-18 09:24:30] WARN  - Disk space running low on server-01
@@ -35,12 +35,10 @@ public class Main {
 				""";
 
 		Path p = Path.of("log.txt");
-		if(!Files.exists(p))
-		{
+		if (!Files.exists(p)) {
 			try {
 				Files.createFile(p);
-			}catch(IOException e)
-			{
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
@@ -57,59 +55,55 @@ public class Main {
 
 		System.out.println(":".repeat(50));
 
-		mapLogs(listLogs(logReader(p))).forEach((k , v) -> System.out.println("Key: " + k + " | Value: " + v));
+		mapLogs(listLogs(logReader(p))).forEach((k, v) -> System.out.println("Key: " + k + " | Value: " + v));
 
 
 		System.out.println(":".repeat(50));
 
 		List<String> logs = listLogs(logReader(p));
 		String testLevelString = "INFO";
-		long count = countLevel(logs,testLevelString);
+		long count = countLevel(logs, testLevelString);
 		System.out.println(testLevelString + " Count: " + count);
 
 		System.out.println(":".repeat(50));
 
-		loggedUsers(logs).forEach((k , v)-> System.out.println(k + " | Value: " + v));
+		loggedUsers(logs).forEach((k, v) -> System.out.println(k + " | Value: " + v));
 
+
+		System.out.println(":".repeat(50));
+
+		timedLogs(logs).forEach((k,v)-> System.out.println(k + " | Value: " + v));
 
 		System.out.println("\n\n End of Instructions /Main thread :-)  \n ");
 
 
-
 	}
 
-	private static void writeLog(Path path, String log)
-	{
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter("log.txt")))
-		{
+	private static void writeLog(Path path, String log) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("log.txt"))) {
 			bw.write(log);
 
-		}catch(IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	private static String logReader(Path path)
-	{
+	private static String logReader(Path path) {
 		String str = "";
-		try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path.toFile())))
-		{
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path.toFile()))) {
 
-		byte[] bArr = bis.readAllBytes();
-		str = new String(bArr, StandardCharsets.UTF_8);
+			byte[] bArr = bis.readAllBytes();
+			str = new String(bArr, StandardCharsets.UTF_8);
 
 
-		}catch(IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return str;
 	}
 
-	private static List<String> listLogs(String logString)
-	{
+	private static List<String> listLogs(String logString) {
 		String[] logs = logString.split("\n");
 
 		List<String> list = new ArrayList<>(Arrays.asList(logs));
@@ -117,30 +111,28 @@ public class Main {
 		return list;
 	}
 
-	private static Map<String,List<String>> mapLogs(List<String> logs)
-	{
-		Map<String,List<String>> map = logs.stream()
-				.collect(Collectors.groupingBy((e)->{
+	private static Map<String, List<String>> mapLogs(List<String> logs) {
+		Map<String, List<String>> map = logs.stream()
+				.collect(Collectors.groupingBy((e) -> {
 
 					Pattern pattern = Pattern.compile("^\\[.*]");
 
 					Matcher matcher = pattern.matcher(e);
-					 matcher.find();
+					matcher.find();
 //					String match = matcher.group();
 //					String finalString = e.replace(match,"");
 //					return finalString;
 
 					return matcher.group();
-				},Collectors.toList()));
+				}, Collectors.toList()));
 
 
 		return map;
 	}
 
-	private static long countLevel(List<String> logs, String level)
-	{
+	private static long countLevel(List<String> logs, String level) {
 		long count = logs.stream()
-				.filter( (e)-> {
+				.filter((e) -> {
 
 					Pattern p = Pattern.compile(level);
 					Matcher matcher = p.matcher(e);
@@ -151,41 +143,38 @@ public class Main {
 		return count;
 	}
 
-	private static Map<String,List<String>> loggedUsers(List<String> logs )
-	{
+	private static Map<String, List<String>> loggedUsers(List<String> logs) {
 		List<String> loggedList = logs.stream()
-				.filter((e)-> {
+				.filter((e) -> {
 
 					Pattern p = Pattern.compile("logged in");
 					Matcher matcher = p.matcher(e);
 					return matcher.find();
 
 				})
-				.collect(()->new ArrayList<>(),(ArrayList<String> e1,String e2)->e1.add(e2),(e3,e4)->e3.addAll(e4));
+				.collect(() -> new ArrayList<>(), (ArrayList<String> e1, String e2) -> e1.add(e2), (e3, e4) -> e3.addAll(e4));
 
-		Map<String,List<String>> userMap = loggedList.stream()
-				.collect(Collectors.groupingBy((e)-> {
+		Map<String, List<String>> userMap = loggedList.stream()
+				.collect(Collectors.groupingBy((e) -> {
 
 					Pattern p = Pattern.compile("User.*logged in");
 					Matcher matcher = p.matcher(e);
 					matcher.find();
-						String str = matcher.group();
-						str = str.replaceAll("User", "");
-						str = str.replaceAll("logged in", "");
-						return str;
+					String str = matcher.group();
+					str = str.replaceAll("User", "");
+					str = str.replaceAll("logged in", "");
+					return str;
 
 
-
-				},Collectors.toList()));
+				}, Collectors.toList()));
 
 
 //		userMap.forEach((k , v) -> System.out.println(k + " | value: " + v));
 
-		Map<String,List<String>> map = userMap.entrySet().stream()
-				.map((entry)-> {
+		Map<String, List<String>> map = userMap.entrySet().stream()
+				.map((entry) -> {
 					List<String> ipList = new ArrayList<>();
-					for(String s : entry.getValue())
-					{
+					for (String s : entry.getValue()) {
 						Pattern p = Pattern.compile("[0-9]+([.][0-9]+)+");
 						Matcher matcher = p.matcher(s);
 						matcher.find();
@@ -193,16 +182,50 @@ public class Main {
 						ipList.add(matcher.group());
 					}
 
-					return Map.entry(entry.getKey(),ipList);
+					return Map.entry(entry.getKey(), ipList);
 				})
-				.collect(()->new LinkedHashMap<String,List<String>>(),(LinkedHashMap<String ,List<String>> e1, Map.Entry<String,List<String>> e2)->{
+				.collect(() -> new LinkedHashMap<String, List<String>>(), (LinkedHashMap<String, List<String>> e1, Map.Entry<String, List<String>> e2) -> {
 
-					e1.put(e2.getKey(),e2.getValue());
-				},(e3,e4)->e3.putAll(e4));
-
+					e1.put(e2.getKey(), e2.getValue());
+				}, (e3, e4) -> e3.putAll(e4));
 
 
 		return map;
+
+	}
+
+	private static Map<String, Map<String,List<String>>>   timedLogs(List<String> logs)
+	{
+		Map<String,Map<String,List<String>>>  map = logs.stream()
+				.collect(Collectors.groupingBy(( e)->{
+
+					Pattern p = Pattern.compile("^\\[[0-9-]+");
+					Matcher m = p.matcher(e);
+					m.find();
+
+
+//					System.out.println(m.group());
+					return m.group();
+
+				} ,Collectors.groupingBy(( e1)->{
+
+					Pattern p = Pattern.compile("[0-9:]+");
+					Matcher m = p.matcher(e1);
+					m.find();
+					m.find();
+					m.find();
+					m.find();
+
+
+//					System.out.println(m.group());
+					return m.group();
+
+				} ,Collectors.toList())));
+
+
+		return map;
+
+
 
 	}
 
