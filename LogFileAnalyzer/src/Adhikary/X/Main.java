@@ -74,6 +74,28 @@ public class Main {
 
 		timedLogs(logs).forEach((k,v)-> System.out.println(k + " | Value: " + v));
 
+
+		System.out.println(":".repeat(50));
+
+		System.out.println("TestStart");
+
+
+		String testDate = "2025-05-18";
+		String testTimeOrigin = "09:21:24";
+		String testTimeBound = "09:27:16";
+		Map<String,Map<String,List<String>>> myFiltration  = filterLogs(timedLogs(logs),testDate,testTimeOrigin,testTimeBound);
+
+		myFiltration.forEach((k,v)-> {
+			System.out.println("Date: " );
+			v.forEach((k1,v1)-> {
+				System.out.println("\tTime: " + k1 );
+				v1.forEach((s)->System.out.println("\t\t log: " + s));
+			});
+		});
+
+
+		System.out.println("Test End");
+
 		System.out.println("\n\n End of Instructions /Main thread :-)  \n ");
 
 
@@ -240,7 +262,7 @@ public class Main {
 
 
 
-
+    //timedLogs() maps first by dates and then does nested mapping by time
 	private static Map<String, Map<String,List<String>>>   timedLogs(List<String> logs)
 	{
 		Map<String,Map<String,List<String>>>  map = logs.stream()
@@ -276,6 +298,9 @@ public class Main {
 
 	}
 
+
+	//filterLogs() returns a map of logs only in the time range and date specified and also they are mapped by date and time
+
 	private static Map<String,Map<String,List<String>>> filterLogs(Map<String,Map<String,List<String>>> map, String date,String timeOrigin, String timeBound)
 	{
 
@@ -309,6 +334,7 @@ public class Main {
 					m.find();
 					return m.group().equals(date);
 				})
+//				.peek(System.out::println)
 				.forEach((entry)->{
 
 					Map<String, List<String>> mp = new LinkedHashMap<>();
@@ -320,15 +346,43 @@ public class Main {
 						Pattern p1 = Pattern.compile("[0-9]+");
 						Matcher mKey = p1.matcher(entryNested.getKey());
 						mKey.find();
+
 						int mHour = Integer.valueOf(mKey.group());
+//						System.out.println("mHour: " + mHour);
 						mKey.find();
 						int mMinute = Integer.valueOf(mKey.group());
 						mKey.find();
 						int mSecond = Integer.valueOf(mKey.group());
-						if(mHour<=bHour && mHour>=oHour && mMinute<=bMin && mMinute>=oMin && mSecond<=bSec && mSecond>=oSec)
+						if(mHour<bHour && mHour>oHour )
 						{
 							mp.put(entryNested.getKey(),entryNested.getValue());
 						}
+						else if(oHour!=bHour && mHour==oHour && mMinute>=oMin && mSecond >= oSec )
+						{
+							mp.put(entryNested.getKey(),entryNested.getValue());
+						}
+						else if(oHour != bHour && mHour == bHour && mMinute<=bMin && mSecond <= bSec)
+						{
+							mp.put(entryNested.getKey(),entryNested.getValue());
+						}
+						else if(oHour == bHour && mHour == bHour  )
+						{
+							if(mMinute == oMin && mSecond >= oSec) {
+								mp.put(entryNested.getKey(), entryNested.getValue());
+							}
+							else if(mMinute >oMin && mMinute < bMin )
+							{
+								mp.put(entryNested.getKey(),entryNested.getValue());
+							}
+							else if(mMinute == bMin && mSecond <= bSec)
+							{
+								mp.put(entryNested.getKey() ,entryNested.getValue());
+							}
+						}
+//						else if(mHour == bHour && mMinute <= bMin && mSecond <= bSec)
+//						{
+//							mp.put(entryNested.getKey(),entryNested.getValue());
+//						}
 
 					}
 					resultMap.put(entry.getKey(),mp);
