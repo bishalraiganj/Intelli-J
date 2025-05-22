@@ -12,7 +12,7 @@ public class Main {
 			int evenCount = 0;
 			for(int i = 1 ; evenCount<5 ; i++ ) {
 				if (i % 2 == 0) {
-					System.out.print(" "+ i + " ");
+					System.out.print(" ( "+ i + " Thread_One ) ");
 					evenCount++;
 					try {
 						TimeUnit.MILLISECONDS.sleep(500);
@@ -40,7 +40,7 @@ public class Main {
 			{
 				if( i % 2 != 0)
 				{
-					System.out.print(" " + i + " ");
+					System.out.print(" ( " + i + " Thread_Two ) ");
 					oddCount++;
 					try {
 						TimeUnit.MILLISECONDS.sleep(400);
@@ -121,8 +121,15 @@ public class Main {
 					}
 					if(!forLoopBreakFlag)
 					{
-						System.out.print(" " + i + " ");
+						System.out.print(" ( " + i + "  Thread_Four ) ");
 						primeCount++;
+						try {
+
+							Thread.sleep(500);
+						}catch(InterruptedException e)
+						{
+							e.printStackTrace();
+						}
 					}
 					boolean forLoopBreakFlag2 = false;
 
@@ -136,8 +143,15 @@ public class Main {
 					}
 					if(!forLoopBreakFlag2)
 					{
-						System.out.print(" " +  oneForm + " ");
+						System.out.print(" ( " +  oneForm + " Thread_Four ) ");
 						primeCount++;
+						try {
+							Thread.sleep(500);
+						}catch(InterruptedException e)
+						{
+							e.printStackTrace();
+						}
+
 					}
 
 				}
@@ -146,11 +160,24 @@ public class Main {
 			}
 		});
 
-//		myThread.start();
-//		threadTwo.start();
+		myThread.start();
+		threadTwo.start();
 //		threadThree.start();
 
 		threadFour.start();
+
+		try {
+			Thread.sleep(2000);
+			myThread.interrupt();
+			System.out.println( "Thread_One state : " + myThread.getState());
+			threadTwo.interrupt();
+			System.out.println( " Thread_Two state : " + threadTwo.getState());
+		}catch(InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+
+
 
 
 
