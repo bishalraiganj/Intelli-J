@@ -18,7 +18,8 @@ public class Main {
 						TimeUnit.MILLISECONDS.sleep(500);
 					} catch (InterruptedException e)
 					{
-						e.printStackTrace();
+//						e.printStackTrace();
+						System.out.println("Thread_One wad Interrupted !");
 					}
 				}
 
@@ -46,7 +47,8 @@ public class Main {
 						TimeUnit.MILLISECONDS.sleep(400);
 					}catch(InterruptedException e)
 					{
-						e.printStackTrace();
+//						e.printStackTrace();
+						System.out.println(" Thread_Two was Interrupted !");
 					}
 
 				}
@@ -82,13 +84,14 @@ public class Main {
 						}
 						if(!forLoopBreakFlag)
 						{
-							System.out.print(" " + i + " ");
+							System.out.print(" ( " + i + " Threed_Three )  ");
 							primeCount++;
 								try {
 									Thread.sleep(1000);
 								}catch(InterruptedException e)
 								{
-									e.printStackTrace();
+//									e.printStackTrace();
+									System.out.println(" Thread_Three was Interrupted !");
 								}
 						}
 
@@ -128,7 +131,8 @@ public class Main {
 							Thread.sleep(500);
 						}catch(InterruptedException e)
 						{
-							e.printStackTrace();
+//							e.printStackTrace();
+							System.out.println(" Thread_Four was Interrupted !");
 						}
 					}
 					boolean forLoopBreakFlag2 = false;
@@ -149,7 +153,8 @@ public class Main {
 							Thread.sleep(500);
 						}catch(InterruptedException e)
 						{
-							e.printStackTrace();
+//							e.printStackTrace();
+							System.out.println(" Thread_Four was Interrupted ! ");
 						}
 
 					}
