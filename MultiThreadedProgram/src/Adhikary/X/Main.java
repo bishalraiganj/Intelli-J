@@ -56,12 +56,7 @@ public class Main {
 
 
 
-		/*
-		threadThree (Thread instance) prints primeNumbers it's prime logic is optimized by only checking odd numbers that are not multiples of 2 and 3
-		and so the numbers are also checked for divisibility only against odd numbers that are also not 2 and 3's multiples
-		because we already know i's in the for loop are not so we dont have to check i's divisibility also by 2 and 3's multiples
-		but only by odd numbers that are not 2 and 3's multiples "
-		 */
+
 		Thread threadThree = new Thread(new Thread() {
 
 			@Override
@@ -69,14 +64,15 @@ public class Main {
 			{
 				int primeCount = 0;
 
-				for(int i = 3 ; primeCount < 500 ; i += 2)
+				for(int i = 3 ; primeCount < 500 ; i += 2) // This condition completely eliminates possibilities of multiples of 2 and some multiples of 3 but not all multiples of 3
 				{
-					if(i % 2 != 0 && i % 3 != 0) // This condition is unnecessary since we are already checking only odd numbers that are not multiples of either 2 and 3
+					if(i % 2 != 0 && i % 3 != 0) // Completely eliminating possibilites of numbers being multiples of 2 and 3
 					{
 						boolean forLoopBreakFlag = false;
-						for(int j = 3 ; j <= Math.abs(Math.sqrt(i)) ; j += 2) // Here , we are only checking divisibility only by odd numbers that are not multiples of 2 and 3 for further optimization
+						for(int j = 5 ; j <= Math.abs(Math.sqrt(i)) ; j += 6) // Since we are only left with numbers of the form 6k+5 and 6k+1 , these are not divisible by both 2 and 3
+							// so we will only check their divisibility by numbers of the form 6k + 1 and 6k + 5
 						{
-							if(i % j == 0)
+							if(i % j == 0 || i % (j+2) == 0)
 							{
 								forLoopBreakFlag = true;
 								break;
@@ -102,10 +98,59 @@ public class Main {
 			}
 		});
 
+		Thread threadFour = new Thread(new Thread() {
+
+
+			@Override
+			public void run()
+			{
+				int primeCount = 0;
+
+				for(int i =5 ; primeCount < 5 ; i +=6)
+				{
+					boolean forLoopBreakFlag = false;
+					int oneForm = i + 2;
+
+					for(int j = 5 ; j <= Math.sqrt(i) ; j += 6)
+					{
+						if( i % j == 0 || i % (j+2) == 0)
+						{
+							forLoopBreakFlag = true;
+							break;
+						}
+					}
+					if(!forLoopBreakFlag)
+					{
+						System.out.print(" " + i + " ");
+						primeCount++;
+					}
+					boolean forLoopBreakFlag2 = false;
+
+					for(int k = 5 ; k <= Math.sqrt(oneForm) ; k  += 6)
+					{
+						if(oneForm % k == 0 || oneForm % (k+2) == 0)
+						{
+							forLoopBreakFlag2 = true;
+							break;
+						}
+					}
+					if(!forLoopBreakFlag2)
+					{
+						System.out.print(" " +  oneForm + " ");
+						primeCount++;
+					}
+
+				}
+
+
+			}
+		});
+
 //		myThread.start();
 //		threadTwo.start();
-		threadThree.start();
+//		threadThree.start();
 
+		threadFour.start();
 
 
 
