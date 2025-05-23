@@ -7,14 +7,16 @@ public class Main {
 	public static void main(String... args)
 	{
 
-		StopWatch stopWatch = new StopWatch(TimeUnit.SECONDS);
+		StopWatch greenWatch = new StopWatch(TimeUnit.SECONDS);
+		StopWatch purpleWatch = new StopWatch(TimeUnit.SECONDS);
+		StopWatch redWatch = new StopWatch(TimeUnit.SECONDS);
 		Thread green = new Thread(()->{
-			stopWatch.countDown();
+			greenWatch.countDown();
 		},ThreadColor.ANSI_GREEN.name());
 
-		Thread purple = new Thread(stopWatch::countDown,ThreadColor.ANSI_PURPLE.name());
+		Thread purple = new Thread(purpleWatch::countDown,ThreadColor.ANSI_PURPLE.name());
 		Thread red = new Thread(()-> {
-			stopWatch.countDown(9);
+			redWatch.countDown(9);
 		},ThreadColor.ANSI_RED.name());
 
 		green.start();
