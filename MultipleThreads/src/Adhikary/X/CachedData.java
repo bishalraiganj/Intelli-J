@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CachedData {
 
-	private boolean flag = false;
+	private volatile boolean flag = false;
 
 	public void toggleFlag()
 	{
