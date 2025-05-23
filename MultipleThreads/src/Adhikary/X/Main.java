@@ -32,10 +32,13 @@ class StopWatch{
 
 	private TimeUnit timeUnit;
 
+	private int i ;
+
 	public StopWatch(TimeUnit timeUnit)
 	{
 		this.timeUnit = timeUnit;
 	}
+
 
 
 	public void countDown()
@@ -55,7 +58,7 @@ class StopWatch{
 			//User may pass a bad color name, Will just ignore in this case
 		}
 		String color = threadColor.color();
-		for(int i = unitCount ; i > 0 ; i-- )
+		for(i =  unitCount ; i > 0 ; i-- )
 		{
 			try
 			{
