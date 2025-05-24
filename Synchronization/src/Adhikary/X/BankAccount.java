@@ -2,9 +2,9 @@ package Adhikary.X;
 
 public class BankAccount {
 
-	private double balance;
+	private  double balance;
 
-	public BankAccount()
+	public BankAccount(double balance)
 	{
 		this.balance = balance;
 	}
@@ -14,12 +14,14 @@ public class BankAccount {
 		return balance;
 	}
 
-	public void deposit(double amount)
+	public  void deposit(double amount)
 	{
 		try
 		{
 
-			Thread.sleep(100);
+			System.out.println("Deposit - Talking to the teller at the bank... ");
+
+			Thread.sleep(7000);
 
 
 		}catch(InterruptedException e)
@@ -27,15 +29,17 @@ public class BankAccount {
 			throw new RuntimeException(e);
 		}
 
-		double origBalance = balance;
+		synchronized(this) {
+			double origBalance = balance;
 
-		balance += amount;
+			balance += amount;
 
-		System.out.printf("STARTING BALANCE: %.0f, DEPOSIT (%.0f) " + " : NEW BALANCE = %.0f%n", origBalance,amount,balance);
+			System.out.printf("STARTING BALANCE: %.0f, DEPOSIT (%.0f) " + " : NEW BALANCE = %.0f%n", origBalance, amount, balance);
+		}
 	}
 
 
-	public void withdraw(double amount)
+	public synchronized void withdraw(double amount)
 	{
 		try{
 			Thread.sleep(100);
