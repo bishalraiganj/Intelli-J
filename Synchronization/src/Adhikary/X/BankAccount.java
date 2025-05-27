@@ -4,17 +4,30 @@ public class BankAccount {
 
 	private  double balance;
 
-	public BankAccount(double balance)
+	private String name;
+
+	public BankAccount(String name,double balance)
 	{
+		this.name = name;
 		this.balance = balance;
 	}
 
+	public String getName()
+	{
+		return name;
+	}
+	public synchronized void setName(String name)
+	{
+		this.name = name;
+		System.out.println("Updated name = " + this.name);
+
+	}
 	public double getBalance()
 	{
 		return balance;
 	}
 
-	public  void deposit(double amount)
+	public  synchronized void deposit(double amount)
 	{
 		try
 		{
@@ -29,13 +42,13 @@ public class BankAccount {
 			throw new RuntimeException(e);
 		}
 
-		synchronized(this) {
+//		synchronized(this) {
 			double origBalance = balance;
 
 			balance += amount;
 
 			System.out.printf("STARTING BALANCE: %.0f, DEPOSIT (%.0f) " + " : NEW BALANCE = %.0f%n", origBalance, amount, balance);
-		}
+//		}
 	}
 
 
