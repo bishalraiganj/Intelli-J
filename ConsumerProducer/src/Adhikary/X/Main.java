@@ -14,9 +14,15 @@ class MessageRepository{
 	{
 		while(!hasMessage)
 		{
-
+			try {
+				wait();
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
 		hasMessage = false;
+		notifyAll();
 		return message;
 	}
 
@@ -25,8 +31,15 @@ class MessageRepository{
 		while(hasMessage)
 		{
 
+			try {
+				wait();
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
 		hasMessage = true;
+		notifyAll();
 		this.message = message;
 	}
 }
@@ -56,7 +69,9 @@ class MessageRepository{
 			outgoingMessage.write(lines[i]);
 			try
 			{
-				Thread.sleep(random.nextInt(500,2000));
+				int r = random.nextInt(500,2000);
+				System.out.println("WriterThread: " + r);
+				Thread.sleep(r);
 			}catch(InterruptedException e)
 			{
 				throw new RuntimeException(e);
@@ -87,7 +102,9 @@ class MessageRepository{
 			do {
 
 				try{
-					TimeUnit.MILLISECONDS.sleep(random.nextInt(500,2000));
+					int r  = random.nextInt(500,2000);
+					System.out.println("ReaderThread: " + r);
+					TimeUnit.MILLISECONDS.sleep(r);
 
 				}catch(InterruptedException e)
 				{
