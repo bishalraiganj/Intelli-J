@@ -1,9 +1,46 @@
 package Adhikary.X;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
 
 	public static void main(String... args)
 	{
+
+		ShoeWarehouse.addInventoryItems(Shoe.SANDAL,3000L);
+		ShoeWarehouse.addInventoryItems(Shoe.BOOTS,6000L);
+		ShoeWarehouse.addInventoryItems(Shoe.LOAFER,3000L);
+		ShoeWarehouse.addInventoryItems(Shoe.SNEAKER,2000L);
+
+		Order sandalOrd1 = new Order(1L,Shoe.SANDAL,100);
+		Order sandalOrd2 = new Order(2L,Shoe.SANDAL,500);
+		Order sandalOrd3 = new Order(3L,Shoe.SANDAL,5000);
+
+		Order loaferOrd1 = new Order(4L,Shoe.LOAFER,200);
+		Order loaferOrd2 = new Order(5L,Shoe.LOAFER,40000);
+
+		List<Order> ordersList = new ArrayList<>(Arrays.asList(sandalOrd1,sandalOrd2,sandalOrd3,loaferOrd1,loaferOrd2));
+
+		Random r = new Random();
+
+
+		Shoe[] enumArr = Shoe.values();
+		int num = r.nextInt(15,200);
+		int i = 0;
+		while(i < num)
+		{
+			int ordinalValue = r.nextInt(0,4);
+			int quantity = r.nextInt(100,6000);
+			ordersList.add(new Order(i+6L,enumArr[ordinalValue],quantity));
+			i++;
+		}
+
+		ordersList.forEach(System.out::println);
+
+		System.out.println(" \n\n Number of Orders in ordersList field = "  + ordersList.size());
 
 
 
