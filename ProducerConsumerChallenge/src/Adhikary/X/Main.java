@@ -27,20 +27,74 @@ public class Main {
 		Random r = new Random();
 
 
+
 		Shoe[] enumArr = Shoe.values();
-		int num = r.nextInt(15,200);
-		int i = 0;
-		while(i < num)
+		int num = r.nextInt(1,3);
+		int i = 1;
+		int totalOrders = 5 + num ;
+
+		while(i <= num)
 		{
 			int ordinalValue = r.nextInt(0,4);
 			int quantity = r.nextInt(100,6000);
-			ordersList.add(new Order(i+6L,enumArr[ordinalValue],quantity));
+			ordersList.add(new Order(i+5L,enumArr[ordinalValue],quantity));
 			i++;
 		}
+
 
 		ordersList.forEach(System.out::println);
 
 		System.out.println(" \n\n Number of Orders in ordersList field = "  + ordersList.size());
+
+
+		System.out.println("-".repeat(50));
+
+		ShoeWarehouse bishalStore = new ShoeWarehouse();
+
+		Thread orderAdder = new Thread(()->{
+
+
+
+			for(Order order : ordersList)
+			{
+				bishalStore.receiveOrder(order);
+
+				try {
+					Thread.sleep(new Random().nextInt(1500,2000));
+				}catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+
+			bishalStore.setStatus();
+			System.out.println("Order adder Completed ");
+
+
+		});
+
+
+		Thread orderProcessor = new Thread(()->
+		{
+
+			while(!bishalStore.getStatus()) {
+				bishalStore.fullfillOrder();
+				try {
+					Thread.sleep(new Random().nextInt(500,2000));
+				}catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+			System.out.println(" All %d Orders finished :-) ".formatted(totalOrders) );
+		});
+
+		orderAdder.start();
+		orderProcessor.start();
+
+
 
 
 

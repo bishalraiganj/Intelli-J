@@ -8,31 +8,56 @@ public class ShoeWarehouse {
 
   private List<Order> orderQueue = new LinkedList<>();
 
-  private static int MAX_CAPACITY = 200;
+  private static int MAX_CAPACITY = 10;
+
+
+  private static boolean status = false;
+
+  public boolean getStatus()
+  {
+    return status;
+  }
+
+  public synchronized void setStatus()
+  {
+    status = true;
+    notifyAll();
+  }
+
 
   public synchronized void receiveOrder(Order order)
   {
 
 
-  while(orderQueue.size() >= MAX_CAPACITY)
+    if(orderQueue.size() >= MAX_CAPACITY)
+    {
+      System.out.println("Cannot add more Orders , Warehouse capacity reached");
+    }
+
+
+  while(orderQueue.size() >= MAX_CAPACITY )
   {
 
 
+
+
+
     try {
+
       wait();
+
     }catch(InterruptedException e)
     {
       e.printStackTrace();
     }
 
   }
-  if( orderQueue.size() < MAX_CAPACITY
-          && products.get(order.shoeType()) >= order.quantity() )
+  if(products.get(order.shoeType()) >= order.quantity() )
 
   {
     orderQueue.add(order);
-    long shoeCount = products.get(order.shoeType());
-    products.put(order.shoeType(), shoeCount - order.quantity());
+    long available = products.get(order.shoeType());
+    products.put(order.shoeType(), available - order.quantity());
     System.out.println("Added to orderQueue : " + order);
   }
   else
@@ -41,19 +66,22 @@ public class ShoeWarehouse {
     {
       System.out.println("Not enough products in stock : Available -> " + products.get(order.shoeType()) + " Requested -> " + order.quantity());
     }
-    else if(orderQueue.size() > MAX_CAPACITY)
-    {
-      System.out.println("Cannot add more Orders , Warehouse capacity reached");
-    }
+
   }
+
+
   notifyAll();
 
 
   }
 
-  public void fullfillOrder(Order order)
+
+
+
+
+  public  synchronized void fullfillOrder()
   {
-    while(orderQueue.isEmpty())
+    while(orderQueue.isEmpty() && !status)
     {
       try
       {
@@ -64,17 +92,23 @@ public class ShoeWarehouse {
       }
     }
 
-    orderQueue.removeFirst();
-    System.out.println(" Order fullfilled : " + order);
-    notifyAll();
+    if(!orderQueue.isEmpty()) {
+      System.out.println(" Order fullfilled : " + orderQueue.getFirst());
+      orderQueue.removeFirst();
+      notifyAll();
 
-
-
+    }
   }
 
   public static void addInventoryItems(Shoe shoe, Long quantity)
   {
-    products.merge(shoe, 0L,(k,v)-> v + quantity);
+    if(!products.containsKey(shoe))
+    {
+      products.put(shoe, quantity);
+    }
+    else {
+      products.merge(shoe, quantity, (k, v) -> v + quantity);
+    }
   }
 
 }
