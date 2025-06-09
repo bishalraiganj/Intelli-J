@@ -3,6 +3,8 @@ package Adhikary.X;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 class MessageRepository{
 
@@ -10,36 +12,62 @@ class MessageRepository{
 
 	private boolean hasMessage = false;
 
-	public synchronized String read()
-	{
-		while(!hasMessage)
-		{
+	private final Lock lock = new ReentrantLock();
+
+	public  String read() {
+
+		if(lock.tryLock()) {
+
 			try {
-				wait();
-			}catch(InterruptedException e)
-			{
-				throw new RuntimeException(e);
+				while (!hasMessage) {
+//					try {
+//						Thread.sleep(500);
+//					} catch (InterruptedException e) {
+//						throw new RuntimeException(e);
+//					}
+				}
+				hasMessage = false;
+
+
+			} finally {
+				lock.unlock();
 			}
+		}else
+		{
+			System.out.println("** read blocked");
+			hasMessage = false;
 		}
-		hasMessage = false;
-		notifyAll();
 		return message;
 	}
 
-	public synchronized void write(String message)
-	{
-		while(hasMessage)
-		{
+	public  void write(String message) {
 
+
+		if (lock.tryLock()) {
 			try {
-				wait();
-			}catch(InterruptedException e)
+				while (hasMessage) {
+
+//					try {
+//						Thread.sleep(500);
+//
+//					} catch (InterruptedException e) {
+//						throw new RuntimeException(e);
+//					}
+				}
+				hasMessage = true;
+
+
+			}finally
 			{
-				throw new RuntimeException(e);
+				lock.unlock();
 			}
+		}else
+
+		{
+			System.out.println("** write blocked ");
+			hasMessage = true;
+
 		}
-		hasMessage = true;
-		notifyAll();
 		this.message = message;
 	}
 }
@@ -70,7 +98,7 @@ class MessageRepository{
 			try
 			{
 				int r = random.nextInt(500,2000);
-				System.out.println("WriterThread: " + r);
+
 				Thread.sleep(r);
 			}catch(InterruptedException e)
 			{
@@ -78,6 +106,12 @@ class MessageRepository{
 			}
 		}
 		outgoingMessage.write("Finished");
+
+
+
+
+
+
 
 		
 	}
@@ -103,7 +137,7 @@ class MessageRepository{
 
 				try{
 					int r  = random.nextInt(500,2000);
-					System.out.println("ReaderThread: " + r);
+
 					TimeUnit.MILLISECONDS.sleep(r);
 
 				}catch(InterruptedException e)
@@ -128,6 +162,30 @@ public class Main {
 
 		Thread reader = new Thread(new MessageReader(messageRepository));
 		Thread writer = new Thread(new MessageWriter(messageRepository));
+
+		writer.setUncaughtExceptionHandler((thread,exc)-> {
+
+			System.out.println("Writer had exception: " + exc);
+			if(reader.isAlive())
+			{
+				System.out.println("Going to interrupt the reader ");
+				reader.interrupt();
+			}
+
+
+		});
+
+		reader.setUncaughtExceptionHandler((thread,exc)-> {
+
+			System.out.println("Reader had exception: " + exc);
+
+			if (writer.isAlive())
+			{
+				System.out.println("Going to interrupt the writer" ) ;
+				writer.interrupt();
+			}
+
+		});
 
 		reader.start();
 		writer.start();
