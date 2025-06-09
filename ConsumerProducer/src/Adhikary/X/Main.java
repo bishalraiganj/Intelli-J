@@ -20,11 +20,11 @@ class MessageRepository{
 
 			try {
 				while (!hasMessage) {
-//					try {
-//						Thread.sleep(500);
-//					} catch (InterruptedException e) {
-//						throw new RuntimeException(e);
-//					}
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
 				}
 				hasMessage = false;
 
@@ -34,39 +34,42 @@ class MessageRepository{
 			}
 		}else
 		{
-			System.out.println("** read blocked");
+			System.out.println("** read blocked " + lock);
 			hasMessage = false;
 		}
+
 		return message;
 	}
 
 	public  void write(String message) {
 
 
-		if (lock.tryLock()) {
-			try {
-				while (hasMessage) {
+		try {
+			if (lock.tryLock(3, TimeUnit.SECONDS)) {
+				try {
+					while (hasMessage) {
 
-//					try {
-//						Thread.sleep(500);
-//
-//					} catch (InterruptedException e) {
-//						throw new RuntimeException(e);
-//					}
+					try {
+						Thread.sleep(500);
+
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+					}
+					hasMessage = true;
+
+
+				} finally {
+					lock.unlock();
 				}
+			} else {
+				System.out.println("** write blocked " + lock);
 				hasMessage = true;
 
-
-			}finally
-			{
-				lock.unlock();
 			}
-		}else
-
+		}catch (InterruptedException e)
 		{
-			System.out.println("** write blocked ");
-			hasMessage = true;
-
+			throw new RuntimeException(e);
 		}
 		this.message = message;
 	}
@@ -160,8 +163,8 @@ public class Main {
 	{
 		MessageRepository messageRepository = new MessageRepository();
 
-		Thread reader = new Thread(new MessageReader(messageRepository));
-		Thread writer = new Thread(new MessageWriter(messageRepository));
+		Thread reader = new Thread(new MessageReader(messageRepository),"Reader");
+		Thread writer = new Thread(new MessageWriter(messageRepository),"Writer");
 
 		writer.setUncaughtExceptionHandler((thread,exc)-> {
 
