@@ -178,6 +178,9 @@ public class Main {
 
 		});
 
+
+
+
 		reader.setUncaughtExceptionHandler((thread,exc)-> {
 
 			System.out.println("Reader had exception: " + exc);
