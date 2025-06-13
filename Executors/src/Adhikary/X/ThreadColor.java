@@ -9,6 +9,8 @@ public enum ThreadColor {
 
 	ANSI_BLUE("\u001B[34m"),
 
+	ANSI_YELLOW("\u001B[33m"),
+
 	ANSI_CYAN("\u001B[36m"),
 
 	ANSI_GREEN("\u001B[32m"),
@@ -19,6 +21,11 @@ public enum ThreadColor {
 
 
 	private final String color ;
+
+	public String color()
+	{
+		return color;
+	}
 	ThreadColor(String color)
 	{
 		this.color = color;
