@@ -3,6 +3,7 @@ package Adhikary.X;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 
 class ColorThreadFactory implements ThreadFactory
@@ -38,6 +39,65 @@ public class Main {
 			Main.countDown();
 		});
 		blueExecutor.shutdown();
+
+
+		boolean isDone = false;
+		try {
+			isDone = blueExecutor.awaitTermination(500, TimeUnit.MILLISECONDS);
+		}catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
+		if(isDone)
+		{
+			System.out.println("Blue finished, starting Yellow");
+
+		}
+
+		ExecutorService yellowExecutor = Executors.newSingleThreadExecutor(
+
+				new ColorThreadFactory(ThreadColor.ANSI_YELLOW));
+		yellowExecutor.execute(()->
+		{
+			Main.countDown();
+		});
+		yellowExecutor.shutdown();
+		try {
+			isDone = yellowExecutor.awaitTermination(500, TimeUnit.MILLISECONDS);
+		}catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		if(isDone)
+		{
+			System.out.println("Yellow finished, starting Red");
+		}
+
+
+
+		ExecutorService redExecutor = Executors.newSingleThreadExecutor(
+				new ColorThreadFactory(ThreadColor.ANSI_RED)
+		);
+		redExecutor.execute(()->{
+			Main.countDown();
+		});
+		redExecutor.shutdown();
+
+		try
+		{
+			isDone = redExecutor.awaitTermination(500,TimeUnit.MILLISECONDS);
+
+		}catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		if(isDone)
+		{
+			System.out.println("Red finished, and with it , All processes have finished ! :-) ");
+		}
+
 
 
 
