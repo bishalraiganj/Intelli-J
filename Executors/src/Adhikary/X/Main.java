@@ -48,7 +48,7 @@ public class Main {
 	{
 		int count = 6;
 		ExecutorService multiExecutor = Executors.newFixedThreadPool(
-				count,new ColorThreadFactory()
+				3,new ColorThreadFactory()
 		);
 
 		for(int i = 0 ; i < count ; i++)
@@ -58,6 +58,7 @@ public class Main {
 				Main.countDown();
 			});
 		}
+
 
 		multiExecutor.shutdown();
 
