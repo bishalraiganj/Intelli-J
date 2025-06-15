@@ -1,5 +1,6 @@
 package Adhikary.X;
 
+import java.util.List;
 import java.util.concurrent.*;
 
 
@@ -40,6 +41,36 @@ class ColorThreadFactory implements ThreadFactory
 public class Main {
 
 	public static void main(String... args)
+	{
+
+		ExecutorService multiExecutor = Executors.newCachedThreadPool();
+
+		List<Callable<Integer>> taskList = List.of(()->Main.sum(1,10
+		,1,"red"),
+				()->Main.sum(10,100,10,"blue"),
+				()->Main.sum(2,10,1,"green"));
+
+		try
+		{
+
+			List<Future<Integer>> results = multiExecutor.invokeAll(taskList);
+
+			for(Future<Integer> result : results)
+			{
+				System.out.println(result.get(500,TimeUnit.SECONDS));
+			}
+
+ 		}catch(InterruptedException  | ExecutionException  | TimeoutException e )
+		{
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			multiExecutor.shutdown();
+		}
+
+	}
+	public static void cachedmain(String... args)
 	{
 
 		ExecutorService multiExecutor = Executors.newCachedThreadPool();
