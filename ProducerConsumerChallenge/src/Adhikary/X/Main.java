@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -51,7 +54,45 @@ public class Main {
 
 		ShoeWarehouse bishalStore = new ShoeWarehouse();
 
+		ShoeWarehouse bishalWarehouse = new ShoeWarehouse();
 
+
+		ExecutorService multiExecutor = Executors.newFixedThreadPool(2);
+
+		multiExecutor.submit(()->{
+
+			for(Order order : ordersList)
+			{
+				bishalWarehouse.receiveOrder(order);
+				try{
+					TimeUnit.SECONDS.sleep(2);
+				}catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			bishalWarehouse.setStatus();
+			System.out.println("Order adder Thread Completed ");
+
+
+		});
+
+		multiExecutor.submit(()->{
+			while(!bishalWarehouse.getStatus())
+			{
+				bishalWarehouse.fullfillOrder();
+				try
+				{
+					Thread.sleep(2000);
+				}catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Order fullfill Thread Completed ");
+		});
+
+		multiExecutor.shutdown();
 
 
 		Thread orderAdder = new Thread(()->{
@@ -94,8 +135,8 @@ public class Main {
 			System.out.println(" All %d Orders finished :-) ".formatted(totalOrders) );
 		});
 
-		orderAdder.start();
-		orderProcessor.start();
+//		orderAdder.start();
+//		orderProcessor.start();
 
 
 
