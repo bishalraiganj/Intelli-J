@@ -22,7 +22,9 @@ public class ShoeWarehouse {
     return status;
   }
 
-  public synchronized void setStatus()
+  public synchronized void setStatus() /* it is a flag to inform the order fullfiller thread
+  that all orders are added and now you can finish
+  */
   {
     status = true;
     notifyAll();
@@ -61,7 +63,10 @@ public class ShoeWarehouse {
   {
     orderQueue.add(order);
     long available = products.get(order.shoeType());
-    products.put(order.shoeType(), available - order.quantity());
+    products.compute(order.shoeType(),(key,val)->{
+
+      return (val==null) ? 0L : available - order.quantity();
+    });
     System.out.println("Added to orderQueue : " + order);
   }
   else
