@@ -1,9 +1,6 @@
 package Adhikary.X;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 
 class ColorThreadFactory implements ThreadFactory
@@ -47,18 +44,12 @@ public class Main {
 
 		ExecutorService multiExecutor = Executors.newCachedThreadPool();
 
-		try
-		{
-			multiExecutor.submit(()->{
-				Main.sum(1,10,1,"red");
-			});
-			multiExecutor.submit(()->{
-				Main.sum(10,100,10,"blue");
 
-			});
-			multiExecutor.submit(()->{
-				Main.sum(2,20,2,"green");
-			});
+			 var redValue =  multiExecutor.submit(()-> Main.sum( 1,10,1,"red" ) );
+
+
+			var blueValue =  multiExecutor.submit(()-> Main.sum(10,100,10,"blue") );
+			var greenValue = multiExecutor.submit(()-> Main.sum(2,20,2,"green"));
 //			multiExecutor.execute(()->{
 //				Main.sum(1,10,1,"yellow");
 //			});
@@ -85,9 +76,21 @@ public class Main {
 //					Main.sum(1,10,1,color);
 //				});
 //			}
-		}finally {
+		try
+		{
+			System.out.println(redValue.get(500,TimeUnit.SECONDS));
+			System.out.println(blueValue.get(500,TimeUnit.SECONDS));
+			System.out.println(greenValue.get(500,TimeUnit.SECONDS));
+		}
+		catch(Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		finally {
 			multiExecutor.shutdown();
 	}
+
 
 
 
@@ -275,7 +278,7 @@ public class Main {
 
 	}
 
-	private static void sum(int start, int end , int delta,  String colorString)
+	private static int sum(int start, int end , int delta,  String colorString)
 	{
 		ThreadColor threadColor = ThreadColor.ANSI_RESET;
 
@@ -300,6 +303,7 @@ public class Main {
 				", " + colorString + " " + sum);
 
 
+		return sum;
 	}
 
 
