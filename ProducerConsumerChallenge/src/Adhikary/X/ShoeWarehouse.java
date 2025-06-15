@@ -4,11 +4,15 @@ import java.util.*;
 
 public class ShoeWarehouse {
 
-  public static Map<Shoe, Long> products = new TreeMap<>();
+  public static Map<Shoe, Long> products = new TreeMap<>(); //Inventory in the warehouse
 
-  private List<Order> orderQueue = new LinkedList<>();
 
-  private static int MAX_CAPACITY = 10;
+  private List<Order> orderQueue = new LinkedList<>(); /*In this case LinkedList is faster because we are accessing
+  the first element so for retrieval traversal is almost o(1) fast and since we do not have to shift because of modification/mutation (only updating links)
+  updating links is o(1) fast as well so overall in this case LinkedList is faster than ArrayList
+  */
+
+  private final static int MAX_CAPACITY = 10;
 
 
   private static boolean status = false;
