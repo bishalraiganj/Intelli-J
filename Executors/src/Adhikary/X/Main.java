@@ -49,42 +49,42 @@ public class Main {
 
 		try
 		{
-			multiExecutor.execute(()->{
+			multiExecutor.submit(()->{
 				Main.sum(1,10,1,"red");
 			});
-			multiExecutor.execute(()->{
+			multiExecutor.submit(()->{
 				Main.sum(10,100,10,"blue");
 
 			});
-			multiExecutor.execute(()->{
+			multiExecutor.submit(()->{
 				Main.sum(2,20,2,"green");
 			});
-			multiExecutor.execute(()->{
-				Main.sum(1,10,1,"yellow");
-			});
-			multiExecutor.execute(()->{
-				Main.sum(10,100,10,"cyan");
-			});
-			multiExecutor.execute(()->{
-				Main.sum(2,20,2,"purple");
-			});
-
-			try
-			{
-				TimeUnit.SECONDS.sleep(1);
-			}catch(InterruptedException e)
-			{
-				throw new RuntimeException(e);
-			}
-
-			System.out.println("    Next Tasks Will get executed     ");
-			for(String color : new String[] {"red","blue","green","yellow","purple","cyan"
-			,"black"})
-			{
-				multiExecutor.execute(()->{
-					Main.sum(1,10,1,color);
-				});
-			}
+//			multiExecutor.execute(()->{
+//				Main.sum(1,10,1,"yellow");
+//			});
+//			multiExecutor.execute(()->{
+//				Main.sum(10,100,10,"cyan");
+//			});
+//			multiExecutor.execute(()->{
+//				Main.sum(2,20,2,"purple");
+//			});
+//
+//			try
+//			{
+//				TimeUnit.SECONDS.sleep(1);
+//			}catch(InterruptedException e)
+//			{
+//				throw new RuntimeException(e);
+//			}
+//
+//			System.out.println("    Next Tasks Will get executed     ");
+//			for(String color : new String[] {"red","blue","green","yellow","purple","cyan"
+//			,"black"})
+//			{
+//				multiExecutor.execute(()->{
+//					Main.sum(1,10,1,color);
+//				});
+//			}
 		}finally {
 			multiExecutor.shutdown();
 	}
