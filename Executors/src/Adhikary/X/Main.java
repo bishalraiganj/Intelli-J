@@ -68,6 +68,23 @@ public class Main {
 			multiExecutor.execute(()->{
 				Main.sum(2,20,2,"purple");
 			});
+
+			try
+			{
+				TimeUnit.SECONDS.sleep(1);
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+			System.out.println("    Next Tasks Will get executed     ");
+			for(String color : new String[] {"red","blue","green","yellow","purple","cyan"
+			,"black"})
+			{
+				multiExecutor.execute(()->{
+					Main.sum(1,10,1,color);
+				});
+			}
 		}finally {
 			multiExecutor.shutdown();
 	}
