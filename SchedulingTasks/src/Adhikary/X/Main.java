@@ -47,16 +47,32 @@ public class Main {
 			threadPool.shutdown();
 		}
 
+		Runnable dateTask = () ->
+		{
+
+			try
+			{
+//				System.out.println(ZonedDateTime.now().format(dtf));
+				TimeUnit.SECONDS.sleep(3);
+				System.out.println(Thread.currentThread().getName() + " a " +
+						ZonedDateTime.now().format(dtf));
+
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
+		};
 		System.out.println("---> " + ZonedDateTime.now().format(dtf));
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
 
 
-		ScheduledFuture<?> scheduledTask = 	executor.scheduleWithFixedDelay(() ->
-			{
-				System.out.println(Thread.currentThread().getName()+" :task2: " +ZonedDateTime.now().format(dtf));
+		ScheduledFuture<?> scheduledTask = 	executor.scheduleAtFixedRate(
+			dateTask, 2,2 , TimeUnit.SECONDS);
 
-
-			}, 2,2 , TimeUnit.SECONDS);
+		ScheduledFuture<?> scheduledTask2 = executor.scheduleAtFixedRate(()->{
+			System.out.println(Thread.currentThread().getName() + " b " +
+					ZonedDateTime.now().format(dtf));
+		},2,2,TimeUnit.SECONDS);
 
 		long time = System.currentTimeMillis();
 
