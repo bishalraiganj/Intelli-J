@@ -48,15 +48,17 @@ public class Main {
 		}
 
 		System.out.println("---> " + ZonedDateTime.now().format(dtf));
-		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
 
-		executor.schedule(() ->
-		{
-			System.out.println(ZonedDateTime.now().format(dtf));
+		for(int i = 0 ;  i< 4 ; i++) {
+			executor.schedule(() ->
+			{
+				System.out.println(ZonedDateTime.now().format(dtf));
 
 
-		}, 2, TimeUnit.SECONDS);
+			}, 2 * (i + 1), TimeUnit.SECONDS);
 
+		}
 		executor.shutdown();
 
 	}
