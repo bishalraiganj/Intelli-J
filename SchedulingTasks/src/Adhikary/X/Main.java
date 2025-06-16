@@ -50,15 +50,32 @@ public class Main {
 		System.out.println("---> " + ZonedDateTime.now().format(dtf));
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
 
-		for(int i = 0 ;  i< 4 ; i++) {
-			executor.schedule(() ->
+
+		ScheduledFuture<?> scheduledTask = 	executor.scheduleWithFixedDelay(() ->
 			{
-				System.out.println(ZonedDateTime.now().format(dtf));
+				System.out.println(Thread.currentThread().getName()+" :task2: " +ZonedDateTime.now().format(dtf));
 
 
-			}, 2 * (i + 1), TimeUnit.SECONDS);
+			}, 2,2 , TimeUnit.SECONDS);
+
+		long time = System.currentTimeMillis();
+
+		while(!scheduledTask.isDone())
+		{
+			try
+			{
+				Thread.sleep(2000);
+				if((System.currentTimeMillis()- time  )/ 1000  > 10)
+				{
+					scheduledTask.cancel(true);
+				}
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
 
 		}
+
 		executor.shutdown();
 
 	}
