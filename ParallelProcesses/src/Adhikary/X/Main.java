@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class Main {
 
@@ -23,7 +20,7 @@ public class Main {
 		System.out.println(sum);
 
 
-		ExecutorService threadPool = Executors.newWorkStealingPool(4);
+		ForkJoinPool threadPool =(ForkJoinPool) Executors.newWorkStealingPool(4);
 		List<Callable<Long>> tasks = new ArrayList<>();
 
 		int taskNo = 10 ;
@@ -45,6 +42,10 @@ public class Main {
 		}
 
 		List<Future<Long>> futures = threadPool.invokeAll(tasks);
+
+		System.out.println("Parallelism = " + threadPool.getParallelism());
+		System.out.println("Pool size = " + threadPool.getPoolSize());
+		System.out.println("Steal count = " + threadPool.getStealCount());
 
 		long tasksum = 0;
 
