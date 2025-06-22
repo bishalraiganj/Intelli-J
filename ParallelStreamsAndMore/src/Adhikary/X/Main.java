@@ -2,6 +2,7 @@ package Adhikary.X;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -85,18 +86,21 @@ public class Main
 		words.forEach(System.out::println);
 		System.out.println("-".repeat(50));
 
-		StringJoiner backToTogetherAgain =
+		String backToTogetherAgain =
 				words.parallelStream()
-						.reduce(new StringJoiner(" "),
-								(sj,s)->
-								{
-								return	sj.add(s);
-								},
-								(sj1,sj2)->
-								{
-							return sj1.merge(sj2);
-								});
+//						.reduce(new StringJoiner(" "),
+//								(sj,s)->
+//								{
+//								return	sj.add(s);
+//								},
+//								(sj1,sj2)->
+//								{
+//							return sj1.merge(sj2);
+//								});
 
+//		.collect(Collectors.joining(" "));
+
+		.reduce("",(s1,s2)->s1.concat(s2).concat(" "));
 		System.out.println(backToTogetherAgain);
 
 
