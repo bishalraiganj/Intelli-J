@@ -105,7 +105,30 @@ public class Main
 
 
 
+		System.out.println("-".repeat(50));
 
+		Map<String, Long> lastNameCounts = Stream.generate(()-> new Person())
+				.limit(10000)
+				.parallel()
+				.collect(Collectors.groupingBy((person)->person.lastName(),
+						Collectors.counting()));
+
+		lastNameCounts.entrySet().forEach(System.out::println);
+
+		System.out.println("-".repeat(50));
+
+		lastNameCounts.forEach((k,v)->{
+			System.out.println(k + " : " + v);
+		});
+
+		int total = 0;
+
+		for(long val : lastNameCounts.values())
+		{
+			total += val;
+		}
+
+		System.out.println("Total: " + total);
 
 
 
