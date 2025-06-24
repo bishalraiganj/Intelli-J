@@ -135,7 +135,7 @@ public class Main
 
 		System.out.println("-".repeat(50));
 
-		Map<String,Long> lastCounts = new ConcurrentSkipListMap<>();
+		Map<String,Long> lastCounts = Collections.synchronizedMap(new TreeMap<>());
 		Stream.generate(()-> new Person())
 				.limit(10000)
 				.parallel()
