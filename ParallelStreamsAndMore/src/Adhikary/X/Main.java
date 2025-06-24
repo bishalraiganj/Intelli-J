@@ -2,6 +2,7 @@ package Adhikary.X;
 
 
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -134,7 +135,7 @@ public class Main
 
 		System.out.println("-".repeat(50));
 
-		Map<String,Long> lastCounts = new TreeMap<>();
+		Map<String,Long> lastCounts = new ConcurrentSkipListMap<>();
 		Stream.generate(()-> new Person())
 				.limit(10000)
 				.parallel()
@@ -148,6 +149,8 @@ public class Main
 							}
 					);
 				});
+
+		System.out.println(lastCounts);
 
 
 		total = 0;
