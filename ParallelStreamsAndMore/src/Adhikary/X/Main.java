@@ -110,7 +110,7 @@ public class Main
 		Map<String, Long> lastNameCounts = Stream.generate(()-> new Person())
 				.limit(10000)
 				.parallel()
-				.collect(Collectors.groupingBy((person)->person.lastName(),
+				.collect(Collectors.groupingByConcurrent((person)->person.lastName(),
 						Collectors.counting()));
 
 		lastNameCounts.entrySet().forEach(System.out::println);
@@ -130,7 +130,33 @@ public class Main
 
 		System.out.println("Total: " + total);
 
+		System.out.println(lastNameCounts.getClass().getName());
 
+		System.out.println("-".repeat(50));
+
+		Map<String,Long> lastCounts = new TreeMap<>();
+		Stream.generate(()-> new Person())
+				.limit(10000)
+				.parallel()
+				.forEach((person)-> {
+
+					lastCounts.merge(person.lastName(), 1L, (a, b)
+									->
+							{
+								return Long.sum(a, b);
+
+							}
+					);
+				});
+
+
+		total = 0;
+		for(long count : lastCounts.values())
+		{
+			total += count;
+		}
+		System.out.println("Total: " + total);
+		System.out.println(lastCounts.getClass().getName());
 
 	}
 
