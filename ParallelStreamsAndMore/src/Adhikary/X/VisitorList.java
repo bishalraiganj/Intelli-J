@@ -16,10 +16,11 @@ public class VisitorList {
 			System.out.println("Adding " + visitor);
 			boolean  queued = false;
 			try {
-				queued = newVisitors.add(visitor);
-			}catch(IllegalStateException e)
+				newVisitors.put(visitor);
+				queued = true;
+			}catch(InterruptedException e)
 			{
-				System.out.println("Illegal State Exception ! ");
+				System.out.println("Interrupted Exception ! ");
 			}
 			if( queued)
 			{
