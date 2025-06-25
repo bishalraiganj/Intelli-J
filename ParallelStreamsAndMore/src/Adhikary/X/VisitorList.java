@@ -1,5 +1,14 @@
 package Adhikary.X;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,8 +25,7 @@ public class VisitorList {
 			System.out.println("Adding " + visitor);
 			boolean  queued = false;
 			try {
-				newVisitors.put(visitor);
-				queued = true;
+				queued =  newVisitors.offer(visitor,5,TimeUnit.SECONDS);
 			}catch(InterruptedException e)
 			{
 				System.out.println("Interrupted Exception ! ");
@@ -28,6 +36,38 @@ public class VisitorList {
 			}
 			else {
 				System.out.println("Queue is Full, cannot add " + visitor);
+				System.out.println("Draining Queue and writing data to file");
+				List<Person>  tempList = new ArrayList<>();
+				newVisitors.drainTo(tempList);
+				List<String> lines = new ArrayList<>();
+				tempList.forEach((person)->lines.add(person.toString()));
+				lines.add(visitor.toString());
+
+				if(!Files.exists(Path.of("DrainedQueue.txt")))
+				{
+					try {
+						Files.createFile(Path.of("DrainedQueue.txt"));
+
+					}catch(IOException e)
+					{
+						throw new RuntimeException(e);
+					}
+				}
+				try(BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Path.of("DrainedQueue.txt").toFile(),true)))
+				{
+
+					for(String line : lines) {
+						bos.write((line+"\n").getBytes(StandardCharsets.UTF_8));
+					}
+
+
+
+				}catch (FileNotFoundException e) {
+					throw new RuntimeException(e);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+
 			}
 		};
 
@@ -38,7 +78,7 @@ public class VisitorList {
 		{
 			try
 			{
-				if(!producerExecutor.awaitTermination(10,TimeUnit.SECONDS))
+				if(!producerExecutor.awaitTermination(20,TimeUnit.SECONDS))
 				{
 					break;
 				}
