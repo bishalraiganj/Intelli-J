@@ -9,14 +9,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.stream.Stream;
 
 public class VisitorList {
 
 	private static final ArrayBlockingQueue<Person> newVisitors = new ArrayBlockingQueue<>(5);
+
+	private static final CopyOnWriteArrayList<Person> masterList;
+
+	static
+	{
+
+		masterList = Stream.generate(()->{
+			return new Person();
+		})
+				.distinct()
+				.collect(()->new CopyOnWriteArrayList<Person>()
+				,(CopyOnWriteArrayList<Person> a,Person e)-> a.add(e),(c,d)->c.addAll(d));
+
+	}
 	public static void main(String... args)
 	{
 
@@ -70,6 +82,28 @@ public class VisitorList {
 
 			}
 		};
+
+
+
+		Runnable consumer = ()->{
+
+			String threadName = Thread.currentThread().getName();
+			System.out.println(threadName + " Polling queue " + newVisitors.size());
+			Person visitor  = newVisitors.poll();
+			if(visitor != null )
+			{
+				System.out.println(threadName + " " + visitor);
+				if(!masterList.contains(visitor))
+				{
+					masterList.add(visitor);
+					System.out.println("--> New Visitor gets Coupon!: " + visitor);
+				}
+			}
+			System.out.println(threadName + " done  " + newVisitors.size());
+
+		};
+
+
 
 		ScheduledExecutorService producerExecutor = Executors.newSingleThreadScheduledExecutor();
 		producerExecutor.scheduleWithFixedDelay(producer,0,1, TimeUnit.SECONDS);
