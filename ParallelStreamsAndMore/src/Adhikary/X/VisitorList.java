@@ -24,8 +24,9 @@ public class VisitorList {
 		masterList = Stream.generate(()->{
 			return new Person();
 		})
+				.limit(2500)
 				.distinct()
-				.collect(()->new CopyOnWriteArrayList<Person>()
+				.collect(()->new CopyOnWriteArrayList<>()
 				,(CopyOnWriteArrayList<Person> a,Person e)-> a.add(e),(c,d)->c.addAll(d));
 
 	}
@@ -34,7 +35,7 @@ public class VisitorList {
 
 		Runnable producer = ()-> {
 			Person visitor = new Person();
-			System.out.println("Adding " + visitor);
+			System.out.println("Queueing " + visitor);
 			boolean  queued = false;
 			try {
 				queued =  newVisitors.offer(visitor,5,TimeUnit.SECONDS);
@@ -44,7 +45,7 @@ public class VisitorList {
 			}
 			if( queued)
 			{
-				System.out.println( newVisitors);
+//				System.out.println( newVisitors);
 			}
 			else {
 				System.out.println("Queue is Full, cannot add " + visitor);
@@ -108,11 +109,22 @@ public class VisitorList {
 		ScheduledExecutorService producerExecutor = Executors.newSingleThreadScheduledExecutor();
 		producerExecutor.scheduleWithFixedDelay(producer,0,1, TimeUnit.SECONDS);
 
+
+
+		ScheduledExecutorService consumerPool = Executors.newScheduledThreadPool(3);
+		for(int i = 0 ; i < 3 ; i++)
+		{
+			consumerPool.scheduleAtFixedRate(consumer,6,3,TimeUnit.SECONDS);
+		}
+
+
+
+
 		while(true)
 		{
 			try
 			{
-				if(!producerExecutor.awaitTermination(20,TimeUnit.SECONDS))
+				if(!producerExecutor.awaitTermination(10,TimeUnit.SECONDS))
 				{
 					break;
 				}
@@ -125,6 +137,35 @@ public class VisitorList {
 
 		producerExecutor.shutdown();
 
+
+		while(true)
+		{
+			try {
+				if (!consumerPool.awaitTermination(3, TimeUnit.SECONDS))
+				{
+					break;
+				}
+			} catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+
+		}
+
+		consumerPool.shutdown();
+
+
+
+
+
 	}
+
+
+
+
+
+
+
 
 }
