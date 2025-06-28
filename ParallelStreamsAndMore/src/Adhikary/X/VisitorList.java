@@ -90,7 +90,13 @@ public class VisitorList {
 
 			String threadName = Thread.currentThread().getName();
 			System.out.println(threadName + " Polling queue " + newVisitors.size());
-			Person visitor  = newVisitors.poll();
+			Person visitor = null;
+			try {
+				visitor = newVisitors.poll(5, TimeUnit.SECONDS);
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
 			if(visitor != null )
 			{
 				System.out.println(threadName + " " + visitor);
@@ -107,14 +113,14 @@ public class VisitorList {
 
 
 		ScheduledExecutorService producerExecutor = Executors.newSingleThreadScheduledExecutor();
-		producerExecutor.scheduleWithFixedDelay(producer,0,1, TimeUnit.SECONDS);
+		producerExecutor.scheduleWithFixedDelay(producer,0,3, TimeUnit.SECONDS);
 
 
 
 		ScheduledExecutorService consumerPool = Executors.newScheduledThreadPool(3);
 		for(int i = 0 ; i < 3 ; i++)
 		{
-			consumerPool.scheduleAtFixedRate(consumer,6,3,TimeUnit.SECONDS);
+			consumerPool.scheduleAtFixedRate(consumer,6,1,TimeUnit.SECONDS);
 		}
 
 
