@@ -4,6 +4,7 @@ package Adhikary.X;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 record Participant(String name, String searchingFor, Maze maze, int[] startingPosition)
 {
@@ -40,7 +41,7 @@ class ParticipantThread extends Thread
 
 			try
 			{
-				Thread.sleep(500);
+				Thread.sleep(participant.name().equals("Grace") ? 2900 : 500);
 				if(maze.searchCell(participant.searchingFor(),newSpot,lastSpot))
 				{
 					System.out.printf("%s found %s at %s!%n",participant.name(),participant.searchingFor(), Arrays.toString(newSpot));
@@ -81,9 +82,30 @@ public class MazeRunner {
 		 System.out.println(maze);
 
 		ExecutorService executor = Executors.newCachedThreadPool();
-//		executor.submit(new ParticipantThread(adam));
+		Future<?> adamsResults = executor.submit(new ParticipantThread(adam));
 
-		executor.submit(new ParticipantThread(grace));
+		Future<?> gracesResults = executor.submit(new ParticipantThread(grace));
+
+		while(!adamsResults.isDone() && !gracesResults.isDone())
+		{
+			try
+			{
+				Thread.sleep(1000);
+
+			}catch(InterruptedException e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+
+		if(adamsResults.isDone())
+		{
+			gracesResults.cancel(true);
+		}
+		else if(gracesResults.isDone())
+		{
+			adamsResults.cancel(true);
+		}
 		executor.shutdown();
 
 
