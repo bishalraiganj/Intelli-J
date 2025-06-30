@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 record Student(String name, int enrolledYear, int studentId) implements Comparable<Student>
 {
@@ -26,12 +27,27 @@ class StudentId {
 
 	}
 
-	public int getNextId()
+	public  synchronized int getNextId()
 	{
 		return ++id;
 	}
 
+}
 
+class AtomicStudentId {
+
+
+	private final AtomicInteger nextId = new AtomicInteger(0);
+
+	public int getId()
+	{
+		return nextId.get();
+	}
+
+	public int getNextId()
+	{
+		return nextId.getAndIncrement();
+	}
 
 
 }
@@ -44,7 +60,7 @@ public class Main {
 	public static void main(String... args)
 	{
 
-		StudentId idGenerator = new StudentId();
+		AtomicStudentId idGenerator = new AtomicStudentId();
 		Callable<Student> studentMaker = ()-> {
 
 			int studentId = idGenerator.getNextId();
