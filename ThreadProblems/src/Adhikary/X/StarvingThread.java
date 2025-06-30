@@ -8,7 +8,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class StarvingThread {
 
 
-	private static final Lock lock  = new ReentrantLock();
+	private static final Lock lock  = new ReentrantLock(); // Fair argument is not passed
+
 	public static void main(String... args)
 	{
 
