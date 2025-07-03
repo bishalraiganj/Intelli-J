@@ -25,7 +25,11 @@ public class Main {
 		final char[] password = (okCxl == JOptionPane.OK_OPTION) ? pf.getPassword() : null ;
 
 		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setURL(CONN_STRING);
+//		dataSource.setURL(CONN_STRING);
+
+		dataSource.setServerName("localhost");
+		dataSource.setPort(3306);
+		dataSource.setUser("devuser");
 
 //		try(Connection connection = DriverManager.getConnection(
 //				CONN_STRING,username,String.valueOf(password)))
