@@ -1,5 +1,8 @@
 package Adhikary.X;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,21 +20,40 @@ public class Main {
 
 		JPasswordField pf = new JPasswordField();
 
-		int okCxl = JOptionPane.showConfirmDialog(null,pf,"Enter DB Passwoed",JOptionPane.OK_CANCEL_OPTION);
+		int okCxl = JOptionPane.showConfirmDialog(null,pf,"Enter DB Password",JOptionPane.OK_CANCEL_OPTION);
 
 
 		final char[] password = (okCxl == JOptionPane.OK_OPTION)  ? pf.getPassword() : null;
 
-		try(Connection connection = DriverManager.getConnection(CONN_STRING,username,String.valueOf(password)))
+
+		MysqlDataSource dataSource = new MysqlDataSource();
+
+		dataSource.setURL(CONN_STRING);
+
+		try(Connection connection = dataSource.getConnection(username,String.valueOf(password)))
 		{
 			JOptionPane.showMessageDialog(null,"Connected to : " + CONN_STRING);
-			System.out.println("Success !! Connection made to the music database ");
-			Arrays.fill(password,' ');
+			System.out.println("Connected to : " + CONN_STRING);
+
 		}catch(SQLException e)
 		{
-			JOptionPane.showMessageDialog(null,"Connection Failed ! :-) ");
+			JOptionPane.showMessageDialog(null,e);
 			throw new RuntimeException(e);
 		}
+
+
+
+
+//		try(Connection connection = DriverManager.getConnection(CONN_STRING,username,String.valueOf(password)))
+//		{
+//			JOptionPane.showMessageDialog(null,"Connected to : " + CONN_STRING);
+//			System.out.println("Success !! Connection made to the music database ");
+//			Arrays.fill(password,' ');
+//		}catch(SQLException e)
+//		{
+//			JOptionPane.showMessageDialog(null,"Connection Failed ! :-) ");
+//			throw new RuntimeException(e);
+//		}
 	}
 
 }
