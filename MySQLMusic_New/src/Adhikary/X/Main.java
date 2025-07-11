@@ -28,7 +28,11 @@ public class Main {
 
 		MysqlDataSource dataSource = new MysqlDataSource();
 
-		dataSource.setURL(CONN_STRING);
+//		dataSource.setURL(CONN_STRING);
+
+		dataSource.setServerName("localhost");
+		dataSource.setPort(3306);
+		dataSource.setDatabaseName("music");
 
 		try(Connection connection = dataSource.getConnection(username,String.valueOf(password)))
 		{
