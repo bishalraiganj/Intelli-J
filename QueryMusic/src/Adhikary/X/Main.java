@@ -6,10 +6,7 @@ import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 public class Main {
@@ -28,7 +25,9 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
-		String query = "SELECT * FROM music.artists";
+		String albumName = "Tapestry";
+		String query = "SELECT * FROM music.albumview WHERE album_name='%s'"
+				.formatted(albumName);
 
 
 
@@ -46,12 +45,44 @@ public class Main {
 			JOptionPane.showMessageDialog(null,"Connected to : " + dataSource.getServerName());
 			System.out.println("Connected to : " + props.getProperty("serverName"));
 
+
+			ResultSetMetaData meta = resultSet.getMetaData();
+
+			for( int i = 1; i <= meta.getColumnCount(); i++)
+			{
+				System.out.printf(" %d %s %s %n",
+						i,
+						meta.getColumnName(i),
+						meta.getColumnTypeName(i));
+
+			}
+
+			System.out.println("-".repeat(100));
+
+			for(int i = 1 ; i <= meta.getColumnCount(); i++)
+			{
+				System.out.printf("%-15s",meta.getColumnName(i).toUpperCase());
+
+			}
+
+			System.out.println();
+
 			while(resultSet.next())
 			{
-				System.out.printf("%d %s %n", resultSet.getInt(1),
-						resultSet.getString("artist_name")
-				);
+//				System.out.printf("%d %s %s %n",
+//						resultSet.getInt("track_number"),
+//						resultSet.getString("artist_name"),
+//						resultSet.getString("song_title")
+//				);
 
+				for(int i = 1 ; i <= meta.getColumnCount(); i++)
+				{
+
+					System.out.printf("%-15s",resultSet.getString(i).toUpperCase());
+
+				}
+
+				System.out.println();
 
 			}
 
