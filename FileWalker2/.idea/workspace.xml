@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dc0e7c2-3a4e-4e71-8a2e-db75ea9aed9f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ReadingWithNIO2/fixedWidth.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ReadingWithNIO2/src/Adhikary/X/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScannerProject/src/Adhikary/X/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScannerProject/src/Adhikary/X/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +38,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bishal Adhikary/Intelli-J/FileWalker2&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -60,8 +59,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
       </set>
     </attachedChunks>
   </component>
@@ -75,6 +74,8 @@
       <updated>1745759677443</updated>
       <workItem from="1745759678497" duration="9000" />
       <workItem from="1745759725826" duration="44000" />
+      <workItem from="1752408621611" duration="70000" />
+      <workItem from="1752413955042" duration="44000" />
     </task>
     <servers />
   </component>

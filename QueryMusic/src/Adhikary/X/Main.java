@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class Main {
 
@@ -25,9 +26,6 @@ public class Main {
 			throw new RuntimeException(e);
 		}
 
-		String albumName = "Tapestry";
-		String query = "SELECT * FROM music.albumview WHERE album_name='%s'"
-				.formatted(albumName);
 
 
 
@@ -36,6 +34,14 @@ public class Main {
 		dataSource.setServerName(props.getProperty("serverName"));
 		dataSource.setPort(Integer.parseInt(props.getProperty("port")));
 		dataSource.setDatabaseName(props.getProperty("databaseName"));
+
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter an Artist  id: ");
+		String artistId = scanner.nextLine();
+		int artistIdInt = Integer.parseInt(artistId);
+		String query = "SELECT * FROM music.artists WHERE artist_id=%d"
+				.formatted(artistIdInt);
 
 		try(Connection connection = dataSource.getConnection(props.getProperty("user"),System.getenv("MYSQL_PASS"));
 		Statement statement = connection.createStatement();
@@ -48,14 +54,14 @@ public class Main {
 
 			ResultSetMetaData meta = resultSet.getMetaData();
 
-			for( int i = 1; i <= meta.getColumnCount(); i++)
-			{
-				System.out.printf(" %d %s %s %n",
-						i,
-						meta.getColumnName(i),
-						meta.getColumnTypeName(i));
-
-			}
+//			for( int i = 1; i <= meta.getColumnCount(); i++)
+//			{
+//				System.out.printf(" %d %s %s %n",
+//						i,
+//						meta.getColumnName(i),
+//						meta.getColumnTypeName(i));
+//
+//			}
 
 			System.out.println("-".repeat(100));
 
