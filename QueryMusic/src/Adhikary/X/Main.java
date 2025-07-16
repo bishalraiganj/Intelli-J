@@ -34,14 +34,28 @@ public class Main {
 		dataSource.setServerName(props.getProperty("serverName"));
 		dataSource.setPort(Integer.parseInt(props.getProperty("port")));
 		dataSource.setDatabaseName(props.getProperty("databaseName"));
+		try {
+			dataSource.setMaxRows(10);
+		}catch(SQLException e)
+		{
+			throw new RuntimeException(e);
+		}
 
 
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter an Artist  id: ");
-		String artistId = scanner.nextLine();
-		int artistIdInt = Integer.parseInt(artistId);
-		String query = "SELECT * FROM music.artists WHERE artist_id=%d"
-				.formatted(artistIdInt);
+
+		String query = "SELECT * FROM music.artists limit 10";
+
+//		String query = """
+//
+//						WITH RankedRows AS (
+//						    SELECT * ,
+//						           ROW_NUMBER() OVER (ORDER BY artist_id) AS row_num
+//						    FROM music.artists
+//						)
+//						SELECT *
+//								FROM RankedRows
+//						WHERE row_num <= 10;
+//							""";
 
 		try(Connection connection = dataSource.getConnection(props.getProperty("user"),System.getenv("MYSQL_PASS"));
 		Statement statement = connection.createStatement();
